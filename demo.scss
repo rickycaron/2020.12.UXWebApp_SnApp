@@ -1,0 +1,27 @@
+$nice-blue: #5B83AD;
+
+#header {
+  color: $nice-blue;
+}
+
+#footer {
+  text-align: center;
+  color: $nice-blue;
+}
+
+@mixin border-radius( $radius ) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+
+#header {
+  @include border-radius(4px);
+}
+
+$height: 100px;
+#header {
+  color: lighten(#224488, 50%);
+  background-color: #223355;
+  height: $height * 2;
+}
