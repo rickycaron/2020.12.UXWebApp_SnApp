@@ -1,0 +1,31 @@
+@media (max-width: 900px) {
+    header, main, footer, aside , #article_container, #main_top img{
+        width: 100%;
+    }
+
+    main {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 750px) {
+    #logo {
+        display: none;
+    }
+    header{
+        height: 1.5em;
+    }
+
+    #main_mid {
+        flex-direction: column;
+    }
+    aside ul{
+        display: flex;
+        flex-direction: row;
+
+    }
+    aside i {
+        margin-left: 10px;
+    }
+
+}
