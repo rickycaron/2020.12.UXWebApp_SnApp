@@ -11,7 +11,7 @@
     <meta name="author" content="Joppe Leers">
 
     <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
-    <link href="<?= base_url()?>/public/css/style.css?version=4" rel="stylesheet" type="text/css"/>
+    <link href="<?= base_url()?>/public/css/style.css?version=5" rel="stylesheet" type="text/css"/>
     <link href="<?= base_url()?>/public/css/media_query.css" rel="stylesheet">
 </head>
 <body>
