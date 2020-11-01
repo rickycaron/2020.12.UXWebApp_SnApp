@@ -17,8 +17,6 @@ body > div {
     background: #E1F2DB;
 
     position: relative;
-    top: 150px;
-    left: 450px;
 }
 
 /* STYLES FOR THE HEADER AND FOOTER */
@@ -39,9 +37,8 @@ header, footer {
 }
 
 header {
-    top: 151px; /* TODO: figure out why this can't be zero. Normally a absolute position gets placed depending on the first positioned element which is not static (div in this case) */
+    top: 0; /* TODO: figure out why this can't be zero. Normally a absolute position gets placed depending on the first positioned element which is not static (div in this case) */
     display: flex;
-
 }
 
 #header_icon_1 {
@@ -51,11 +48,11 @@ header {
 
 #header_icon_2 {
     position: absolute;
-    right: 0px;
+    right: 0;
 }
 
 footer {
-    bottom:194px; /* TODO: figure out why this can't be zero. Normally a absolute position gets placed depending on the first positioned element which is not static (div in this case) */
+    top:529px; /* TODO: figure out why this can't "bottom: 0;" . Normally a absolute position gets placed depending on the first positioned element that is not static (div in this case) */
 }
 
 nav {
@@ -69,7 +66,17 @@ nav a.active span.material-icons{
     color: #25AC71;
 }
 
+/* STYLES FOR MAIN PART OF THE SCREEN -> add the css for your views here */
+main {
+    height: 488px; /* i am not sure if we should specify this parameter */
+    width: inherit;
+    position: absolute;
+    top: 40px;
 
+}
+
+
+/* STYLES FOR TEXT */
 /* TODO: change the style for the headers and paragraphs */
 h1,h2 {
     font-family: 'Montserrat', sans-serif;
