@@ -67,6 +67,10 @@ nav a.active span.material-icons{
 }
 
 /* STYLES FOR MAIN PART OF THE SCREEN -> add the css for your views here */
+/*
+ * !!! maybe it would be nice if someone made the css for both an observation and a group and give it class name "card"
+ * this way no we don't have any redundant code. !!!
+ */
 main {
     height: 488px; /* i am not sure if we should specify this parameter */
     width: inherit;
