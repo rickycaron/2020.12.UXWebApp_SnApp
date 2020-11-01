@@ -11,17 +11,17 @@ class Menu_model
     public function __construct()
     {
         $this->menu_items = array(
-            array('name'=>'Home', 'title'=>'Go home', 'link'=>'home', 'className'=>'active'),
-            array('name'=>'Tips', 'title'=>'Look at the tips', 'link'=>'tips', 'className'=>'inactive'),
-            array('name'=>'Upcoming events', 'title'=>'Have a look at the upcoming events', 'link'=>'events', 'className'=>'inactive'),
-            array('name'=>'Create', 'title'=>'Start a new PotLuck event', 'link'=>'create', 'className'=>'inactive'),
-            array('name'=>'About', 'title'=>'About this website', 'link'=>'about', 'className'=>'inactive')
+            array('iconName'=>'home', 'link'=>'hub', 'className'=>'inactive'),
+            array('iconName'=>'people_alt', 'link'=>'groups', 'className'=>'inactive'),
+            array('iconName'=>'add_circle', 'link'=>'addObservation', 'className'=>'active'),
+            array('iconName'=>'leaderboard', 'link'=>'leaderboardSelect', 'className'=>'inactive'),
+            array('iconName'=>'person', 'link'=>'profile', 'className'=>'inactive')
         );
     }
 
-    private function set_active($menutitle){
+    private function set_active($menuLink){
         foreach ($this->menu_items as &$item) {
-            if(strcasecmp($menutitle, $item['name']) == 0) {
+            if(strcasecmp($menuLink, $item['link']) == 0) {
                 $item['className'] = 'active';
             }
             else {
@@ -30,8 +30,8 @@ class Menu_model
         }
     }
 
-    public function get_menuitems($menutitle = 'Home'){
-        $this->set_active($menutitle);
+    public function get_menuitems($menuLink = 'addObservation'){
+        $this->set_active($menuLink);
         return $this->menu_items;
     }
 }
