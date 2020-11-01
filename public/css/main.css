@@ -3,33 +3,77 @@
     padding: 0;
 }
 
-button {
-    all: unset;
-}
-
-
 body {
-    background: #FFFFFF;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
+    background: #ffffff;
     font-family: 'Roboto', sans-serif;
     font-size: 10px;
 }
 
-body > section {
+/* this is just to get the square that represents the display of the mobile device */
+body > div {
     height: 568px;
     width: 320px;
     border:1px solid #CCC;
-    background: #E1F2DB
+    background: #E1F2DB;
+
+    position: relative;
+    top: 150px;
+    left: 450px;
 }
 
+/* STYLES FOR THE HEADER AND FOOTER */
+
+span.material-icons {
+    color: #242424;
+    font-size: 3em;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 5px; /* TODO: there should be a better way to vertically center the icons in the bars. */
+}
+
+header, footer {
+    background: #F2F2F2;
+    position: fixed;
+    width: inherit;
+    height: 40px;
+}
+
+header {
+    top: 151px; /* TODO: figure out why this can't be zero. Normally a absolute position gets placed depending on the first positioned element which is not static (div in this case) */
+    display: flex;
+
+}
+
+#header_icon_1 {
+    position: absolute;
+    left: 0;
+}
+
+#header_icon_2 {
+    position: absolute;
+    right: 0px;
+}
+
+footer {
+    bottom:194px; /* TODO: figure out why this can't be zero. Normally a absolute position gets placed depending on the first positioned element which is not static (div in this case) */
+}
+
+nav {
+    width: inherit;
+    height: inherit;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav a.active span.material-icons{
+    color: #25AC71;
+}
+
+
+/* TODO: change the style for the headers and paragraphs */
 h1,h2 {
     font-family: 'Montserrat', sans-serif;
 }
-
-
 
 h1 {
     font-size: 20px;
