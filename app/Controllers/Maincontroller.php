@@ -6,30 +6,68 @@ namespace App\Controllers;
 
 class Maincontroller extends \CodeIgniter\Controller
 {
+    private $menu_model;
+    private $data;
+
+    /**
+     * Maincontroller constructor.
+     */
+    public function __construct() {
+        $this->menu_model = new \Menu_model();
+    }
+
+    private function set_common_data($header_icon_1, $header_icon_2) {
+        $this->data['header_icon_1'] = $header_icon_1;
+        $this->data['header_icon_2'] = $header_icon_2;
+    }
 
     public function leaderboardSelect() {
-        $data['header_icon_1'] = 'arrow_back';
-        $data['header_middle'] = 'search bar?';
-        $data['header_icon_2'] = 'search';
-        return view("mainTemplate", $data);
+        $this->set_common_data('arrow_back', 'search');
+
+        //add your code here...
+        $this->data['content'] = "<h1>nothing yet</h1>"; //replace by your own view
+
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
+        return view("mainTemplate", $this->data);
     }
 
     public function hub() {
-        $data['header_icon_1'] = 'arrow_back';
-        $data['header_middle'] = 'search bar?';
-        $data['header_icon_2'] = 'search';
-        return view("mainTemplate", $data);
+        $this->set_common_data('arrow_back', 'search');
+
+        //add your code here...
+        $this->data['content'] = "<h1>nothing yet</h1>"; //replace by your own view
+
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
+        return view("mainTemplate", $this->data);
     }
 
     public function groups() {
-        return view("mainTemplate");
+        $this->set_common_data('arrow_back', 'search');
+
+        //add your code here...
+        $this->data['content'] = "<h1>nothing yet</h1>"; //replace by your own view
+
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
+        return view("mainTemplate", $this->data);
     }
 
     public function profile() {
-        return view("mainTemplate");
+        $this->set_common_data('arrow_back', 'search');
+
+        //add your code here...
+        $this->data['content'] = "<h1>nothing yet</h1>"; //replace by your own view
+
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('profile');
+        return view("mainTemplate", $this->data);
     }
 
     public function addObservation() {
-        return view("mainTemplate");
+        $this->set_common_data('arrow_back', 'search');
+
+        //add your code here...
+        $this->data['content'] = "<h1>nothing yet</h1>"; //replace by your own view
+
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
+        return view("mainTemplate", $this->data);
     }
 }
