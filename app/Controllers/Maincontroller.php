@@ -35,7 +35,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->set_common_data('arrow_back', 'search');
 
         //add your code here...
-        $this->data['content'] = "<h1>nothing yet</h1>"; //replace by your own view
+        $this->data['content'] = view('observationCard'); //replace by your own view
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
         return view("mainTemplate", $this->data);

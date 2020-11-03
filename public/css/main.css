@@ -3,23 +3,117 @@
     padding: 0;
 }
 
+/* ***********************/
+/* code for full screen */
+
 body {
-    background: #ffffff;
+    background: #7EA273;
     font-family: 'Roboto', sans-serif;
     font-size: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+    background: #E1F2DB;
+}
+
+#content-wrap {
+    padding-bottom: 40px;    /* Footer height */
+}
+
+header, main, footer {
+    width: 900px;
+    /*box-sizing: border-box;*/
+    /*box-shadow: 10px 10px 10px 5px rgba(0,0,0,.2);*!*/
+}
+
+header {
+    height: 20px;
+    padding: 10px;
+    background: #F2F2F2;
+    text-transform: uppercase;
+    justify-content: space-between;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+main {
+    padding: 20px;
+    background: #E1F2DB;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: row;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;            /* Footer height */
+    background: #F2F2F2;
+    text-align: center;
+}
+
+/* **************************/
+/* code to mimic smaller phone screen
 
 /* this is just to get the square that represents the display of the mobile device */
-body > div {
-    height: 568px;
-    width: 320px;
-    border:1px solid #CCC;
-    background: #E1F2DB;
+/*body > div {*/
+    /*height: 568px;*/
+    /*width: 320px;*/
+    /*border:1px solid #CCC;*/
+    /*background: #E1F2DB;*/
 
-    position: relative;
-}
+    /*position: relative;*/
+/*}*/
+
+
+
+/*footer {*/
+    /*!*padding: 15px 0px; !* top+bottom left+right*!*!*/
+    /*background: #F2F2F2;*/
+    /*border-top: 2px solid #000000;*/
+    /*text-align: center;*/
+/*}*/
 
 /* STYLES FOR THE HEADER AND FOOTER */
+
+
+/*header, footer {*/
+    /*background: #F2F2F2;*/
+    /*position: fixed;*/
+    /*width: inherit;*/
+    /*height: 40px;*/
+/*}*/
+
+/*header {*/
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+/*}*/
+
+/*#header_icon_1 {*/
+    /*position: absolute;*/
+    /*left: 0;*/
+/*}*/
+
+/*#header_icon_2 {*/
+    /*position: absolute;*/
+    /*right: 0;*/
+/*}*/
+
+
+/*footer {*/
+    /*bottom: 0px; !* TODO: figure out why this can't "bottom: 0;" . Normally a absolute position gets placed depending on the first positioned element that is not static (div in this case) *!*/
+/*}*/
 
 span.material-icons {
     color: #242424;
@@ -27,32 +121,6 @@ span.material-icons {
     margin-left: 15px;
     margin-right: 15px;
     margin-top: 5px; /* TODO: there should be a better way to vertically center the icons in the bars. */
-}
-
-header, footer {
-    background: #F2F2F2;
-    position: fixed;
-    width: inherit;
-    height: 40px;
-}
-
-header {
-    top: 0; /* TODO: figure out why this can't be zero. Normally a absolute position gets placed depending on the first positioned element which is not static (div in this case) */
-    display: flex;
-}
-
-#header_icon_1 {
-    position: absolute;
-    left: 0;
-}
-
-#header_icon_2 {
-    position: absolute;
-    right: 0;
-}
-
-footer {
-    top:529px; /* TODO: figure out why this can't "bottom: 0;" . Normally a absolute position gets placed depending on the first positioned element that is not static (div in this case) */
 }
 
 nav {
@@ -77,6 +145,11 @@ main {
     position: absolute;
     top: 40px;
 
+}
+
+.container {
+    background-color: #fafafa;
+    width: 400px; height:200px; margin:0 auto;
 }
 
 
