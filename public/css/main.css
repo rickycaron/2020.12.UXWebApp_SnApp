@@ -17,104 +17,41 @@ body {
 }
 
 #page-container {
-    position: relative;
+    width: 900px;
     min-height: 100vh;
     background: #E1F2DB;
 }
 
-#content-wrap {
-    padding-bottom: 40px;    /* Footer height */
-}
-
-header, main, footer {
-    width: 900px;
-    /*box-sizing: border-box;*/
-    /*box-shadow: 10px 10px 10px 5px rgba(0,0,0,.2);*!*/
+header, footer {
+    width: inherit;
 }
 
 header {
-    height: 20px;
-    padding: 10px;
-    background: #F2F2F2;
-    text-transform: uppercase;
-    justify-content: space-between;
-
+    background-color: #F8F8F8;
+    height: 40px;
     display: flex;
     flex-direction: row;
+
+    justify-content: space-between;
+    text-transform: uppercase;
     align-items: center;
+    position: fixed;
+    top:0;
 }
 
 main {
-    padding: 20px;
+    margin: 40px 10px;
     background: #E1F2DB;
     height: 100vh;
-
-    display: flex;
-    flex-direction: row;
 }
 
 footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
     height: 40px;            /* Footer height */
-    background: #F2F2F2;
+    background: #F8F8F8;
     text-align: center;
+    position: fixed;
+    bottom:0;
 }
-
-/* **************************/
-/* code to mimic smaller phone screen
-
-/* this is just to get the square that represents the display of the mobile device */
-/*body > div {*/
-    /*height: 568px;*/
-    /*width: 320px;*/
-    /*border:1px solid #CCC;*/
-    /*background: #E1F2DB;*/
-
-    /*position: relative;*/
-/*}*/
-
-
-
-/*footer {*/
-    /*!*padding: 15px 0px; !* top+bottom left+right*!*!*/
-    /*background: #F2F2F2;*/
-    /*border-top: 2px solid #000000;*/
-    /*text-align: center;*/
-/*}*/
-
-/* STYLES FOR THE HEADER AND FOOTER */
-
-
-/*header, footer {*/
-    /*background: #F2F2F2;*/
-    /*position: fixed;*/
-    /*width: inherit;*/
-    /*height: 40px;*/
-/*}*/
-
-/*header {*/
-    /*display: flex;*/
-    /*justify-content: center;*/
-    /*align-items: center;*/
-/*}*/
-
-/*#header_icon_1 {*/
-    /*position: absolute;*/
-    /*left: 0;*/
-/*}*/
-
-/*#header_icon_2 {*/
-    /*position: absolute;*/
-    /*right: 0;*/
-/*}*/
-
-
-/*footer {*/
-    /*bottom: 0px; !* TODO: figure out why this can't "bottom: 0;" . Normally a absolute position gets placed depending on the first positioned element that is not static (div in this case) *!*/
-/*}*/
-
 span.material-icons {
     color: #242424;
     font-size: 3em;
@@ -135,27 +72,55 @@ nav a.active span.material-icons{
 }
 
 /* STYLES FOR MAIN PART OF THE SCREEN -> add the css for your views here */
-/*
- * !!! maybe it would be nice if someone made the css for both an observation and a group and give it class name "card"
- * this way no we don't have any redundant code. !!!
- */
-main {
-    height: 488px; /* i am not sure if we should specify this parameter */
-    width: inherit;
-    position: absolute;
-    top: 40px;
-
-}
-
 .container {
     background-color: #fafafa;
     width: 400px; height:200px; margin:0 auto;
 }
+/* leaderboard_select css code */
+#leaderboard_select_container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.filter_container {
+    margin-top: 20px;
+}
+
+.filter_container h2 {
+    margin-bottom: 5px;
+}
+
+.leaderboard_select_element {
+    display: flex;
+    flex-direction: row;
+}
+
+.big_ruler {
+    border: 1px solid #242424;
+}
+
+.h3_leaderboard_filter {
+    display: inline;
+    margin: 10px 0px;
+}
+
+.leaderboard_select_element span {
+    position: absolute;
+    right: 0;
+}
+
+.page_title {
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* leaderboard css code */
 
 
 /* STYLES FOR TEXT */
 /* TODO: change the style for the headers and paragraphs */
-h1,h2 {
+h1,h2,h3,h4,h5,h6 {
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -164,5 +129,5 @@ h1 {
 }
 
 h2 {
-    font-size: 18px;
+    font-size: 16px;
 }
