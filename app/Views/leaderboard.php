@@ -16,6 +16,21 @@
     </div>
     <hr>
     <div id="leaderboard_container">
-
+        <div id="podium">
+            <div id="top_three">
+                <div id="first" class="top_three_person">
+                    <img src="image/person1.jpg">
+                    <p>3305</p>
+                </div>
+                <div id="second" class="top_three_person">
+                    <img src="image/person2.jpg">
+                    <p>30</p>
+                </div>
+                <div id="third" class="top_three_person">
+                    <img src="image/person3.jpg">
+                    <p>2</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
