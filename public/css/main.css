@@ -165,21 +165,8 @@ nav a.active span.material-icons{
 
 }
 
-span.observationCardlocationIcon {
-    color: #242424;
-    font-size: 3em;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 5px;
-}
-
 #observationCardPictureFooterLocation h4 {
-    padding: 5px 5px;
-}
-
-#observationCardPictureFooterLocation img {
-    height: 100%;
-    width: 20px;
+    margin-top: 10px;
 }
 
 #observationCardPictureFooterButtons {
@@ -188,22 +175,11 @@ span.observationCardlocationIcon {
     align-items: normal;
 }
 
-#observationCardPictureFooterButtons img {
-    height: 100%;
-    width: 20px;
-    padding-right: 20%;
-}
-
 
 #observationCardComments {
-    padding: 1% 2%;
+    padding: 1% 1%;
+    margin-top: 5px;
     height: 4%;
-    /*background-color: #002b36;*/
-}
-
-#observationCardTime {
-    padding: 1% 2%;
-    height: 1%;
     /*background-color: #002b36;*/
 }
 
@@ -247,7 +223,7 @@ span.observationCardlocationIcon {
 
 #groupCardPicture img {
     width: 30%;
-    background-color: #002b36;
+    /*background-color: #002b36;*/
 }
 
 #groupCardInformationText {

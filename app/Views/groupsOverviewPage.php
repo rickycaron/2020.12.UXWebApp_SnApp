@@ -1,5 +1,5 @@
 <div id="groupCardContainer">
-    <div onclick="location.href='group';" id="groupCard">
+    <div onclick="location.href='groupPage';" id="groupCard">
         <div id="groupCardName">
             <h2 id="groupName"> UXWD6 </h2>
         </div>
@@ -20,7 +20,7 @@
         </div>
     </div>
 </div>
-<div onclick="location.href='group';" id="groupCardContainer">
+<div onclick="location.href='groupPage';" id="groupCardContainer">
     <div id="groupCard">
         <div id="groupCardName">
             <h2 id="groupName"> UXWD6 </h2>
@@ -42,7 +42,7 @@
         </div>
     </div>
 </div>
-<div onclick="location.href='group';" id="groupCardContainer">
+<div onclick="location.href='groupPage';" id="groupCardContainer">
     <div id="groupCard">
         <div id="groupCardName">
             <h2 id="groupName"> UXWD6 </h2>

@@ -9,14 +9,14 @@
         </div>
         <div id="observationCardPictureFooter">
             <div id="observationCardPictureFooterLocation">
-                <a href="location"><span class="observationCardlocationIcon">location_on</span></a>
+                <span class="material-icons">location_on</span>
                 <h4>
                     Leuven
                 </h4>
             </div>
             <div id="observationCardPictureFooterButtons">
-                <span class="observationCardlocationIcon">location_on</span>
-                <a href="location"><span class="observationCardlocationIcon">location_on</span></a>
+                <span class="material-icons">favorite_border</span>
+                <span class="material-icons">chat</span>
             </div>
         </div>
         <div id="observationCardComments">
