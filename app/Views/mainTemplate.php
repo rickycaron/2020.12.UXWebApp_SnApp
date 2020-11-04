@@ -18,7 +18,7 @@
     <header>
         <span class="material-icons" id="header_icon_1"><?=$header_icon_1?></span>
         <h1 id="title">snAPP Nature</h1>
-        <span class="material-icons" id="header_icon_2"><?=$header_icon_2?></span>
+        <a href="<?= base_url()?>/public/MainController/search"><span class="material-icons" id="header_icon_2"><?=$header_icon_2?></span></a>
     </header>
     <main id="content-wrap">
         <?=$content?>
