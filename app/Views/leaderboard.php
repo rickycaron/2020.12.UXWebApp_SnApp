@@ -1,6 +1,13 @@
 <div id="leaderboard_overall_container">
     <h1 class="page_title">Friends leaderboard</h1>
     <div id="radio_buttons_container">
+        <input type="radio" name="size" id="daily" checked="checked">
+        <label for="daily">daily</label>
+        <input type="radio" name="size" id="monthly">
+        <label for="daily">monthly</label>
+        <input type="radio" name="size" id="yearly">
+        <label for="daily">yearly</label>
+        <!--
         <div class="radio_button">
             <input type="radio" id="daily" name="periodic" value="daily">
             <h3 id="h3_radio_button_label" for="daily">daily</h3>
@@ -13,23 +20,47 @@
             <input type="radio" id="yearly" name="periodic" value="yearly">
             <h3 id="h3_radio_button_label" for="yearly">yearly</h3>
         </div>
+        -->
     </div>
-    <hr>
     <div id="leaderboard_container">
-        <div id="podium">
+        <div id="podium_container">
             <div id="top_three">
-                <div id="first" class="top_three_person">
-                    <img src="image/person1.jpg">
-                    <p>3305</p>
-                </div>
                 <div id="second" class="top_three_person">
-                    <img src="image/person2.jpg">
-                    <p>30</p>
+                    <img src="image/profile.png">
+                    <h2>firstname name</h2>
+                    <h2>30</h2>
+                </div>
+                <div id="first" class="top_three_person">
+                    <img src="image/profile.png">
+                    <h2>firstname name</h2>
+                    <h2>3305</h2>
                 </div>
                 <div id="third" class="top_three_person">
-                    <img src="image/person3.jpg">
-                    <p>2</p>
+                    <img src="image/profile.png">
+                    <h2>firstname name</h2>
+                    <h2>2</h2>
                 </div>
+            </div>
+            <img id="podium_img" src="image/podium.png" alt="podium">
+        </div>
+        <div id="forth_and_worse">
+            <div class="after_third">
+                <h2>4</h2>
+                <img src="image/profile.png">
+                <h3>firstname name</h3>
+                <h3>10</h3>
+            </div>
+            <div class="after_third">
+                <h2>5</h2>
+                <img src="image/profile.png">
+                <h3>firstname name</h3>
+                <h3>5</h3>
+            </div>
+            <div class="after_third">
+                <h2>6</h2>
+                <img src="image/profile.png">
+                <h3>firstname name</h3>
+                <h3>4</h3>
             </div>
         </div>
     </div>

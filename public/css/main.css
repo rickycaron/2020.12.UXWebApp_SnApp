@@ -42,7 +42,6 @@ header {
 main {
     margin: 40px 10px;
     background: #E1F2DB;
-    height: 100vh;
 }
 
 footer {
@@ -117,6 +116,92 @@ nav a.active span.material-icons{
 
 /* leaderboard css code */
 
+/* TODO: style the radio buttons so they look good */
+input[type="radio"] {
+    display: none;
+}
+label {
+    position: relative;
+    color: #25AC71;
+    font-size: 30px;
+    border: 2px solid #25AC71;
+    border-radius: 5px;
+    padding: 10px 50px;
+    align-items: center;
+}
+
+label:before {
+    content:"";
+    height: 30px;
+    width: 30px;
+    border: 3px solid #25AC71;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+#leaderboard_container {
+    width: inherit;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+}
+
+#podium_container {
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#top_three {
+    width: inherit;
+    display: flex;
+    flex-direction: row;
+}
+
+#podium_img {
+    width: 80%;
+}
+
+#top_three img{
+    width: 150px;
+    border-radius: 50%;
+
+}
+
+#second, #third{
+    position: relative;
+    top:40px;
+}
+.top_three_person {
+    margin: 20px 40px 0px;
+    text-align: center;
+}
+
+.after_third img{
+    width: 30px;
+    border-radius: 50%;
+}
+
+#forth_and_worse {
+    width: 89%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    position: relative;
+    left:45px;
+}
+
+.after_third {
+    margin: 3px 0px;
+    padding: 10px;
+    width: inherit;
+    background-color: #F8F8F8;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
 /* STYLES FOR TEXT */
 /* TODO: change the style for the headers and paragraphs */
@@ -131,3 +216,10 @@ h1 {
 h2 {
     font-size: 16px;
 }
+
+/*
+img {
+    display: none;
+}
+
+ */
