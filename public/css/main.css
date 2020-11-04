@@ -179,7 +179,7 @@ label:before {
 }
 
 .after_third img{
-    width: 30px;
+    width: 50px;
     border-radius: 50%;
 }
 
@@ -194,7 +194,8 @@ label:before {
 }
 
 .after_third {
-    margin: 3px 0px;
+    margin: 5px 0px;
+    box-shadow: 5px 5px 5px 3px rgba(0,0,0,.2);
     padding: 10px;
     width: inherit;
     background-color: #F8F8F8;
