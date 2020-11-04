@@ -1,3 +1,6 @@
+<div id="groupTitle">
+    <h1>UXWD6</h1>
+</div>
 <div id="observationCardContainer">
     <div id="observationCard">
         <div id="observationCardProfile">

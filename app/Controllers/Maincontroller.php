@@ -45,7 +45,17 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->set_common_data('arrow_back', 'search');
 
         //add your code here...
-        $this->data['content'] = view('groupCard'); //replace by your own view
+        $this->data['content'] = view('groupsOverviewPage'); //replace by your own view
+
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
+        return view("mainTemplate", $this->data);
+    }
+
+    public function group() {
+        $this->set_common_data('arrow_back', 'search');
+
+        //add your code here...
+        $this->data['content'] = view('groupPage'); //replace by your own view
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
         return view("mainTemplate", $this->data);

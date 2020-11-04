@@ -9,14 +9,14 @@
         </div>
         <div id="observationCardPictureFooter">
             <div id="observationCardPictureFooterLocation">
-                <img id="locationIcon" src="https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_location_on_48px-512.png">
+                <a href="location"><span class="observationCardlocationIcon">location_on</span></a>
                 <h4>
                     Leuven
                 </h4>
             </div>
             <div id="observationCardPictureFooterButtons">
-                <img id="likeButton" src="https://icons-for-free.com/iconfiles/png/512/heart-131965017458786724.png">
-                <img id="commentButton" src="https://static.thenounproject.com/png/638755-200.png">
+                <span class="observationCardlocationIcon">location_on</span>
+                <a href="location"><span class="observationCardlocationIcon">location_on</span></a>
             </div>
         </div>
         <div id="observationCardComments">

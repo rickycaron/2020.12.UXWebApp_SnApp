@@ -17,108 +17,45 @@ body {
 }
 
 #page-container {
-    position: relative;
+    width: 900px;
     min-height: 100vh;
     background: #E1F2DB;
 }
 
-#content-wrap {
-    padding-bottom: 40px;    /* Footer height */
-}
-
-header, main, footer {
-    width: 900px;
+header, footer {
+    width: inherit;
 }
 
 header {
-    height: 20px;
-    padding: 10px;
-    background: #F8F8F8;
-    text-transform: uppercase;
-    justify-content: space-between;
-
+    background-color: #F8F8F8;
+    height: 40px;
     display: flex;
     flex-direction: row;
+
+    justify-content: space-between;
+    text-transform: uppercase;
     align-items: center;
+    position: fixed;
+    top:0;
 }
 
 main {
-    padding: 20px;
+    margin: 40px 10px;
     background: #E1F2DB;
-    /*height: 100vh;*/
-    height: inherit;
-    width: inherit;
-    display: flex;
-    flex-direction: column;
 }
 
 footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
     height: 40px;            /* Footer height */
     background: #F8F8F8;
     text-align: center;
+    position: fixed;
+    bottom:0;
 }
-
-/* **************************/
-/* code to mimic smaller phone screen
-
-/* this is just to get the square that represents the display of the mobile device */
-/*body > div {*/
-    /*height: 568px;*/
-    /*width: 320px;*/
-    /*border:1px solid #CCC;*/
-    /*background: #E1F2DB;*/
-
-    /*position: relative;*/
-/*}*/
-
-
-
-/*footer {*/
-    /*!*padding: 15px 0px; !* top+bottom left+right*!*!*/
-    /*background: #F2F2F2;*/
-    /*border-top: 2px solid #000000;*/
-    /*text-align: center;*/
-/*}*/
-
-/* STYLES FOR THE HEADER AND FOOTER */
-
-
-/*header, footer {*/
-    /*background: #F2F2F2;*/
-    /*position: fixed;*/
-    /*width: inherit;*/
-    /*height: 40px;*/
-/*}*/
-
-/*header {*/
-    /*display: flex;*/
-    /*justify-content: center;*/
-    /*align-items: center;*/
-/*}*/
-
-/*#header_icon_1 {*/
-    /*position: absolute;*/
-    /*left: 0;*/
-/*}*/
-
-/*#header_icon_2 {*/
-    /*position: absolute;*/
-    /*right: 0;*/
-/*}*/
-
-
-/*footer {*/
-    /*bottom: 0px; !* TODO: figure out why this can't "bottom: 0;" . Normally a absolute position gets placed depending on the first positioned element that is not static (div in this case) *!*/
-/*}*/
-
 span.material-icons {
     color: #242424;
     font-size: 3em;
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-left: 15px;
+    margin-right: 15px;
     margin-top: 5px; /* TODO: there should be a better way to vertically center the icons in the bars. */
 }
 
@@ -134,17 +71,10 @@ nav a.active span.material-icons{
 }
 
 /* STYLES FOR MAIN PART OF THE SCREEN -> add the css for your views here */
-/*
- * !!! maybe it would be nice if someone made the css for both an observation and a group and give it class name "card"
- * this way no we don't have any redundant code. !!!
- */
-/*main {*/
-    /*height: 488px; !* i am not sure if we should specify this parameter *!*/
-    /*width: inherit;*/
-    /*position: absolute;*/
-    /*top: 40px;*/
-
-/*}*/
+.container {
+    background-color: #fafafa;
+    width: 400px; height:200px; margin:0 auto;
+}
 
 /**********************************/
 /* styles for Hub page */
@@ -235,6 +165,14 @@ nav a.active span.material-icons{
 
 }
 
+span.observationCardlocationIcon {
+    color: #242424;
+    font-size: 3em;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
 #observationCardPictureFooterLocation h4 {
     padding: 5px 5px;
 }
@@ -276,7 +214,7 @@ nav a.active span.material-icons{
 }
 
 /**********************************/
-/* styles for an OBSERVATION CARD */
+/* styles for a GROUP CARD */
 /**********************************/
 
 #groupCardContainer {
@@ -307,13 +245,13 @@ nav a.active span.material-icons{
     /*background-color: #002b36;*/
 }
 
-#groupCardPicture{
-    width: 20%;
-    /*background-color: #002b36;*/
+#groupCardPicture img {
+    width: 30%;
+    background-color: #002b36;
 }
 
-#groupCardPicture img {
-    height: 100%;
+#groupCardInformationText {
+    padding-left: 10px;
     /*background-color: #002b36;*/
 }
 
