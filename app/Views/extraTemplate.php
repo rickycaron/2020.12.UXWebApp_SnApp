@@ -20,7 +20,7 @@
             <header>
                 <span class="material-icons" id="header_icon_1"><?= $header_icon_1?></span>
                 <h1 id="title">snAPP Nature</h1>
-                <span class="material-icons" id="header_icon_2"><?=$header_icon_2?></span>
+                <span class="material-icons" id="header_icon_1"><?= $header_icon_1?></span>
             </header>
             <main>
                 <?=$content?>
@@ -28,11 +28,7 @@
         </div>
     </div>
     <footer>
-        <nav>
-            <?php foreach ($menu_items as $menu): ?>
-                <a href="<?=$menu['link']?>" class="<?=$menu['className']?>"><span class="material-icons"><?=$menu['iconName']?></span></a>
-            <?php endforeach; ?>
-        </nav>
+        <h2 id="author">Designed and created by groupt students</h2>
     </footer>
 </div>
 </body>

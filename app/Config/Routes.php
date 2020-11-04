@@ -36,6 +36,11 @@ $routes->get('groups', 'Maincontroller::groups');
 $routes->get('addObservation', 'Maincontroller::addObservation');
 $routes->get('leaderboardSelect', 'Maincontroller::leaderboardSelect');
 $routes->get('profile', 'Maincontroller::profile');
+$routes->get('login', 'Maincontroller::login');
+$routes->get('loginFromObservation', 'Maincontroller::loginFromObservation');
+$routes->get('register', 'Maincontroller::register');
+$routes->get('forgotPassword', 'Maincontroller::forgotPassword');
+$routes->get('resetPassword', 'Maincontroller::resetPassword');
 /**
  * --------------------------------------------------------------------
  * Additional Routing
