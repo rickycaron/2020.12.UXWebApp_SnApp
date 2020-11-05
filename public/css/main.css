@@ -17,118 +17,54 @@ body {
 }
 
 #page-container {
-    position: relative;
+    width: 900px;
     min-height: 100vh;
     background: #E1F2DB;
 }
-#test-container {
-    text-transform: uppercase;
-    justify-content: space-between;
-
-    display: flex;
-    flex-direction: row;
+#input {
+    width: 400px;
     align-items: center;
 }
-#test {
-    text-align: center;
+#button{
     display: flex;
-    flex-direction: column;
-
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
 }
-
-#content-wrap {
-    padding-bottom: 40px;    /* Footer height */
+#button1{
+    width: 250px;
+    height: 150px;
+    background-color: #F8F8F8;
 }
-
-header, main, footer {
-    width: 900px;
-    /*box-sizing: border-box;*/
-    /*box-shadow: 10px 10px 10px 5px rgba(0,0,0,.2);*!*/
+header, footer {
+    width: inherit;
 }
 
 header {
-    height: 20px;
-    padding: 10px;
-    background: #F2F2F2;
-    text-transform: uppercase;
-    justify-content: space-between;
-
+    background-color: #F8F8F8;
+    height: 40px;
     display: flex;
     flex-direction: row;
+
+    justify-content: space-between;
+    text-transform: uppercase;
     align-items: center;
+    position: fixed;
+    top:0;
 }
 
 main {
-    padding: 20px;
+    margin: 40px 10px;
     background: #E1F2DB;
-    height: 100vh;
-
-    display: flex;
-    flex-direction: row;
 }
 
 footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
     height: 40px;            /* Footer height */
-    background: #F2F2F2;
+    background: #F8F8F8;
     text-align: center;
+    position: fixed;
+    bottom:0;
 }
-
-/* **************************/
-/* code to mimic smaller phone screen
-
-/* this is just to get the square that represents the display of the mobile device */
-/*body > div {*/
-    /*height: 568px;*/
-    /*width: 320px;*/
-    /*border:1px solid #CCC;*/
-    /*background: #E1F2DB;*/
-
-    /*position: relative;*/
-/*}*/
-
-
-
-/*footer {*/
-    /*!*padding: 15px 0px; !* top+bottom left+right*!*!*/
-    /*background: #F2F2F2;*/
-    /*border-top: 2px solid #000000;*/
-    /*text-align: center;*/
-/*}*/
-
-/* STYLES FOR THE HEADER AND FOOTER */
-
-
-/*header, footer {*/
-    /*background: #F2F2F2;*/
-    /*position: fixed;*/
-    /*width: inherit;*/
-    /*height: 40px;*/
-/*}*/
-
-/*header {*/
-    /*display: flex;*/
-    /*justify-content: center;*/
-    /*align-items: center;*/
-/*}*/
-
-/*#header_icon_1 {*/
-    /*position: absolute;*/
-    /*left: 0;*/
-/*}*/
-
-/*#header_icon_2 {*/
-    /*position: absolute;*/
-    /*right: 0;*/
-/*}*/
-
-
-/*footer {*/
-    /*bottom: 0px; !* TODO: figure out why this can't "bottom: 0;" . Normally a absolute position gets placed depending on the first positioned element that is not static (div in this case) *!*/
-/*}*/
-
 span.material-icons {
     color: #242424;
     font-size: 3em;
@@ -149,27 +85,363 @@ nav a.active span.material-icons{
 }
 
 /* STYLES FOR MAIN PART OF THE SCREEN -> add the css for your views here */
-/*
- * !!! maybe it would be nice if someone made the css for both an observation and a group and give it class name "card"
- * this way no we don't have any redundant code. !!!
- */
-main {
-    height: 488px; /* i am not sure if we should specify this parameter */
-    width: inherit;
-    position: absolute;
-    top: 40px;
-
-}
-
 .container {
     background-color: #fafafa;
     width: 400px; height:200px; margin:0 auto;
 }
 
+/**************************************/
+/* styles for Leaderboard select page */
+/**************************************/
+#leaderboard_select_container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.filter_container {
+    margin-top: 20px;
+}
+
+.filter_container h2 {
+    margin-bottom: 5px;
+}
+
+.leaderboard_select_element {
+    display: flex;
+    flex-direction: row;
+}
+
+.big_ruler {
+    border: 1px solid #242424;
+}
+
+.h3_leaderboard_filter {
+    display: inline;
+    margin: 10px 0px;
+}
+
+.leaderboard_select_element span {
+    position: absolute;
+    right: 0;
+}
+
+.page_title {
+    margin-top: 10px;
+    text-align: center;
+}
+
+/**********************************/
+/* styles for leaderboard page */
+/**********************************/
+#radio_buttons_container {
+    margin: 20px 200px 10px;
+    width: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+input[type="radio"] {
+    display: none;
+}
+label {
+    position: relative;
+    color: #25AC71;
+    font-size: 15px;
+    border: 2px solid #25AC71;
+    box-shadow: 5px 5px 5px 3px rgba(0,0,0,.2);
+    padding: 5px 20px;
+    align-items: center;
+}
+
+input[type="radio"]:checked + label {
+    background-color: #25AC71;
+    color: white;
+}
+
+#leaderboard_container {
+    width: inherit;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+}
+
+#podium_container {
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#top_three {
+    width: inherit;
+    display: flex;
+    flex-direction: row;
+}
+
+#podium_img {
+    width: 80%;
+}
+
+#top_three img{
+    width: 150px;
+    border-radius: 50%;
+
+}
+
+#second, #third{
+    position: relative;
+    top:40px;
+}
+.top_three_person {
+    margin: 20px 40px 0px;
+    text-align: center;
+}
+
+.after_third img{
+    width: 50px;
+    border-radius: 50%;
+}
+
+#forth_and_worse {
+    width: 89%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    position: relative;
+    left:45px;
+}
+
+.after_third {
+    margin: 5px 0px;
+    box-shadow: 5px 5px 5px 3px rgba(0,0,0,.2);
+    padding: 10px;
+    width: inherit;
+    background-color: #F8F8F8;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.after_third h2, .after_third h3 {
+    margin-top: 8px;
+}
+.without_points {
+    width: 50%;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+}
+
+/**********************************/
+/* styles for Hub page */
+/**********************************/
+
+#hubTitle {
+    padding: 5px 5px;
+}
+
+/**********************************/
+/* styles for Group page */
+/**********************************/
+
+#groupTitle {
+    padding: 5px 5px;
+}
+
+/**********************************/
+/* styles for an OBSERVATION CARD */
+/**********************************/
+
+#observationCardContainer {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#observationCard {
+    background-color: #F8F8F8;
+    max-width: 860px;
+    /*width: 870px;*/
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 5px 5px 5px 3px rgba(0,0,0,.2);
+}
+
+#observationCardProfile {
+    display: flex;
+    align-items: flex-start;
+    padding: 1%;
+    height: 5%;
+}
+
+/*make sure the image is a perfect square */
+#observationCardProfile img {
+    /*border: 1px solid black;*/
+    height: 100%;
+    width: 4%;
+    border-radius: 50%;
+    display: inline-block;
+    padding-top: 1%;
+    padding-left: 1%;
+}
+
+#observationCardProfile h3 {
+    padding: 1% 2%;
+}
+
+#observationCardPicture {
+    margin-left: 2%;
+    margin-right: 2%;
+    height: 70%;
+    width: 100%;
+    justify-content: center;
+    /*background-color: #002b36;*/
+}
+
+#observationCardPicture img {
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block; /* remove extra space below image */
+}
+
+#observationCardPictureFooter {
+    padding: 1% 1%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 4%;
+    /*background-color: #002b36;*/
+}
+
+#observationCardPictureFooterLocation {
+    display: flex;
+    flex-direction: row;
+    align-items: normal;
+
+}
+
+#observationCardPictureFooterLocation h4 {
+    margin-top: 10px;
+}
+
+#observationCardPictureFooterButtons {
+    display: flex;
+    flex-direction: row;
+    align-items: normal;
+}
+
+
+#observationCardComments {
+    padding: 1% 1%;
+    margin-top: 5px;
+    height: 4%;
+    /*background-color: #002b36;*/
+}
+
+#observationCardTime {
+    padding: 1% 2%;
+    height: 1%;
+    /*background-color: #002b36;*/
+}
+
+/**********************************/
+/* styles for a GROUP CARD */
+/**********************************/
+
+#groupCardContainer {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#groupCard {
+    background-color: #F8F8F8;
+    max-width: 860px;
+    /*width: 870px;*/
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 5px 5px 5px 3px rgba(0,0,0,.2);
+}
+
+#groupCardName {
+    padding: 1% 2%;
+}
+
+#groupCardInformation {
+    display: flex;
+    flex-direction: row;
+    align-items: normal;
+    height: 80%;
+    padding-left: 10px;
+    /*background-color: #002b36;*/
+}
+
+#groupCardPicture img {
+    width: 30%;
+    /*background-color: #002b36;*/
+}
+
+#groupCardInformationText {
+    padding-left: 10px;
+    /*background-color: #002b36;*/
+}
+
+/**********************************/
+/* styles for Search page */
+/**********************************/
+
+.searchContainer {
+    width: 800px;
+    align: center;
+    display: flex;
+    flex-direction: row;
+}
+
+/**********************************/
+/* styles for a PERSON CARD */
+/**********************************/
+
+.personCardContainer {
+    background-color: #F8F8F8;
+    padding: 10px;
+    margin: 10px;
+    width: 840px;
+    margin-top: 20px;
+    box-shadow: 5px 5px 5px 3px rgba(0,0,0,.2);
+
+    display: flex;
+    flex-direction: row;
+}
+
+.personCardInfo {
+    align-items: center;
+    width: 300px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.personCardInfo h3 {
+    margin: 10px;
+    font-size: 20px;
+}
+
+.personCardPhotoContainer {
+    width: 140px;
+    height: 140px;
+}
+
+.personCardPhoto {
+    max-width:100%;
+    max-height:100%;
+}
 
 /* STYLES FOR TEXT */
 /* TODO: change the style for the headers and paragraphs */
-h1,h2 {
+h1,h2,h3,h4,h5,h6 {
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -179,4 +451,12 @@ h1 {
 
 h2 {
     font-size: 18px;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+ul {
+    list-style-type: none;
 }

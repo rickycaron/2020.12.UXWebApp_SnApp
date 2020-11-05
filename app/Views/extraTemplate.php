@@ -15,18 +15,14 @@
 </head>
 <body>
 <div id="page-container">
-    <div id="content-wrap">
-        <div>
             <header>
                 <span class="material-icons" id="header_icon_1"><?= $header_icon_1?></span>
                 <h1 id="title">snAPP Nature</h1>
                 <span class="material-icons" id="header_icon_1"><?= $header_icon_1?></span>
             </header>
-            <main>
+            <main id="content-wrap">
                 <?=$content?>
             </main>
-        </div>
-    </div>
     <footer>
         <h2 id="author">Designed and created by groupt students</h2>
     </footer>

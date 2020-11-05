@@ -88,7 +88,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->set_common_data1('eco');
 
         //add your code here...
-        $this->data['content'] = "<h1>nothing yet</h1>"; //replace by your own view
+        $this->data['content'] = view('loginFromObservation'); //replace by your own view
 
 
         return view("extraTemplate", $this->data);
@@ -97,7 +97,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->set_common_data1('eco');
 
         //add your code here...
-        $this->data['content'] = "<h1>nothing yet</h1>"; //replace by your own view
+        $this->data['content'] = view('register'); //replace by your own view
 
 
         return view("extraTemplate", $this->data);
@@ -106,7 +106,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->set_common_data1('eco');
 
         //add your code here...
-        $this->data['content'] = "<h1>nothing yet</h1>"; //replace by your own view
+        $this->data['content'] = view('forgotPassword'); //replace by your own view
 
 
         return view("extraTemplate", $this->data);
@@ -115,7 +115,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->set_common_data1('eco');
 
         //add your code here...
-        $this->data['content'] = "<h1>nothing yet</h1>"; //replace by your own view
+        $this->data['content'] = view('resetPassword'); //replace by your own view
 
 
         return view("extraTemplate", $this->data);
