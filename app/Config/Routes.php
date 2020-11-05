@@ -37,6 +37,8 @@ $routes->get('addObservation', 'Maincontroller::addObservation');
 $routes->get('leaderboardSelect', 'Maincontroller::leaderboardSelect');
 $routes->get('profile', 'Maincontroller::profile');
 $routes->get('leaderboard', 'Maincontroller::leaderboard');
+$routes->get('friendList', 'Maincontroller::friendList');
+$routes->get('search', 'Maincontroller::search');
 /**
  * --------------------------------------------------------------------
  * Additional Routing

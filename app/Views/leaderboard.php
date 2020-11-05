@@ -18,28 +18,28 @@
         <div id="podium_container">
             <div id="top_three">
                 <div id="second" class="top_three_person">
-                    <img src="image/profile.png">
+                    <img src="<?= base_url()?>/public/image/profile.png">
                     <h2>firstname name</h2>
                     <h2>30</h2>
                 </div>
                 <div id="first" class="top_three_person">
-                    <img src="image/profile.png">
+                    <img src="<?= base_url()?>/public/image/profile.png">
                     <h2>firstname name</h2>
                     <h2>3305</h2>
                 </div>
                 <div id="third" class="top_three_person">
-                    <img src="image/profile.png">
+                    <img src="<?= base_url()?>/public/image/profile.png">
                     <h2>firstname name</h2>
                     <h2>2</h2>
                 </div>
             </div>
-            <img id="podium_img" src="image/podiumv2.png" alt="podium">
+            <img id="podium_img" src="<?= base_url()?>/public/image/podiumv2.png" alt="podium">
         </div>
         <div id="forth_and_worse">
             <div class="after_third">
                 <div class="without_points">
                     <h2>4</h2>
-                    <img src="image/profile.png">
+                    <img src="<?= base_url()?>/public/image/profile.png">
                     <h3>firstname name</h3>
                 </div>
                 <h3>10</h3>
@@ -47,7 +47,7 @@
             <div class="after_third">
                 <div class="without_points">
                     <h2>5</h2>
-                    <img src="image/profile.png">
+                    <img src="<?= base_url()?>/public/image/profile.png">
                     <h3>firstname name</h3>
                 </div>
                 <h3>5</h3>
@@ -55,7 +55,7 @@
             <div class="after_third">
                 <div class="without_points">
                     <h2>6</h2>
-                    <img src="image/profile.png">
+                    <img src="<?= base_url()?>/public/image/profile.png">
                     <h3>firstname name</h3>
                 </div>
                 <h3>4</h3>
