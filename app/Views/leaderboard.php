@@ -1,12 +1,18 @@
 <div id="leaderboard_overall_container">
     <h1 class="page_title">Friends leaderboard</h1>
     <div id="radio_buttons_container">
-        <input type="radio" name="size" id="daily" checked="checked">
-        <label for="daily">daily</label>
-        <input type="radio" name="size" id="monthly">
-        <label for="daily">monthly</label>
-        <input type="radio" name="size" id="yearly">
-        <label for="daily">yearly</label>
+        <div class="radio_button">
+            <input type="radio" name="size" id="daily">
+            <label for="daily">daily</label>
+        </div>
+        <div class="radio_button">
+            <input type="radio" name="size" id="monthly" checked="checked">
+            <label for="monthly">monthly</label>
+        </div>
+        <div class="radio_button">
+            <input type="radio" name="size" id="yearly">
+            <label for="yearly">yearly</label>
+        </div>
         <!--
         <div class="radio_button">
             <input type="radio" id="daily" name="periodic" value="daily">

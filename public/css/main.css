@@ -116,27 +116,29 @@ nav a.active span.material-icons{
 
 /* leaderboard css code */
 
-/* TODO: style the radio buttons so they look good */
+#radio_buttons_container {
+    margin: 20px 200px 10px;
+    width: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 input[type="radio"] {
     display: none;
 }
 label {
     position: relative;
     color: #25AC71;
-    font-size: 30px;
+    font-size: 15px;
     border: 2px solid #25AC71;
-    border-radius: 5px;
-    padding: 10px 50px;
+    box-shadow: 5px 5px 5px 3px rgba(0,0,0,.2);
+    padding: 5px 20px;
     align-items: center;
 }
 
-label:before {
-    content:"";
-    height: 30px;
-    width: 30px;
-    border: 3px solid #25AC71;
-    border-radius: 50%;
-    margin-right: 20px;
+input[type="radio"]:checked + label {
+    background-color: #25AC71;
+    color: white;
 }
 
 #leaderboard_container {
