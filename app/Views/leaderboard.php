@@ -51,21 +51,27 @@
         </div>
         <div id="forth_and_worse">
             <div class="after_third">
-                <h2>4</h2>
-                <img src="image/profile.png">
-                <h3>firstname name</h3>
+                <div class="without_points">
+                    <h2>4</h2>
+                    <img src="image/profile.png">
+                    <h3>firstname name</h3>
+                </div>
                 <h3>10</h3>
             </div>
             <div class="after_third">
-                <h2>5</h2>
-                <img src="image/profile.png">
-                <h3>firstname name</h3>
+                <div class="without_points">
+                    <h2>5</h2>
+                    <img src="image/profile.png">
+                    <h3>firstname name</h3>
+                </div>
                 <h3>5</h3>
             </div>
             <div class="after_third">
-                <h2>6</h2>
-                <img src="image/profile.png">
-                <h3>firstname name</h3>
+                <div class="without_points">
+                    <h2>6</h2>
+                    <img src="image/profile.png">
+                    <h3>firstname name</h3>
+                </div>
                 <h3>4</h3>
             </div>
         </div>

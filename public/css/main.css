@@ -206,6 +206,16 @@ input[type="radio"]:checked + label {
     justify-content: space-between;
 }
 
+.after_third h2, .after_third h3 {
+    margin-top: 8px;
+}
+.without_points {
+    width: 50%;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+}
+
 /* STYLES FOR TEXT */
 /* TODO: change the style for the headers and paragraphs */
 h1,h2,h3,h4,h5,h6 {
