@@ -237,17 +237,6 @@ input[type="radio"]:checked + label {
 }
 
 /**********************************/
-/* styles for Search page */
-/**********************************/
-
-.searchContainer {
-    width: 800px;
-    align: center;
-    display: flex;
-    flex-direction: row;
-}
-
-/**********************************/
 /* styles for an OBSERVATION CARD */
 /**********************************/
 
@@ -387,6 +376,17 @@ input[type="radio"]:checked + label {
 }
 
 /**********************************/
+/* styles for Search page */
+/**********************************/
+
+.searchContainer {
+    width: 800px;
+    align: center;
+    display: flex;
+    flex-direction: row;
+}
+
+/**********************************/
 /* styles for a PERSON CARD */
 /**********************************/
 
@@ -424,8 +424,6 @@ input[type="radio"]:checked + label {
     max-width:100%;
     max-height:100%;
 }
-
-
 
 /* STYLES FOR TEXT */
 /* TODO: change the style for the headers and paragraphs */
