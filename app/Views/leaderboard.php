@@ -47,7 +47,7 @@
                     <h2>2</h2>
                 </div>
             </div>
-            <img id="podium_img" src="image/podium.png" alt="podium">
+            <img id="podium_img" src="image/podiumv2.png" alt="podium">
         </div>
         <div id="forth_and_worse">
             <div class="after_third">
