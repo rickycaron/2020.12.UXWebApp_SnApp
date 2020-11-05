@@ -38,6 +38,7 @@ $routes->get('leaderboardSelect', 'Maincontroller::leaderboardSelect');
 $routes->get('profile', 'Maincontroller::profile');
 $routes->get('leaderboard', 'Maincontroller::leaderboard');
 
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing
