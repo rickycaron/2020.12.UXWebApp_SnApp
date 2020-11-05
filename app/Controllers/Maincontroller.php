@@ -88,4 +88,24 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
         return view("mainTemplate", $this->data);
     }
+
+    public function friendList() {
+        $this->set_common_data('arrow_back', 'search');
+
+        //add your code here...
+        $this->data['content'] = view('friendList'); //replace by your own view
+
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
+        return view("mainTemplate", $this->data);
+    }
+
+    public function search() {
+        $this->set_common_data('arrow_back', 'search');
+
+        //add your code here...
+        $this->data['content'] = view('search'); //replace by your own view
+
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
+        return view("mainTemplate", $this->data);
+    }
 }
