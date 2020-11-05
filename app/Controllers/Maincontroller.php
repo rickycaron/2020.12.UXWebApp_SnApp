@@ -20,6 +20,9 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['header_icon_1'] = $header_icon_1;
         $this->data['header_icon_2'] = $header_icon_2;
     }
+    private function set_common_data1($header_icon_1) {
+        $this->data['header_icon_1'] = $header_icon_1;
+    }
 
     public function leaderboardSelect() {
         $this->set_common_data('eco', 'search');
@@ -108,4 +111,50 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
         return view("mainTemplate", $this->data);
     }
+    public function login() {
+        $this->set_common_data1('eco');
+
+        //add your code here...
+        $this->data['content'] = view('login'); //replace by your own view
+
+
+        return view("extraTemplate", $this->data);
+    }
+    public function loginFromObservation() {
+        $this->set_common_data1('eco');
+
+        //add your code here...
+        $this->data['content'] = view('loginFromObservation'); //replace by your own view
+
+
+        return view("extraTemplate", $this->data);
+    }
+    public function register() {
+        $this->set_common_data1('eco');
+
+        //add your code here...
+        $this->data['content'] = view('register'); //replace by your own view
+
+
+        return view("extraTemplate", $this->data);
+    }
+    public function forgotPassword() {
+        $this->set_common_data1('eco');
+
+        //add your code here...
+        $this->data['content'] = view('forgotPassword'); //replace by your own view
+
+
+        return view("extraTemplate", $this->data);
+    }
+    public function resetPassword() {
+        $this->set_common_data1('eco');
+
+        //add your code here...
+        $this->data['content'] = view('resetPassword'); //replace by your own view
+
+
+        return view("extraTemplate", $this->data);
+    }
+
 }
