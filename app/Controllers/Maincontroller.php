@@ -22,17 +22,25 @@ class Maincontroller extends \CodeIgniter\Controller
     }
 
     public function leaderboardSelect() {
-        $this->set_common_data('arrow_back', 'search');
+        $this->set_common_data('eco', 'search');
 
         //add your code here...
-        $this->data['content'] = "<h1>nothing yet</h1>"; //replace by your own view
+        $this->data['content'] = view('leaderboardSelect'); //replace by your own view
+
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
+        return view("mainTemplate", $this->data);
+    }
+
+    public function leaderboard() {
+        $this->set_common_data('arrow_back', 'search');
+        $this->data['content'] = view('leaderboard');
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
         return view("mainTemplate", $this->data);
     }
 
     public function hub() {
-        $this->set_common_data('arrow_back', 'search');
+        $this->set_common_data('eco', 'search');
 
         //add your code here...
         $this->data['content'] = view('hubPage'); //replace by your own view
@@ -42,7 +50,7 @@ class Maincontroller extends \CodeIgniter\Controller
     }
 
     public function groups() {
-        $this->set_common_data('arrow_back', 'search');
+        $this->set_common_data('eco', 'search');
 
         //add your code here...
         $this->data['content'] = view('groupsOverviewPage'); //replace by your own view
@@ -62,7 +70,7 @@ class Maincontroller extends \CodeIgniter\Controller
     }
 
     public function profile() {
-        $this->set_common_data('arrow_back', 'search');
+        $this->set_common_data('search', 'menu');
 
         //add your code here...
         $this->data['content'] = "<h1>nothing yet</h1>"; //replace by your own view
@@ -72,7 +80,7 @@ class Maincontroller extends \CodeIgniter\Controller
     }
 
     public function addObservation() {
-        $this->set_common_data('arrow_back', 'search');
+        $this->set_common_data('eco', 'search');
 
         //add your code here...
         $this->data['content'] = "<h1>nothing yet</h1>"; //replace by your own view
