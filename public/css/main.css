@@ -21,6 +21,20 @@ body {
     min-height: 100vh;
     background: #E1F2DB;
 }
+#test-container {
+    text-transform: uppercase;
+    justify-content: space-between;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#test {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+}
 
 #content-wrap {
     padding-bottom: 40px;    /* Footer height */
