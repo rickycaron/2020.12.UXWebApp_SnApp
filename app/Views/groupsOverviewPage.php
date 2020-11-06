@@ -1,5 +1,15 @@
+<nav class="navSearchBarGroups">
+    <div class="searchBarGroups" id="bs-example-navbar-collapse-1">
+        <form class="searchContainerGroups">
+            <input class="userInputGroups" type="text">
+            <button class="submitButtonGroups" type="submit">
+                Search
+            </button>
+        </form>
+    </div>
+</nav>
 <div id="groupCardContainer">
-    <div onclick="location.href='groupPage';" id="groupCard">
+    <div onclick="location.href='group';" id="groupCard">
         <div id="groupCardName">
             <h2 id="groupName"> UXWD6 </h2>
         </div>
@@ -20,7 +30,7 @@
         </div>
     </div>
 </div>
-<div onclick="location.href='groupPage';" id="groupCardContainer">
+<div onclick="location.href='group';" id="groupCardContainer">
     <div id="groupCard">
         <div id="groupCardName">
             <h2 id="groupName"> UXWD6 </h2>
@@ -42,7 +52,7 @@
         </div>
     </div>
 </div>
-<div onclick="location.href='groupPage';" id="groupCardContainer">
+<div onclick="location.href='group';" id="groupCardContainer">
     <div id="groupCard">
         <div id="groupCardName">
             <h2 id="groupName"> UXWD6 </h2>
