@@ -86,7 +86,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->set_common_data('eco', 'search');
 
         //add your code here...
-        $this->data['content'] = view('tryaddobservation'); //replace by your own view
+        $this->data['content'] = view('addobservation'); //replace by your own view
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
         return view("mainTemplate", $this->data);
