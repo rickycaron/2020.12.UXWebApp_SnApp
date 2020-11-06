@@ -76,7 +76,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->set_common_data('search', 'menu');
 
         //add your code here...
-        $this->data['content'] = "<h1>nothing yet</h1>"; //replace by your own view
+        $this->data['content'] = view('profile'); //replace by your own view
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('profile');
         return view("mainTemplate", $this->data);
