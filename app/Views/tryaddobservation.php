@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Add an observation</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta name="keywords" content="Animals Plants Nature Social media" />
-    <meta name="description" content="This website is a social madia like page where you can share your observations from nature with your friends and the world" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- stylesheet css -->
-    <link href='css/main.css' rel='stylesheet'>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap" rel="stylesheet">
-</head>
-
-    <div class="col-sm-8 title">
+<div class="col-sm-8 title">
         <h1>Add Observation</h1>
     </div>
 
