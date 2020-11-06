@@ -251,6 +251,19 @@ input[type="radio"]:checked + label {
 }
 
 /**********************************/
+/* styles for Groups overview page */
+/**********************************/
+
+#groupTitle {
+    padding: 5px 5px;
+}
+
+.searchBarGroups {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+/**********************************/
 /* styles for an OBSERVATION CARD */
 /**********************************/
 
@@ -373,7 +386,7 @@ input[type="radio"]:checked + label {
 #groupCardInformation {
     display: flex;
     flex-direction: row;
-    align-items: normal;
+    /*align-items: normal;*/
     height: 80%;
     padding-left: 10px;
     /*background-color: #002b36;*/
@@ -386,7 +399,13 @@ input[type="radio"]:checked + label {
 
 #groupCardInformationText {
     padding-left: 10px;
-    /*background-color: #002b36;*/
+    background-color: #002b36;
+}
+
+#groupMembers {
+    display: flex;
+    flex-direction: row;
+    align-items: normal;
 }
 
 /**********************************/
