@@ -627,7 +627,8 @@ form .txt_field{
     width:100%;}
 
 input[type="submit"]{
-    margin-top: 40px;
+    margin-top: 20px;
+    margin-bottom: 40px;
     border:1px solid;
     background: #25AC71;
     cursor:pointer;
