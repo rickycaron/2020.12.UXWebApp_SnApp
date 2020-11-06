@@ -49,7 +49,7 @@
 </div>
 
 
-<div id="observationCardContainer" class="col-sm-12 col-md-10 col-lg-7">
+<div id="observationCardContainer_p" class="col-sm-12 col-md-10 col-lg-7">
     <div id="observationCard_p">
         <div id="observationCardProfile_profile">
             <img id="ProfilePicture" src="https://pic4.zhimg.com/ee44507a59989947c85d60e0b400f0c5_xl.jpg" style="width: 35px;border-radius: 35px">
@@ -92,7 +92,7 @@
 </div>
 
 
-<div id="observationCardContainer" class="col-sm-12 col-md-10 col-lg-7">
+<div id="observationCardContainer_p" class="col-sm-12 col-md-10 col-lg-7">
     <div id="observationCard_p">
         <div id="observationCardProfile_profile">
             <img id="ProfilePicture" src="https://pic4.zhimg.com/ee44507a59989947c85d60e0b400f0c5_xl.jpg" style="width: 35px;border-radius: 35px">
@@ -135,7 +135,7 @@
 </div>
 
 
-<div id="observationCardContainer" class="col-sm-12 col-md-10 col-lg-7">
+<div id="observationCardContainer_p" class="col-sm-12 col-md-10 col-lg-7">
     <div id="observationCard_p">
         <div id="observationCardProfile_profile">
             <img id="ProfilePicture" src="https://pic4.zhimg.com/ee44507a59989947c85d60e0b400f0c5_xl.jpg" style="width: 35px;border-radius: 35px">
