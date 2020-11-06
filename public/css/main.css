@@ -727,7 +727,7 @@ input[type="submit"]:hover{
 
 
     text-align: justify;
-    text-justify: left;
+    /*text-justify: left;*/
     /* iconColor */
 
     color: #242424;
@@ -746,7 +746,7 @@ input[type="submit"]:hover{
 
 
     text-align: justify;
-    text-justify: left;
+    /*text-justify: left;*/
     /* iconColor */
 
     color: #242424;
@@ -762,8 +762,8 @@ input[type="submit"]:hover{
 
 
 .profileUserContainer {
-    padding-left: 3%;s
-padding-right: 3%;
+    padding-left: 3%;
+    padding-right: 3%;
     height: 130px;
 }
 
