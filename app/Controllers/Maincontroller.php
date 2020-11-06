@@ -156,5 +156,14 @@ class Maincontroller extends \CodeIgniter\Controller
 
         return view("extraTemplate", $this->data);
     }
+    public function anobservation() {
+        $this->set_common_data1('eco');
+
+        //add your code here...
+        $this->data['content'] = view('anobservation'); //replace by your own view
+
+
+        return view("extraTemplate", $this->data);
+    }
 
 }
