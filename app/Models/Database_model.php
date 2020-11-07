@@ -24,7 +24,7 @@ class Database_model
      * @param $username
      * @param $password
      * @param $email
-     * @return int = 0 if the user already exists, 1 if query executed successfully.
+     * @return int = 0 if query failed, 1 if query executed successfully.
      */
     public function insertUser ($username, $password, $email) {
         // check if user already exists or not
@@ -45,7 +45,7 @@ class Database_model
     /**
      * @param $name
      * @param $points
-     * @return int = 0 if the user already exists, 1 if query executed successfully.
+     * @return int = 0 if query failed, 1 if query executed successfully.
      */
     public function insertSpecie ($name, $points) {
         $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.specie WHERE name="'.$name.'") AS result;');
@@ -57,7 +57,11 @@ class Database_model
         return 1;
     }
 
-    // TODO: test this function
+    /**
+     * @param $name
+     * @param $description
+     * @return int = 0 if query failed, 1 if query executed successfully.
+     */
     public function insertTrophy ($name, $description) {
         $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.trophy WHERE name="'.$name.'") AS result;');
         if ($query->getRow()->result) {
@@ -68,34 +72,44 @@ class Database_model
         return 1;
     }
 
+    /**
+     * @param $name
+     * @param $description
+     * @return int = 0 if query failed, 1 if query executed successfully.
+     */
+    // TODO: how should we make it so that you can make multiple groups with the same name but from different users -> maybe ask Aquel?
+    public function insertGroup ($name, $description) {
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.userGroup WHERE name="'.$name.'") AS result;');
+        if ($query->getRow()->result) {
+            return 0;
+        }
+        $data = ['name'=> $name, 'description' => $description];
+        $this->db->table('userGroup')->insert($data);
+        return 1;
+    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // TODO: test this function
+    /**
+     * @param $description
+     * @param $location
+     * @param $gender
+     * @param $date
+     * @param $amount
+     * @param $specieID i am not sure what would be the best option to give as parameter. specie id or name (depends on the implementation from you code)
+     * @param $userID i am not sure what would be the best option to give as parameter. user id or username (depends on the implementation from you code)
+     * @return int = 0 if query failed, 1 if query executed successfully.
+     */
     public function insertObservation($description, $location, $gender, $date, $amount, $specieID, $userID) {
+        //check if specie exists
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.specie WHERE id="'.$specieID.'") AS result;');
+        if (!$query->getRow()->result) {
+            return 0;
+        }
+        //check if user exists
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.user WHERE id="'.$userID.'") AS result;');
+        if (!$query->getRow()->result) {
+            return 0;
+        }
         $data = ['description'=> $description,
             'location' => $location,
             'gender' => $gender,
@@ -105,40 +119,112 @@ class Database_model
             'userID' => $userID
         ];
         $this->db->table('observation')->insert($data);
+        return 1;
     }
-    // TODO: test this function
+
+
+    /**
+     * @param $url
+     * @param $observationID is this the best option?
+     * @return int = 0 if query failed, 1 if query executed successfully.
+     */
     public function insertPhotoPath ($url, $observationID) {
+        //check if photo path exists
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.observation WHERE id="'.$observationID.'") AS result;');
+        if (!$query->getRow()->result) {
+            return 0;
+        }
         $data = ['url'=> $url, 'observationID' => $observationID];
         $this->db->table('photoPath')->insert($data);
+        return 1;
     }
 
-    // TODO: test this function
-    public function insertGroup ($name, $description) {
-        $data = ['name'=> $name, 'description' => $description];
-        $this->db->table('userGroup')->insert($data);
-    }
-
-    // TODO: test this function
+    /**
+     * @param $userID_A this the best option?
+     * @param $userID_B this the best option?
+     * @return int = 0 if query failed, 1 if query executed successfully.
+     */
     public function insertFriendsMapping($userID_A, $userID_B) {
+        if ($userID_A == $userID_B) return 0;
+        // check if both users exist
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.user WHERE id="'.$userID_A.'") AS result;');
+        if (!$query->getRow()->result) return 0;
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.user WHERE id="'.$userID_B.'") AS result;');
+        if (!$query->getRow()->result) return 0;
+        //check if friend mapping already exists (query takes care of both directions)
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.friendsMapping 
+                                                     WHERE (userID_A="'.$userID_A.'" AND userID_B="'.$userID_B.'") OR (userID_A="'.$userID_B.'" AND userID_B="'.$userID_A.'")) 
+                                                     AS result;');
+        if ($query->getRow()->result) return 0;
+
         $data = ['userID_A'=> $userID_A, 'userID_B' => $userID_B];
         $this->db->table('friendsMapping')->insert($data);
+        return 1;
     }
 
-    // TODO: test this function
+    /**
+     * @param $userGroupID is this the best option?
+     * @param $observationID is this the best option?
+     * @return int = 0 if query failed, 1 if query executed successfully.
+     */
     public function insertGroupObservationMapping($userGroupID, $observationID) {
+        // check if both entities exist
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.userGroup WHERE id="'.$userGroupID.'") AS result;');
+        if (!$query->getRow()->result) return 0;
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.observation WHERE id="'.$observationID.'") AS result;');
+        if (!$query->getRow()->result) return 0;
+        //check if mapping already exists
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.groupObservationMapping 
+                                                     WHERE userGroupID="'.$userGroupID.'" AND observationID="'.$observationID.'") 
+                                                     AS result;');
+        if ($query->getRow()->result) return 0;
+
         $data = ['userGroupID'=> $userGroupID, 'observationID' => $observationID];
         $this->db->table('groupObservationMapping')->insert($data);
+        return 1;
     }
 
-    // TODO: test this function
+    /**
+     * @param $userID = is this the best option?
+     * @param $groupID = is  this the best option?
+     * @return int = 0 if query failed, 1 if query executed successfully.
+     */
     public function insertUserGroupMapping($userID, $groupID) {
+        // check if both entities exist
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.userGroup WHERE id="'.$groupID.'") AS result;');
+        if (!$query->getRow()->result) return 0;
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.user WHERE id="'.$userID.'") AS result;');
+        if (!$query->getRow()->result) return 0;
+        //check if mapping already exists
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.userGroupMapping
+                                                     WHERE userID="'.$userID.'" AND groupID="'.$groupID.'") 
+                                                     AS result;');
+        if ($query->getRow()->result) return 0;
+
         $data = ['userID'=> $userID, 'groupID' => $groupID];
         $this->db->table('userGroupMapping')->insert($data);
+        return 1;
     }
 
-    // TODO: test this function
+    /**
+     * @param $userID = is this the best option?
+     * @param $trophyID = is this the best option?
+     * @return int = 0 if query failed, 1 if query executed successfully.
+     */
     public function insertTrophyMapping($userID, $trophyID) {
+        // check if both entities exist
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.user WHERE id="'.$userID.'") AS result;');
+        if (!$query->getRow()->result) return 0;
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.trophy WHERE id="'.$trophyID.'") AS result;');
+        if (!$query->getRow()->result) return 0;
+        //check if mapping already exists
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.userTrophyMapping
+                                                     WHERE userID="'.$userID.'" AND trophyID="'.$trophyID.'") 
+                                                     AS result;');
+        if ($query->getRow()->result) return 0;
+
         $data = ['userID'=> $userID, 'trophyID' => $trophyID];
-        $this->db->table('userGroupMapping')->insert($data);
+        $this->db->table('userTrophyMapping')->insert($data);
+        return 1;
     }
 }
