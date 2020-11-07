@@ -6,8 +6,9 @@
     <meta name="keywords" content="Animals Plants Nature Social media" />
     <meta name="description" content="This website is a social madia like page where you can share your observations from nature with your friends and the world" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="<?= base_url()?>/public/css/main.css?version=5" rel="stylesheet" type="text/css"/>
-    <!-- <link href="<?= base_url()?>/public/css/media_query.css" rel="stylesheet"> -->
+
+    <link href="<?= base_url()?>/public/css/main.css" rel="stylesheet"/>
+    <link href="<?= base_url()?>/public/css/media_query.css" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">

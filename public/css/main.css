@@ -21,28 +21,14 @@ body {
     min-height: 100vh;
     background: #E1F2DB;
 }
-#input {
-    width: 400px;
-    align-items: center;
-}
-#button{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-}
-#button1{
-    width: 250px;
-    height: 150px;
-    background-color: #F8F8F8;
-}
+
 header, footer {
     width: inherit;
 }
 
 header {
     background-color: #F8F8F8;
-    height: 40px;
+    height: 50px;
     display: flex;
     flex-direction: row;
 
@@ -59,7 +45,7 @@ main {
 }
 
 footer {
-    height: 40px;            /* Footer height */
+    height: 70px;            /* Footer height */
     background: #F8F8F8;
     text-align: center;
     position: fixed;
@@ -67,10 +53,16 @@ footer {
 }
 span.material-icons {
     color: #242424;
-    font-size: 3em;
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-top: 5px; /* TODO: there should be a better way to vertically center the icons in the bars. */
+    font-size: 4em;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+nav a { /* used to center icons in footer*/
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 nav {
@@ -89,7 +81,23 @@ nav a.active span.material-icons{
     background-color: #fafafa;
     width: 400px; height:200px; margin:0 auto;
 }
-
+/*
+#input {
+    width: 400px;
+    align-items: center;
+}
+#button{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+#button1 {
+    width: 250px;
+    height: 150px;
+    background-color: #F8F8F8;
+}
+*/
 /**************************************/
 /* styles for Leaderboard select page */
 /**************************************/
@@ -1143,7 +1151,7 @@ form .form-row .textarea{
     margin-left: 20%;
     margin-right: 20%;
 }
-
+/*
 @media (max-width: 700px) {
     .container_p .text{
         font-size: 30px;
@@ -1161,7 +1169,7 @@ form .form-row .textarea{
         width: 40%!important;
     }
 }
-
+*/
 
 /*change profile picture*/
 .change_profilePicture {
@@ -1208,8 +1216,8 @@ form input[type="file"] {
 /**********************************/
 /* styles for different size device */
 /**********************************/
-
-/********** Large devices only **********/
+/*
+/********** Large devices only ********** /
 @media (min-width: 1200px) {
     .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
         float: left;
@@ -1252,7 +1260,7 @@ form input[type="file"] {
     }
 }
 
-/********** Medium devices only **********/
+/********** Medium devices only ********** /
 @media (min-width: 992px) and (max-width: 1199px) {
     .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
         float: left;
@@ -1295,7 +1303,7 @@ form input[type="file"] {
     }
 }
 
-/********** small devices only **********/
+/********** small devices only ********** /
 @media (max-width: 991px) {
     .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
         float: left;
@@ -1337,7 +1345,7 @@ form input[type="file"] {
         width: 100%;
     }
 }
-
+*/
 /* STYLES FOR TEXT */
 /* TODO: change the style for the headers and paragraphs */
 h1,h2,h3,h4,h5,h6 {
