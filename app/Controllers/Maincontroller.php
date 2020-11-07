@@ -7,6 +7,7 @@ namespace App\Controllers;
 class Maincontroller extends \CodeIgniter\Controller
 {
     private $menu_model;
+    private $database_model;
     private $data;
 
     /**
@@ -16,13 +17,17 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->menu_model = new \Menu_model();
     }
 
+    /**
+     * Functions
+     */
     private function set_common_data($header_icon_1, $header_icon_2) {
         $this->data['header_icon_1'] = $header_icon_1;
         $this->data['header_icon_2'] = $header_icon_2;
     }
-    private function set_common_data1($header_icon_1) {
-        $this->data['header_icon_1'] = $header_icon_1;
-    }
+
+    /**
+     * links to the different pages
+     */
 
     public function leaderboardSelect() {
         $this->set_common_data('eco', 'search');
@@ -112,7 +117,7 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("mainTemplate", $this->data);
     }
     public function login() {
-        $this->set_common_data1('eco');
+        $this->set_common_data('eco', 'eco');
 
         //add your code here...
         $this->data['content'] = view('login'); //replace by your own view
@@ -121,7 +126,7 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("extraTemplate", $this->data);
     }
     public function loginFromObservation() {
-        $this->set_common_data1('eco');
+        $this->set_common_data('eco', 'eco');
 
         //add your code here...
         $this->data['content'] = view('loginFromObservation'); //replace by your own view
@@ -130,7 +135,7 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("extraTemplate", $this->data);
     }
     public function register() {
-        $this->set_common_data1('eco');
+        $this->set_common_data('eco', 'eco');
 
         //add your code here...
         $this->data['content'] = view('register'); //replace by your own view
@@ -139,7 +144,7 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("extraTemplate", $this->data);
     }
     public function forgotPassword() {
-        $this->set_common_data1('eco');
+        $this->set_common_data('eco', 'eco');
 
         //add your code here...
         $this->data['content'] = view('forgotPassword'); //replace by your own view
@@ -148,7 +153,7 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("extraTemplate", $this->data);
     }
     public function resetPassword() {
-        $this->set_common_data1('eco');
+        $this->set_common_data('eco', 'eco');
 
         //add your code here...
         $this->data['content'] = view('resetPassword'); //replace by your own view
@@ -157,7 +162,7 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("extraTemplate", $this->data);
     }
     public function anobservation() {
-        $this->set_common_data1('eco');
+        $this->set_common_data('eco', 'eco');
 
         //add your code here...
         $this->data['content'] = view('anobservation'); //replace by your own view
@@ -166,4 +171,12 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("extraTemplate", $this->data);
     }
 
+
+    /* TODO: delete this function + delete view databaseTest + delete route in Routes.php file*/
+    /* This functions shows how the database should be used in your own pages */
+    public function databaseTest() {
+        $this->set_common_data('sentiment_satisfied_alt', 'sentiment_satisfied_alt');
+        $this->data['content'] = view('databaseTest');
+        return view("extraTemplate", $this->data);
+    }
 }
