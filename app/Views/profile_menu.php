@@ -10,5 +10,4 @@
     <hr>
     <h3 class = "menuTitle">Log out</h3>
     <hr>
-
 </div>

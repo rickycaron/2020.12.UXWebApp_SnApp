@@ -15,6 +15,7 @@ class Maincontroller extends \CodeIgniter\Controller
      */
     public function __construct() {
         $this->menu_model = new \Menu_model();
+        $this->database_model = new \Database_model();
     }
 
     /**
@@ -176,7 +177,11 @@ class Maincontroller extends \CodeIgniter\Controller
     /* This functions shows how the database should be used in your own pages */
     public function databaseTest() {
         $this->set_common_data('sentiment_satisfied_alt', 'sentiment_satisfied_alt');
-        $this->data['content'] = view('databaseTest');
-        return view("extraTemplate", $this->data);
+
+        $this->data['content'] = $this->database_model->insertSpecie("Bordercollie", 50);
+        //$this->database_model->insertUser("Tijs", "password", "tijs@hotmail.com");
+        //$this->database_model->insertObservation("description", "location", "gender", "2020-11-07",20,1,1);
+        //$this->database_model->insertSpecie("Akita", 100);
+        return view("extraTemplate",$this->data);
     }
 }
