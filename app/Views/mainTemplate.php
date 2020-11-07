@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="<?= base_url()?>/public/css/main.css" rel="stylesheet"/>
+    <link href="<?= base_url()?>/public/css/reusable.css" rel="stylesheet"/>
+    <link href="<?= base_url()?>/public/css/pages.css" rel="stylesheet"/>
     <link href="<?= base_url()?>/public/css/media_query.css" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -18,10 +20,10 @@
 <div id="page-container">
     <header>
         <span class="material-icons" id="header_icon_1"><?=$header_icon_1?></span>
-        <h1 id="title">snAPP Nature</h1>
+        <h1 id="title"><?=$title?></h1>
         <a href="<?= base_url()?>/public/MainController/search"><span class="material-icons" id="header_icon_2"><?=$header_icon_2?></span></a>
     </header>
-    <main id="content-wrap">
+    <main>
         <?=$content?>
     </main>
     <footer>
