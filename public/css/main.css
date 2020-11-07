@@ -25,7 +25,7 @@ header, footer {
 
 header {
     /*background-color: #F8F8F8;*/
-    background: lightgray;
+    background: #F8F8F8;
     height: 50px;
     display: flex;
     flex-direction: row;
@@ -47,7 +47,7 @@ main {
 footer {
     height: 60px;
     /*background: #F8F8F8;*/
-    background-color: lightgray;
+    background-color: #F8F8F8;
     text-align: center;
     position: fixed;
     bottom:0;
