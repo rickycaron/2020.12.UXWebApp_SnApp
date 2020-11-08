@@ -95,8 +95,8 @@ class Database_model
      * @param $gender
      * @param $date
      * @param $amount
-     * @param $specieID i am not sure what would be the best option to give as parameter. specie id or name (depends on the implementation from you code)
-     * @param $userID i am not sure what would be the best option to give as parameter. user id or username (depends on the implementation from you code)
+     * @param $specieID = i am not sure what would be the best option to give as parameter. specie id or name (depends on the implementation from you code)
+     * @param $userID = i am not sure what would be the best option to give as parameter. user id or username (depends on the implementation from you code)
      * @return int = 0 if query failed, 1 if query executed successfully.
      */
     public function insertObservation($description, $location, $gender, $date, $amount, $specieID, $userID) {
@@ -125,7 +125,7 @@ class Database_model
 
     /**
      * @param $url
-     * @param $observationID is this the best option?
+     * @param $observationID = is this the best option?
      * @return int = 0 if query failed, 1 if query executed successfully.
      */
     public function insertPhotoPath ($url, $observationID) {
@@ -140,8 +140,8 @@ class Database_model
     }
 
     /**
-     * @param $userID_A this the best option?
-     * @param $userID_B this the best option?
+     * @param $userID_A = is this the best option?
+     * @param $userID_B = is this the best option?
      * @return int = 0 if query failed, 1 if query executed successfully.
      */
     public function insertFriendsMapping($userID_A, $userID_B) {
@@ -163,8 +163,8 @@ class Database_model
     }
 
     /**
-     * @param $userGroupID is this the best option?
-     * @param $observationID is this the best option?
+     * @param $userGroupID = is this the best option?
+     * @param $observationID = is this the best option?
      * @return int = 0 if query failed, 1 if query executed successfully.
      */
     public function insertGroupObservationMapping($userGroupID, $observationID) {
@@ -226,5 +226,51 @@ class Database_model
         $data = ['userID'=> $userID, 'trophyID' => $trophyID];
         $this->db->table('userTrophyMapping')->insert($data);
         return 1;
+    }
+
+    /**
+     * @param $userID
+     * @return array|array[]|object[]
+     */
+    public function getUser($userID) {
+        $query = $this->db->query('SELECT * FROM a20ux6.user WHERE id = "'.$userID.'";');
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @return array|array[]|object[]
+     */
+    public function getGroupsFromUser($userID) {
+        $query = $this->db->query('SELECT name, description
+                                        FROM a20ux6.userGroup as g
+                                        INNER JOIN a20ux6.userGroupMapping as m on g.id = m.groupID
+                                        WHERE m.userID = "'.$userID.'";');
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @return array|array[]|object[]
+     */
+    public function getFriendsFromUser($userID) {
+        $query = $this->db->query('SELECT username, email, points
+                                        FROM a20ux6.friendsMapping as m , a20ux6.user as u
+                                        WHERE CASE WHEN m.userID_A = "'.$userID.'" THEN m.userID_B = u.id
+			                                        WHEN m.userID_B = "'.$userID.'" THEN m.userID_A = u.id
+		                                        END;');
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @return array|array[]|object[]
+     */
+    public function getTrophysFromUser($userID) {
+        $query = $this->db->query('SELECT name, description
+                                        FROM a20ux6.trophy as t
+                                        INNER JOIN a20ux6.userTrophyMapping as m on t.id = m.trophyID
+                                        WHERE m.userID = "'.$userID.'";');
+        return $query->getResult();
     }
 }

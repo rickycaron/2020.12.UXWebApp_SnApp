@@ -178,7 +178,11 @@ class Maincontroller extends \CodeIgniter\Controller
     public function databaseTest() {
         $this->set_common_data('sentiment_satisfied_alt', 'sentiment_satisfied_alt');
 
-        $this->data['content'] = $this->database_model->insertTrophyMapping("3", "1");
+        //$data2['results'] = $this->database_model->getTrophysFromUser("3");
+        //$data2['results'] = $this->database_model->getFriendsFromUser("3");
+        $data2['results'] = $this->database_model->getGroupsFromUser("3");
+
+        $this->data['content'] = view('databaseTest', $data2);
 
         return view("extraTemplate",$this->data);
     }
