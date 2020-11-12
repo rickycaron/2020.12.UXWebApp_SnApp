@@ -1,8 +1,3 @@
 
-    <?php foreach ($results as $res): ?>
-        <div>
-            <span><?=$res->name?></span>
-            <span><?=$res->description?></span>
-        </div>
+    <h1>DONE</h1>
 
-    <?php endforeach; ?>
