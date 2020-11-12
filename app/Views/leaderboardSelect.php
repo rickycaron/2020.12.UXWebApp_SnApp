@@ -1,3 +1,4 @@
+<div class="addObservationContainer">
 <div id="leaderboard_select_container">
     <h1 class="page_title">Leaderboard</h1>
     <div class="filter_container">
@@ -39,5 +40,6 @@
         </div>
         <hr class="small_ruler">
     </div>
+</div>
 </div>
 

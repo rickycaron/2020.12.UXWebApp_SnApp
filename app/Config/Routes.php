@@ -44,6 +44,11 @@ $routes->get('register', 'Maincontroller::register');
 $routes->get('forgotPassword', 'Maincontroller::forgotPassword');
 $routes->get('resetPassword', 'Maincontroller::resetPassword');
 $routes->get('anobservation', 'Maincontroller::anobservation');
+$routes->get('account', 'Maincontroller::account');
+$routes->get('edit_profile', 'Maincontroller::edit_profile');
+$routes->get('search', 'Maincontroller::search');
+
+
 
 
 
