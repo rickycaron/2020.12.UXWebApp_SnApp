@@ -7,6 +7,7 @@ namespace App\Controllers;
 class Maincontroller extends \CodeIgniter\Controller
 {
     private $menu_model;
+    private $database_model;
     private $data;
 
     /**
@@ -14,6 +15,7 @@ class Maincontroller extends \CodeIgniter\Controller
      */
     public function __construct() {
         $this->menu_model = new \Menu_model();
+        $this->database_model = new \Database_model();
     }
 
     private function set_common_data($header_icon_1, $header_icon_2) {
@@ -144,8 +146,10 @@ class Maincontroller extends \CodeIgniter\Controller
                 //return hub page
                 $this->set_common_data('eco', 'search');
                 $this->data['content'] = view('hubPage'); //replace by your own view
+                $this->data['title'] = 'Observation Feed';
                 $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
                 return view("mainTemplate", $this->data);
+
             }
             else if($searchresult==1){
                 //password is wrong
@@ -177,14 +181,34 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("extraTemplate", $this->data);
     }
     public function register() {
-        $this->set_common_data1('eco');
-
+        $this->data=[];
+        $this->set_common_data('eco', 'eco');
         //add your code here...
-        $this->data['content'] = view('register'); //replace by your own view
-        $this->data['title'] = 'Register';
+        helper(['form']);
+        if ($this->request->getMethod() === 'post' && $this->validate([
+                'username' => 'required|min_length[3]|max_length[255]|alpha_dash|is_unique[user.username]',
+                'email'  => 'required|min_length[3]|max_length[40]|valid_email|is_unique[user.email]',
+                'password'=>'required|min_length[6]|max_length[50]',
+                'password_confirm'=>'matches[password]'
+            ]))
+        {
+            $username= $this->request->getPost('username');
+            $email= $this->request->getPost('email');
+            $password=$this->request->getPost('password');
+            $this->database_model-> insertUser($username,$password,$email);
 
+            //echo view('news/success');
+            $this->set_common_data('eco', 'search');
+            $this->data['content'] = view('hubPage'); //replace by your own view
+            $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
+            return view("mainTemplate", $this->data);
+        }
+        else
+        {
+            $this->data['content'] = view('register'); //replace by your own view
+            return view("extraTemplate", $this->data);
+        }
 
-        return view("extraTemplate", $this->data);
     }
     public function forgotPassword() {
         $this->set_common_data1('eco');
