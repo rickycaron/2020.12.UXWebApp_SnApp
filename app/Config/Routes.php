@@ -17,7 +17,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
  */
 $routes->setDefaultNamespace('App\Controllers');
 $routes->setDefaultController('Maincontroller');
-$routes->setDefaultMethod('addObservation');
+$routes->setDefaultMethod('login');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 $routes->setAutoRoute(true);
@@ -30,7 +30,7 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Maincontroller::addObservation');
+$routes->get('/', 'Maincontroller::login');
 $routes->get('hub', 'Maincontroller::hub');
 $routes->get('groups', 'Maincontroller::groups');
 $routes->get('group', 'Maincontroller::group');
@@ -44,7 +44,22 @@ $routes->get('register', 'Maincontroller::register');
 $routes->get('forgotPassword', 'Maincontroller::forgotPassword');
 $routes->get('resetPassword', 'Maincontroller::resetPassword');
 $routes->get('anobservation', 'Maincontroller::anobservation');
+$routes->get('account', 'Maincontroller::account');
+$routes->get('edit_profile', 'Maincontroller::edit_profile');
+$routes->get('search', 'Maincontroller::search');
+
+//$routes->get('login', 'Maincontroller::login');
+$routes->match(['get','post'],'login', 'Maincontroller::login');
+$routes->get('loginFromObservation', 'Maincontroller::loginFromObservation');
+//$routes->get('register', 'Maincontroller::register');
+$routes->match(['get','post'],'register', 'Maincontroller::register');
+
+$routes->get('forgotPassword', 'Maincontroller::forgotPassword');
+$routes->get('resetPassword', 'Maincontroller::resetPassword');
+$routes->get('anobservation', 'Maincontroller::anobservation');
 $routes->get('databaseTest', 'Maincontroller::databaseTest');
+
+
 
 
 /**

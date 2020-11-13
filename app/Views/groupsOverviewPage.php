@@ -1,14 +1,12 @@
-<nav class="navSearchBarGroups">
-    <div class="searchBarGroups" id="bs-example-navbar-collapse-1">
-        <form class="searchContainerGroups">
-            <input class="userInputGroups" type="text">
-            <button class="submitButtonGroups" type="submit">
-                Search
-            </button>
-        </form>
-    </div>
-</nav>
+
 <div id="groupCardContainer">
+    <form method="post">
+        <div class="txt_field">
+            <input type="text" name="Username/email">
+            <span></span>
+            <label>Search</label>
+        </div>
+    </form>
     <div onclick="location.href='group';" id="groupCard">
         <div id="groupCardName">
             <h2 id="groupName"> UXWD6 </h2>

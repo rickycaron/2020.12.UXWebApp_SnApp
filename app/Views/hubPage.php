@@ -1,6 +1,3 @@
-<div id="hubTitle">
-    <h1>Friends Feed</h1>
-</div>
 <div id="observationCardContainer">
     <div id="observationCard">
         <div id="observationCardProfile">
@@ -44,7 +41,7 @@
             <h3 id="profileName"> maartenkesters </h3>
         </div>
         <div id="observationCardPicture">
-            <img id="observationPicture" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png">
+            <img id="observationPicture" src="https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg">
         </div>
         <div id="observationCardPictureFooter">
             <div id="observationCardPictureFooterLocation">
@@ -80,7 +77,7 @@
             <h3 id="profileName"> maartenkesters </h3>
         </div>
         <div id="observationCardPicture">
-            <img id="observationPicture" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png">
+            <img id="observationPicture" src="https://c8.alamy.com/comp/W8RM76/one-lupine-flower-in-a-meadow-vertical-dark-blue-purple-long-stem-of-lupine-with-many-petal-flowers-wild-lupine-flower-blooms-in-the-meadow-W8RM76.jpg">
         </div>
         <div id="observationCardPictureFooter">
             <div id="observationCardPictureFooterLocation">
@@ -116,7 +113,7 @@
             <h3 id="profileName"> maartenkesters </h3>
         </div>
         <div id="observationCardPicture">
-            <img id="observationPicture" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png">
+            <img id="observationPicture" src="https://image.freepik.com/free-vector/beautiful-banner-floral-leaves-template_21799-2813.jpg">
         </div>
         <div id="observationCardPictureFooter">
             <div id="observationCardPictureFooterLocation">

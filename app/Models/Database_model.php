@@ -273,4 +273,33 @@ class Database_model
                                         WHERE m.userID = "'.$userID.'";');
         return $query->getResult();
     }
+
+    /**
+     * created by rui
+     * @param $email
+     * @param $password
+     * @return 0 (correct)/1(password is wrong)/2(the user email doesn't exist)/3(multiple enail exsit, this shouldn't happen)
+     */
+    public function validateUser($email, $password) {
+        $query = $this->db->query('SELECT password FROM a20ux6.user WHERE email = "'.$email.'";');
+        $searcheresult= $query->getResult();
+        if(count($searcheresult)==1){
+            $searchedpassword=$query->getRow()->password;
+            if(strcmp($searchedpassword,$password)==0)
+            {
+                return 0;
+            }
+            else
+            {
+                //password is incorrect
+                return 1;
+            }
+        }elseif (count($searcheresult)==0){
+            //user email doesn't exsit
+            return 2;
+        }else{
+            //there are multiple results
+            return 3;
+        }
+    }
 }

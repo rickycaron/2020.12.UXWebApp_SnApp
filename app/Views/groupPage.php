@@ -1,7 +1,7 @@
-<div id="groupTitle">
-    <h1>UXWD6</h1>
-</div>
 <div id="observationCardContainer">
+    <div id="groupTitle">
+        <h1 style="align-content: center">Groupname: UXWD6</h1>
+    </div>
     <div id="observationCard">
         <div id="observationCardProfile">
             <img id="profilePicture" src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"> <! -- icons need to be imported in correct way!!! -->

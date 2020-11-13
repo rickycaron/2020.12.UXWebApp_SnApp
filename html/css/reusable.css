@@ -1,0 +1,277 @@
+/**********************************/
+/* general styles */
+/**********************************/
+
+.txt_field{
+    position: relative;
+    border-bottom: 2px solid #25AC71;
+    margin-top: 20px;
+    margin-bottom: 20px
+}
+
+.txt_field input{
+    width:100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border:none;
+    background:none;
+    outline: none;
+}
+
+.txt_field label{
+    position:absolute;
+    top:50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: .5s;
+    border:none;
+    box-shadow: none;
+    padding: 0;
+}
+
+.txt_field span::before{
+    content:'';
+    position: absolute;
+    top:40px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background:  linear-gradient(135deg,#00b09b 0%, #96c93d 100%);;
+}
+
+.txt_field input:focus ~ label,
+.txt_field input:valid ~ label{
+    top:-5px;
+    color: #25AC71;
+}
+
+.txt_field input:focus ~ span::before,
+.txt_field input:valid ~ span::before{
+    width:100%;}
+
+
+.custom-btn{
+    margin-top:30px;
+    width: 100%;
+    height:36px;
+    display: block;
+    border: none;
+    border-radius: 25px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    background: linear-gradient(135deg,#00b09b 0%, #96c93d 100%);
+    margin-bottom: 50px;
+}
+
+input[type="submit"]{
+    margin-top: 20px;
+    margin-bottom: 40px;
+    border:1px solid;
+    background: #25AC71;
+    cursor:pointer;
+    outline:none;
+    width: 100%;
+    height:40px;
+    display: block;
+    border-radius: 25px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    background: linear-gradient(135deg,#00b09b 0%, #96c93d 100%);
+}
+
+input[type="submit"]:hover{
+    border-color:#25AC71;
+    transition: .5s;
+}
+/**********************************/
+/* styles for an OBSERVATION CARD */
+/**********************************/
+
+#observationCardContainer {
+    margin: 20px 3% 20px 3%;
+}
+
+#observationCard {
+    background-color: #F8F8F8;
+    /*width: 870px;*/
+    height: 50vh;
+    box-shadow: 5px 5px 5px 3px rgba(0,0,0,.2);
+    padding: 5px;
+}
+
+#observationCardProfile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 10%;
+}
+
+/*make sure the image is a perfect square */
+#observationCardProfile img {
+    /*border: 1px solid black;*/
+    height: 100%;
+
+    width: auto;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+#observationCardProfile h3 {
+    padding: 1% 2%;
+}
+
+#observationCardPicture {
+
+    height: 60%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*background-color: #002b36;*/
+}
+
+#observationCardPicture img {
+    max-height: 100%;
+    max-width: 96%;
+    margin: auto;
+    display: block; /* remove extra space below image */
+}
+
+#observationCardPictureFooter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 10%;
+    /*background-color: #002b36;*/
+}
+
+#observationCardPictureFooterLocation {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#observationCardPictureFooterLocation h4 {
+    font-size: 150%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#observationCardPictureFooterButtons {
+    display: flex;
+    flex-direction: row;
+    align-items: normal;
+}
+
+
+#observationCardComments {
+    box-sizing: border-box;
+    padding: 1% 2% 1% 2%;
+    height: 16%;
+    font-size: 150%;
+    /*background-color: #002b36;*/
+}
+
+#observationCardTime {
+    box-sizing: border-box;
+    padding: 0% 2% 0% 2%;
+    height: 4%;
+    /*background-color: #002b36;*/
+}
+
+/**********************************/
+/* styles for a GROUP CARD */
+/**********************************/
+
+#groupCardContainer {
+    margin: 20px 5% 20px 5%;
+}
+
+#groupCard {
+    background-color: #F8F8F8;
+    height: 200px;
+    box-shadow: 5px 5px 5px 3px rgba(0,0,0,.2);
+}
+
+#groupCardName {
+    padding: 1% 2%;
+}
+
+#groupCardInformation {
+    display: flex;
+    flex-direction: row;
+    /*align-items: normal;*/
+    height: 80%;
+    padding-left: 10px;
+    /*background-color: #002b36;*/
+}
+
+#groupCardPicture img {
+    width: 30%;
+    /*background-color: #002b36;*/
+}
+
+#groupCardInformationText {
+    padding-left: 10px;
+    background-color: #002b36;
+}
+
+#groupMembers {
+    display: flex;
+    flex-direction: row;
+    align-items: normal;
+}
+
+/**********************************/
+/* styles for a PERSON CARD */
+/**********************************/
+
+.personCardContainer {
+    background-color: #F8F8F8;
+    padding: 10px;
+    margin: 10px;
+    width: 840px;
+    margin-top: 20px;
+    box-shadow: 5px 5px 5px 3px rgba(0,0,0,.2);
+
+    display: flex;
+    flex-direction: row;
+}
+
+.personCardInfo {
+    align-items: center;
+    width: 300px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.personCardInfo h3 {
+    margin: 10px;
+    font-size: 20px;
+}
+
+.personCardPhotoContainer {
+    width: 140px;
+    height: 140px;
+}
+
+.personCardPhoto {
+    max-width:100%;
+    max-height:100%;
+}
