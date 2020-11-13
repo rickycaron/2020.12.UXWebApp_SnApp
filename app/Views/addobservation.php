@@ -1,16 +1,15 @@
 <div class="addObservationContainer">
     <div class="wrapper">
-        <div class="previewImage">
+        <div class="previewImage" id="previewImageDiv">
             <img src="" id="uploadImageTag"/>
         </div>
         <div class="content">
-            <div class="material-icons icon">backup</div>
-            <div class="text">No file chosen, yet!</div>
+            <div class="material-icons icon" id="backupIcon">backup</div>
+            <div class="text" id="noFileText">No picture made, yet!</div>
         </div>
     </div>
     <input id="inputFile" type="file"  onchange="readURL(this)" hidden>
     <button class="custom-btn" id="takePictureButton">Take picture</button>
-    <button class="custom-btn" id="analysePictureButton">Analyse picture</button>
 
     <form method="post">
 

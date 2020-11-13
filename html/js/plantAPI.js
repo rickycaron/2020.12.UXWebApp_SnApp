@@ -2,7 +2,8 @@ document.getElementById("takePictureButton").onclick = function selectFile() {
     document.getElementById("inputFile").click();
 }
 
-document.getElementById("analysePictureButton").onclick = function sendIdentification() {
+// document.getElementById("analysePictureButton").onclick = function sendIdentification() {
+function sendIdentification() {
     const files = [...document.querySelector('input[type=file]').files];
     const promises = files.map((file) => {
         return new Promise((resolve, reject) => {
