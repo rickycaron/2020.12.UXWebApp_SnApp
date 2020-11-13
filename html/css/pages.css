@@ -11,6 +11,7 @@
     width: inherit;
     background-color: #F8F8F8;
     border: 2px dashed #c2cdda;
+    padding: 2%;
 
     display: flex;
     align-items: center;
@@ -20,10 +21,10 @@
 
 .addObservationContainer .wrapper .previewImage{
     position: relative;
-    height: 99%;
-    width: 99%;
-    display: flex;
-    align-items:center;
+    height: 100%;
+    width: 100%;
+    display: none;
+    /*align-items:center;*/
     justify-content: center;
 }
 
