@@ -9,13 +9,13 @@
     <span style="font-size: 200px" class="material-icons"> account_box </span>
         <form method="post">
             <div class="txt_field">
-                <input type="text" name="Username/email">
+                <input type="text" name="Username/email" value="demo@test.com">
                 <span></span>
                 <label>Username/email:</label>
             </div>
 
             <div class="txt_field">
-                <input type="text" name="Password" required>
+                <input type="text" name="Password" required value="password">
                 <span></span>
                 <label>Password:</label>
             </div>
