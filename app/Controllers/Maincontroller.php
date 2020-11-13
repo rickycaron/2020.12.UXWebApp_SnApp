@@ -124,13 +124,46 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("mainTemplate", $this->data);
     }
     public function login() {
-        $this->set_common_data1('eco');
+        $this->data=[];
+        $this->set_common_data('eco', 'eco');
 
         //add your code here...
+        helper(['form']);//to remain the user's typed value if the login fails
+        $this->data['error_message'] =' ';
+        if ($this->request->getMethod() === 'post' && $this->validate([
+                'email'  => 'required|min_length[3]|max_length[40]|valid_email|is_not_unique[user.email]',
+                'password'=>'required|min_length[6]|max_length[50]'
+            ]))
+        {
+            //check the password
+            $email= $this->request->getPost('email');
+            $password=$this->request->getPost('password');
+            $searchresult=$this->database_model->validateUser($email,$password);
+            if ($searchresult==0){
+                //password is correct
+                //return hub page
+                $this->set_common_data('eco', 'search');
+                $this->data['content'] = view('hubPage'); //replace by your own view
+                $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
+                return view("mainTemplate", $this->data);
+            }
+            else if($searchresult==1){
+                //password is wrong
+                $this->data['error_message'] = 'Wrong password. Try again or click Forgot password to reset it.';
+            }
+            else if ($searchresult==2){
+                //user doesn't exsit
+                $this->data['error_message'] = 'Invalid username. Please register one account.';
+            }
+            else if ($searchresult==3){
+                //multiple accounts with the same user name,
+                $this->data['error_message'] = 'Multiple accounts with the same email exsit. Please consult our software developer!';
+            }
+        }
+        else
+        {
+        }
         $this->data['content'] = view('login'); //replace by your own view
-        $this->data['title'] = 'Login';
-
-
         return view("extraTemplate", $this->data);
     }
     public function loginFromObservation() {
