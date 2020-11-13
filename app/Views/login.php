@@ -1,7 +1,12 @@
-<div class="col-sm-8 title">
-    <h1>Welcome to snAPP!</h1>
-</div>
-<div id="addaphoto">
+<div class="addObservationContainer">
+    <div style="text-align:center">
+        <br/>
+        <br/>
+        <h1>Welcome snAPP</h1>
+        <br/>
+        <br/>
+        <div>
+        <div id="addaphoto">
     <div class="container">
         <div class="wrapper">
             <div class="content">
@@ -28,15 +33,19 @@
             <br>
             <a href="forgotPassword">Forgot password?</a>
         </form>
-    </div>
+
         <br/>
         <h1 >OR !</h1>
         <div>
             <br/>
-            <button id="button1" type="button">
+            <button id="custom-btn">
                 Create obervation as a visitor
             </button>
             <br/>
             <br/>
+        </div>
+        </div>
+        </div>
     </div>
+</div>
 </div>
