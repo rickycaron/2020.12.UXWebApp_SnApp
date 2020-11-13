@@ -40,7 +40,7 @@
     justify-content: center;
 }
 
-.addObservationContainer .wrapper .text{
+.text{
     font-size: 18px;
     font-weight: 500;
     color: #8B8B8B;
@@ -48,126 +48,7 @@
 
 }
 
-.addObservationContainer #custom-btn{
-    margin-top:30px;
-    width: 100%;
-    height:36px;
-    display: block;
-    border: none;
-    border-radius: 25px;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    background: linear-gradient(135deg,#00b09b 0%, #96c93d 100%);
-    margin-bottom: 50px;
-}
 
-.addObservationContainer form .txt_field{
-    position: relative;
-    border-bottom: 2px solid #25AC71;
-    margin-top: 20px;
-    margin-bottom: 20px
-}
-
-.addObservationContainer .txt_field input{
-    width:100%;
-    padding: 0 5px;
-    height: 40px;
-    font-size: 16px;
-    border:none;
-    background:none;
-    outline: none;
-}
-
-.addObservationContainer .txt_field label{
-    position:absolute;
-    top:50%;
-    left: 5px;
-    transform: translateY(-50%);
-    font-size: 16px;
-    pointer-events: none;
-    transition: .5s;
-    border:none;
-    box-shadow: none;
-    padding: 0;
-}
-
-.addObservationContainer .txt_field span::before{
-    content:'';
-    position: absolute;
-    top:40px;
-    left: 0;
-    width: 0%;
-    height: 2px;
-    background:  linear-gradient(135deg,#00b09b 0%, #96c93d 100%);;
-}
-
-.addObservationContainer .txt_field input:focus ~ label,
-.addObservationContainer .txt_field input:valid ~ label{
-    top:-5px;
-    color: #25AC71;
-}
-
-.addObservationContainer .txt_field input:focus ~ span::before,
-.addObservationContainer .txt_field input:valid ~ span::before{
-    width:100%;}
-
-.addObservationContainer input[type="submit"]{
-    margin-top: 20px;
-    margin-bottom: 40px;
-    border:1px solid;
-    background: #25AC71;
-    cursor:pointer;
-    outline:none;
-    width: 100%;
-    height:40px;
-    display: block;
-    border-radius: 25px;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    background: linear-gradient(135deg,#00b09b 0%, #96c93d 100%);
-}
-
-.addObservationContainer input[type="submit"]:hover{
-    border-color:#25AC71;
-    transition: .5s;
-}
-/*
-
-
-
-.container {
-    background-color: #fafafa;
-    width: 400px; height:200px; margin:0 auto;
-}
-*/
-
-/* STYLES FOR MAIN PART OF THE SCREEN -> add the css for your views here */
-
-/*
-#input {
-    width: 400px;
-    align-items: center;
-}
-#button{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-}
-#button1 {
-    width: 250px;
-    height: 150px;
-    background-color: #F8F8F8;
-}
-*/
 /**************************************/
 /* styles for Leaderboard select page */
 /**************************************/
@@ -499,9 +380,6 @@ span.trophy {
     margin-left: 5%;
 }
 
-#smProfilePicture {
-
-}
 
 #observationCardProfile_profile {
     display: flex;
@@ -883,6 +761,8 @@ form .form-row .textarea{
     background-blend-mode: multiply;
     vertical-align: middle;
     text-align: center;
+
+
     color: transparent;
     transition: all .3s ease;
     text-decoration: none;

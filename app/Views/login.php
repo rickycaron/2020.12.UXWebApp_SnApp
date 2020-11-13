@@ -1,3 +1,4 @@
+<div class="addObservationContainer">
 <div style="text-align:center">
     <br/>
     <br/>
@@ -6,47 +7,31 @@
     <br/>
     <div>
     <span style="font-size: 200px" class="material-icons"> account_box </span>
-        <div>
-            <h3 style="text-align:left">Username/email</h3>
-            <br/>
-            <div style="text-align:center">
-                <input id="input"  type="text">
-                <br/>
-                <div>
-                    <h3 style="text-align:left">Password</h3>
-                    <br/>
-                    <div>
-                        <input id="input"   type="text">
-                        <div>
-                            <br/>
-                            <div id="button" style="text-align:center">
-
-                                <button type="submit">
-                                    Log in
-                                </button>
-                                <button type="submit">
-                                    New user?
-                                </button>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <form method="post">
+            <div class="txt_field">
+                <input type="text" name="Username/email">
+                <span></span>
+                <label>Username/email:</label>
             </div>
+
+            <div class="txt_field">
+                <input type="text" name="Password" required>
+                <span></span>
+                <label>Password:</label>
+            </div>
+            </form>
+        <div>
+            <button id="custom-btn">Log in</button>
+            <button id="custom-btn">New user?</button>
         </div>
+    </div>
+    <br/>
+    <h2>OR !</h2>
+    <div>
+        <br/>
+        <button id="custom-btn">
+            Create obervation as a visitor
+        </button>
     </div>
 </div>
-<div>
-    <br/>
-    <p style="margin-left: 550px"><a href="https://www.w3schools.com/">Forgot password?</a></p>
-    <div style="text-align:center">
-        <br/>
-        <h1 >OR !</h1>
-        <div>
-            <br/>
-            <button id="button1" type="button">
-                Create obervation as a visitor
-            </button>
-        </div>
-    </div>
 </div>

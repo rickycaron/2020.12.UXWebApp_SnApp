@@ -180,5 +180,24 @@ class Maincontroller extends \CodeIgniter\Controller
 
         return view("extraTemplate", $this->data);
     }
+    public function edit_profile() {
+        $this->set_common_data('arrow_back', 'search');
 
+        //add your code here...
+        $this->data['content'] = view('edit_profile'); //replace by your own view
+        $this->data['title'] = 'edit profile';
+
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
+        return view("mainTemplate", $this->data);
+    }
+    public function account() {
+        $this->set_common_data('arrow_back', 'search');
+
+        //add your code here...
+        $this->data['content'] = view('account'); //replace by your own view
+        $this->data['title'] = 'Account';
+
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
+        return view("mainTemplate", $this->data);
+    }
 }
