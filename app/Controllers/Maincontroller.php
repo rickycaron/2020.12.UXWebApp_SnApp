@@ -97,7 +97,9 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['title'] = 'Add Observation';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','plantAPI.js', 'previewPicture.js');
         return view("mainTemplate", $this->data);
+
     }
 
     public function friendList() {

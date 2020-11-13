@@ -18,20 +18,21 @@
     overflow: hidden;
 }
 
-.addObservationContainer .wrapper .image{
-    height: 100%;
-    width: 100%;
-
-    display: none;
+.addObservationContainer .wrapper .previewImage{
+    position: relative;
+    height: 99%;
+    width: 99%;
+    display: flex;
     align-items:center;
     justify-content: center;
 }
 
-.addObservationContainer .wrapper .image img{
+.addObservationContainer .wrapper .previewImage img{
     height:100%;
     width: 100%;
     object-fit: cover;
 }
+
 
 .addObservationContainer .wrapper .icon{
     font-size: 70px;
