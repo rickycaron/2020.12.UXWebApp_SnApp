@@ -1,7 +1,7 @@
-<div class="col-sm-8 title">
+<div id="addaphoto" style="text-align: center;">
+    <br>
     <h1>Welcome to snAPP!</h1>
-</div>
-<div id="addaphoto">
+    <br>
     <div class="container">
         <div class="wrapper">
             <div class="content">
@@ -38,7 +38,7 @@
                 <?= \Config\Services::validation()->listErrors(); ?>
             </div>
 
-            <input type="submit" name="submit" value="Create news item" /></input>
+            <input type="submit" name="submit" value="Create your account" /></input>
             <a href="login">Alreay have an account</a>
         </form>
     </div>

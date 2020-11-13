@@ -38,9 +38,10 @@
         <h1 >OR !</h1>
         <div>
             <br/>
-            <button id="custom-btn">
-                Create obervation as a visitor
-            </button>
+<!--            <button id="custom-btn">-->
+<!--                Create obervation as a visitor-->
+<!--            </button>-->
+            <input type="submit" class="" value="Create obervation as a visitor"></input>
             <br/>
             <br/>
         </div>
