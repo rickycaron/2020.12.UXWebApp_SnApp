@@ -63,5 +63,6 @@ function printInformation(input) {
     plantDescription = plantDetails["wiki_description"];
     document.getElementById("speciesNamePlaceholder").value = plantDetails.common_names[0];
     document.getElementById("scientificNamePlaceholder").value = plantDetails.scientific_name;
+    document.getElementById("textAreaDescription").value = plantDescription.value;
     document.getElementById("DescriptionPlaceholder").value = plantDescription.value;
 }

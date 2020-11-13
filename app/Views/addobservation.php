@@ -25,6 +25,17 @@
             <label>Scientific name</label>
         </div>
 
+        <div class="descriptionField">
+            <h3>Description</h3>
+            <textarea id="textAreaDescription" name="speciesDescription"></textarea>
+        </div>
+
+    </form>
+
+
+
+
+
         <div class="txt_field">
             <input type="text" id="DescriptionPlaceholder" required>
             <span></span>
@@ -44,12 +55,6 @@
         </div>
 
         <div class="txt_field">
-            <input type="number" id="speciesCountPlaceholder" required>
-            <span></span>
-            <label>Number of individuals</label>
-        </div>
-
-        <div class="txt_field">
             <input type="Address" id="LocationPlaceholder" required>
             <span></span>
             <label>Location</label>
@@ -57,7 +62,7 @@
 
         <input type="submit" value="submit">
         <input type="submit" value="cancel">
-    </form>
+
 
 
 </div>

@@ -50,6 +50,17 @@
 
 }
 
+.addObservationContainer .descriptionField {
+    position: relative;
+    width: 100%;
+}
+
+.addObservationContainer #textAreaDescription {
+    position: relative;
+    width: 100%;
+    height: 60px;
+}
+
 
 /**************************************/
 /* styles for Leaderboard select page */
