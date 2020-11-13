@@ -22,9 +22,6 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['header_icon_1'] = $header_icon_1;
         $this->data['header_icon_2'] = $header_icon_2;
     }
-    private function set_common_data1($header_icon_1) {
-        $this->data['header_icon_1'] = $header_icon_1;
-    }
 
     public function leaderboardSelect() {
         $this->set_common_data('eco', 'search');
@@ -171,7 +168,7 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("extraTemplate", $this->data);
     }
     public function loginFromObservation() {
-        $this->set_common_data1('eco');
+        $this->set_common_data('eco', 'eco');
 
         //add your code here...
         $this->data['content'] = view('loginFromObservation'); //replace by your own view
@@ -212,7 +209,7 @@ class Maincontroller extends \CodeIgniter\Controller
 
     }
     public function forgotPassword() {
-        $this->set_common_data1('eco');
+        $this->set_common_data('eco', 'eco');
 
         //add your code here...
         $this->data['content'] = view('forgotPassword'); //replace by your own view
@@ -222,7 +219,7 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("extraTemplate", $this->data);
     }
     public function resetPassword() {
-        $this->set_common_data1('eco');
+        $this->set_common_data('eco', 'eco');
 
         //add your code here...
         $this->data['content'] = view('resetPassword'); //replace by your own view
@@ -232,7 +229,7 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("extraTemplate", $this->data);
     }
     public function anobservation() {
-        $this->set_common_data1('eco');
+        $this->set_common_data('eco', 'eco');
 
         //add your code here...
         $this->data['content'] = view('anobservation'); //replace by your own view
