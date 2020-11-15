@@ -229,13 +229,14 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("extraTemplate", $this->data);
     }
     public function anobservation() {
-        $this->set_common_data('eco', 'eco');
+        $this->set_common_data('eco', 'search');
 
         //add your code here...
         $this->data['content'] = view('anobservation'); //replace by your own view
         $this->data['title'] = 'Observation';
 
-        return view("extraTemplate", $this->data);
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('none');
+        return view("mainTemplate", $this->data);
     }
     public function edit_profile() {
         $this->set_common_data('arrow_back', 'search');
