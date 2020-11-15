@@ -2,7 +2,6 @@ document.getElementById("takePictureButton").onclick = function selectFile() {
     document.getElementById("inputFile").click();
 }
 
-// document.getElementById("analysePictureButton").onclick = function sendIdentification() {
 function sendIdentification() {
     const files = [...document.querySelector('input[type=file]').files];
     const promises = files.map((file) => {
@@ -64,5 +63,41 @@ function printInformation(input) {
     document.getElementById("speciesNamePlaceholder").value = plantDetails.common_names[0];
     document.getElementById("scientificNamePlaceholder").value = plantDetails.scientific_name;
     document.getElementById("textAreaDescription").value = plantDescription.value;
-    document.getElementById("DescriptionPlaceholder").value = plantDescription.value;
+    document.getElementById("datePlaceholder").value = metaData.date;
+
+    let now = new Date();
+    let time = leadZero(now.getHours()) + ":" + leadZero(now.getMinutes());
+    document.getElementById("timePlaceholder").value = time;
+
+    $('#processingText').style.display = 'none';
 }
+
+function leadZero(_something) {
+    if(parseInt(_something)<10) return "0"+_something;
+    return _something;//else
+}
+
+document.getElementById("useLocationCheckbox").onclick = function Location() {
+    if (document.getElementById("useLocationCheckbox").checked == true) {
+        getLocation();
+    }
+    else {
+        document.getElementById("LocationPlaceholder").value = '';
+    }
+
+}
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        document.getElementById("LocationPlaceholder").value = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    let curLocation = position.coords.latitude + " : " + position.coords.longitude;
+    document.getElementById("LocationPlaceholder").value = curLocation;
+}
+
+
