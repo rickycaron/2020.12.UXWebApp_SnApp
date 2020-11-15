@@ -16,12 +16,12 @@
         <form action="login" method="post">
             <?= csrf_field() ?>
             <div class="txt_field" >
-                <input type="text" class="" style="padding: 0;" name="email" id="email" value="<?= set_value("email")?>">
+                <input type="text" class="" style="padding: 0;" name="email" id="email" value="demo@test.com">
                 <span></span>
                 <label for="email">Email address</label>
             </div>
             <div class="txt_field">
-                <input type="password" class="" style="padding: 0;" name="password" id="password" value="<?= set_value("password")?>">
+                <input type="password" class="" style="padding: 0;" name="password" id="password" value="password">
                 <span></span>
                 <label for="password">Password</label>
             </div>
@@ -38,9 +38,10 @@
         <h1 >OR !</h1>
         <div>
             <br/>
-            <button id="custom-btn">
-                Create obervation as a visitor
-            </button>
+<!--            <button id="custom-btn">-->
+<!--                Create obervation as a visitor-->
+<!--            </button>-->
+            <input type="submit" class="" value="Create obervation as a visitor"></input>
             <br/>
             <br/>
         </div>
