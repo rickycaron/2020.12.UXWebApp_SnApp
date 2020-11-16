@@ -275,10 +275,23 @@ class Database_model
     }
 
     /**
+     * @param $group
+     * @return array|array[]|object[]
+     */
+    public function getUsersFromGroup($group) {
+        $query = $this->db->query('SELECT u.id, u.username, u.points, u.monthlyPoints, u.weeklyPoints
+                                        FROM a20ux6.user as u
+                                        INNER JOIN a20ux6.userGroupMapping as m on u.id = m.userID
+                                        INNER JOIN a20ux6.userGroup as g on g.id = m.groupID
+                                        WHERE g.name = "'.$group.'";');
+        return $query->getResult();
+    }
+
+    /**
      * created by rui
      * @param $email
      * @param $password
-     * @return 0 (correct)/1(password is wrong)/2(the user email doesn't exist)/3(multiple enail exsit, this shouldn't happen)
+     * @return int (correct)/1(password is wrong)/2(the user email doesn't exist)/3(multiple enail exsit, this shouldn't happen)
      */
     public function validateUser($email, $password) {
         $query = $this->db->query('SELECT password FROM a20ux6.user WHERE email = "'.$email.'";');

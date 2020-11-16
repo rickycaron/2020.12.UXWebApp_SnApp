@@ -34,10 +34,13 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("mainTemplate", $this->data);
     }
 
-    public function leaderboard() {
+    //TODO: fix that the function can read use the input variable for now work with the $test variable as filter
+    public function leaderboard($filter) {
+        $test = "hallow";
         $this->set_common_data('arrow_back', 'search');
 
-        $this->data['content'] = view('leaderboard');
+        //$this->data['content'] = view('leaderboard');
+        $this->data['content'] = $filter;
         $this->data['title'] = 'Leaderboard';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
