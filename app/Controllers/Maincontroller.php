@@ -9,6 +9,7 @@ class Maincontroller extends \CodeIgniter\Controller
     private $menu_model;
     private $database_model;
     private $data;
+    private $userName = "Maarten";
 
     /**
      * Maincontroller constructor.
@@ -47,9 +48,21 @@ class Maincontroller extends \CodeIgniter\Controller
     public function hub() {
         $this->set_common_data('eco', 'search');
 
+        $userIdArray = $this->database_model->getUserID($this->userName);
+        $userID = $userIdArray[0]->id;
+
+        $friendsArray = $this->database_model->getFriendsUserName($userID);
+
+
+        $data2['username'] = $this->userName;
+        $data2['friends'] = $friendsArray;
+        $data2['observations'] = $this->database_model->getObservationForHub($friendsArray);
+
         //add your code here...
-        $this->data['content'] = view('hubPage', $this->data); //replace by your own view
+        $this->data['content'] = view('hubPage', $data2); //replace by your own view
         $this->data['title'] = 'Observation Feed';
+
+
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showFriendsObservations.js');
@@ -124,6 +137,8 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("mainTemplate", $this->data);
     }
     public function login() {
+        $loginCompleted = 0;
+
         $this->data=[];
         $this->set_common_data('eco', 'eco');
 
@@ -141,13 +156,21 @@ class Maincontroller extends \CodeIgniter\Controller
             $searchresult=$this->database_model->validateUser($email,$password);
             if ($searchresult==0){
                 //password is correct
-                //return hub page
-                $this->set_common_data('eco', 'search');
-                $this->data['content'] = view('hubPage'); //replace by your own view
-                $this->data['title'] = 'Observation Feed';
-                $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
-                $this->data['userName']=$this->database_model->getUsername($email);
-                return view("mainTemplate", $this->data);
+                $loginCompleted = 1;
+                // set global username to use in other views (to query the database)
+                $this->userName = $this->database_model->getUsername($email);
+                //return hub
+                $this->hub();
+
+                // set global username to use in other views (to query the database)
+//                $this->userName = $this->database_model->getUsername($email);
+//
+//                //return hub page
+//                $this->set_common_data('eco', 'search');
+//                $this->data['content'] = view('hubPage'); //replace by your own view
+//                $this->data['title'] = 'Observation Feed';
+//                $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
+//                return view("mainTemplate", $this->data);
 
             }
             else if($searchresult==1){
@@ -157,14 +180,12 @@ class Maincontroller extends \CodeIgniter\Controller
             else if ($searchresult==2){
                 //user doesn't exsit
                 $this->data['error_message'] = 'Invalid username. Please register one account.';
+
             }
             else if ($searchresult==3){
                 //multiple accounts with the same user name,
                 $this->data['error_message'] = 'Multiple accounts with the same email exsit. Please consult our software developer!';
             }
-        }
-        else
-        {
         }
         $this->data['content'] = view('login'); //replace by your own view
         return view("extraTemplate", $this->data);
@@ -201,7 +222,7 @@ class Maincontroller extends \CodeIgniter\Controller
             $this->data['content'] = view('hubPage'); //replace by your own view
             $this->data['title'] = 'Observation Feed';
             $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
-            return view("mainTemplate", $this->data);
+            return view("extraTemplate", $this->data);
         }
         else
         {
