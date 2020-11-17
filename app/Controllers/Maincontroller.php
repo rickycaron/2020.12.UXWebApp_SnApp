@@ -35,12 +35,26 @@ class Maincontroller extends \CodeIgniter\Controller
     }
 
     //TODO: fix that the function can read use the input variable for now work with the $test variable as filter
+    //TODO: place all the logic in a leaderboard model to keep the main controller clean
     public function leaderboard($filter) {
-        $test = "hallow";
         $this->set_common_data('arrow_back', 'search');
+        $leaderboard_data['name_first'] = 'Joppe Leers';
+        $leaderboard_data['points_first'] = 200;
+        $leaderboard_data['name_second'] = 'Tijs Leers';
+        $leaderboard_data['points_second'] = 150;
+        $leaderboard_data['name_third'] = 'Flor Leers';
+        $leaderboard_data['points_third'] = 100;
 
-        //$this->data['content'] = view('leaderboard');
-        $this->data['content'] = $filter;
+        $leaderboard_data['persons_list'] = array(
+            array('place'=>'3', 'name'=>'full name', 'point'=>'10'),
+            array('place'=>'4', 'name'=>'full name', 'point'=>'10'),
+            array('place'=>'5', 'name'=>'full name', 'point'=>'10'),
+            array('place'=>'6', 'name'=>'full name', 'point'=>'10'),
+            array('place'=>'7', 'name'=>'full name', 'point'=>'10')
+        );
+
+        $this->data['content'] = view('leaderboard', $leaderboard_data);
+        //$this->data['content'] = $filter;
         $this->data['title'] = 'Leaderboard';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
