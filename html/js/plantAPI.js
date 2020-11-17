@@ -96,7 +96,7 @@ function getLocation() {
 }
 
 function showPosition(position) {
-    let curLocation = position.coords.latitude + " : " + position.coords.longitude;
+    let curLocation = position.coords.latitude + ", " + position.coords.longitude;
     document.getElementById("LocationPlaceholder").value = curLocation;
 }
 

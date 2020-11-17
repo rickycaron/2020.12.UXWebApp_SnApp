@@ -302,4 +302,45 @@ class Database_model
             return 3;
         }
     }
+
+    /**
+     * @param $email
+     * @return string
+     */
+    public function getUsername($email) {
+        $query = $this->db->query('SELECT username FROM a20ux6.user WHERE email = "'.$email.'";');
+        $searcheresult= $query->getResult();
+        if(count($searcheresult)==1) {
+            $userName = $query->getRow()->username;
+            return $userName;
+        }
+    }
+
+    /**
+     * @param ownUserName
+     * @return array|array[]|object[]
+     */
+    public function getObservationForHub($ownUserName) {
+        //get own observations from database
+        $query = $this->db->query('SELECT EXISTS(SELECT picture, description, specieName, username FROM a20ux6.observation t1 INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id WHERE t1.id = 5 AND username = ' .$ownUserName);
+        if (!$query->getRow()->result) {
+            return 0;
+        }
+//        $data = ['userName'=> $query->getRow()->username,
+//            'picture' => $query->getRow()->picture,
+//            'specieName' => $query->getRow()->specieName,
+//            'description' => $query->getRow()->description
+//        ];
+        return $query->getResult();
+    }
+
+    /**
+     * Query to get own observations:
+     *
+     * SELECT picture, description, specieName, username FROM a20ux6.observation t1
+     * INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id
+     * INNER JOIN a20ux6.user t3 ON t1.userID = t3.id
+     * WHERE username = 'userName';
+     *
+     */
 }

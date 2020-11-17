@@ -1,3 +1,10 @@
+<?php
+
+
+include ("observationCard.php");
+?>
+
+
 <div id="observationCardContainer">
     <div id="observationCard">
         <div id="observationCardProfile">

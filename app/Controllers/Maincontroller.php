@@ -48,10 +48,11 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->set_common_data('eco', 'search');
 
         //add your code here...
-        $this->data['content'] = view('hubPage'); //replace by your own view
+        $this->data['content'] = view('hubPage', $this->data); //replace by your own view
         $this->data['title'] = 'Observation Feed';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showFriendsObservations.js');
         return view("mainTemplate", $this->data);
     }
 
@@ -145,6 +146,7 @@ class Maincontroller extends \CodeIgniter\Controller
                 $this->data['content'] = view('hubPage'); //replace by your own view
                 $this->data['title'] = 'Observation Feed';
                 $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
+                $this->data['userName']=$this->database_model->getUsername($email);
                 return view("mainTemplate", $this->data);
 
             }
