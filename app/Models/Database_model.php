@@ -276,15 +276,43 @@ class Database_model
 
     /**
      * @param $group
-     * @return array|array[]|object[]
+     * @param $period
+     * @return array|array[]
      */
-    public function getUsersFromGroup($group) {
-        $query = $this->db->query('SELECT u.id, u.username, u.points, u.monthlyPoints, u.weeklyPoints
-                                        FROM a20ux6.user as u
-                                        INNER JOIN a20ux6.userGroupMapping as m on u.id = m.userID
-                                        INNER JOIN a20ux6.userGroup as g on g.id = m.groupID
-                                        WHERE g.name = "'.$group.'";');
-        return $query->getResult();
+    public function getLeaderboardFromGroup($group, $period) {
+        $query = $this->db->query('SELECT u.id, u.username, u.'.$period.'
+                                        FROM a20ux6.user AS u
+                                        INNER JOIN a20ux6.userGroupMapping AS m ON u.id = m.userID
+                                        INNER JOIN a20ux6.userGroup AS g ON g.id = m.groupID
+                                        WHERE g.name = "'.$group.'"
+                                        ORDER BY u.'.$period.' DESC;');
+        return $query->getResultArray();
+    }
+
+    /**
+     * @param $period
+     * @param $userID
+     * @return array|array[]
+     */
+    public function getFriendLeaderboard($period, $userID) {
+        $query = $this->db->query('SELECT u.username, u.points, u.monthlyPoints, u.weeklyPoints
+                                        FROM a20ux6.friendsMapping as m , a20ux6.user as u
+                                        WHERE CASE WHEN m.userID_A = "'.$userID.'" THEN m.userID_B = u.id
+                                                    WHEN m.userID_B = "'.$userID.'" THEN m.userID_A = u.id
+                                                    END
+                                        ORDER BY u.'.$period.' DESC;');
+        return $query->getResultArray();
+    }
+
+    /**
+     * @param $period
+     * @return array|array[]
+     */
+    public function getLeaderboardWorldwide($period) {
+        $query = $this->db->query('SELECT id, username, points, monthlyPoints, weeklyPoints
+                                        FROM a20ux6.user
+                                        ORDER BY '.$period.' DESC;');
+        return $query->getResultArray();
     }
 
     /**

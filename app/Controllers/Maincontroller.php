@@ -23,6 +23,27 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['header_icon_2'] = $header_icon_2;
     }
 
+    private function set_leaderboard_data($person_list,$period) {
+        //fill in the first podium data
+        //TODO: there must be a better way to do this i think but don't know how.
+        $leaderboard_data['name_first'] = $person_list[0]['username'];
+        $leaderboard_data['points_first'] = $person_list[0][$period];
+        $leaderboard_data['name_second'] = $person_list[1]['username'];
+        $leaderboard_data['points_second'] = $person_list[1][$period];
+        $leaderboard_data['name_third'] = $person_list[2]['username'];
+        $leaderboard_data['points_third'] = $person_list[2][$period];
+        //fill in all the others places
+        $leaderboard_data['persons_list'] = array();
+        for ($i = 3; $i < count($person_list); $i++) {
+            array_push($leaderboard_data['persons_list'], array('place'=>$i, 'name'=>$person_list[$i]['username'], 'point'=>$person_list[$i][$period]));
+        }
+        return $leaderboard_data;
+    }
+
+    private function test() {
+        return "<h1>test</h1>";
+    }
+
     public function leaderboardSelect() {
         $this->set_common_data('eco', 'search');
 
@@ -36,27 +57,40 @@ class Maincontroller extends \CodeIgniter\Controller
 
     //TODO: fix that the function can read use the input variable for now work with the $test variable as filter
     //TODO: place all the logic in a leaderboard model to keep the main controller clean
-    public function leaderboard($filter) {
+    //TODO: when you use the friends filter you can't see your own score
+    public function leaderboard($filter, $userID) {
+        $filter = "friends"; // declaration of the input variables because that doesn't work yet
+        $userID = 2; // declaration of the input variables because that doesn't work yet
+        $period = 'monthlyPoints'; // declaration of the input variables because that doesn't work yet
+
         $this->set_common_data('arrow_back', 'search');
-        $leaderboard_data['name_first'] = 'Joppe Leers';
-        $leaderboard_data['points_first'] = 200;
-        $leaderboard_data['name_second'] = 'Tijs Leers';
-        $leaderboard_data['points_second'] = 150;
-        $leaderboard_data['name_third'] = 'Flor Leers';
-        $leaderboard_data['points_third'] = 100;
+        //$groups = $this->database_model->getGroupsFromUser($userID);
 
-        $leaderboard_data['persons_list'] = array(
-            array('place'=>'3', 'name'=>'full name', 'point'=>'10'),
-            array('place'=>'4', 'name'=>'full name', 'point'=>'10'),
-            array('place'=>'5', 'name'=>'full name', 'point'=>'10'),
-            array('place'=>'6', 'name'=>'full name', 'point'=>'10'),
-            array('place'=>'7', 'name'=>'full name', 'point'=>'10')
-        );
+        $query_result = 0;
+        switch($filter) {
+            case 'worldwide':
+                $query_result = $this->database_model->getLeaderboardWorldwide($period);
+                break;
+            case 'friends':
+                $query_result = $this->database_model->getFriendLeaderboard($period, $userID);
+                break;
+            default:
+                //if none of the above are selected it means that the filter is a group
+                $groups = $this->database_model->getGroupsFromUser($userID);
+                $isGroup = 0;
+                foreach ($groups as $gr):
+                    if ($filter == $gr->name) {
+                        $isGroup = 1;
+                        break;
+                    }
+                endforeach;
+                if ($isGroup == 1) {
+                    $query_result = $this->database_model->getLeaderboardFromGroup($filter, $period);
+                }
+        }
+        $this->data['content'] = view('leaderboard', $this->set_leaderboard_data($query_result,$period));
 
-        $this->data['content'] = view('leaderboard', $leaderboard_data);
-        //$this->data['content'] = $filter;
         $this->data['title'] = 'Leaderboard';
-
         $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
         return view("mainTemplate", $this->data);
     }
