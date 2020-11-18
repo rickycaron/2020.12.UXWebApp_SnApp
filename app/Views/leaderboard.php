@@ -37,6 +37,7 @@
             <img id="podium_img" src="<?= base_url()?>/image/podiumv2.png" alt="podium">
         </div>
         <div id="forth_and_worse">
+            <?php $loopcounter = 0;?>
             <?php foreach ($persons_list as $person): ?>
                 <div class="after_third">
                     <div class="without_points">
@@ -46,7 +47,10 @@
                     </div>
                     <h3><?=$person['point']?></h3>
                 </div>
+                <?php $loopcounter++;?>
+                <?php if ($loopcounter == 8) break;?>
             <?php endforeach; ?>
+            <?=$user_placeholder?>
         </div>
     </div>
 </div>
