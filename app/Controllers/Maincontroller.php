@@ -25,7 +25,7 @@ class Maincontroller extends \CodeIgniter\Controller
 
     public function leaderboardSelect() {
         $this->set_common_data('eco', 'search');
-
+        $username=session()->get('username');
         //add your code here...
         $this->data['content'] = view('leaderboardSelect'); //replace by your own view
         $this->data['title'] = 'Leaderboard Select';
@@ -140,8 +140,15 @@ class Maincontroller extends \CodeIgniter\Controller
             $searchresult=$this->database_model->validateUser($email,$password);
             if ($searchresult==0){
                 //password is correct
-                //return hub page
+                // save the current user data
+                //get the user row from the database by the email
+                $user = $this->database_model->getUserByEmail($email);
+                //save this
+                $this->setUserSession($user);
+                session()->setFlashdata('success','Successful Login!');
 
+                //______________________________________________
+                //return hub page
                 return redirect()->to('hub');
 //                $this->set_common_data('eco', 'search');
 //                $this->data['content'] = view('hubPage'); //replace by your own view
@@ -176,7 +183,6 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['content'] = view('loginFromObservation'); //replace by your own view
         $this->data['title'] = 'Login From Observation';
 
-
         return view("extraTemplate", $this->data);
     }
     public function register() {
@@ -195,7 +201,7 @@ class Maincontroller extends \CodeIgniter\Controller
             $email= $this->request->getPost('email');
             $password=$this->request->getPost('password');
             $this->database_model-> insertUser($username,$password,$email);
-
+            session()->setFlashdata('success','Successful Register!');
             //echo view('news/success');
 //            $this->set_common_data('eco', 'search');
 //            $this->data['content'] = view('hubPage'); //replace by your own view
@@ -260,5 +266,34 @@ class Maincontroller extends \CodeIgniter\Controller
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
         return view("mainTemplate", $this->data);
+    }
+    /* created by rui
+     * save the data of the current data to session
+     * */
+    private function setUserSession($user){
+        $data = [
+            'id' => $user->id,
+            'username' => $user->username,
+            'email' => $user->email,
+            'points' => $user->points,
+            'monthlyPoints' => $user->monthlyPoints,
+            'weeklyPoints' => $user->weeklyPoints,
+            'isLoggedIn' => true,
+//            'id' => $user['id'],
+//            'username' => $user['username'],
+//            'email' => $user['email'],
+//            'points' => $user['points'],
+//            'monthlyPoints' => $user['monthlyPoints'],
+//            'weeklyPoints' => $user['weeklyPoints'],
+        ];
+        session()->set($data);
+        return true;
+    }
+    /* created by rui
+     * logout, clean the data of the current information
+     * */
+    public function logout(){
+        session()->destroy();
+        return redirect()->to('login');
     }
 }
