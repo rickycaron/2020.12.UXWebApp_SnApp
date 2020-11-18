@@ -1,10 +1,12 @@
-<h1>Hello, <?= session()->get('username')?></h1>
+<div style="text-align: center;">
+    <h1>Hello, <?= session()->get('username')?></h1>
 <?php if(session()->get('success')): ?>
     <h1>
 <!--        This will show a successful login/register information-->
         <?= session()->get('success')?>
     </h1>
 <?php endif; ?>
+</div>
 <div id="observationCardContainer">
     <div id="observationCard">
         <div id="observationCardProfile">

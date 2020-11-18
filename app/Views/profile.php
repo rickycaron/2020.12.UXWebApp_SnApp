@@ -1,4 +1,4 @@
-<a href="logout">Logout</a>
+<a href="logout"  style="text-align: center;" >Logout</a>
 <div class="profileUserContainer">
     <div class="col-sm-4 col-lg-4 col-md-4">
         <img src="https://pic4.zhimg.com/ee44507a59989947c85d60e0b400f0c5_xl.jpg" class="img-circle" alt="templatemo easy profile" style="width: 100px;">
