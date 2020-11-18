@@ -6,7 +6,7 @@
     </div>
 
     <div class="col-sm-8 col-lg-8 col-md-8">
-        <h1 class="user_name">만나서 반가워 Hello : <?= session()->get('username')?></h1>
+        <h1 class="user_name">Hello : <?= session()->get('username')?></h1>
         <h1 class="personal_description">A guy who really likes photography. XXXXXXXXXXXXXXXXXXXXXXXXX XXXXXX</h1>
         <div class = "trophyContainer">
             <span class="material-icons trophy">emoji_events</span>
