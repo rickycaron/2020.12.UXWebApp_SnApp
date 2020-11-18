@@ -1,3 +1,4 @@
+<input type="hidden" id="hidden_variable_filter" value="<?=$filter?>"/>
 <div id="leaderboard_overall_container">
     <h1 class="page_title">Friends leaderboard</h1>
     <div id="radio_buttons_container">
@@ -49,3 +50,5 @@
         </div>
     </div>
 </div>
+
+

@@ -12,6 +12,8 @@ class Maincontroller extends \CodeIgniter\Controller
     private $database_model;
     private $data;
 
+    private $leaderboard_userID = 2;
+
     /**
      * Maincontroller constructor.
      */
@@ -25,7 +27,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['header_icon_2'] = $header_icon_2;
     }
 
-    private function set_leaderboard_data($person_list, $period) {
+    private function set_leaderboard_data($person_list, $period, $filter) {
         //fill in the first podium data
         $leaderboard_data['name_first'] = $person_list[0]['username'];
         $leaderboard_data['points_first'] = $person_list[0][$period];
@@ -38,6 +40,7 @@ class Maincontroller extends \CodeIgniter\Controller
         for ($i = 3; $i < count($person_list); $i++) {
             array_push($leaderboard_data['persons_list'], array('place'=>$i, 'name'=>$person_list[$i]['username'], 'point'=>$person_list[$i][$period]));
         }
+        $leaderboard_data['filter'] = $filter;
         return $leaderboard_data;
     }
 
@@ -65,12 +68,12 @@ class Maincontroller extends \CodeIgniter\Controller
     }
 
     //TODO: fix that the function can read use the input variable for now work with the $test variable as filter
-    //TODO: place all the logic in a leaderboard model (or trait) to keep the main controller clean
     //TODO: when you use the friends filter you can't see your own score
-    public function leaderboard($leaderboard_filter, $leaderboard_userID, $leaderboard_period) {
+    public function leaderboard($leaderboard_filter, $leaderboard_period) {
+        //this should be a groupname, worldwide or friends
         $leaderboard_filter = "worldwide"; // declaration of the input variables because that doesn't work yet
-        $leaderboard_userID = 2; // declaration of the input variables because that doesn't work yet
-        $leaderboard_period = 'monthlyPoints'; // declaration of the input variables because that doesn't work yet
+        //this should be weeklyPoints, monthlyPoints or points (points will give the overall leaderboard)
+        $leaderboard_period = 'points'; // declaration of the input variables because that doesn't work yet
 
         $this->set_common_data('arrow_back', 'search');
         //$groups = $this->database_model->getGroupsFromUser($this->leaderboard_userID);
@@ -81,11 +84,11 @@ class Maincontroller extends \CodeIgniter\Controller
                 $query_result = $this->database_model->getLeaderboardWorldwide($leaderboard_period);
                 break;
             case 'friends':
-                $query_result = $this->database_model->getFriendLeaderboard($leaderboard_period, $leaderboard_userID);
+                $query_result = $this->database_model->getFriendLeaderboard($leaderboard_period, $this->leaderboard_userID);
                 break;
             default:
                 //if none of the above are selected it means that the filter is a group
-                $groups = $this->database_model->getGroupsFromUser($leaderboard_userID);
+                $groups = $this->database_model->getGroupsFromUser($this->leaderboard_userID);
                 $isGroup = 0;
                 foreach ($groups as $gr):
                     if ($leaderboard_filter == $gr->name) {
@@ -97,8 +100,8 @@ class Maincontroller extends \CodeIgniter\Controller
                     $query_result = $this->database_model->getLeaderboardFromGroup($leaderboard_filter, $leaderboard_period);
                 }
         }
-        $this->data['content'] = view('leaderboard', $this->set_leaderboard_data($query_result, $leaderboard_period));
 
+        $this->data['content'] = view('leaderboard', $this->set_leaderboard_data($query_result, $leaderboard_period, $leaderboard_filter));
         $this->data['title'] = 'Leaderboard';
         $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','leaderboard.js');
