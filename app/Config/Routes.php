@@ -38,7 +38,7 @@ $routes->get('addObservation', 'Maincontroller::addObservation');
 $routes->get('leaderboardSelect', 'Maincontroller::leaderboardSelect');
 $routes->get('profile', 'Maincontroller::profile');
 //$routes->get('leaderboard', 'Maincontroller::leaderboard');
-$routes->get('leaderboard/(:alpha)/(:num)', 'Maincontroller::leaderboard/$filter/$userID');
+$routes->get('leaderboard/(:alpha)/(:num)/(:alpha)', 'Maincontroller::leaderboard/$filter/$userID/$period');
 $routes->get('login', 'Maincontroller::login');
 $routes->get('loginFromObservation', 'Maincontroller::loginFromObservation');
 $routes->get('register', 'Maincontroller::register');
