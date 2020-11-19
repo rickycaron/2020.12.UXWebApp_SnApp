@@ -342,20 +342,37 @@ class Database_model
      * @param $friends
      * @return array|array[]|object[]
      */
-    public function getObservationForHub($friends) {
+    public function getFirstObservationsForHub($friends) {
         //make the query
-        $queryString = 'SELECT picture, description, specieName, username FROM a20ux6.observation t1 INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id WHERE username = "" ';
+        $queryString = 'SELECT * FROM (SELECT id, picture, description, specieName, username, date, time FROM a20ux6.observation t1 
+                                        INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
+                                        WHERE username = "" ';
         foreach ($friends as $friend):
             $queryString .= 'OR username = "'.$friend->username.'" ';
         endforeach;
-        $queryString .= ';';
+        $queryString .= 'ORDER BY date DESC LIMIT 5) AS temp ORDER BY time DESC;';
         //get observations from friends from database
         $query = $this->db->query($queryString);
-//            $data = ['userName'=> $query->getRow()->username,
-//            'picture' => $query->getRow()->picture,
-//            'specieName' => $query->getRow()->specieName,
-//            'description' => $query->getRow()->description
-//        ];
+        return $query->getResult();
+    }
+
+    /**
+     * @param $friends
+     * @param $lastDate
+     * @param $lastTime
+     * @return array|array[]|object[]
+     */
+    public function getMoreObservationsForHub($friends, $lastDate, $lastTime) {
+        //make the query
+        $queryString = 'SELECT * FROM (SELECT id, picture, description, specieName, username, date, time FROM a20ux6.observation t1 
+                                        INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
+                                        WHERE username = "" ';
+        foreach ($friends as $friend):
+            $queryString .= 'OR username = "'.$friend->username.'" ';
+        endforeach;
+        $queryString .= 'AND (date < \''.$lastDate.'\' OR ( date < \''.$lastDate.'\' AND time < \''.$lastTime.'\')) ORDER BY date DESC LIMIT 5) AS temp ORDER BY time DESC;';
+        //get observations from friends from database
+        $query = $this->db->query($queryString);
         return $query->getResult();
     }
 

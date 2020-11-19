@@ -1,5 +1,4 @@
-
-
+<div id="hubPageContainer">
 <?php foreach ($observations as $ob): ?>
     <div id="observationCardContainer">
         <div id="observationCard">
@@ -22,8 +21,14 @@
             <div id="observationCardSpecieDescription">
                 <p><?=$ob->description?></p>
             </div>
+            <div id="observationCardTime">
+                <h4><?=$ob->date?> om <?=$ob->time?></h4>
+            </div>
         </div>
     </div>
 
 
 <?php endforeach; ?>
+
+</div>
+<div id="placeholderLoading"></div>

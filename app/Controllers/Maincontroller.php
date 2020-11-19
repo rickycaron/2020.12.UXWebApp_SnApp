@@ -48,24 +48,61 @@ class Maincontroller extends \CodeIgniter\Controller
     public function hub() {
         $this->set_common_data('eco', 'search');
 
+        //get current url
+//        $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+//        $url_components = parse_url($actual_link);
+//        parse_str($url_components['query'], $params);
+
+        //variable for date and time of last observation shown on page
+//        $lastDate = null;
+//        $lastTime = null;
+
+        //get current user
         $userIdArray = $this->database_model->getUserID($this->userName);
         $userID = $userIdArray[0]->id;
 
+        //get friends of current user
         $friendsArray = $this->database_model->getFriendsUserName($userID);
 
+//        $outputType = $this->request->getVar('loadMoreObservations');
+        $variableActive = $this->request->getVar('extra');
+        if ($variableActive != null) {
+            $getMoreObservations = $_GET['extra'];
+            $lastDate = $_GET['lastDate'];
+            $lastTime = $_GET['lastTime'];
+            $lastID = $_GET['lastTime'];
+//        $getMoreObservations = $params['extra'];
+//        $lastDate = $params['lastDate'];
+//        $lastTime = $params['lastTime'];
 
-        $data2['username'] = $this->userName;
-        $data2['friends'] = $friendsArray;
-        $data2['observations'] = $this->database_model->getObservationForHub($friendsArray);
+            if (strcasecmp($getMoreObservations, 'true') == 0) {
+                // return more observations
+//            $data3['username'] = $this->userName;
+//            $data3['friends'] = $friendsArray;
 
-        //add your code here...
+                //get more observations from friends from current users
+                $data3['observations'] = $this->database_model->getMoreObservationsForHub($friendsArray, $lastDate, $lastTime);
+//            $lastDate = $data3['observations'][count($data3['observations'])-1]->date;
+//            $lastTime = $data3['observations'][count($data3['observations'])-1]->time;
+                return view('hubPage', $data3);
+            }
+        }
+
+
+//        $data2['username'] = $this->userName;
+//        $data2['friends'] = $friendsArray;
+
+        //get observations from friends from current users
+        $data2['observations'] = $this->database_model->getFirstObservationsForHub($friendsArray);
+//        $lastDate = $data2['observations'][count($data2['observations'])-1]->date;
+//        $lastTime = $data2['observations'][count($data2['observations'])-1]->time;
+
+
         $this->data['content'] = view('hubPage', $data2); //replace by your own view
         $this->data['title'] = 'Observation Feed';
 
-
-
         $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showFriendsObservations.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreFriendsObservations.js');
         return view("mainTemplate", $this->data);
     }
 
@@ -137,8 +174,6 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("mainTemplate", $this->data);
     }
     public function login() {
-        $loginCompleted = 0;
-
         $this->data=[];
         $this->set_common_data('eco', 'eco');
 
@@ -156,22 +191,10 @@ class Maincontroller extends \CodeIgniter\Controller
             $searchresult=$this->database_model->validateUser($email,$password);
             if ($searchresult==0){
                 //password is correct
-                $loginCompleted = 1;
                 // set global username to use in other views (to query the database)
                 $this->userName = $this->database_model->getUsername($email);
                 //return hub
-                $this->hub();
-
-                // set global username to use in other views (to query the database)
-//                $this->userName = $this->database_model->getUsername($email);
-//
-//                //return hub page
-//                $this->set_common_data('eco', 'search');
-//                $this->data['content'] = view('hubPage'); //replace by your own view
-//                $this->data['title'] = 'Observation Feed';
-//                $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
-//                return view("mainTemplate", $this->data);
-
+                return redirect()->to('hub');
             }
             else if($searchresult==1){
                 //password is wrong
