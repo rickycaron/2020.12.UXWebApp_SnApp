@@ -47,11 +47,35 @@ class Maincontroller extends \CodeIgniter\Controller
     public function hub() {
         $this->set_common_data('eco', 'search');
 
-        //add your code here...
-        $this->data['content'] = view('hubPage'); //replace by your own view
+        //get current user
+        $userID = session()->get('id');
+
+        //get friends of current user
+        $friendsArray = $this->database_model->getFriendsUserName($userID);
+
+        //check if the url contains parameter for new observations
+        $variableActive = $this->request->getVar('extra');
+        if ($variableActive != null) {
+            $getMoreObservations = $_GET['extra'];
+            $lastDate = $_GET['lastDate'];
+            $lastTime = $_GET['lastTime'];
+            $tomorrow = $_GET['tomorrow'];
+
+            if (strcasecmp($getMoreObservations, 'true') == 0) {
+                //get more observations from friends from current users
+                $data3['observations'] = $this->database_model->getMoreObservationsForHub($friendsArray, $lastDate, $tomorrow, $lastTime);
+                return view('hubPage', $data3);
+            }
+        }
+
+        //get observations from friends from current users
+        $data2['observations'] = $this->database_model->getFirstObservationsForHub($friendsArray);
+
+        $this->data['content'] = view('hubPage', $data2); //replace by your own view
         $this->data['title'] = 'Observation Feed';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreFriendsObservations.js');
         return view("mainTemplate", $this->data);
     }
 
@@ -157,14 +181,12 @@ class Maincontroller extends \CodeIgniter\Controller
             else if ($searchresult==2){
                 //user doesn't exsit
                 $this->data['error_message'] = 'Invalid username. Please register one account.';
+
             }
             else if ($searchresult==3){
                 //multiple accounts with the same user name,
                 $this->data['error_message'] = 'Multiple accounts with the same email exsit. Please consult our software developer!';
             }
-        }
-        else
-        {
         }
         $this->data['content'] = view('login'); //replace by your own view
         return view("extraTemplate", $this->data);
