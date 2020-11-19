@@ -43,7 +43,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->set_common_data('eco', 'search');
 
         //add your code here...
-
+        //$this->leaderboard_userID=session()->get('id')
         $this->leaderboard_userID=2;
         $groups = $this->database_model->getGroupsFromUser($this->leaderboard_userID);
         $this->data['groups']=array();
