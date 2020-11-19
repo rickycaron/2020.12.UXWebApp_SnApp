@@ -35,6 +35,7 @@ $routes->get('hub', 'Maincontroller::hub');
 $routes->get('groups', 'Maincontroller::groups');
 $routes->get('group', 'Maincontroller::group');
 $routes->get('addObservation', 'Maincontroller::addObservation');
+$routes->match(['get','post'],'addObservation', 'Maincontroller::addObservation');
 $routes->get('leaderboardSelect', 'Maincontroller::leaderboardSelect');
 $routes->get('profile', 'Maincontroller::profile');
 $routes->get('leaderboard', 'Maincontroller::leaderboard');

@@ -115,22 +115,31 @@ class Maincontroller extends \CodeIgniter\Controller
     public function addObservation() {
         helper(['form']);
         $this->set_common_data('eco', 'search');
-        if ($this->request->getMethod() === 'post' && $this->validate([
-                'description'  => 'required|min_length[3]|max_length[50]',
+
+        //get current user
+        $userID = session()->get('id');
+
+        if ($this->request->getMethod() === 'post'&& $this->validate([
+                'specieDescription'  => 'required|min_length[3]',
                 'location'=>'required|min_length[6]|max_length[50]',
                 'date'=>'required|min_length[6]|max_length[50]',
                 'time'=>'required|min_length[4]|max_length[50]']))
         {
-            $description= $this->request->getPost('description');
-            $location=$this->request->getPost('location');
-            $date=$this->request->getPost('date');
+            $picture = $this->request->getPost('picture');
+            $specieName = $this->request->getPost('specieName');
+            $specieId = $this->database_model->getSpecieID($specieName);
+            $description = $this->request->getPost('specieDescription');
+            $location = $this->request->getPost('location');
+            $date = $this->request->getPost('date');
             $time = $this->request->getPost('time');
 
-            $this->database_model->insertObservation($description,$location,$date,$time,10,12);
-            return redirect()->to('public/hub');}
+            $this->database_model->insertObservation($picture, $description, $location, $date, $time, 14, $userID); //hardcoded values should be changed if species are filled in in the database with correct name
+            return redirect()->to('hub');
+        }
 
         //add your code here...
         $this->data['content'] = view('addobservation'); //replace by your own view
+        $this->data['title'] = 'Explore';
         //$data2['results'] = $this->database_model->insertObservation(,"l","M",'2020-11-07',21,2,3);
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'plantAPI.js','previewPicture.js');
@@ -325,4 +334,5 @@ class Maincontroller extends \CodeIgniter\Controller
         session()->destroy();
         return redirect()->to('login');
     }
+
 }

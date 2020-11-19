@@ -7,7 +7,7 @@
                 <h3 id="profileName"><?=$ob->username?></h3>
             </div>
             <div id="observationCardPicture">
-                <img id="observationPicture" src=<?=$ob->picture?>>
+                <img id="observationPicture" src=<?='data:image/jpeg;base64, "'.base64_encode( $ob->picture).'"'?>>
             </div>
             <div id="observationCardPictureFooter">
                 <div id="observationCardPictureFooterSpecie">

@@ -69,7 +69,7 @@ function printInformation(input) {
     let time = leadZero(now.getHours()) + ":" + leadZero(now.getMinutes());
     document.getElementById("timePlaceholder").value = time;
 
-    $('#processingText').style.display = 'none';
+    // $('#processingText').style.display = 'none';
 }
 
 function leadZero(_something) {

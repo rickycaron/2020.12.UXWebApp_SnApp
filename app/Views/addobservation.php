@@ -8,29 +8,30 @@
             <div class="text" id="noFileText">No picture made, yet!</div>
         </div>
     </div>
-    <input id="inputFile" type="file"  onchange="readURL(this)" hidden>
+
     <button class="custom-btn" id="takePictureButton">Take picture</button>
     <div id="processingText">
         <h2>Processing...</h2>
     </div>
 
-    <form method="post">
+    <form action="addObservation" method="post">
+        <input id="inputFile" type="file" name="picture"  onchange="readURL(this)" hidden>
 
         <div class="txt_field">
-            <input type="text" id="speciesNamePlaceholder" required>
+            <input type="text" id="speciesNamePlaceholder" name="specieName" required>
             <span></span>
             <label>Species</label>
         </div>
 
         <div class="txt_field">
-            <input type="text" id="scientificNamePlaceholder" required>
+            <input type="text" id="scientificNamePlaceholder" name="scientificName" required>
             <span></span>
             <label>Scientific name</label>
         </div>
 
         <div class="descriptionField">
             <h3>Description</h3>
-            <textarea id="textAreaDescription" name="speciesDescription"></textarea>
+            <textarea id="textAreaDescription" name="specieDescription"></textarea>
         </div>
 
         <div class="txt_field">
@@ -46,7 +47,7 @@
         </div>
 
         <div class="txt_field">
-            <input type="text" id="LocationPlaceholder" required>
+            <input type="text" id="LocationPlaceholder" name="location" required>
             <span></span>
             <label>Location</label>
         </div>
@@ -56,6 +57,8 @@
             <span></span>
             <label for="useLocation"> use current location for this observation</label>
         </div>
+
+        <input type="submit" class="" value="Submit">
 
     </form>
 
