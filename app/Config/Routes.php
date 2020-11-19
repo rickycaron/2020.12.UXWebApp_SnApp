@@ -30,32 +30,31 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Maincontroller::login');
-$routes->get('hub', 'Maincontroller::hub');
+//['filter' => 'noauth'], this website can only be shown when the user hasn'r logged in
+//['filter' => 'auth'], this website can only be shown when the user has logged in
+$routes->get('/', 'Maincontroller::login',['filter' => 'noauth']);
+$routes->get('hub', 'Maincontroller::hub',['filter'=>'auth']);
 $routes->get('groups', 'Maincontroller::groups');
 $routes->get('group', 'Maincontroller::group');
 $routes->get('addObservation', 'Maincontroller::addObservation');
-$routes->get('leaderboardSelect', 'Maincontroller::leaderboardSelect');
-$routes->get('profile', 'Maincontroller::profile');
-$routes->get('leaderboard', 'Maincontroller::leaderboard');
-$routes->get('login', 'Maincontroller::login');
+$routes->get('leaderboardSelect', 'Maincontroller::leaderboardSelect',['filter'=>'auth']);
+$routes->get('profile', 'Maincontroller::profile',['filter'=>'auth']);
+$routes->get('leaderboard', 'Maincontroller::leaderboard',['filter'=>'auth']);
+
 $routes->get('loginFromObservation', 'Maincontroller::loginFromObservation');
-$routes->get('register', 'Maincontroller::register');
-$routes->get('forgotPassword', 'Maincontroller::forgotPassword');
-$routes->get('resetPassword', 'Maincontroller::resetPassword');
-$routes->get('anobservation', 'Maincontroller::anobservation');
-$routes->get('account', 'Maincontroller::account');
-$routes->get('edit_profile', 'Maincontroller::edit_profile');
+
+$routes->get('forgotPassword', 'Maincontroller::forgotPassword',['filter' => 'noauth']);
+$routes->get('resetPassword', 'Maincontroller::resetPassword',['filter' => 'noauth']);
+$routes->get('anobservation', 'Maincontroller::anobservation',['filter'=>'auth']);
+$routes->get('account', 'Maincontroller::account',['filter'=>'auth']);
+$routes->get('edit_profile', 'Maincontroller::edit_profile',['filter'=>'auth']);
 $routes->get('search', 'Maincontroller::search');
-//$routes->get('login', 'Maincontroller::login');
-$routes->match(['get','post'],'login', 'Maincontroller::login');
+
+$routes->match(['get','post'],'login', 'Maincontroller::login',['filter' => 'noauth']);
 $routes->get('loginFromObservation', 'Maincontroller::loginFromObservation');
-$routes->match(['get','post'],'register', 'Maincontroller::register');
+$routes->match(['get','post'],'register', 'Maincontroller::register',['filter' => 'noauth']);
 $routes->get('logout','Maincontroller::logout');
 
-$routes->get('forgotPassword', 'Maincontroller::forgotPassword');
-$routes->get('resetPassword', 'Maincontroller::resetPassword');
-$routes->get('anobservation', 'Maincontroller::anobservation');
 $routes->get('databaseTest', 'Maincontroller::databaseTest');
 
 

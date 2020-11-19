@@ -10,11 +10,16 @@ class Filters extends BaseConfig
 		'csrf'     => \CodeIgniter\Filters\CSRF::class,
 		'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
-	];
+        //filter for user authtication, then if you are nor logged in, you can't see other page
+        'auth'=>\App\Filters\Auth::class,
+        'noauth'=>\App\Filters\Noauth::class,
+        'maincontrollercheck'=>\App\Filters\MaincontrollerCheck::class,
+    ];
 
 	// Always applied before every request
 	public $globals = [
 		'before' => [
+            'maincontrollercheck'
 			//'honeypot'
 			// 'csrf',
 		],
