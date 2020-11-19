@@ -113,14 +113,27 @@ class Maincontroller extends \CodeIgniter\Controller
     }
 
     public function addObservation() {
+        helper(['form']);
         $this->set_common_data('eco', 'search');
+        if ($this->request->getMethod() === 'post' && $this->validate([
+                'description'  => 'required|min_length[3]|max_length[50]',
+                'location'=>'required|min_length[6]|max_length[50]',
+                'date'=>'required|min_length[6]|max_length[50]',
+                'time'=>'required|min_length[4]|max_length[50]']))
+        {
+            $description= $this->request->getPost('description');
+            $location=$this->request->getPost('location');
+            $date=$this->request->getPost('date');
+            $time = $this->request->getPost('time');
+
+            $this->database_model->insertObservation($description,$location,$date,$time,10,12);
+            return redirect()->to('public/hub');}
 
         //add your code here...
         $this->data['content'] = view('addobservation'); //replace by your own view
-        $this->data['title'] = 'Add Observation';
-
+        //$data2['results'] = $this->database_model->insertObservation(,"l","M",'2020-11-07',21,2,3);
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','plantAPI.js', 'previewPicture.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'plantAPI.js','previewPicture.js');
         return view("mainTemplate", $this->data);
 
     }
