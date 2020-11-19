@@ -215,11 +215,6 @@ class Maincontroller extends \CodeIgniter\Controller
             $password=$this->request->getPost('password');
             $this->database_model-> insertUser($username,$password,$email);
 
-            //echo view('news/success');
-//            $this->set_common_data('eco', 'search');
-//            $this->data['content'] = view('hubPage'); //replace by your own view
-//            $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
-//            return view("mainTemplate", $this->data);
             return redirect()->to('hub');
 
         }
