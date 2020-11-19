@@ -48,15 +48,6 @@ class Maincontroller extends \CodeIgniter\Controller
     public function hub() {
         $this->set_common_data('eco', 'search');
 
-        //get current url
-//        $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-//        $url_components = parse_url($actual_link);
-//        parse_str($url_components['query'], $params);
-
-        //variable for date and time of last observation shown on page
-//        $lastDate = null;
-//        $lastTime = null;
-
         //get current user
         $userIdArray = $this->database_model->getUserID($this->userName);
         $userID = $userIdArray[0]->id;
@@ -64,39 +55,23 @@ class Maincontroller extends \CodeIgniter\Controller
         //get friends of current user
         $friendsArray = $this->database_model->getFriendsUserName($userID);
 
-//        $outputType = $this->request->getVar('loadMoreObservations');
+        //check if the url contains parameter for new observations
         $variableActive = $this->request->getVar('extra');
         if ($variableActive != null) {
             $getMoreObservations = $_GET['extra'];
             $lastDate = $_GET['lastDate'];
             $lastTime = $_GET['lastTime'];
-            $lastID = $_GET['lastTime'];
-//        $getMoreObservations = $params['extra'];
-//        $lastDate = $params['lastDate'];
-//        $lastTime = $params['lastTime'];
+            $tomorrow = $_GET['tomorrow'];
 
             if (strcasecmp($getMoreObservations, 'true') == 0) {
-                // return more observations
-//            $data3['username'] = $this->userName;
-//            $data3['friends'] = $friendsArray;
-
                 //get more observations from friends from current users
-                $data3['observations'] = $this->database_model->getMoreObservationsForHub($friendsArray, $lastDate, $lastTime);
-//            $lastDate = $data3['observations'][count($data3['observations'])-1]->date;
-//            $lastTime = $data3['observations'][count($data3['observations'])-1]->time;
+                $data3['observations'] = $this->database_model->getMoreObservationsForHub($friendsArray, $lastDate, $tomorrow, $lastTime);
                 return view('hubPage', $data3);
             }
         }
 
-
-//        $data2['username'] = $this->userName;
-//        $data2['friends'] = $friendsArray;
-
         //get observations from friends from current users
         $data2['observations'] = $this->database_model->getFirstObservationsForHub($friendsArray);
-//        $lastDate = $data2['observations'][count($data2['observations'])-1]->date;
-//        $lastTime = $data2['observations'][count($data2['observations'])-1]->time;
-
 
         $this->data['content'] = view('hubPage', $data2); //replace by your own view
         $this->data['title'] = 'Observation Feed';

@@ -8,14 +8,34 @@ $(window).scroll(function() {
 });
 
 var base_url = window.location;
-var lastDate =
+var lastDate = php_lastDate;
+var lastTime = php_lastTime;
+
+var lastDateObject = new Date(lastDate);
+var tomorrowObject = new Date(lastDateObject.getTime()+1000*60*60*24);
+var tomorrow = formatDate(tomorrowObject);
+tomorrow = tomorrow.toString();
 
 function getOtherObservations() {
     document.getElementById("placeholderLoading").innerHTML = "<span style='color: green;'>Waiting...</span>"
-    console.log('Entered showMoreFriends', base_url);
-    fetch(base_url + "/hub?extra=true&lastDate=2020-11-17&lastTime=10:24:00")
+    console.log('Entered showMoreFriends', tomorrow);
+    fetch(base_url + "?extra=true&lastDate=" + lastDate + "&lastTime=" + lastTime + "&tomorrow=" + tomorrow)
         .then(resp => resp.text())
         .then(myHTML => document.getElementById("hubPageContainer").innerHTML += myHTML)
         .catch(a => console.log(a))
     document.getElementById("placeholderLoading").innerHTML = "<span></span>"
+}
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [year, month, day].join('-');
 }

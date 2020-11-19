@@ -26,6 +26,10 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        var php_lastDate = "<?php echo $ob->date; ?>";
+        var php_lastTime = "<?php echo $ob->time; ?>";
+    </script>
 
 
 <?php endforeach; ?>

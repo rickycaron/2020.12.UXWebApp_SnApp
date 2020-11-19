@@ -344,7 +344,7 @@ class Database_model
      */
     public function getFirstObservationsForHub($friends) {
         //make the query
-        $queryString = 'SELECT * FROM (SELECT id, picture, description, specieName, username, date, time FROM a20ux6.observation t1 
+        $queryString = 'SELECT * FROM (SELECT picture, description, specieName, username, date, time FROM a20ux6.observation t1 
                                         INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
                                         WHERE username = "" ';
         foreach ($friends as $friend):
@@ -360,17 +360,18 @@ class Database_model
      * @param $friends
      * @param $lastDate
      * @param $lastTime
+     * @param $tomorrow
      * @return array|array[]|object[]
      */
-    public function getMoreObservationsForHub($friends, $lastDate, $lastTime) {
+    public function getMoreObservationsForHub($friends, $lastDate, $tomorrow, $lastTime) {
         //make the query
-        $queryString = 'SELECT * FROM (SELECT id, picture, description, specieName, username, date, time FROM a20ux6.observation t1 
+        $queryString = 'SELECT * FROM (SELECT picture, description, specieName, username, date, time FROM a20ux6.observation t1 
                                         INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
-                                        WHERE username = "" ';
+                                        WHERE (username = "" ';
         foreach ($friends as $friend):
-            $queryString .= 'OR username = "'.$friend->username.'" ';
+            $queryString .= 'OR username = "'.$friend->username.'"';
         endforeach;
-        $queryString .= 'AND (date < \''.$lastDate.'\' OR ( date < \''.$lastDate.'\' AND time < \''.$lastTime.'\')) ORDER BY date DESC LIMIT 5) AS temp ORDER BY time DESC;';
+        $queryString .= ') AND (date < "'.$lastDate.'" OR (date < "'.$tomorrow.'" AND time < "'.$lastTime.'")) ORDER BY date DESC LIMIT 5) AS temp ORDER BY time DESC;';
         //get observations from friends from database
         $query = $this->db->query($queryString);
         return $query->getResult();
