@@ -54,7 +54,7 @@ class Maincontroller extends \CodeIgniter\Controller
         }
         $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
         $this->data['content'] = view('leaderboardSelect', $this->data); //replace by your own view
-        $this->data['title'] = 'Leaderboard Select';
+        $this->data['title'] = 'Leaderboard Filter';
         return view("mainTemplate", $this->data);
     }
 
