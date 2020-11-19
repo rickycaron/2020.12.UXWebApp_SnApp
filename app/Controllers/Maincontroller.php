@@ -43,10 +43,18 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->set_common_data('eco', 'search');
 
         //add your code here...
-        $this->data['content'] = view('leaderboardSelect'); //replace by your own view
-        $this->data['title'] = 'Leaderboard Select';
 
+        $this->leaderboard_userID=2;
+        $groups = $this->database_model->getGroupsFromUser($this->leaderboard_userID);
+        $this->data['groups']=array();
+        foreach ($groups as $group)
+        {
+            $groupname=$group->name;
+            array_push($this->data['groups'],$groupname);
+        }
         $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
+        $this->data['content'] = view('leaderboardSelect', $this->data); //replace by your own view
+        $this->data['title'] = 'Leaderboard Select';
         return view("mainTemplate", $this->data);
     }
 
@@ -207,9 +215,6 @@ class Maincontroller extends \CodeIgniter\Controller
                 //multiple accounts with the same user name,
                 $this->data['error_message'] = 'Multiple accounts with the same email exsit. Please consult our software developer!';
             }
-        }
-        else
-        {
         }
         $this->data['content'] = view('login'); //replace by your own view
         return view("extraTemplate", $this->data);

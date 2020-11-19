@@ -4,21 +4,13 @@
     <div class="filter_container">
         <h2>Groups</h2>
         <hr class="big_ruler">
-        <div class="leaderboard_select_element">
-            <h3 class="h3_leaderboard_filter">My family</h3>
-            <a href="leaderboard"><span class="material-icons">navigate_next</span></a>
-        </div>
-        <hr class="small_ruler">
-        <div class="leaderboard_select_element">
-            <h3 class="h3_leaderboard_filter">school friends</h3>
-            <a href="leaderboard"><span class="material-icons">navigate_next</span></a>
-        </div>
-        <hr class="small_ruler">
-        <div class="leaderboard_select_element">
-            <h3 class="h3_leaderboard_filter">football</h3>
-            <a href="leaderboard"><span class="material-icons">navigate_next</span></a>
-        </div>
-        <hr class="small_ruler">
+        <?php foreach ($groups as $groupname): ?>
+            <div class="leaderboard_select_element">
+                <h3 class="h3_leaderboard_filter"><?=$groupname?></h3>
+                <a href="leaderboard"><span class="material-icons">navigate_next</span></a>
+            </div>
+            <hr class="small_ruler">
+        <?php endforeach; ?>
     </div>
 
     <div class="filter_container">
