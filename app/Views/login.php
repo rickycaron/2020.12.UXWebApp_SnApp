@@ -28,7 +28,7 @@
             <div role="alert" style="color: red; font-size: 14px; padding: 5px;text-space: 1px;">
                 <?= \Config\Services::validation()->listErrors(); ?>
             </div>
-            <input type="submit" class="" value="Log in" onclick="location.href='hub'>Log in</input>
+            <input type="submit" class="" value="Log in" onclick=location.href='hub'>Log in</input>
             <a href="register">Don't have an account yet?</a>
             <br>
             <a href="forgotPassword">Forgot password?</a>

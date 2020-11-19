@@ -90,16 +90,16 @@ class Database_model
 
 
     /**
+     * @param $picture
      * @param $description
      * @param $location
-     * @param $gender
      * @param $date
-     * @param $amount
+     * @param $time
      * @param $specieID = i am not sure what would be the best option to give as parameter. specie id or name (depends on the implementation from you code)
      * @param $userID = i am not sure what would be the best option to give as parameter. user id or username (depends on the implementation from you code)
      * @return int = 0 if query failed, 1 if query executed successfully.
      */
-    public function insertObservation($description, $location, $gender, $date, $amount, $specieID, $userID) {
+    public function insertObservation($picture, $description, $location, $date, $time , $specieID, $userID) {
         //check if specie exists
         $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.specie WHERE id="'.$specieID.'") AS result;');
         if (!$query->getRow()->result) {
@@ -110,11 +110,12 @@ class Database_model
         if (!$query->getRow()->result) {
             return 0;
         }
-        $data = ['description'=> $description,
+        $data = [
+            'picture'=> $picture,
+            'description'=> $description,
             'location' => $location,
-            'gender' => $gender,
             'date' => $date,
-            'amount' => $amount,
+            'time' => $time,
             'specieID' => $specieID,
             'userID' => $userID
         ];
@@ -335,6 +336,15 @@ class Database_model
     }
 
     /**
+     * @param $specieName
+     * @return string
+     */
+    public function getSpecieID($specieName) {
+        $query = $this->db->query('SELECT id FROM a20ux6.specie WHERE specieName= "'.$specieName.'";');
+        return $query->getResult();
+    }
+
+    /**
      * @param $userID
      * @return array|array[]|object[]
      */
@@ -395,4 +405,6 @@ class Database_model
      * WHERE username = 'userName';
      *
      */
+
+
 }
