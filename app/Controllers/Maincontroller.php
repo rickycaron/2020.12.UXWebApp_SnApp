@@ -9,7 +9,6 @@ class Maincontroller extends \CodeIgniter\Controller
     private $menu_model;
     private $database_model;
     private $data;
-    private $userName = "Maarten";
 
     /**
      * Maincontroller constructor.
@@ -49,8 +48,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->set_common_data('eco', 'search');
 
         //get current user
-        $userIdArray = $this->database_model->getUserID($this->userName);
-        $userID = $userIdArray[0]->id;
+        $userID = session()->get('id');
 
         //get friends of current user
         $friendsArray = $this->database_model->getFriendsUserName($userID);
