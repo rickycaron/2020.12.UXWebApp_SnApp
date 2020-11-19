@@ -1,3 +1,10 @@
+<?php
+$uri = service('uri');
+?>
+<?php if(session()->get('isLoggedIn')): ?>
+<?php else: ?>
+<?php endif; ?>
+<a  <?= ($uri->getSegment(1) == 'leaderboardSelect'?'active' : null)?> href="/"></a>
 <div class="addObservationContainer">
 <div id="leaderboard_select_container">
     <h1 class="page_title">Leaderboard</h1>

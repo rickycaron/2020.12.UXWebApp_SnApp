@@ -238,6 +238,15 @@ class Database_model
     }
 
     /**
+     * @param $email input
+     * @return array|array[]|object[]
+     */
+    public function getUserByEmail($email) {
+        $query = $this->db->query('SELECT * FROM a20ux6.user WHERE email = "'.$email.'"  LIMIT 1 ;');
+        return $query->getRow();
+    }
+
+    /**
      * @param $userID
      * @return array|array[]|object[]
      */
