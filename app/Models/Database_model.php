@@ -90,7 +90,8 @@ class Database_model
 
 
     /**
-     * @param $picture
+     * @param $imageData
+     * @param $imageProperties
      * @param $description
      * @param $location
      * @param $date
@@ -99,7 +100,7 @@ class Database_model
      * @param $userID = i am not sure what would be the best option to give as parameter. user id or username (depends on the implementation from you code)
      * @return int = 0 if query failed, 1 if query executed successfully.
      */
-    public function insertObservation($picture, $description, $location, $date, $time , $specieID, $userID) {
+    public function insertObservation($imageData, $imageProperties, $description, $location, $date, $time , $specieID, $userID) {
         //check if specie exists
         $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.specie WHERE id="'.$specieID.'") AS result;');
         if (!$query->getRow()->result) {
@@ -111,8 +112,9 @@ class Database_model
             return 0;
         }
         $data = [
-            'picture'=> $picture,
-            'description'=> $description,
+            'imageData' => $imageData,
+            'imageType' => $imageProperties['mime'],
+            'description' => $description,
             'location' => $location,
             'date' => $date,
             'time' => $time,

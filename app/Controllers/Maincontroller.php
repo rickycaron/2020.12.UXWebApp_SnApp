@@ -125,7 +125,11 @@ class Maincontroller extends \CodeIgniter\Controller
                 'date'=>'required|min_length[6]|max_length[50]',
                 'time'=>'required|min_length[4]|max_length[50]']))
         {
-            $picture = $this->request->getPost('picture');
+            $inputPicture = $this->request->getPost('picture');
+//            $picture = $this->request->getPost(file_get_contents($_FILES['picture']['tmp_name']));
+            $imageData = file_get_contents($inputPicture);
+            $imageProperties = getimageSize($inputPicture);
+
             $specieName = $this->request->getPost('specieName');
             $specieId = $this->database_model->getSpecieID($specieName);
             $description = $this->request->getPost('specieDescription');
@@ -133,7 +137,7 @@ class Maincontroller extends \CodeIgniter\Controller
             $date = $this->request->getPost('date');
             $time = $this->request->getPost('time');
 
-            $this->database_model->insertObservation($picture, $description, $location, $date, $time, 14, $userID); //hardcoded values should be changed if species are filled in in the database with correct name
+            $this->database_model->insertObservation($imageData, $imageProperties, $description, $location, $date, $time, 14, $userID); //hardcoded values should be changed if species are filled in in the database with correct name
             return redirect()->to('hub');
         }
 
