@@ -5,9 +5,14 @@ function getLeaderboard() {
     let baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
     let filter = document.querySelector('input[id="hidden_variable_filter"]').value;
     let period = document.querySelector('input[name="size"]:checked').value;
-    console.log(baseUrl +"/html/leaderboard/"+filter+"/"+period)
-    fetch(baseUrl +"/html/leaderboard/"+filter+"/"+period)
+    //location.replace(baseUrl +"/html/leaderboard/"+filter+"/"+period)
+
+    console.log(baseUrl +"/html/getLeaderboardHTMLajax/"+filter+"/"+period);
+    /*
+    fetch(baseUrl +"/html/getLeaderboardHTMLajax/"+filter+"/"+period)
         .then(resp => resp.text())
-        .then(myHTML => document.getElementsByTagName("main").innerHTML = myHTML)
+        .then(data => console.log(data))
+        .then(myHTML => document.getElementsByTagName("leaderboard_container").innerHTML = myHTML)
         .catch(a => console.log(a));
+        */
 }

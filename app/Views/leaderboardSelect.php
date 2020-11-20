@@ -6,7 +6,7 @@
         <?php foreach ($groups as $groupname): ?>
             <div class="leaderboard_select_element">
                 <h3 class="h3_leaderboard_filter"><?=$groupname?></h3>
-                <a href="leaderboard/<?=$groupname?>/monthlyPoints"><span class="material-icons">navigate_next</span></a>
+                <a href="leaderboard/<?=$groupname?>"><span class="material-icons">navigate_next</span></a>
             </div>
             <hr class="small_ruler">
         <?php endforeach; ?>
@@ -17,12 +17,12 @@
         <hr class="big_ruler">
         <div class="leaderboard_select_element">
             <h3 class="h3_leaderboard_filter">friends</h3>
-            <a href="leaderboard/friends/monthlyPoints"><span class="material-icons">navigate_next</span></a>
+            <a href="leaderboard/friends"><span class="material-icons">navigate_next</span></a>
         </div>
         <hr class="small_ruler">
         <div class="leaderboard_select_element">
             <h3 class="h3_leaderboard_filter">worldwide</h3>
-            <a href="leaderboard/worldwide/monthlyPoints"><span class="material-icons">navigate_next</span></a>
+            <a href="leaderboard/worldwide"><span class="material-icons">navigate_next</span></a>
         </div>
         <hr class="small_ruler">
     </div>

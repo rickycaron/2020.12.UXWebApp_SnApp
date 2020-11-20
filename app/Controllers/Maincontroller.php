@@ -27,18 +27,6 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['header_icon_2'] = $header_icon_2;
     }
 
-    public function test() {
-        $this->set_common_data('eco', 'search');
-
-        //add your code here...
-        $this->data['content'] = "<h1>Hallow</h1>";
-        $this->data['title'] = 'Leaderboard Select';
-
-        $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
-        return view("mainTemplate", $this->data);
-    }
-
-
     public function leaderboardSelect() {
         $this->set_common_data('eco', 'search');
 
@@ -60,39 +48,25 @@ class Maincontroller extends \CodeIgniter\Controller
 
     //TODO: fix that the function can read use the input variable for now work with the $test variable as filter
     //TODO: when you use the friends filter you can't see your own score
-    public function leaderboard($leaderboard_filter, $leaderboard_period) {
+    public function leaderboard($leaderboard_filter) {
         //this should be a group name, worldwide or friends
-        $leaderboard_filter = "worldwide"; // declaration of the input variables because that doesn't work yet
+        //$leaderboard_filter = "worldwide"; // declaration of the input variables because that doesn't work yet
         //this should be weeklyPoints, monthlyPoints or points (points will give the overall leaderboard)
-        $leaderboard_period = 'points'; // declaration of the input variables because that doesn't work yet
-
+        //$leaderboard_period = 'points'; // declaration of the input variables because that doesn't work yet
+        $leaderboard_period = "monthlyPoints";
+        $this->debug_to_console($leaderboard_filter);
+        $this->debug_to_console($leaderboard_period);
         $this->set_common_data('arrow_back', 'search');
-        //$groups = $this->database_model->getGroupsFromUser($this->leaderboard_userID);
 
-        $query_result = 0;
-        switch($leaderboard_filter) {
-            case 'worldwide':
-                $query_result = $this->database_model->getLeaderboardWorldwide($leaderboard_period);
-                break;
-            case 'friends':
-                $query_result = $this->database_model->getFriendLeaderboard($leaderboard_period, $this->leaderboard_userID);
-                break;
-            default:
-                //if none of the above are selected it means that the filter is a group
-                $groups = $this->database_model->getGroupsFromUser($this->leaderboard_userID);
-                $isGroup = 0;
-                foreach ($groups as $gr):
-                    if ($leaderboard_filter == $gr->name) {
-                        $isGroup = 1;
-                        break;
-                    }
-                endforeach;
-                if ($isGroup == 1) {
-                    $query_result = $this->database_model->getLeaderboardFromGroup($leaderboard_filter, $leaderboard_period);
-                }
-        }
+        $query_result = $this->get_leaderboard_query_result($leaderboard_filter, $leaderboard_period);
+        $this->debug_to_console(count($query_result));
 
-        $this->data['content'] = view('leaderboard', $this->set_leaderboard_data($query_result, $leaderboard_period, $leaderboard_filter));
+        $leaderboard_content = view('fetchLeaderboardHTML', $this->set_leaderboard_data($query_result, $leaderboard_period, $leaderboard_filter));
+
+        $pass_leaderboard_content['leaderboard_content'] = $leaderboard_content;
+        $pass_leaderboard_content['leaderboard_filter'] = $leaderboard_filter;
+
+        $this->data['content'] = view('leaderboard', $pass_leaderboard_content);
         $this->data['title'] = 'Leaderboard';
         $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
         $this->data['scripts_to_load'] = array('leaderboard.js');
