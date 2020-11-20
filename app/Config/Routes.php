@@ -40,7 +40,9 @@ $routes->get('addObservation', 'Maincontroller::addObservation');
 $routes->match(['get','post'],'addObservation', 'Maincontroller::addObservation');
 $routes->get('leaderboardSelect', 'Maincontroller::leaderboardSelect');
 $routes->get('profile', 'Maincontroller::profile');
-$routes->get('leaderboard', 'Maincontroller::leaderboard');
+$routes->get('leaderboard/(:alpha)', 'Maincontroller::leaderboard/$1');
+$routes->get('getLeaderboardHTMLajax/(:alpha)/(:alpha)', 'Maincontroller::getLeaderboardHTMLajax/$1/$2');
+//$routes->get('leaderboard', 'Maincontroller::leaderboard');
 $routes->get('login', 'Maincontroller::login');
 $routes->get('loginFromObservation', 'Maincontroller::loginFromObservation');
 

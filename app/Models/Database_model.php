@@ -287,10 +287,51 @@ class Database_model
     }
 
     /**
+     * @param $group
+     * @param $period
+     * @return array|array[]
+     */
+    public function getLeaderboardFromGroup($group, $period) {
+        $query = $this->db->query('SELECT u.id, u.username, u.'.$period.'
+                                        FROM a20ux6.user AS u
+                                        INNER JOIN a20ux6.userGroupMapping AS m ON u.id = m.userID
+                                        INNER JOIN a20ux6.userGroup AS g ON g.id = m.groupID
+                                        WHERE g.name = "'.$group.'"
+                                        ORDER BY u.'.$period.' DESC;');
+        return $query->getResultArray();
+    }
+
+    /**
+     * @param $period
+     * @param $userID
+     * @return array|array[]
+     */
+    public function getFriendLeaderboard($period, $userID) {
+        $query = $this->db->query('SELECT u.id, u.username, u.points, u.monthlyPoints, u.weeklyPoints
+                                        FROM a20ux6.friendsMapping as m , a20ux6.user as u
+                                        WHERE CASE WHEN m.userID_A = "'.$userID.'" THEN m.userID_B = u.id
+                                                    WHEN m.userID_B = "'.$userID.'" THEN m.userID_A = u.id
+                                                    END
+                                        ORDER BY u.'.$period.' DESC;');
+        return $query->getResultArray();
+    }
+
+    /**
+     * @param $period
+     * @return array|array[]
+     */
+    public function getLeaderboardWorldwide($period) {
+        $query = $this->db->query('SELECT id, username, points, monthlyPoints, weeklyPoints
+                                        FROM a20ux6.user
+                                        ORDER BY '.$period.' DESC;');
+        return $query->getResultArray();
+    }
+
+    /**
      * created by rui
      * @param $email
      * @param $password
-     * @return 0 (correct)/1(password is wrong)/2(the user email doesn't exist)/3(multiple enail exsit, this shouldn't happen)
+     * @return int (correct)/1(password is wrong)/2(the user email doesn't exist)/3(multiple enail exsit, this shouldn't happen)
      */
     public function validateUser($email, $password) {
         $query = $this->db->query('SELECT password FROM a20ux6.user WHERE email = "'.$email.'";');

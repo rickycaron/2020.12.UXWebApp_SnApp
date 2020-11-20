@@ -4,11 +4,15 @@
 namespace App\Controllers;
 
 
+use App\Models\leaderboard_functions;
+
 class Maincontroller extends \CodeIgniter\Controller
 {
     private $menu_model;
     private $database_model;
     private $data;
+
+    use \App\Controllers\leaderboard_functions;
 
     /**
      * Maincontroller constructor.
@@ -27,20 +31,38 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->set_common_data('eco', 'search');
         $username=session()->get('username');
         //add your code here...
-        $this->data['content'] = view('leaderboardSelect'); //replace by your own view
-        $this->data['title'] = 'Leaderboard Select';
-
+        //$this->leaderboard_userID=session()->get('id')
+        $this->leaderboard_userID=2;
+        $groups = $this->database_model->getGroupsFromUser($this->leaderboard_userID);
+        $this->data['groups']=array();
+        foreach ($groups as $group)
+        {
+            $groupname=$group->name;
+            array_push($this->data['groups'],$groupname);
+        }
         $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
+        $this->data['content'] = view('leaderboardSelect', $this->data); //replace by your own view
+        $this->data['title'] = 'Leaderboard Filter';
         return view("mainTemplate", $this->data);
     }
 
-    public function leaderboard() {
+    //TODO: when you use the friends filter you can't see your own score
+    public function leaderboard($leaderboard_filter) {
+        $leaderboard_period = "monthlyPoints";
+
         $this->set_common_data('arrow_back', 'search');
 
-        $this->data['content'] = view('leaderboard');
-        $this->data['title'] = 'Leaderboard';
+        $query_result = $this->get_leaderboard_query_result($leaderboard_filter, $leaderboard_period);
 
+        $leaderboard_content = view('fetchLeaderboardHTML', $this->set_leaderboard_data($query_result, $leaderboard_period, $leaderboard_filter));
+
+        $pass_leaderboard_content['leaderboard_content'] = $leaderboard_content;
+        $pass_leaderboard_content['leaderboard_filter'] = $leaderboard_filter;
+
+        $this->data['content'] = view('leaderboard', $pass_leaderboard_content);
+        $this->data['title'] = 'Leaderboard';
         $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
+        $this->data['scripts_to_load'] = array('leaderboard.js', 'jquery-3.5.1.min');
         return view("mainTemplate", $this->data);
     }
 

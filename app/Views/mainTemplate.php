@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap" rel="stylesheet">
 
     <?php if (isset($scripts_to_load)) foreach ($scripts_to_load as $script): ?>
-        <script src="<?= base_url()?>/js/<?=$script?>" defer></script>
+        <script src="<?= base_url()?>/js/<?=$script?>?v=4" defer></script>
     <?php endforeach; ?>
 
 </head>
@@ -34,7 +34,7 @@
     <footer>
         <nav>
             <?php foreach ($menu_items as $menu): ?>
-                <a href="<?=$menu['link']?>" class="<?=$menu['className']?>"><span class="material-icons"><?=$menu['iconName']?></span></a>
+                <a href="<?= base_url()?>/<?=$menu['link']?>" class="<?=$menu['className']?>"><span class="material-icons"><?=$menu['iconName']?></span></a>
             <?php endforeach; ?>
         </nav>
     </footer>
