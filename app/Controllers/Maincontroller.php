@@ -196,10 +196,9 @@ class Maincontroller extends \CodeIgniter\Controller
                 //save this
                 $this->setUserSession($user);
                 session()->setFlashdata('success','Successful Login!');
-
-                //______________________________________________
                 //return hub page
                 return redirect()->to('hub');
+//                return view("mainTemplate", $this->data);
             }
             else if($searchresult==1){
                 //password is wrong
@@ -244,20 +243,13 @@ class Maincontroller extends \CodeIgniter\Controller
             $password=$this->request->getPost('password');
             $this->database_model-> insertUser($username,$password,$email);
             session()->setFlashdata('success','Successful Register!');
-            //echo view('news/success');
-//            $this->set_common_data('eco', 'search');
-//            $this->data['content'] = view('hubPage'); //replace by your own view
-//            $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
-//            return view("mainTemplate", $this->data);
-            return redirect()->to('hub');
-
+            return redirect()->to('login');
         }
         else
         {
             $this->data['content'] = view('register'); //replace by your own view
             return view("extraTemplate", $this->data);
         }
-
     }
     public function forgotPassword() {
         $this->set_common_data('eco', 'eco');
