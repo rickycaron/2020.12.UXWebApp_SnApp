@@ -48,10 +48,10 @@ trait leaderboard_functions
         $worse_then_tenth_flag = 0;
         $current_user = 0;
         for ($i = 3; $i < count((array)$person_list); $i++) {
-            array_push($leaderboard_data['persons_list'], array('place'=>$i, 'name'=>$person_list[$i]['username'], 'point'=>$person_list[$i][$period]));
+            array_push($leaderboard_data['persons_list'], array('place'=>($i+1), 'name'=>$person_list[$i]['username'], 'point'=>$person_list[$i][$period]));
             if ($this->leaderboard_userID == $person_list[$i]['id'] && $i > 10) {
                 $worse_then_tenth_flag = 1;
-                $current_user = array('place'=>$i,'name'=>$person_list[$i]['username'], 'point'=>$person_list[$i][$period]);
+                $current_user = array('place'=>($i+1),'name'=>$person_list[$i]['username'], 'point'=>$person_list[$i][$period]);
             }
         }
         if ($worse_then_tenth_flag) {

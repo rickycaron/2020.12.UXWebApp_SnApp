@@ -2,6 +2,7 @@ document.getElementById("weekly").addEventListener("click", weeklyClicked);
 document.getElementById("monthly").addEventListener("click", monthlyClicked);
 document.getElementById("overall").addEventListener("click",overallClicked);
 
+// this is far from
 function weeklyClicked() {
     console.log("weekly clicked");
     getLeaderboard("weeklyPoints")
@@ -21,7 +22,6 @@ function getLeaderboard(period) {
     let getUrl = window.location;
     let baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
     let filter = document.querySelector('input[id="hidden_variable_filter"]').value;
-    //let period = document.querySelector('input[name="size"]:checked').value;
 
     console.log(baseUrl +"/html/getLeaderboardHTMLajax/"+filter+"/"+period);
 

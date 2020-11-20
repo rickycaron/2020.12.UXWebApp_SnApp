@@ -30,7 +30,7 @@
                 <h3><?=$person['point']?></h3>
             </div>
             <?php $loopcounter++;?>
-                <?php if ($loopcounter == 8) break;?>
+                <?php if ($loopcounter == 7) break;?>
         <?php endforeach; ?>
         <?=$user_placeholder?>
 </div>
