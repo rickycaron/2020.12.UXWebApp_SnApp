@@ -371,7 +371,7 @@ class Database_model
         foreach ($friends as $friend):
             $queryString .= 'OR username = "'.$friend->username.'" ';
         endforeach;
-        $queryString .= 'ORDER BY date DESC LIMIT 5) AS temp ORDER BY time DESC;';
+        $queryString .= 'ORDER BY date DESC LIMIT 5) AS temp ORDER BY date(date) DESC, time DESC;';
         //get observations from friends from database
         $query = $this->db->query($queryString);
         return $query->getResult();
@@ -392,7 +392,7 @@ class Database_model
         foreach ($friends as $friend):
             $queryString .= 'OR username = "'.$friend->username.'"';
         endforeach;
-        $queryString .= ') AND (date < "'.$lastDate.'" OR (date < "'.$tomorrow.'" AND time < "'.$lastTime.'")) ORDER BY date DESC LIMIT 5) AS temp ORDER BY time DESC;';
+        $queryString .= ') AND (date < "'.$lastDate.'" OR (date < "'.$tomorrow.'" AND time < "'.$lastTime.'")) ORDER BY date DESC LIMIT 5) AS temp ORDER BY date(date) DESC, time DESC;';
         //get observations from friends from database
         $query = $this->db->query($queryString);
         return $query->getResult();
