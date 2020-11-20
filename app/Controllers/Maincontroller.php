@@ -69,7 +69,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['content'] = view('leaderboard', $pass_leaderboard_content);
         $this->data['title'] = 'Leaderboard';
         $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
-        $this->data['scripts_to_load'] = array('leaderboard.js');
+        $this->data['scripts_to_load'] = array('leaderboard.js', 'jquery-3.5.1.min');
         return view("mainTemplate", $this->data);
     }
 
