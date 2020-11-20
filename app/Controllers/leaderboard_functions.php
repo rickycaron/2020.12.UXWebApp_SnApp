@@ -70,14 +70,11 @@ trait leaderboard_functions
         else {
             $leaderboard_data['user_placeholder'] = "";
         }
-        //$leaderboard_data['filter'] = $filter; //this variable is placed in a hidden container so the javascript file can read this
         return $leaderboard_data;
     }
 
     function getLeaderboardHTMLajax ($leaderboard_filter, $leaderboard_period) {
-        //$this->debug_to_console("in ajax function");
         $query_result = $this->get_leaderboard_query_result($leaderboard_filter, $leaderboard_period);
-        $this->debug_to_console(count((array)$query_result));
         return view('fetchLeaderboardHTML', $this->set_leaderboard_data($query_result, $leaderboard_period, $leaderboard_filter));
     }
 

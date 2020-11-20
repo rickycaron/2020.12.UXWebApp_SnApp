@@ -46,20 +46,13 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("mainTemplate", $this->data);
     }
 
-    //TODO: fix that the function can read use the input variable for now work with the $test variable as filter
     //TODO: when you use the friends filter you can't see your own score
     public function leaderboard($leaderboard_filter) {
-        //this should be a group name, worldwide or friends
-        //$leaderboard_filter = "worldwide"; // declaration of the input variables because that doesn't work yet
-        //this should be weeklyPoints, monthlyPoints or points (points will give the overall leaderboard)
-        //$leaderboard_period = 'points'; // declaration of the input variables because that doesn't work yet
         $leaderboard_period = "monthlyPoints";
-        $this->debug_to_console($leaderboard_filter);
-        $this->debug_to_console($leaderboard_period);
+
         $this->set_common_data('arrow_back', 'search');
 
         $query_result = $this->get_leaderboard_query_result($leaderboard_filter, $leaderboard_period);
-        $this->debug_to_console(count($query_result));
 
         $leaderboard_content = view('fetchLeaderboardHTML', $this->set_leaderboard_data($query_result, $leaderboard_period, $leaderboard_filter));
 

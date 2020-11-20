@@ -27,7 +27,8 @@ function getLeaderboard(period) {
 
     fetch(baseUrl +"/html/getLeaderboardHTMLajax/"+filter+"/"+period)
         .then(resp => resp.text())
-        .then(data => console.log(data))
-        .then(myHTML => document.getElementById("leaderboard_container").innerHTML = myHTML)
+        .then(data => document.getElementById("leaderboard_container").innerHTML = data)
         .catch(a => console.log(a));
+    //.then(data => console.log(data))
+    //.then(myHTML => document.getElementById("leaderboard_container").innerHTML = myHTML)
 }
