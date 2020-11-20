@@ -187,6 +187,14 @@ input[type="submit"]:hover{
     /*background-color: #002b36;*/
 }
 
+#observationCardSpecieDescription p {
+    display: inherit;
+    width: 100%;
+    height: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 #observationCardTime {
     box-sizing: border-box;
     padding: 0% 2%;

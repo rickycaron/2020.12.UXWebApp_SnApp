@@ -14,7 +14,7 @@
         <h2>Processing...</h2>
     </div>
 
-    <form action="addObservation" method="post">
+    <form action="addObservation" method="post" enctype="multipart/form-data">
         <input id="inputFile" type="file" name="picture"  onchange="readURL(this)" hidden>
 
         <div class="txt_field">
@@ -47,7 +47,7 @@
         </div>
 
         <div class="txt_field">
-            <input type="text" id="LocationPlaceholder" name="location" required>
+            <input type="text" id="LocationPlaceholder" name="location">
             <span></span>
             <label>Location</label>
         </div>
@@ -62,11 +62,7 @@
 
     </form>
 
-    <button class="custom-btn" id="submitObservationButton">Submit</button>
     <button class="custom-btn" id="cancelObservationButton">Cancel</button>
-
-
-
 </div>
 
 

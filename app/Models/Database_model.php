@@ -90,7 +90,8 @@ class Database_model
 
 
     /**
-     * @param $picture
+     * @param $imageData
+     * @param $imageProperties
      * @param $description
      * @param $location
      * @param $date
@@ -99,7 +100,7 @@ class Database_model
      * @param $userID = i am not sure what would be the best option to give as parameter. user id or username (depends on the implementation from you code)
      * @return int = 0 if query failed, 1 if query executed successfully.
      */
-    public function insertObservation($picture, $description, $location, $date, $time , $specieID, $userID) {
+    public function insertObservation($imageData, $imageProperties, $description, $location, $date, $time , $specieID, $userID) {
         //check if specie exists
         $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.specie WHERE id="'.$specieID.'") AS result;');
         if (!$query->getRow()->result) {
@@ -111,8 +112,9 @@ class Database_model
             return 0;
         }
         $data = [
-            'picture'=> $picture,
-            'description'=> $description,
+            'imageData' => $imageData,
+            'imageType' => $imageProperties,
+            'description' => $description,
             'location' => $location,
             'date' => $date,
             'time' => $time,
@@ -363,13 +365,13 @@ class Database_model
      */
     public function getFirstObservationsForHub($friends) {
         //make the query
-        $queryString = 'SELECT * FROM (SELECT picture, description, specieName, username, date, time FROM a20ux6.observation t1 
+        $queryString = 'SELECT * FROM (SELECT imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1 
                                         INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
                                         WHERE username = "" ';
         foreach ($friends as $friend):
             $queryString .= 'OR username = "'.$friend->username.'" ';
         endforeach;
-        $queryString .= 'ORDER BY date DESC LIMIT 5) AS temp ORDER BY time DESC;';
+        $queryString .= 'ORDER BY date DESC LIMIT 5) AS temp ORDER BY date(date) DESC, time DESC;';
         //get observations from friends from database
         $query = $this->db->query($queryString);
         return $query->getResult();
@@ -384,13 +386,13 @@ class Database_model
      */
     public function getMoreObservationsForHub($friends, $lastDate, $tomorrow, $lastTime) {
         //make the query
-        $queryString = 'SELECT * FROM (SELECT picture, description, specieName, username, date, time FROM a20ux6.observation t1 
+        $queryString = 'SELECT * FROM (SELECT imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1 
                                         INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
                                         WHERE (username = "" ';
         foreach ($friends as $friend):
             $queryString .= 'OR username = "'.$friend->username.'"';
         endforeach;
-        $queryString .= ') AND (date < "'.$lastDate.'" OR (date < "'.$tomorrow.'" AND time < "'.$lastTime.'")) ORDER BY date DESC LIMIT 5) AS temp ORDER BY time DESC;';
+        $queryString .= ') AND (date < "'.$lastDate.'" OR (date < "'.$tomorrow.'" AND time < "'.$lastTime.'")) ORDER BY date DESC LIMIT 5) AS temp ORDER BY date(date) DESC, time DESC;';
         //get observations from friends from database
         $query = $this->db->query($queryString);
         return $query->getResult();
