@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap" rel="stylesheet">
 
     <?php if (isset($scripts_to_load)) foreach ($scripts_to_load as $script): ?>
-        <script src="<?= base_url()?>/js/<?=$script?>?v=3" defer></script>
+        <script src="<?= base_url()?>/js/<?=$script?>?v=4" defer></script>
     <?php endforeach; ?>
 
 </head>

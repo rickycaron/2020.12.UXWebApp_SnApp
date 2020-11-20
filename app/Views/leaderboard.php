@@ -7,11 +7,11 @@
             <label for="weekly">weekly</label>
         </div>
         <div class="radio_button">
-            <input type="radio" name="size" id="monthly" value="monthlyPoints" checked="checked" >
+            <input type="radio" name="size" id="monthly" value="monthlyPoints" >
             <label for="monthly">monthly</label>
         </div>
         <div class="radio_button">
-            <input type="radio" name="size" value="points" id="overall">
+            <input type="radio" name="size" id="overall" value="points">
             <label for="overall">overall</label>
         </div>
     </div>

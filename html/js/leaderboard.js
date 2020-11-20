@@ -1,18 +1,33 @@
-document.getElementById("radio_buttons_container").addEventListener("click", getLeaderboard);
+document.getElementById("weekly").addEventListener("click", weeklyClicked);
+document.getElementById("monthly").addEventListener("click", monthlyClicked);
+document.getElementById("overall").addEventListener("click",overallClicked);
 
-function getLeaderboard() {
+function weeklyClicked() {
+    console.log("weekly clicked");
+    getLeaderboard("weeklyPoints")
+}
+
+function monthlyClicked() {
+    console.log("monthly clicked");
+    getLeaderboard("monthlyPoints")
+}
+
+function overallClicked() {
+    console.log("overall clicked");
+    getLeaderboard("points")
+}
+
+function getLeaderboard(period) {
     let getUrl = window.location;
     let baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
     let filter = document.querySelector('input[id="hidden_variable_filter"]').value;
-    let period = document.querySelector('input[name="size"]:checked').value;
-    console.log(period);
+    //let period = document.querySelector('input[name="size"]:checked').value;
 
-    //console.log(baseUrl +"/html/getLeaderboardHTMLajax/"+filter+"/"+period);
-/*
+    console.log(baseUrl +"/html/getLeaderboardHTMLajax/"+filter+"/"+period);
+
     fetch(baseUrl +"/html/getLeaderboardHTMLajax/"+filter+"/"+period)
         .then(resp => resp.text())
         .then(data => console.log(data))
-        .then(myHTML => document.getElementsByTagName("leaderboard_container").innerHTML = myHTML)
+        .then(myHTML => document.getElementById("leaderboard_container").innerHTML = myHTML)
         .catch(a => console.log(a));
-*/
 }
