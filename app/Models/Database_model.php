@@ -113,7 +113,7 @@ class Database_model
         }
         $data = [
             'imageData' => $imageData,
-            'imageType' => $imageProperties['mime'],
+            'imageType' => $imageProperties,
             'description' => $description,
             'location' => $location,
             'date' => $date,
@@ -365,7 +365,7 @@ class Database_model
      */
     public function getFirstObservationsForHub($friends) {
         //make the query
-        $queryString = 'SELECT * FROM (SELECT picture, description, specieName, username, date, time FROM a20ux6.observation t1 
+        $queryString = 'SELECT * FROM (SELECT imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1 
                                         INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
                                         WHERE username = "" ';
         foreach ($friends as $friend):
@@ -386,7 +386,7 @@ class Database_model
      */
     public function getMoreObservationsForHub($friends, $lastDate, $tomorrow, $lastTime) {
         //make the query
-        $queryString = 'SELECT * FROM (SELECT picture, description, specieName, username, date, time FROM a20ux6.observation t1 
+        $queryString = 'SELECT * FROM (SELECT imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1 
                                         INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
                                         WHERE (username = "" ';
         foreach ($friends as $friend):

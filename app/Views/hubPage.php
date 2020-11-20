@@ -1,10 +1,3 @@
-<h1>Hello, <?= session()->get('username')?></h1>
-<?php if(session()->get('success')): ?>
-    <h1>
-        <!--        This will show a successful login/register information-->
-        <?= session()->get('success')?>
-    </h1>
-<?php endif; ?>
 <div id="hubPageContainer">
 <?php foreach ($observations as $ob): ?>
     <div id="observationCardContainer">
@@ -14,7 +7,7 @@
                 <h3 id="profileName"><?=$ob->username?></h3>
             </div>
             <div id="observationCardPicture">
-                <img id="observationPicture" src=<?='data:image/jpeg;base64, "'.base64_encode( $ob->picture).'"'?>>
+                <img id="observationPicture" src="<?php echo data_uri($ob->imageData,$ob->imageType); ?>">
             </div>
             <div id="observationCardPictureFooter">
                 <div id="observationCardPictureFooterSpecie">
@@ -43,3 +36,11 @@
 
 </div>
 <div id="placeholderLoading"></div>
+
+<?php
+function data_uri($file, $mime)
+{
+    $base64   = base64_encode($file);
+    return ('data:' . $mime . ';base64,' . $base64);
+}
+?>
