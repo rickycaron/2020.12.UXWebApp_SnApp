@@ -29,10 +29,9 @@ class Maincontroller extends \CodeIgniter\Controller
 
     public function leaderboardSelect() {
         $this->set_common_data('eco', 'search');
-        $username=session()->get('username');
-        //add your code here...
-        //$this->leaderboard_userID=session()->get('id')
-        $this->leaderboard_userID=2;
+        //$username=session()->get('username');
+
+        $this->leaderboard_userID=session()->get('id');
         $groups = $this->database_model->getGroupsFromUser($this->leaderboard_userID);
         $this->data['groups']=array();
         foreach ($groups as $group)
@@ -46,10 +45,11 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("mainTemplate", $this->data);
     }
 
-    //TODO: when you use the friends filter you can't see your own score
+    //TODO: when you use the friends filter you can't see your own score i think?
     public function leaderboard($leaderboard_filter) {
         $leaderboard_period = "monthlyPoints";
-
+        $this->leaderboard_userID = session()->get('id');
+        //$this->debug_to_console(session()->get('id'));
         $this->set_common_data('arrow_back', 'search');
 
         $query_result = $this->get_leaderboard_query_result($leaderboard_filter, $leaderboard_period);

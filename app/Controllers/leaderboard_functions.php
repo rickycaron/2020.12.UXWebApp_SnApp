@@ -6,7 +6,7 @@ namespace App\Controllers;
 
 trait leaderboard_functions
 {
-    private $leaderboard_userID = 1;
+    private $leaderboard_userID;
 
     private function get_leaderboard_query_result($leaderboard_filter, $leaderboard_period) {
         $query_result = 0;
