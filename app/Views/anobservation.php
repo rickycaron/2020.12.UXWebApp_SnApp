@@ -22,6 +22,10 @@
             <p class="observationtext">Leuven</p>
         </div>
     </div>
+    <div>
+        <h2>Details</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper diam at erat pulvinar, at pulvinar felis blandit. Vestibulum volutpat tellus diam, consequat gravida libero rhoncus ut.</p>
+    </div>
     <div id="like_and_comment_button">
         <div id="like_button">
             <span class="material-icons">favorite_border</span>

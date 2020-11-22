@@ -2,7 +2,6 @@
 /* styles for an observation */
 /**********************************/
 #observation_container {
-    position:absolute;
     display:flex;
     flex-direction: column;
 }
