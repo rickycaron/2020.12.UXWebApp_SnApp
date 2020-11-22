@@ -46,11 +46,11 @@ class Maincontroller extends \CodeIgniter\Controller
     }
 
     //TODO: when you use the friends filter you can't see your own score i think?
+    //TODO: when you select a filter with a space it gives an error -> set a restriction to the group name so no spaces are accepted or deal with it.
     public function leaderboard($leaderboard_filter) {
+        $this->set_common_data('arrow_back', 'search');
         $leaderboard_period = "monthlyPoints";
         $this->leaderboard_userID = session()->get('id');
-        //$this->debug_to_console(session()->get('id'));
-        $this->set_common_data('arrow_back', 'search');
 
         $query_result = $this->get_leaderboard_query_result($leaderboard_filter, $leaderboard_period);
 
