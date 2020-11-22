@@ -22,7 +22,7 @@
                 <p><?=$ob->description?></p>
             </div>
             <div id="observationCardTime">
-                <h4><?=$ob->date?> om <?=$ob->time?></h4>
+                <h4><?=$ob->date?> at <?=$ob->time?></h4>
             </div>
         </div>
     </div>

@@ -1,4 +1,25 @@
 /**********************************/
+/* styles for an observation */
+/**********************************/
+#observation_container {
+    position:absolute;
+    display:flex;
+    flex-direction: column;
+}
+
+#anobservation_profile_info {
+    display: flex;
+    flex-direction: row;
+}
+
+#observation_profilePicture {
+    
+}
+
+
+
+
+/**********************************/
 /* styles for add observation */
 /**********************************/
 
