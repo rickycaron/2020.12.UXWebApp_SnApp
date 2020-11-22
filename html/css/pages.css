@@ -10,12 +10,41 @@
 #anobservation_profile_info {
     display: flex;
     flex-direction: row;
+    margin: 10px 15px;
 }
 
 #observation_profilePicture {
-    
+    width: 50px;
+    border-radius: 50%;
 }
 
+#observation_title_description {
+    margin: 10px 15px;
+}
+
+#observation_picture {
+    width: 140px;
+    height: 140px;
+}
+
+#information_wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.information_container {
+    margin: 10px 30px;
+}
+
+#like_and_comment_button {
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+#like_button, #comment_button {
+    border: #1b1b1b solid;
+}
 
 
 

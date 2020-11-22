@@ -9,7 +9,7 @@
 
     <link href="<?= base_url()?>/css/main.css" rel="stylesheet"/>
     <link href="<?= base_url()?>/css/reusable.css" rel="stylesheet"/>
-    <link href="<?= base_url()?>/css/pages.css?v=1" rel="stylesheet"/>
+    <link href="<?= base_url()?>/css/pages.css?v=2" rel="stylesheet"/>
     <link href="<?= base_url()?>/css/media_query.css" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

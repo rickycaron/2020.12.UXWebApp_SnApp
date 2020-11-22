@@ -3,32 +3,37 @@
         <img id="observation_profilePicture" src="<?= base_url()?>/image/profile.png"> <! -- icons need to be imported in correct way!!! -->
         <h3 id="observation_profileName">Joppe Leers</h3>
     </div>
-    <h2>Turtle</h2>
-    <p>i took this amazing picture on a run.</p>
+    <div id="observation_title_description">
+        <h2>Turtle</h2>
+        <p>i took this amazing picture on a run.</p>
+    </div>
     <img id="observation_picture" src="https://www.woodlandtrust.org.uk/media/4256/sessile-oak-leaves-acorns-wtml-1044114-nature-photographers-ltd.jpg" alt="picture af a Turtle">
-    <div id="grid_information_container">
+    <div id="information_wrapper">
         <div class="information_container">
-            <span class="material-icons iconsforinformation">event_note</span>
-            <span class="observationtext">DD/MM/YYYY</span>
+            <span class="material-icons">event_note</span>
+            <p class="observationtext">DD/MM/YYYY</p>
         </div>
         <div class="information_container">
-            <span class="material-icons iconsforinformation">schedule</span>
-            <span class="observationtext">00:00 PM</span>
+            <span class="material-icons">schedule</span>
+            <p class="observationtext">00:00 PM</p>
         </div>
         <div class="information_container">
-            <span class="material-icons iconsforinformation">location_on</span>
-            <span class="observationtext">On a mysterious place</span>
+            <span class="material-icons">location_on</span>
+            <p class="observationtext">Leuven</p>
         </div>
     </div>
     <div id="like_and_comment_button">
         <div id="like_button">
             <span class="material-icons">favorite_border</span>
+            <p>20 likes</p>
         </div>
         <div id="comment_button">
             <span class="material-icons">chat</span>
+            <p>20 comments</p>
         </div>
     </div>
-    <div id="likess_or_comment_placeholder">
+    <hr>
+    <div id="likes_or_comment_placeholder">
         <h1>nothing yet</h1>
     </div>
 </div>
