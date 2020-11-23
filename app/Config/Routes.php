@@ -50,6 +50,8 @@ $routes->get('forgotPassword', 'Maincontroller::forgotPassword',['filter' => 'no
 $routes->get('resetPassword', 'Maincontroller::resetPassword',['filter' => 'noauth']);
 //$routes->get('anobservation', 'Maincontroller::anobservation',['filter'=>'auth']);
 $routes->get('anobservation/(:num)', 'Maincontroller::anobservation/$1',['filter'=>'auth']);
+$routes->get('fetchObservationLikeHTML/(:num)', 'Maincontroller::fetchObservationLikeHTML/$1');
+$routes->get('fetchObservationCommentHTML/(:num)', 'Maincontroller::fetchObservationCommentHTML/$1');
 $routes->get('account', 'Maincontroller::account',['filter'=>'auth']);
 $routes->get('edit_profile', 'Maincontroller::edit_profile',['filter'=>'auth']);
 $routes->get('search', 'Maincontroller::search');

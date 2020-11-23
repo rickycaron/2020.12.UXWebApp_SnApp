@@ -5,6 +5,7 @@ namespace App\Controllers;
 
 
 use App\Models\leaderboard_functions;
+use App\Models\extra_functions;
 
 class Maincontroller extends \CodeIgniter\Controller
 {
@@ -13,6 +14,7 @@ class Maincontroller extends \CodeIgniter\Controller
     private $data;
 
     use \App\Controllers\leaderboard_functions;
+    use \App\Controllers\extra_functions;
 
     /**
      * Maincontroller constructor.
@@ -115,6 +117,10 @@ class Maincontroller extends \CodeIgniter\Controller
         $observation_data['description'] = $observation['description'];
         $observation_data['like_count'] = $observation['likes'];
         $observation_data['comment_count'] = $observation['comments'];
+        $observation_data['image_data'] = $observation['imageData'];
+        $observation_data['image_type'] = $observation['imageType'];
+        $observation_data['likes_comments'] = "";
+        $observation_data['id'] = $observation['id'];
 
         $this->data['content'] = view('anobservation', $observation_data);
         $this->data['title'] = 'Observation';

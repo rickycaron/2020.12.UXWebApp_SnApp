@@ -284,6 +284,10 @@ input[type="radio"]:checked + label {
     padding: 5px 5px;
 }
 
+.observationcard_hyperlink, .observationcard_hyperlink:visited, .observationcard_hyperlink:active, .observationcard_hyperlink:hover{
+    text-decoration:none;
+    color: #0C322C;
+}
 /**********************************/
 /* styles for Groups overview page */
 /**********************************/

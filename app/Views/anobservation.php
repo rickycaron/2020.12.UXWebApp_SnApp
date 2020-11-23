@@ -10,7 +10,7 @@
         <h2><?=$specie_name?></h2>
         <p><?=$user_note?></p>
     </div>
-    <img id="observation_picture" src="https://www.woodlandtrust.org.uk/media/4256/sessile-oak-leaves-acorns-wtml-1044114-nature-photographers-ltd.jpg" alt="picture af a Turtle">
+    <img id="observation_picture" src="<?php echo data_uri($image_data, $image_type); ?>" alt="picture of the observation">
     <div id="information_wrapper">
         <div class="information_container">
             <span class="material-icons">event_note</span>
@@ -42,6 +42,15 @@
     </div>
     <hr>
     <div id="likes_or_comment_placeholder">
-        <h1>nothing yet</h1>
+        <?=$likes_comments?>
     </div>
 </div>
+<input type="hidden" id="hidden_variable_filter" value="<?=$id?>"/>
+
+<?php
+function data_uri($file, $mime)
+{
+    $base64   = base64_encode($file);
+    return ('data:' . $mime . ';base64,' . $base64);
+}
+?>
