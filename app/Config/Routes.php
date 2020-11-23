@@ -48,7 +48,8 @@ $routes->get('loginFromObservation', 'Maincontroller::loginFromObservation');
 
 $routes->get('forgotPassword', 'Maincontroller::forgotPassword',['filter' => 'noauth']);
 $routes->get('resetPassword', 'Maincontroller::resetPassword',['filter' => 'noauth']);
-$routes->get('anobservation', 'Maincontroller::anobservation',['filter'=>'auth']);
+//$routes->get('anobservation', 'Maincontroller::anobservation',['filter'=>'auth']);
+$routes->get('anobservation/(:num)', 'Maincontroller::anobservation/$1',['filter'=>'auth']);
 $routes->get('account', 'Maincontroller::account',['filter'=>'auth']);
 $routes->get('edit_profile', 'Maincontroller::edit_profile',['filter'=>'auth']);
 $routes->get('search', 'Maincontroller::search');

@@ -101,6 +101,29 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("mainTemplate", $this->data);
     }
 
+    public function anobservation($observationID) {
+        $this->set_common_data('arrow_back', 'search');
+
+        // retrieve all the information needed from the database and write values in placeholders
+        $observation = $this->database_model->getObservation($observationID);
+        $observation_data['username'] = $this->database_model->getUser($observation['userID'])->username;
+        $observation_data['specie_name'] = $this->database_model->getSpecie($observation['specieID'])->specieName;
+        $observation_data['user_note'] = $observation['userNote'];
+        $observation_data['date'] = $observation['date'];
+        $observation_data['time'] = $observation['time'];
+        $observation_data['location'] = $observation['location'];
+        $observation_data['description'] = $observation['description'];
+        $observation_data['like_count'] = $observation['likes'];
+        $observation_data['comment_count'] = $observation['comments'];
+
+        $this->data['content'] = view('anobservation', $observation_data);
+        $this->data['title'] = 'Observation';
+
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('none');
+        $this->data['scripts_to_load'] = array('anobservationMap.js');
+        return view("mainTemplate", $this->data);
+    }
+
     public function groups() {
         $this->set_common_data('eco', 'search');
 
@@ -291,15 +314,7 @@ class Maincontroller extends \CodeIgniter\Controller
 
         return view("extraTemplate", $this->data);
     }
-    public function anobservation() {
-        $this->set_common_data('arrow_back', 'search');
 
-        $this->data['content'] = view('anobservation');
-        $this->data['title'] = 'Observation';
-
-        $this->data['menu_items'] = $this->menu_model->get_menuitems('none');
-        return view("mainTemplate", $this->data);
-    }
     public function edit_profile() {
         $this->set_common_data('arrow_back', 'search');
 

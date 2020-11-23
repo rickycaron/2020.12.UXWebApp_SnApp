@@ -237,7 +237,7 @@ class Database_model
      */
     public function getUser($userID) {
         $query = $this->db->query('SELECT * FROM a20ux6.user WHERE id = "'.$userID.'";');
-        return $query->getResult();
+        return $query->getRow();
     }
 
     /**
@@ -437,6 +437,16 @@ class Database_model
         //get observations from friends from database
         $query = $this->db->query($queryString);
         return $query->getResult();
+    }
+
+    public function getObservation($observationID) {
+        $query = $this->db->query('SELECT * FROM a20ux6.observation WHERE id= "'.$observationID.'";');
+        return $query->getRowArray();
+    }
+
+    public function getSpecie($specieID) {
+        $query = $this->db->query('SELECT * FROM a20ux6.specie WHERE id= "'.$specieID.'";');
+        return $query->getRow();
     }
 
     /**
