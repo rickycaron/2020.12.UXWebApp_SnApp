@@ -4,7 +4,6 @@
 namespace App\Controllers;
 
 
-use App\Models\leaderboard_functions;
 use App\Models\extra_functions;
 
 class Maincontroller extends \CodeIgniter\Controller
@@ -13,7 +12,6 @@ class Maincontroller extends \CodeIgniter\Controller
     private $database_model;
     private $data;
 
-    use \App\Controllers\leaderboard_functions;
     use \App\Controllers\extra_functions;
 
     /**

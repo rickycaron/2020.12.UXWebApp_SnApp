@@ -439,16 +439,28 @@ class Database_model
         return $query->getResult();
     }
 
+    /**
+     * @param $observationID
+     * @return array|mixed|null
+     */
     public function getObservation($observationID) {
         $query = $this->db->query('SELECT * FROM a20ux6.observation WHERE id= "'.$observationID.'";');
         return $query->getRowArray();
     }
 
+    /**
+     * @param $specieID
+     * @return array|mixed|object|null
+     */
     public function getSpecie($specieID) {
         $query = $this->db->query('SELECT * FROM a20ux6.specie WHERE id= "'.$specieID.'";');
         return $query->getRow();
     }
 
+    /**
+     * @param $observationID
+     * @return array|array[]
+     */
     public function getLikeListFromObservation($observationID) {
         $query = $this->db->query('SELECT u.username
                                         FROM a20ux6.user AS u
@@ -457,6 +469,10 @@ class Database_model
         return $query->getResultArray();
     }
 
+    /**
+     * @param $observationID
+     * @return array|array[]
+     */
     public function getCommentListFromObservation($observationID) {
         $query = $this->db->query('SELECT u.username, c.message
                                         FROM a20ux6.user AS u
