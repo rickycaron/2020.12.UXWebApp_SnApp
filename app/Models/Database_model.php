@@ -450,7 +450,39 @@ class Database_model
     }
 
     public function getLikeListFromObservation($observationID) {
-        
+        $query = $this->db->query('SELECT u.username
+                                        FROM a20ux6.user AS u
+                                        INNER JOIN a20ux6.like AS l ON  u.id = l.userID
+                                        WHERE observationID = "'.$observationID.'";');
+        return $query->getResultArray();
+    }
+
+    public function getCommentListFromObservation($observationID) {
+        $query = $this->db->query('SELECT u.username, c.message
+                                        FROM a20ux6.user AS u
+                                        INNER JOIN a20ux6.comment AS c ON  u.id = c.userID
+                                        WHERE observationID = "'.$observationID.'";');
+        return $query->getResultArray();
+    }
+
+    /**
+     * @param $observationID
+     * @return string
+     */
+    public function getObservationCommentCount($observationID) {
+        $queryString = 'SELECT count(observationID = "'.$observationID.'") FROM a20ux6.comment;';
+        $query = $this->db->query($queryString);
+        return $query->getResult();
+    }
+
+    /**
+     * @param $observationID
+     * @return string
+     */
+    public function getObservationComments($observationID) {
+        $queryString = 'SELECT message FROM a20ux6.comment where observationID = "'.$observationID.'";';
+        $query = $this->db->query($queryString);
+        return $query->getResult();
     }
 
     /**

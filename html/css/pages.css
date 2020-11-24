@@ -1,6 +1,16 @@
 /**********************************/
 /* styles for an observation */
 /**********************************/
+.comment_list {
+    display: flex;
+    flex-direction: column;
+}
+
+.like_list , .person_info{
+    display: flex;
+    flex-direction: row;
+}
+
 #observation_container {
     display:flex;
     flex-direction: column;
@@ -12,7 +22,7 @@
     margin: 10px 15px;
 }
 
-#observation_profilePicture {
+#observation_profilePicture, .profile_picture {
     width: 50px;
     border-radius: 50%;
 }
