@@ -126,7 +126,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['title'] = 'Observation';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('none');
-        $this->data['scripts_to_load'] = array('anobservationMap.js');
+        $this->data['scripts_to_load'] = array('anobservation.js');
         return view("mainTemplate", $this->data);
     }
 

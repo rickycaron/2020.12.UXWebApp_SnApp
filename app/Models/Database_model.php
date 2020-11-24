@@ -449,6 +449,10 @@ class Database_model
         return $query->getRow();
     }
 
+    public function getLikeListFromObservation($observationID) {
+        
+    }
+
     /**
      * Query to get own observations:
      *

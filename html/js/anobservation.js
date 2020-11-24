@@ -45,7 +45,6 @@ function commentClicked() {
 function setLikesOrComments(url) {
     fetch(url)
         .then(resp => resp.text())
-        .then(data => console.log(data))
         .then(data => document.getElementById("likes_or_comment_placeholder").innerHTML = data)
         .catch(a => console.log(a));
     //.then(data => console.log(data))

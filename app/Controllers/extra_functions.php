@@ -8,11 +8,13 @@ trait extra_functions
 {
     function fetchObservationLikeHTML ($observationID) {
         $this->debug_to_console($observationID);
-        return "<h1><?=$observationID?> show likes</h1>";
+        $like_list = $this->database_model->getLikeListFromObservation($observationID);
+        return view('observationLikeList', $like_list);
     }
 
     function fetchObservationCommentHTML ($observationID) {
         $this->debug_to_console($observationID);
-        return "<h1><?=$observationID?> show comments</h1>";
+        $comment_list = $this->database_model->getCommentListFromObservation($observationID);
+        return view('observationCommentList', $comment_list);
     }
 }
