@@ -1,33 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
     <title>VERANDER DEZE TITEL</title>
     <meta charset="UTF-8" />
     <meta name="keywords" content="Animals Plants Nature Social media" />
     <meta name="description" content="This website is a social madia like page where you can share your observations from nature with your friends and the world" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="<?= base_url()?>/css/main.css" rel="stylesheet"/>
-    <link href="<?= base_url()?>/css/reusable.css" rel="stylesheet"/>
-    <link href="<?= base_url()?>/css/pages.css" rel="stylesheet"/>
-    <link href="<?= base_url()?>/css/media_query.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="<?= base_url()?>/css/bootstrap.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap" rel="stylesheet">
 </head>
-<body>
-<div id="page-container">
-    <header>
-        <span class="material-icons" id="header_icon_1"><?= $header_icon_1?></span>
-        <h1 id="title">snAPP Nature</h1>
-        <span class="material-icons" id="header_icon_1"><?= $header_icon_2?></span>
-    </header>
-    <main id="content-wrap">
-        <?=$content?>
-    </main>
-    <footer>
-        <h2 id="author">Designed and created by groupt students</h2>
-    </footer>
-</div>
+
+<body class="container-fluid justify-content-center d-flex flex-column mx-auto bg-secondary" style="max-width:330px; height:100vh">
+<main>
+    <?=$content?>
+</main>
+<footer>
+    <p class="mt-5 mb-3 text-muted text-center">&copy; 2020 UXWD Team 6</p>
+</footer>
 </body>
+
 </html>

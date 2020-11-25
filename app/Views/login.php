@@ -1,52 +1,23 @@
-<div class="addObservationContainer">
-    <div style="text-align:center">
-        <br/>
-        <br/>
-        <h1>Welcome snAPP</h1>
-        <br/>
-        <br/>
-        <div>
-        <div id="addaphoto">
-    <div class="container">
-        <div class="wrapper">
-            <div class="content">
-                <div style="font-size: 200px" class="material-icons icon"> account_box </div>
-            </div>
-        </div>
-        <form action="login" method="post">
-            <?= csrf_field() ?>
-            <div class="txt_field" >
-                <input type="text" class="" style="padding: 0;" name="email" id="email" value="demo@test.com">
-                <span></span>
-                <label for="email">Email address</label>
-            </div>
-            <div class="txt_field">
-                <input type="password" class="" style="padding: 0;" name="password" id="password" value="password">
-                <span></span>
-                <label for="password">Password</label>
-            </div>
-            <div role="alert" style="color: red; font-size: 14px; padding: 5px;text-space: 1px;">
-                <?= \Config\Services::validation()->listErrors(); ?>
-            </div>
-            <input type="submit" class="" value="Log in" onclick=location.href='hub'>Log in</input>
-            <a href="register">Don't have an account yet?</a>
-            <br>
-            <a href="forgotPassword">Forgot password?</a>
-        </form>
+<h1 class="text-center">snAPP Nature</h1>
 
-        <br/>
-        <h1 >OR !</h1>
-        <div>
-            <br/>
-<!--            <button id="custom-btn">-->
-<!--                Create obervation as a visitor-->
-<!--            </button>-->
-            <input type="submit" class="" value="Create obervation as a visitor"></input>
-            <br/>
-            <br/>
-        </div>
-        </div>
-        </div>
+<form class="form-signin" action="login" method="post">
+    <?= csrf_field() ?>
+    <div class="justify-content-center d-flex">
+        <span style="font-size: 100px" class="material-icons">account_box</span>
     </div>
-</div>
-</div>
+    <h1 class="h3 mb-3 font-weight-normal text-center">Please log in</h1>
+    <label for="email" class="sr-only">Email address</label>
+    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" value="demo@test.com" required autofocus>
+
+    <label for="password" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" value="password" required>
+    <a class="text-info text-right w-100" href="forgotPassword">Forgot password?</a>
+    <div role="alert" style="color: red; font-size: 14px; padding: 5px;text-space: 1px;">
+        <?= \Config\Services::validation()->listErrors(); ?>
+    </div>
+    <button onclick=location.href='hub' class="btn btn-lg btn-primary btn-block mt-5" type="submit">Log in</button>
+</form>
+
+<hr class="mt-2 mb-3 my-3"/>
+<a class="btn btn-lg btn-primary btn-block" href="register">Register</a>
+
