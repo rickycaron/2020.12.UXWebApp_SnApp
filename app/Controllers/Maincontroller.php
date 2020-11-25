@@ -138,7 +138,10 @@ class Maincontroller extends \CodeIgniter\Controller
         foreach ($groups as $group)
         {
             $groupname=$group->name;
-            array_push($this->data['groups'],$groupname);
+            $groupdescription=$group->description;
+            $groupmember=$this->database_model->getGroupMember($group->id)->count;
+            $grouparray=array($groupname,$groupdescription,$groupmember);
+            array_push($this->data['groups'],$grouparray);
         }
         $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
         $this->data['content'] = view('groupsOverviewPage', $this->data); //replace by your own view

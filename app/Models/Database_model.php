@@ -254,11 +254,22 @@ class Database_model
      * @return array|array[]|object[]
      */
     public function getGroupsFromUser($userID) {
-        $query = $this->db->query('SELECT name, description
+        $query = $this->db->query('SELECT g.id as id, name, description
                                         FROM a20ux6.userGroup as g
                                         INNER JOIN a20ux6.userGroupMapping as m on g.id = m.groupID
                                         WHERE m.userID = "'.$userID.'";');
         return $query->getResult();
+    }
+
+    /**
+     * @param $groupid
+     * @return array|array[]|object[]
+     */
+    public function getGroupMember($groupid) {
+        $query = $this->db->query('SELECT COUNT(*) AS count 
+                                        FROM a20ux6.userGroupMapping 
+                                        WHERE groupID="'.$groupid.'";');
+        return $query->getRow();
     }
 
     /**
@@ -510,6 +521,8 @@ class Database_model
      * WHERE username = 'userName';
      *
      */
+
+
 
 
 }
