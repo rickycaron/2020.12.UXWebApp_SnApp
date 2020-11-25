@@ -130,12 +130,19 @@ class Maincontroller extends \CodeIgniter\Controller
 
     public function groups() {
         $this->set_common_data('eco', 'search');
+        //$username=session()->get('username');
 
-        //add your code here...
-        $this->data['content'] = view('groupsOverviewPage'); //replace by your own view
-        $this->data['title'] = 'Groups';
-
+        $this->leaderboard_userID=session()->get('id');
+        $groups = $this->database_model->getGroupsFromUser($this->leaderboard_userID);
+        $this->data['groups']=array();
+        foreach ($groups as $group)
+        {
+            $groupname=$group->name;
+            array_push($this->data['groups'],$groupname);
+        }
         $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
+        $this->data['content'] = view('groupsOverviewPage', $this->data); //replace by your own view
+        $this->data['title'] = 'Groups';
         return view("mainTemplate", $this->data);
     }
 
