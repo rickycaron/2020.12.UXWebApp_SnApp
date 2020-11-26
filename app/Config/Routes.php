@@ -35,21 +35,18 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Maincontroller::login',['filter' => 'noauth']);
 $routes->get('hub', 'Maincontroller::hub',['filter'=>'auth']);
 $routes->get('groups', 'Maincontroller::groups',['filter'=>'auth']);
-//$routes->get('group', 'Maincontroller::group');
 $routes->get('group/(:alpha)', 'Maincontroller::group/$1',['filter'=>'auth']);
+$routes->match(['get','post'],'newgroup', 'Maincontroller::newgroup',['filter'=>'auth']);
+$routes->get('groupmembers', 'Maincontroller::groupmembers',['filter'=>'auth']);
+
 $routes->get('addObservation', 'Maincontroller::addObservation');
 $routes->match(['get','post'],'addObservation', 'Maincontroller::addObservation');
 $routes->get('leaderboardSelect', 'Maincontroller::leaderboardSelect',['filter'=>'auth']);
 $routes->get('profile', 'Maincontroller::profile',['filter'=>'auth']);
 $routes->get('leaderboard/(:alpha)', 'Maincontroller::leaderboard/$1',['filter'=>'auth']);
 $routes->get('getLeaderboardHTMLajax/(:alpha)/(:alpha)', 'Maincontroller::getLeaderboardHTMLajax/$1/$2',['filter'=>'auth']);
-//$routes->get('leaderboard', 'Maincontroller::leaderboard');
-$routes->get('login', 'Maincontroller::login',['filter'=>'noauth']);
-$routes->get('loginFromObservation', 'Maincontroller::loginFromObservation');
-
 $routes->get('forgotPassword', 'Maincontroller::forgotPassword',['filter' => 'noauth']);
 $routes->get('resetPassword', 'Maincontroller::resetPassword',['filter' => 'noauth']);
-//$routes->get('anobservation', 'Maincontroller::anobservation',['filter'=>'auth']);
 $routes->get('anobservation/(:num)', 'Maincontroller::anobservation/$1',['filter'=>'auth']);
 $routes->get('fetchObservationLikeHTML/(:num)', 'Maincontroller::fetchObservationLikeHTML/$1');
 $routes->get('fetchObservationCommentHTML/(:num)', 'Maincontroller::fetchObservationCommentHTML/$1');
