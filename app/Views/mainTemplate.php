@@ -66,7 +66,7 @@
 
 <body class="d-flex flex-column" style="min-height:100vh; font-family: 'Dosis', sans-serif; background-color: #006650">
 <header class="navbar fixed-top py-0" style=" max-height: 48px ;background-color: #006650; color: #FAFEFD">
-    <span  class="material-icons text-primary" style="font-size:45px" id="header_icon_1"><?=$header_icon_1?></span>
+    <span  class="material-icons" style="font-size:45px" id="header_icon_1"><?=$header_icon_1?></span>
     <h2><?=$title?></h2>
     <a href="<?= base_url()?>/search"><span class="material-icons " style="font-size:50px; color: #FAFEFD" id="header_icon_2"><?=$header_icon_2?></span></a>
 </header>
