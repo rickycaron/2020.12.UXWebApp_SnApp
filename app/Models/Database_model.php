@@ -594,10 +594,6 @@ class Database_model
      */
     public function getUserCommentCount($userID) {
         $query = $this->db->query('SELECT COUNT(c.id) AS commentCount FROM a20ux6.user u LEFT JOIN a20ux6.comment c ON c.userID = u.id where u.id = "'.$userID.'";');
-        /*if (!$query->getRow()->result) {
-            return 0;
-        }*/
-
         return $query->getResult();
     }
 
@@ -607,9 +603,89 @@ class Database_model
      */
     public function getUserLikeCount($userID) {
         $query = $this->db->query('SELECT COUNT(l.id) AS likeCount FROM a20ux6.user u LEFT JOIN a20ux6.like l ON l.userID = u.id where u.id = "'.$userID.'";');
-        /*if (!$query->getRow()->result) {
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @param $observationID
+     * @return string
+     */
+    public function checkUserLikeStatus($userID,$observationID) {
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.like  where userID = "'.$userID.'" and observationID = "'.$observationID.'") AS result;');
+        if (!$query->getRow()->result) {
             return 0;
-        }*/
+        }
+        $queryString = 'SELECT status FROM a20ux6.like where userID = "'.$userID.'" and observationID = "'.$observationID.'";';
+        $query = $this->db->query($queryString);
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @param $observationID
+     * @return boolean
+     */
+    public function setUserLikeStatus($userID,$observationID) {
+        $queryString = 'SELECT status FROM a20ux6.like where userID = "'.$userID.'" and observationID = "'.$observationID.'";';
+        $query = $this->db->query($queryString);
+        if(!$query->getResult()) {
+            $data = ['status'=> 1,
+                'userID' => $userID,
+                'observationID' => $observationID
+            ];
+            $this->db->table('like')->insert($data);
+            return 1;
+        }
+        else {
+            $data = ['status'=> 1
+            ];
+
+            $this->db->table('like')->update( $data, 'userID = "'.$userID.'" and  observationID = "'.$observationID.'"');
+            return 1;
+        }
+    }
+
+
+    /**
+     * @param $userID
+     * @param $observationID
+     * @return string
+     */
+    public function cancelUserLikeStatus($userID,$observationID) {
+
+        $data = ['status'=> 0
+        ];
+        $this->db->table('like')->update( $data, 'userID = "'.$userID.'" and  observationID = "'.$observationID.'"');
+        return 1;
+    }
+
+    /**
+     * @param $userID
+     * @param $message
+     * @return int = 0 if query failed, 1 if query executed successfully.
+     */
+    public function insertComment ($userID, $message, $observationID) {
+        // check if user already exists or not
+        //TODO: change the condition to check if it exists or not
+
+        $data = ['userID'=> $userID,
+            'message' => $message,
+            'observationID' => $observationID
+        ];
+        $this->db->table('comment')->insert($data);
+        return 1;
+    }
+
+    /**
+     * @param $observationID
+     * @return int = 0 if query failed, 1 if query executed successfully.
+     */
+
+    public function getComment ($observationID) {
+        $query = $this->db->query('SELECT message, userID
+                                        FROM a20ux6.comment
+                                        WHERE observationID = "'.$observationID.'"; ');
 
         return $query->getResult();
     }

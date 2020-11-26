@@ -67,9 +67,10 @@ class Maincontroller extends \CodeIgniter\Controller
 
     public function hub() {
         $this->set_common_data('eco', 'search');
-
+        helper(['form']);
         //get current user
         $userID = session()->get('id');
+
 
         //get friends of current user
         $friendsArray = $this->database_model->getFriendsUserName($userID);
@@ -85,18 +86,57 @@ class Maincontroller extends \CodeIgniter\Controller
             if (strcasecmp($getMoreObservations, 'true') == 0) {
                 //get more observations from friends from current users
                 $data3['observations'] = $this->database_model->getMoreObservationsForHub($friendsArray, $lastDate, $tomorrow, $lastTime);
-                return view('hubPage', $data3);
+                $observationID = $this->request->getPost('obID');
+                $comment2['comments'] = $this->database_model->getComment($observationID);//34
+
+                if ($this->request->getMethod() === 'post')
+                {
+                    $message= $this->request->getPost('message');
+
+                    $this->database_model-> insertComment($userID,$message,$observationID);
+
+                    /*$this->data['content'] = view('hubPage'); //replace by your own view
+                    return view("extraTemplate", $this->data);*/
+                    return redirect()->to('hub');
+
+                }
+                return view('hubPage', $data3, $comment2);
             }
         }
 
         //get observations from friends from current users
         $data2['observations'] = $this->database_model->getFirstObservationsForHub($friendsArray);
+        $observationID = $this->request->getPost('obID');
+        $likeStatus = $this->database_model->checkUserLikeStatus($userID, $observationID);
 
-        $this->data['content'] = view('hubPage', $data2); //replace by your own view
+        if($this->request->getPost('like')) {
+            $this->database_model->setUserLikeStatus($userID,$observationID);
+        }
+        //get observations comment from
+
+        $comment1['comments'] = $this->database_model->getComment($observationID);
+
+        //check if submit comment
+        if ($this->request->getMethod() === 'post')
+        {
+            $message= $this->request->getPost('message');
+            $observationID = $this->request->getPost('obID');
+
+            $this->database_model-> insertComment($userID,$message,$observationID);
+
+            /*$this->data['content'] = view('hubPage'); //replace by your own view
+            return view("extraTemplate", $this->data);*/
+            return redirect()->to('hub');
+
+        }
+        //comment function end
+
+        $this->data['content'] = view('hubPage', $data2, $comment1); //replace by your own view
         $this->data['title'] = 'Observation Feed';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreFriendsObservations.js');
+        //$this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','UpdateLikes.js');
         return view("mainTemplate", $this->data);
     }
 
