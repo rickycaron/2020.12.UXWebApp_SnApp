@@ -96,24 +96,22 @@ class Maincontroller extends \CodeIgniter\Controller
                     return $upToDateDiv;
                 }
                 else {
-                    return view('hubPage', $data3);
+                    $observationID = $this->request->getPost('obID');
+                    $comment2['comments'] = $this->database_model->getComment($observationID);//34
+
+                    if ($this->request->getMethod() === 'post')
+                    {
+                        $message= $this->request->getPost('message');
+
+                        $this->database_model-> insertComment($userID,$message,$observationID);
+
+                        /*$this->data['content'] = view('hubPage'); //replace by your own view
+                        return view("extraTemplate", $this->data);*/
+                        return redirect()->to('hub');
+
+                    }
+                    return view('hubPage', $data3, $comment2);
                 }
-                $data3['observations'] = $this->database_model->getMoreObservationsForHub($friendsArray, $lastDate, $lastTime);
-                $observationID = $this->request->getPost('obID');
-                $comment2['comments'] = $this->database_model->getComment($observationID);//34
-
-                if ($this->request->getMethod() === 'post')
-                {
-                    $message= $this->request->getPost('message');
-
-                    $this->database_model-> insertComment($userID,$message,$observationID);
-
-                    /*$this->data['content'] = view('hubPage'); //replace by your own view
-                    return view("extraTemplate", $this->data);*/
-                    return redirect()->to('hub');
-
-                }
-                return view('hubPage', $data3, $comment2);
             }
         }
 
@@ -294,9 +292,6 @@ class Maincontroller extends \CodeIgniter\Controller
 
         //get observations from friends from current users
         $data2['observations'] = $this->database_model->getFirstObservationsProfile($userID);
-
-        //add your code here...
-        $this->data['content'] = view('profile', $data2); //replace by your own view
 
         //profile user information part
 
