@@ -464,19 +464,32 @@ class Database_model
         return $query->getResult();
     }
 
+//    /**
+//     * @param $userID
+//     * @return array|array[]|object[]
+//     */
+//    public function getFriendsId($userID) {
+//        $query = $this->db->query('SELECT userID
+//                                        FROM a20ux6.user as u, a20ux6.friendsMapping as m
+//                                        WHERE CASE WHEN m.userID_A = "'.$userID.'" THEN m.userID_B = u.id
+//			                                        WHEN m.userID_B = "'.$userID.'" THEN m.userID_A = u.id
+//		                                        END;');
+//        return $query->getResult();
+//    }
+
     /**
      * @param $friends
      * @return array|array[]|object[]
      */
     public function getFirstObservationsForHub($friends) {
         //make the query
-        $queryString = 'SELECT * FROM (SELECT t1.id, imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1 
+        $queryString = 'SELECT t1.id, imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1 
                                         INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
                                         WHERE username = "" ';
         foreach ($friends as $friend):
             $queryString .= 'OR username = "'.$friend->username.'" ';
         endforeach;
-        $queryString .= 'ORDER BY date DESC LIMIT 5) AS temp ORDER BY date(date) DESC, time DESC;';
+        $queryString .= 'ORDER BY date DESC, time DESC LIMIT 15;';
         //get observations from friends from database
         $query = $this->db->query($queryString);
         return $query->getResult();
@@ -486,18 +499,49 @@ class Database_model
      * @param $friends
      * @param $lastDate
      * @param $lastTime
-     * @param $tomorrow
      * @return array|array[]|object[]
      */
-    public function getMoreObservationsForHub($friends, $lastDate, $tomorrow, $lastTime) {
+    public function getMoreObservationsForHub($friends, $lastDate, $lastTime) {
         //make the query
-        $queryString = 'SELECT * FROM (SELECT t1.id, imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1 
+        $queryString = 'SELECT t1.id, imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1 
                                         INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
                                         WHERE (username = "" ';
         foreach ($friends as $friend):
             $queryString .= 'OR username = "'.$friend->username.'"';
         endforeach;
-        $queryString .= ') AND (date < "'.$lastDate.'" OR (date < "'.$tomorrow.'" AND time < "'.$lastTime.'")) ORDER BY date DESC LIMIT 5) AS temp ORDER BY date(date) DESC, time DESC;';
+        $queryString .= ') AND (date < "'.$lastDate.'" OR (date = "'.$lastDate.'" AND time < "'.$lastTime.'")) ORDER BY date DESC, time DESC LIMIT 15;';
+        //get observations from friends from database
+        $query = $this->db->query($queryString);
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @return array|array[]|object[]
+     */
+    public function getFirstObservationsProfile($userID) {
+        //make the query
+        $queryString = 'SELECT t1.id, imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1 
+                                        INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
+                                        WHERE t1.userID = "'.$userID.'"';
+        $queryString .= 'ORDER BY date DESC, time DESC LIMIT 15;';
+        //get own observations from database
+        $query = $this->db->query($queryString);
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @param $lastDate
+     * @param $lastTime
+     * @return array|array[]|object[]
+     */
+    public function getMoreObservationsProfile($userID, $lastDate, $lastTime) {
+        //make the query
+        $queryString = 'SELECT t1.id, imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1 
+                                        INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
+                                       WHERE (t1.userID = "'.$userID.'"';
+        $queryString .= ' AND (date < "'.$lastDate.'" OR (date = "'.$lastDate.'" AND time < "'.$lastTime.'"))) ORDER BY date DESC, time DESC LIMIT 15;';
         //get observations from friends from database
         $query = $this->db->query($queryString);
         return $query->getResult();
@@ -594,10 +638,6 @@ class Database_model
      */
     public function getUserCommentCount($userID) {
         $query = $this->db->query('SELECT COUNT(c.id) AS commentCount FROM a20ux6.user u LEFT JOIN a20ux6.comment c ON c.userID = u.id where u.id = "'.$userID.'";');
-        /*if (!$query->getRow()->result) {
-            return 0;
-        }*/
-
         return $query->getResult();
     }
 
@@ -607,9 +647,89 @@ class Database_model
      */
     public function getUserLikeCount($userID) {
         $query = $this->db->query('SELECT COUNT(l.id) AS likeCount FROM a20ux6.user u LEFT JOIN a20ux6.like l ON l.userID = u.id where u.id = "'.$userID.'";');
-        /*if (!$query->getRow()->result) {
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @param $observationID
+     * @return string
+     */
+    public function checkUserLikeStatus($userID,$observationID) {
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.like  where userID = "'.$userID.'" and observationID = "'.$observationID.'") AS result;');
+        if (!$query->getRow()->result) {
             return 0;
-        }*/
+        }
+        $queryString = 'SELECT status FROM a20ux6.like where userID = "'.$userID.'" and observationID = "'.$observationID.'";';
+        $query = $this->db->query($queryString);
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @param $observationID
+     * @return boolean
+     */
+    public function setUserLikeStatus($userID,$observationID) {
+        $queryString = 'SELECT status FROM a20ux6.like where userID = "'.$userID.'" and observationID = "'.$observationID.'";';
+        $query = $this->db->query($queryString);
+        if(!$query->getResult()) {
+            $data = ['status'=> 1,
+                'userID' => $userID,
+                'observationID' => $observationID
+            ];
+            $this->db->table('like')->insert($data);
+            return 1;
+        }
+        else {
+            $data = ['status'=> 1
+            ];
+
+            $this->db->table('like')->update( $data, 'userID = "'.$userID.'" and  observationID = "'.$observationID.'"');
+            return 1;
+        }
+    }
+
+
+    /**
+     * @param $userID
+     * @param $observationID
+     * @return string
+     */
+    public function cancelUserLikeStatus($userID,$observationID) {
+
+        $data = ['status'=> 0
+        ];
+        $this->db->table('like')->update( $data, 'userID = "'.$userID.'" and  observationID = "'.$observationID.'"');
+        return 1;
+    }
+
+    /**
+     * @param $userID
+     * @param $message
+     * @return int = 0 if query failed, 1 if query executed successfully.
+     */
+    public function insertComment ($userID, $message, $observationID) {
+        // check if user already exists or not
+        //TODO: change the condition to check if it exists or not
+
+        $data = ['userID'=> $userID,
+            'message' => $message,
+            'observationID' => $observationID
+        ];
+        $this->db->table('comment')->insert($data);
+        return 1;
+    }
+
+    /**
+     * @param $observationID
+     * @return int = 0 if query failed, 1 if query executed successfully.
+     */
+
+    public function getComment ($observationID) {
+        $query = $this->db->query('SELECT message, userID
+                                        FROM a20ux6.comment
+                                        WHERE observationID = "'.$observationID.'"; ');
 
         return $query->getResult();
     }
