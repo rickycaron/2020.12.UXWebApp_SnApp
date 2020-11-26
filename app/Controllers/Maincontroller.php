@@ -271,13 +271,12 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("mainTemplate", $this->data);
     }
 
-    public function profile($userid) {
+    public function profile() {
         $this->set_common_data('search', 'menu');
-        //get current user
-        $userID = session()->get('id');
 
         //get current user
         $userID = session()->get('id');
+        $username = $this->database_model->getUser($userID)->username;
 
         //check if the url contains parameter for new observations
         $variableActive = $this->request->getVar('extra');
@@ -289,6 +288,8 @@ class Maincontroller extends \CodeIgniter\Controller
 
             if (strcasecmp($getMoreObservations, 'true') == 0) {
                 //get more observations from friends from current users
+                $data3['userID']=$userID;
+                $data3['username']=$username;
                 $data3['observations'] = $this->database_model->getMoreObservationsProfile($userID, $lastDate, $lastTime);
                 $observations = $data3['observations'];
                 if ($observations == null) {
@@ -307,6 +308,8 @@ class Maincontroller extends \CodeIgniter\Controller
         //profile user information part
 
         //get observation amount
+        $data2['userID']=$userID;
+        $data2['username']=$username;
         $data2['observationCount'] = $this->database_model->getUserObservationCount($userID);
         $data2['commentCount'] = $this->database_model->getUserCommentCount($userID);
         $data2['likeCount'] = $this->database_model->getUserLikeCount($userID);

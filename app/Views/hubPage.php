@@ -3,7 +3,7 @@
 
         <div class="card my-2 shadow-sm" style="width:100%;max-width:600px">
 
-            <a href="anobservation/<?=$ob->id?>">
+            <a href="/html/anobservation/<?=$ob->id?>">
             <div style="position: relative;">
                 <img class="card-img" id="observationCardPicture" src="<?php echo data_uri($ob->imageData,$ob->imageType); ?>">
                 <div class="card-img" style="box-shadow: inset 0px -50px 40px -20px black;position: absolute; width: 100%; height: 100%;top: 0; left: 0;"></div>
