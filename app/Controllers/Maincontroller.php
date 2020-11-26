@@ -139,7 +139,8 @@ class Maincontroller extends \CodeIgniter\Controller
             $groupname=$group->name;
             $groupdescription=$group->description;
             $groupmember=$this->database_model->getGroupMemberNumber($group->id)->count;
-            $grouparray=array($groupname,$groupdescription,$groupmember);
+            $groupadmin=$group->admin;
+            $grouparray=array($groupname,$groupdescription,$groupmember,$groupadmin);
             array_push($this->data['groups'],$grouparray);
         }
         $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
@@ -167,6 +168,42 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreFriendsObservations.js');
         $this->data['title'] = 'Group';
         $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
+        return view("mainTemplate", $this->data);
+    }
+
+    public function newgroup(){
+        $this->data=[];
+        $this->set_common_data('eco', 'eco');
+        //add your code here...
+        helper(['form']);
+        if ($this->request->getMethod() === 'post' && $this->validate([
+                'groupname' => 'required|min_length[3]|max_length[50]|alpha_dash',
+                'groupdescription'  => 'required|min_length[3]|max_length[255]'
+            ]))
+        {
+            $groupname= $this->request->getPost('groupname');
+            $groupdescription= $this->request->getPost('groupdescription');
+            $this->database_model-> insertGroup($groupname,$groupdescription);
+
+            session()->setFlashdata('success','Create a new group Successfulfly!');
+            return redirect()->to('groups');
+        }else
+        {
+            $this->data['content'] = view('newgroup'); //replace by your own view
+            $this->data['title'] = 'New Group';
+            $this->data['menu_items'] = $this->menu_model->get_menuitems('newgroup');
+            return view("mainTemplate", $this->data);
+        }
+    }
+
+    public function groupmembers() {
+        $this->set_common_data('arrow_back', 'search');
+
+        //add your code here...
+        $this->data['content'] = view('groupmembers'); //replace by your own view
+        $this->data['title'] = 'Group Members';
+
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('groupmembers');
         return view("mainTemplate", $this->data);
     }
 

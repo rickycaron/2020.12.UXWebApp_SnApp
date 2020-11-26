@@ -79,12 +79,16 @@ class Database_model
      */
     // TODO: how should we make it so that you can make multiple groups with the same name but from different users -> maybe ask Aquel?
     public function insertGroup ($name, $description) {
-        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.userGroup WHERE name="'.$name.'") AS result;');
+        $userid=session()->get('id');
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.userGroup WHERE name="'.$name.'" AND admin = "'.$userid.'" ) AS result;');
         if ($query->getRow()->result) {
             return 0;
         }
-        $data = ['name'=> $name, 'description' => $description];
+        $data = ['name'=> $name, 'description' => $description,'admin'=>$userid];
         $this->db->table('userGroup')->insert($data);
+        $newgroupid=$this->db->query('SELECT * FROM a20ux6.userGroup WHERE name="'.$name.'" AND admin = "'.$userid.'" ;')->getRow()->id;
+        $data2 = ['groupID'=>$newgroupid,'userID'=>$userid];
+        $this->db->table('userGroupMapping')->insert($data2);
         return 1;
     }
 
@@ -254,7 +258,7 @@ class Database_model
      * @return array|array[]|object[]
      */
     public function getGroupsFromUser($userID) {
-        $query = $this->db->query('SELECT g.id as id, name, description
+        $query = $this->db->query('SELECT g.id as id, name, description,g.admin
                                         FROM a20ux6.userGroup as g
                                         INNER JOIN a20ux6.userGroupMapping as m on g.id = m.groupID
                                         WHERE m.userID = "'.$userID.'";');
