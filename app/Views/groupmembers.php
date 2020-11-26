@@ -11,6 +11,7 @@
                 <p>Total Points: <?= $member->points?></p>
             </address>
             <a href="/html/profile" class="btn btn-primary">See Profile</a>
+            <a href="/html/deletememberfromgroup" class="btn btn-primary">Delete</a>
         </div>
     </div>
 <?php endforeach?>
