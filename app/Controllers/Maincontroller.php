@@ -209,9 +209,19 @@ class Maincontroller extends \CodeIgniter\Controller
 
     public function profile() {
         $this->set_common_data('search', 'menu');
+        //get current user
+        $userID = session()->get('id');
 
-        //add your code here...
-        $this->data['content'] = view('profile'); //replace by your own view
+        //profile user information part
+
+        //get observation amount
+        $data2['observationCount'] = $this->database_model->getUserObservationCount($userID);
+        $data2['commentCount'] = $this->database_model->getUserCommentCount($userID);
+        $data2['likeCount'] = $this->database_model->getUserLikeCount($userID);
+
+        //user information part end
+        //change the content
+        $this->data['content'] = view('profile',$data2); //replace by your own view
         $this->data['title'] = 'Profile';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('profile');
@@ -424,6 +434,20 @@ class Maincontroller extends \CodeIgniter\Controller
     public function logout(){
         session()->destroy();
         return redirect()->to('login');
+    }
+
+
+    public function check_login(){
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+        $this->load->model('user_model');
+        $row = $this->user_model->get_by_name_pwd($username,$password);
+        if($row){
+            $this->load->view('success');
+        }
+        else{
+            $this->load->view('login');
+        }
     }
 
 }
