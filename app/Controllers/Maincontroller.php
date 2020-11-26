@@ -326,24 +326,55 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("mainTemplate", $this->data);
     }
     public function otheruserprofile($userID) {
+        //this ffunction should the same as profile function, the nly diference is the useid
         $this->set_common_data('search', 'menu');
-        //RETURN THE PROFILE OF ANOTHER USER
+        //get current user
+        $username = $this->database_model->getUser($userID)->username;
+
+        //check if the url contains parameter for new observations
+        $variableActive = $this->request->getVar('extra');
+        if ($variableActive != null) {
+            $getMoreObservations = $_GET['extra'];
+            $lastDate = $_GET['lastDate'];
+            $lastTime = $_GET['lastTime'];
+            #$tomorrow = $_GET['tomorrow'];
+
+            if (strcasecmp($getMoreObservations, 'true') == 0) {
+                //get more observations from friends from current users
+                $data3['userID']=$userID;
+                $data3['username']=$username;
+                $data3['observations'] = $this->database_model->getMoreObservationsProfile($userID, $lastDate, $lastTime);
+                $observations = $data3['observations'];
+                if ($observations == null) {
+                    $upToDateDiv = '<div id="upToDateDiv" hidden>You are up to date</div>';
+                    return $upToDateDiv;
+                }
+                else {
+                    return view('hubPage', $data3);
+                }
+            }
+        }
+
+        //get observations from friends from current users
+        $data2['observations'] = $this->database_model->getFirstObservationsProfile($userID);
+
         //profile user information part
+
         //get observation amount
-        $data2['userid']=$userID;
-        $data2['username']=$this->database_model->getUser($userID)->username;
+        $data2['userID']=$userID;
+        $data2['username']=$username;
         $data2['observationCount'] = $this->database_model->getUserObservationCount($userID);
         $data2['commentCount'] = $this->database_model->getUserCommentCount($userID);
         $data2['likeCount'] = $this->database_model->getUserLikeCount($userID);
         $data2['friendCount'] = $this->database_model->getUserFriendCount($userID);
         $data2['pointCount'] = $this->database_model->getUserpoint($userID);
+
         //user information part end
-        //te observations of the user
         //change the content
         $this->data['content'] = view('profile',$data2); //replace by your own view
-        $this->data['title'] = 'Profile';
-
-        $this->data['menu_items'] = $this->menu_model->get_menuitems('profile');
+        $this->data['title'] = 'Other User Profile';
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('otheruserprofile');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js');
         return view("mainTemplate", $this->data);
     }
 
