@@ -319,6 +319,29 @@ class Database_model
      * @param $userID
      * @return array|array[]|object[]
      */
+    public function getUserFriendCount($userID) {
+        $query = $this->db->query('SELECT count(m.id) as friendCount
+                                        FROM a20ux6.friendsMapping as m , a20ux6.user as u
+                                        WHERE CASE WHEN m.userID_A = "'.$userID.'" THEN m.userID_B = u.id
+			                                        WHEN m.userID_B = "'.$userID.'" THEN m.userID_A = u.id
+		                                        END;');
+        return $query->getResult();
+    }
+    /**
+     * @param $userID
+     * @return array|array[]|object[]
+     */
+    public function getUserpoint($userID) {
+        $query = $this->db->query('SELECT u.points as pointCount
+                                        FROM a20ux6.user as u where u.id = "'.$userID.'"');
+        return $query->getResult();
+    }
+
+
+    /**
+     * @param $userID
+     * @return array|array[]|object[]
+     */
     public function getTrophysFromUser($userID) {
         $query = $this->db->query('SELECT name, description
                                         FROM a20ux6.trophy as t

@@ -218,6 +218,8 @@ class Maincontroller extends \CodeIgniter\Controller
         $data2['observationCount'] = $this->database_model->getUserObservationCount($userID);
         $data2['commentCount'] = $this->database_model->getUserCommentCount($userID);
         $data2['likeCount'] = $this->database_model->getUserLikeCount($userID);
+        $data2['friendCount'] = $this->database_model->getUserFriendCount($userID);
+        $data2['pointCount'] = $this->database_model->getUserpoint($userID);
 
         //user information part end
         //change the content
