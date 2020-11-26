@@ -265,11 +265,37 @@ class Database_model
      * @param $groupid
      * @return array|array[]|object[]
      */
-    public function getGroupMember($groupid) {
+    public function getGroupMemberNumber($groupid) {
         $query = $this->db->query('SELECT COUNT(*) AS count 
                                         FROM a20ux6.userGroupMapping 
                                         WHERE groupID="'.$groupid.'";');
         return $query->getRow();
+    }
+
+    /**
+     * @param $groupname_filter, $userID
+     * @return array|array[]|object[]
+     * This function return te group id by group name and the current user id
+     */
+    public function getGroupName($groupname_filter, $userID){
+        $query = $this->db->query('SELECT m.groupID,m.userID,g.name,g.description 
+                                        FROM a20ux6.userGroup as g 
+                                        INNER JOIN a20ux6.userGroupMapping as m
+                                        ON g.id=m.groupID 
+                                        WHERE g.name = "'.$groupname_filter.'" AND userID = "'.$userID.'";');
+        return $query->getRow();
+    }
+
+    /**
+     * @param $groupid
+     * @return array|array[]|object[]
+     * This function return all the user id of a group
+     */
+    public function getUsersFromGroup($groupid) {
+        $query = $this->db->query('SELECT * FROM a20ux6.userGroupMapping 
+                                        where groupID = "'.$groupid.'" 
+                                        ORDER BY groupID, userID;');
+        return $query->getResult();
     }
 
     /**
@@ -511,6 +537,18 @@ class Database_model
         $query = $this->db->query($queryString);
         return $query->getResult();
     }
+//
+//    /**
+//     * @param $group_filter, $userID
+//     * @return string
+//     */
+//    public function getObservationFromGroup($group_filter, $userID) {
+//        $queryString = 'SELECT message FROM a20ux6.comment where observationID = "'.$observationID.'";';
+//        $query = $this->db->query($queryString);
+//        return $query->getResult();
+//    }
+//
+
 
     /**
      * Query to get own observations:

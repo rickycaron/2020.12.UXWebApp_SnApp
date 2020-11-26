@@ -34,16 +34,17 @@ $routes->setAutoRoute(true);
 //['filter' => 'auth'], this website can only be shown when the user has logged in
 $routes->get('/', 'Maincontroller::login',['filter' => 'noauth']);
 $routes->get('hub', 'Maincontroller::hub',['filter'=>'auth']);
-$routes->get('groups', 'Maincontroller::groups');
-$routes->get('group', 'Maincontroller::group');
+$routes->get('groups', 'Maincontroller::groups',['filter'=>'auth']);
+//$routes->get('group', 'Maincontroller::group');
+$routes->get('group/(:alpha)', 'Maincontroller::group/$1',['filter'=>'auth']);
 $routes->get('addObservation', 'Maincontroller::addObservation');
 $routes->match(['get','post'],'addObservation', 'Maincontroller::addObservation');
-$routes->get('leaderboardSelect', 'Maincontroller::leaderboardSelect');
-$routes->get('profile', 'Maincontroller::profile');
-$routes->get('leaderboard/(:alpha)', 'Maincontroller::leaderboard/$1');
-$routes->get('getLeaderboardHTMLajax/(:alpha)/(:alpha)', 'Maincontroller::getLeaderboardHTMLajax/$1/$2');
+$routes->get('leaderboardSelect', 'Maincontroller::leaderboardSelect',['filter'=>'auth']);
+$routes->get('profile', 'Maincontroller::profile',['filter'=>'auth']);
+$routes->get('leaderboard/(:alpha)', 'Maincontroller::leaderboard/$1',['filter'=>'auth']);
+$routes->get('getLeaderboardHTMLajax/(:alpha)/(:alpha)', 'Maincontroller::getLeaderboardHTMLajax/$1/$2',['filter'=>'auth']);
 //$routes->get('leaderboard', 'Maincontroller::leaderboard');
-$routes->get('login', 'Maincontroller::login');
+$routes->get('login', 'Maincontroller::login',['filter'=>'noauth']);
 $routes->get('loginFromObservation', 'Maincontroller::loginFromObservation');
 
 $routes->get('forgotPassword', 'Maincontroller::forgotPassword',['filter' => 'noauth']);

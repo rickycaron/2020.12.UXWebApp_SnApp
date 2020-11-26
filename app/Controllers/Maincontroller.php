@@ -29,7 +29,6 @@ class Maincontroller extends \CodeIgniter\Controller
 
     public function leaderboardSelect() {
         $this->set_common_data('eco', 'search');
-        //$username=session()->get('username');
 
         $this->leaderboard_userID=session()->get('id');
         $groups = $this->database_model->getGroupsFromUser($this->leaderboard_userID);
@@ -139,7 +138,7 @@ class Maincontroller extends \CodeIgniter\Controller
         {
             $groupname=$group->name;
             $groupdescription=$group->description;
-            $groupmember=$this->database_model->getGroupMember($group->id)->count;
+            $groupmember=$this->database_model->getGroupMemberNumber($group->id)->count;
             $grouparray=array($groupname,$groupdescription,$groupmember);
             array_push($this->data['groups'],$grouparray);
         }
@@ -149,13 +148,24 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("mainTemplate", $this->data);
     }
 
-    public function group() {
+    public function group($groupname_filter) {
         $this->set_common_data('arrow_back', 'search');
 
-        //add your code here...
-        $this->data['content'] = view('groupPage'); //replace by your own view
+        $userID=session()->get("id");
+        //get the groupid by the groupname and userid
+        $groupid = $this->database_model->getGroupName($groupname_filter, $userID)->groupID;
+        //get an array of userid of this group
+        $query_result = $this->database_model->getUsersFromGroup($groupid);
+        //get an array of user name of this group
+        $groupmembers=array();
+        foreach ($query_result as $row)
+        {
+            array_push($groupmembers,$this->database_model->getUser($row->userID));
+        }
+        $data2['observations'] = $this->database_model->getFirstObservationsForHub($groupmembers);
+        $this->data['content'] = view('hubPage', $data2); //replace by your own view
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreFriendsObservations.js');
         $this->data['title'] = 'Group';
-
         $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
         return view("mainTemplate", $this->data);
     }
