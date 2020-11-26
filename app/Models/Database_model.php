@@ -548,7 +548,44 @@ class Database_model
 //        return $query->getResult();
 //    }
 //
+    /**
+     * @param $userID
+     * @return string
+     */
+    public function getUserObservationCount($userID) {
+        $query = $this->db->query('SELECT COUNT(o.id) AS observationCount FROM a20ux6.user u LEFT JOIN a20ux6.observation o ON o.userID = u.id where u.id = "'.$userID.'";');
+        /*if (!$query->getRow()->result) {
+            return 0;
+        }*/
 
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @return string
+     */
+    public function getUserCommentCount($userID) {
+        $query = $this->db->query('SELECT COUNT(c.id) AS commentCount FROM a20ux6.user u LEFT JOIN a20ux6.comment c ON c.userID = u.id where u.id = "'.$userID.'";');
+        /*if (!$query->getRow()->result) {
+            return 0;
+        }*/
+
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @return string
+     */
+    public function getUserLikeCount($userID) {
+        $query = $this->db->query('SELECT COUNT(l.id) AS likeCount FROM a20ux6.user u LEFT JOIN a20ux6.like l ON l.userID = u.id where u.id = "'.$userID.'";');
+        /*if (!$query->getRow()->result) {
+            return 0;
+        }*/
+
+        return $query->getResult();
+    }
 
     /**
      * Query to get own observations:
