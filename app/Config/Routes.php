@@ -37,7 +37,8 @@ $routes->get('hub', 'Maincontroller::hub',['filter'=>'auth']);
 $routes->get('groups', 'Maincontroller::groups',['filter'=>'auth']);
 $routes->get('group/(:alpha)', 'Maincontroller::group/$1',['filter'=>'auth']);
 $routes->match(['get','post'],'newgroup', 'Maincontroller::newgroup',['filter'=>'auth']);
-$routes->get('groupmembers', 'Maincontroller::groupmembers',['filter'=>'auth']);
+//$routes->get('groupmembers', 'Maincontroller::groupmembers',['filter'=>'auth']);
+$routes->get('groupmembers/(:alpha)', 'Maincontroller::groupmembers/$1',['filter'=>'auth']);
 
 $routes->get('addObservation', 'Maincontroller::addObservation');
 $routes->match(['get','post'],'addObservation', 'Maincontroller::addObservation');
