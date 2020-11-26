@@ -196,11 +196,22 @@ class Maincontroller extends \CodeIgniter\Controller
         }
     }
 
-    public function groupmembers() {
+    public function groupmembers($groupname_filter) {
         $this->set_common_data('arrow_back', 'search');
 
-        //add your code here...
-        $this->data['content'] = view('groupmembers'); //replace by your own view
+        $userID=session()->get("id");
+        //get the groupid by the groupname and userid
+        $groupid = $this->database_model->getGroupName($groupname_filter, $userID)->groupID;
+        //get an array of userid of this group
+        $query_result = $this->database_model->getUsersFromGroup($groupid);
+        //get an array of user name of this group
+        $groupmembers=array();
+        foreach ($query_result as $row)
+        {
+            array_push($groupmembers,$this->database_model->getUser($row->userID));
+        }
+        $data['groupmembers']=$groupmembers;
+        $this->data['content'] = view('groupmembers',$data); //replace by your own view
         $this->data['title'] = 'Group Members';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('groupmembers');

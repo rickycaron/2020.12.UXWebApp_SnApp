@@ -293,7 +293,7 @@ class Database_model
     /**
      * @param $groupid
      * @return array|array[]|object[]
-     * This function return all the user id of a group
+     * This function return all the user information of a group
      */
     public function getUsersFromGroup($groupid) {
         $query = $this->db->query('SELECT * FROM a20ux6.userGroupMapping 
