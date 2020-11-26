@@ -1,20 +1,24 @@
 <div id="podium_container">
     <div id="top_three">
-        <div id="second" class="top_three_person">
-            <img src="<?= base_url()?>/image/profile.png">
-            <h2><?=$name_second?></h2>
-            <h2><?=$points_second?></h2>
-        </div>
+        <?php if(isset($name_second)):?>
+            <div id="second" class="top_three_person">
+                <img src="<?= base_url()?>/image/profile.png">
+                <h2><?=$name_second?></h2>
+                <h2><?=$points_second?></h2>
+            </div>
+        <?php endif?>
         <div id="first" class="top_three_person">
             <img src="<?= base_url()?>/image/profile.png">
             <h2><?=$name_first?></h2>
             <h2><?=$points_first?></h2>
         </div>
-        <div id="third" class="top_three_person">
-            <img src="<?= base_url()?>/image/profile.png">
-            <h2><?=$name_third?></h2>
-            <h2><?=$points_third?></h2>
-        </div>
+        <?php if(isset($name_second)): ?>
+            <div id="third" class="top_three_person">
+                <img src="<?= base_url()?>/image/profile.png">
+                <h2><?=$name_third?></h2>
+                <h2><?=$points_third?></h2>
+            </div>
+        <?php endif?>
     </div>
     <img id="podium_img" src="<?= base_url()?>/image/podiumv2.png" alt="podium">
 </div>
