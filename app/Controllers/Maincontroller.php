@@ -81,12 +81,23 @@ class Maincontroller extends \CodeIgniter\Controller
             $getMoreObservations = $_GET['extra'];
             $lastDate = $_GET['lastDate'];
             $lastTime = $_GET['lastTime'];
-            $tomorrow = $_GET['tomorrow'];
+            #$tomorrow = $_GET['tomorrow'];
 
             if (strcasecmp($getMoreObservations, 'true') == 0) {
                 //get more observations from friends from current users
-                $data3['observations'] = $this->database_model->getMoreObservationsForHub($friendsArray, $lastDate, $tomorrow, $lastTime);
-                return view('hubPage', $data3);
+                $data3['observations'] = $this->database_model->getMoreObservationsForHub($friendsArray, $lastDate, $lastTime);
+                $observations = $data3['observations'];
+                if ($observations == null) {
+                    $upToDateDiv = '<div id="upToDateDiv" hidden>You are up to date</div>';
+                    return $upToDateDiv;
+                }
+                if ($observations[0] == null) {
+                    $upToDateDiv = '<div id="upToDateDiv" hidden>You are up to date</div>';
+                    return $upToDateDiv;
+                }
+                else {
+                    return view('hubPage', $data3);
+                }
             }
         }
 
@@ -97,7 +108,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['title'] = 'Observation Feed';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreFriendsObservations.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js');
         return view("mainTemplate", $this->data);
     }
 
@@ -153,11 +164,40 @@ class Maincontroller extends \CodeIgniter\Controller
     public function profile() {
         $this->set_common_data('search', 'menu');
 
+        //get current user
+        $userID = session()->get('id');
+
+        //check if the url contains parameter for new observations
+        $variableActive = $this->request->getVar('extra');
+        if ($variableActive != null) {
+            $getMoreObservations = $_GET['extra'];
+            $lastDate = $_GET['lastDate'];
+            $lastTime = $_GET['lastTime'];
+            #$tomorrow = $_GET['tomorrow'];
+
+            if (strcasecmp($getMoreObservations, 'true') == 0) {
+                //get more observations from friends from current users
+                $data3['observations'] = $this->database_model->getMoreObservationsProfile($userID, $lastDate, $lastTime);
+                $observations = $data3['observations'];
+                if ($observations == null) {
+                    $upToDateDiv = '<div id="upToDateDiv" hidden>You are up to date</div>';
+                    return $upToDateDiv;
+                }
+                else {
+                    return view('hubPage', $data3);
+                }
+            }
+        }
+
+        //get observations from friends from current users
+        $data2['observations'] = $this->database_model->getFirstObservationsProfile($userID);
+
         //add your code here...
-        $this->data['content'] = view('profile'); //replace by your own view
+        $this->data['content'] = view('profile', $data2); //replace by your own view
         $this->data['title'] = 'Profile';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('profile');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js');
         return view("mainTemplate", $this->data);
     }
 

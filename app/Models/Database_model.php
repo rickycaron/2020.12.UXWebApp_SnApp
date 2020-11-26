@@ -400,19 +400,32 @@ class Database_model
         return $query->getResult();
     }
 
+//    /**
+//     * @param $userID
+//     * @return array|array[]|object[]
+//     */
+//    public function getFriendsId($userID) {
+//        $query = $this->db->query('SELECT userID
+//                                        FROM a20ux6.user as u, a20ux6.friendsMapping as m
+//                                        WHERE CASE WHEN m.userID_A = "'.$userID.'" THEN m.userID_B = u.id
+//			                                        WHEN m.userID_B = "'.$userID.'" THEN m.userID_A = u.id
+//		                                        END;');
+//        return $query->getResult();
+//    }
+
     /**
      * @param $friends
      * @return array|array[]|object[]
      */
     public function getFirstObservationsForHub($friends) {
         //make the query
-        $queryString = 'SELECT * FROM (SELECT t1.id, imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1 
+        $queryString = 'SELECT t1.id, imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1 
                                         INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
                                         WHERE username = "" ';
         foreach ($friends as $friend):
             $queryString .= 'OR username = "'.$friend->username.'" ';
         endforeach;
-        $queryString .= 'ORDER BY date DESC LIMIT 5) AS temp ORDER BY date(date) DESC, time DESC;';
+        $queryString .= 'ORDER BY date DESC, time DESC LIMIT 15;';
         //get observations from friends from database
         $query = $this->db->query($queryString);
         return $query->getResult();
@@ -422,18 +435,49 @@ class Database_model
      * @param $friends
      * @param $lastDate
      * @param $lastTime
-     * @param $tomorrow
      * @return array|array[]|object[]
      */
-    public function getMoreObservationsForHub($friends, $lastDate, $tomorrow, $lastTime) {
+    public function getMoreObservationsForHub($friends, $lastDate, $lastTime) {
         //make the query
-        $queryString = 'SELECT * FROM (SELECT t1.id, imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1 
+        $queryString = 'SELECT t1.id, imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1 
                                         INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
                                         WHERE (username = "" ';
         foreach ($friends as $friend):
             $queryString .= 'OR username = "'.$friend->username.'"';
         endforeach;
-        $queryString .= ') AND (date < "'.$lastDate.'" OR (date < "'.$tomorrow.'" AND time < "'.$lastTime.'")) ORDER BY date DESC LIMIT 5) AS temp ORDER BY date(date) DESC, time DESC;';
+        $queryString .= ') AND (date < "'.$lastDate.'" OR (date = "'.$lastDate.'" AND time < "'.$lastTime.'")) ORDER BY date DESC, time DESC LIMIT 15;';
+        //get observations from friends from database
+        $query = $this->db->query($queryString);
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @return array|array[]|object[]
+     */
+    public function getFirstObservationsProfile($userID) {
+        //make the query
+        $queryString = 'SELECT t1.id, imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1 
+                                        INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
+                                        WHERE t1.userID = "'.$userID.'"';
+        $queryString .= 'ORDER BY date DESC, time DESC LIMIT 5;';
+        //get own observations from database
+        $query = $this->db->query($queryString);
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @param $lastDate
+     * @param $lastTime
+     * @return array|array[]|object[]
+     */
+    public function getMoreObservationsProfile($userID, $lastDate, $lastTime) {
+        //make the query
+        $queryString = 'SELECT t1.id, imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1 
+                                        INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
+                                       WHERE (t1.userID = "'.$userID.'"';
+        $queryString .= ' AND (date < "'.$lastDate.'" OR (date = "'.$lastDate.'" AND time < "'.$lastTime.'"))) ORDER BY date DESC, time DESC LIMIT 5;';
         //get observations from friends from database
         $query = $this->db->query($queryString);
         return $query->getResult();
