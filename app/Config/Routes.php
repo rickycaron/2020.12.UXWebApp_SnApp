@@ -53,6 +53,7 @@ $routes->get('fetchObservationCommentHTML/(:num)', 'Maincontroller::fetchObserva
 $routes->get('account', 'Maincontroller::account',['filter'=>'auth']);
 $routes->get('edit_profile', 'Maincontroller::edit_profile',['filter'=>'auth']);
 $routes->get('search', 'Maincontroller::search');
+$routes->get('friendList', 'Maincontroller::friendList');
 
 $routes->match(['get','post'],'login', 'Maincontroller::login',['filter' => 'noauth']);
 $routes->get('loginFromObservation', 'Maincontroller::loginFromObservation');
