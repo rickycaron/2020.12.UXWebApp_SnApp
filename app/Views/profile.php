@@ -1,4 +1,6 @@
-<a href="logout" class="btn btn-lg btn-primary btn-block my-3" style="width:100%;max-width:600px">Logout</a>
+<?php if($userid == session()->get('username')):?>
+    <a href="logout" class="btn btn-lg btn-primary btn-block my-3" style="width:100%;max-width:600px">Logout</a>
+<?php endif?>
 <div class="d-flex flex-row m-3" style="width:100%;max-width:600px">
 
     <div class="">
@@ -6,7 +8,7 @@
     </div>
 
     <div class="mx-4">
-        <h3 class="user_name">Hello : <?= session()->get('username')?></h3>
+        <h3 class="user_name">Hello : <?= $username?></h3>
         <h4 class="personal_description">A guy who really likes photography.</h4>
         <div class = "trophyContainer">
             <span class="material-icons trophy">emoji_events</span>
@@ -46,6 +48,7 @@
 <?php foreach ($observations as $ob): ?>
 
     <div class="card my-2 shadow-sm" style="width:100%;max-width:600px">
+<div class="card my-2 shadow-sm" style="width:100%;max-width:600px">
 
         <a href="anobservation/<?=$ob->id?>">
             <div style="position: relative;">
