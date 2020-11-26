@@ -34,11 +34,11 @@
     </div>
     <div class="d-flex flex-column align-items-center mx-2">
         <span class = "h6" > friends</span>
-        <span class = "h6" > 99</span>
+        <span class = "h6" > <?=$friendCount[0]->friendCount?></span>
     </div>
     <div class="d-flex flex-column align-items-center mx-2">
         <span class = "h6" > points</span>
-        <span class = "h6" > 101</span>
+        <span class = "h6" > <?=$pointCount[0]->pointCount?></span>
     </div>
 </div>
 
