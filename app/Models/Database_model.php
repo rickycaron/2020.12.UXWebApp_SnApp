@@ -79,12 +79,16 @@ class Database_model
      */
     // TODO: how should we make it so that you can make multiple groups with the same name but from different users -> maybe ask Aquel?
     public function insertGroup ($name, $description) {
-        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.userGroup WHERE name="'.$name.'") AS result;');
+        $userid=session()->get('id');
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.userGroup WHERE name="'.$name.'" AND admin = "'.$userid.'" ) AS result;');
         if ($query->getRow()->result) {
             return 0;
         }
-        $data = ['name'=> $name, 'description' => $description];
+        $data = ['name'=> $name, 'description' => $description,'admin'=>$userid];
         $this->db->table('userGroup')->insert($data);
+        $newgroupid=$this->db->query('SELECT * FROM a20ux6.userGroup WHERE name="'.$name.'" AND admin = "'.$userid.'" ;')->getRow()->id;
+        $data2 = ['groupID'=>$newgroupid,'userID'=>$userid];
+        $this->db->table('userGroupMapping')->insert($data2);
         return 1;
     }
 
@@ -254,10 +258,47 @@ class Database_model
      * @return array|array[]|object[]
      */
     public function getGroupsFromUser($userID) {
-        $query = $this->db->query('SELECT name, description
+        $query = $this->db->query('SELECT g.id as id, name, description,g.admin
                                         FROM a20ux6.userGroup as g
                                         INNER JOIN a20ux6.userGroupMapping as m on g.id = m.groupID
                                         WHERE m.userID = "'.$userID.'";');
+        return $query->getResult();
+    }
+
+    /**
+     * @param $groupid
+     * @return array|array[]|object[]
+     */
+    public function getGroupMemberNumber($groupid) {
+        $query = $this->db->query('SELECT COUNT(*) AS count 
+                                        FROM a20ux6.userGroupMapping 
+                                        WHERE groupID="'.$groupid.'";');
+        return $query->getRow();
+    }
+
+    /**
+     * @param $groupname_filter, $userID
+     * @return array|array[]|object[]
+     * This function return te group id by group name and the current user id
+     */
+    public function getGroupName($groupname_filter, $userID){
+        $query = $this->db->query('SELECT m.groupID,m.userID,g.name,g.description 
+                                        FROM a20ux6.userGroup as g 
+                                        INNER JOIN a20ux6.userGroupMapping as m
+                                        ON g.id=m.groupID 
+                                        WHERE g.name = "'.$groupname_filter.'" AND userID = "'.$userID.'";');
+        return $query->getRow();
+    }
+
+    /**
+     * @param $groupid
+     * @return array|array[]|object[]
+     * This function return all the user id of a group
+     */
+    public function getUsersFromGroup($groupid) {
+        $query = $this->db->query('SELECT * FROM a20ux6.userGroupMapping 
+                                        where groupID = "'.$groupid.'" 
+                                        ORDER BY groupID, userID;');
         return $query->getResult();
     }
 
@@ -273,6 +314,29 @@ class Database_model
 		                                        END;');
         return $query->getResult();
     }
+
+    /**
+     * @param $userID
+     * @return array|array[]|object[]
+     */
+    public function getUserFriendCount($userID) {
+        $query = $this->db->query('SELECT count(m.id) as friendCount
+                                        FROM a20ux6.friendsMapping as m , a20ux6.user as u
+                                        WHERE CASE WHEN m.userID_A = "'.$userID.'" THEN m.userID_B = u.id
+			                                        WHEN m.userID_B = "'.$userID.'" THEN m.userID_A = u.id
+		                                        END;');
+        return $query->getResult();
+    }
+    /**
+     * @param $userID
+     * @return array|array[]|object[]
+     */
+    public function getUserpoint($userID) {
+        $query = $this->db->query('SELECT u.points as pointCount
+                                        FROM a20ux6.user as u where u.id = "'.$userID.'"');
+        return $query->getResult();
+    }
+
 
     /**
      * @param $userID
@@ -544,6 +608,131 @@ class Database_model
         $query = $this->db->query($queryString);
         return $query->getResult();
     }
+//
+//    /**
+//     * @param $group_filter, $userID
+//     * @return string
+//     */
+//    public function getObservationFromGroup($group_filter, $userID) {
+//        $queryString = 'SELECT message FROM a20ux6.comment where observationID = "'.$observationID.'";';
+//        $query = $this->db->query($queryString);
+//        return $query->getResult();
+//    }
+//
+    /**
+     * @param $userID
+     * @return string
+     */
+    public function getUserObservationCount($userID) {
+        $query = $this->db->query('SELECT COUNT(o.id) AS observationCount FROM a20ux6.user u LEFT JOIN a20ux6.observation o ON o.userID = u.id where u.id = "'.$userID.'";');
+        /*if (!$query->getRow()->result) {
+            return 0;
+        }*/
+
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @return string
+     */
+    public function getUserCommentCount($userID) {
+        $query = $this->db->query('SELECT COUNT(c.id) AS commentCount FROM a20ux6.user u LEFT JOIN a20ux6.comment c ON c.userID = u.id where u.id = "'.$userID.'";');
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @return string
+     */
+    public function getUserLikeCount($userID) {
+        $query = $this->db->query('SELECT COUNT(l.id) AS likeCount FROM a20ux6.user u LEFT JOIN a20ux6.like l ON l.userID = u.id where u.id = "'.$userID.'";');
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @param $observationID
+     * @return string
+     */
+    public function checkUserLikeStatus($userID,$observationID) {
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.like  where userID = "'.$userID.'" and observationID = "'.$observationID.'") AS result;');
+        if (!$query->getRow()->result) {
+            return 0;
+        }
+        $queryString = 'SELECT status FROM a20ux6.like where userID = "'.$userID.'" and observationID = "'.$observationID.'";';
+        $query = $this->db->query($queryString);
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @param $observationID
+     * @return boolean
+     */
+    public function setUserLikeStatus($userID,$observationID) {
+        $queryString = 'SELECT status FROM a20ux6.like where userID = "'.$userID.'" and observationID = "'.$observationID.'";';
+        $query = $this->db->query($queryString);
+        if(!$query->getResult()) {
+            $data = ['status'=> 1,
+                'userID' => $userID,
+                'observationID' => $observationID
+            ];
+            $this->db->table('like')->insert($data);
+            return 1;
+        }
+        else {
+            $data = ['status'=> 1
+            ];
+
+            $this->db->table('like')->update( $data, 'userID = "'.$userID.'" and  observationID = "'.$observationID.'"');
+            return 1;
+        }
+    }
+
+
+    /**
+     * @param $userID
+     * @param $observationID
+     * @return string
+     */
+    public function cancelUserLikeStatus($userID,$observationID) {
+
+        $data = ['status'=> 0
+        ];
+        $this->db->table('like')->update( $data, 'userID = "'.$userID.'" and  observationID = "'.$observationID.'"');
+        return 1;
+    }
+
+    /**
+     * @param $userID
+     * @param $message
+     * @return int = 0 if query failed, 1 if query executed successfully.
+     */
+    public function insertComment ($userID, $message, $observationID) {
+        // check if user already exists or not
+        //TODO: change the condition to check if it exists or not
+
+        $data = ['userID'=> $userID,
+            'message' => $message,
+            'observationID' => $observationID
+        ];
+        $this->db->table('comment')->insert($data);
+        return 1;
+    }
+
+    /**
+     * @param $observationID
+     * @return int = 0 if query failed, 1 if query executed successfully.
+     */
+
+    public function getComment ($observationID) {
+        $query = $this->db->query('SELECT message, userID
+                                        FROM a20ux6.comment
+                                        WHERE observationID = "'.$observationID.'"; ');
+
+        return $query->getResult();
+    }
 
     /**
      * Query to get own observations:
@@ -554,6 +743,8 @@ class Database_model
      * WHERE username = 'userName';
      *
      */
+
+
 
 
 }

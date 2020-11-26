@@ -38,10 +38,16 @@ trait extra_functions
         //fill in the first podium data
         $leaderboard_data['name_first'] = $person_list[0]['username'];
         $leaderboard_data['points_first'] = $person_list[0][$period];
-        $leaderboard_data['name_second'] = $person_list[1]['username'];
-        $leaderboard_data['points_second'] = $person_list[1][$period];
-        $leaderboard_data['name_third'] = $person_list[2]['username'];
-        $leaderboard_data['points_third'] = $person_list[2][$period];
+        if(isset($person_list[1]))
+        {
+            $leaderboard_data['name_second'] = $person_list[1]['username'];
+            $leaderboard_data['points_second'] = $person_list[1][$period];
+        }
+        if(isset($person_list[2]))
+        {
+            $leaderboard_data['name_third'] = $person_list[2]['username'];
+            $leaderboard_data['points_third'] = $person_list[2][$period];
+        }
         //fill in all the others places
         $leaderboard_data['persons_list'] = array();
 

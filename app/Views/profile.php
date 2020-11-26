@@ -22,23 +22,23 @@
 <div class="d-flex flex-row my-3">
     <div class="d-flex flex-column align-items-center mx-2">
         <span class = "h6" > observations</span>
-        <span class = "h6" > 103</span>
+        <span class = "h6" > <?=$observationCount[0]->observationCount?></span>
     </div>
     <div class="d-flex flex-column align-items-center mx-2">
         <span class = "h6" > likes</span>
-        <span class = "h6" > 222</span>
+        <span class = "h6" > <?=$likeCount[0]->likeCount?></span>
     </div>
     <div class="d-flex flex-column align-items-center mx-2">
         <span class = "h6" > comments</span>
-        <span class = "h6" > 78</span>
+        <span class = "h6" > <?=$commentCount[0]->commentCount?></span>
     </div>
     <div class="d-flex flex-column align-items-center mx-2">
         <span class = "h6" > friends</span>
-        <span class = "h6" > 99</span>
+        <span class = "h6" > <?=$friendCount[0]->friendCount?></span>
     </div>
     <div class="d-flex flex-column align-items-center mx-2">
         <span class = "h6" > points</span>
-        <span class = "h6" > 101</span>
+        <span class = "h6" > <?=$pointCount[0]->pointCount?></span>
     </div>
 </div>
 
