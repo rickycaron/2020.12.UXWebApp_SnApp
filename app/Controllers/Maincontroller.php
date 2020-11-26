@@ -218,7 +218,7 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("mainTemplate", $this->data);
     }
 
-    public function profile() {
+    public function profile($userid) {
         $this->set_common_data('search', 'menu');
         //get current user
         $userID = session()->get('id');
@@ -233,6 +233,27 @@ class Maincontroller extends \CodeIgniter\Controller
         $data2['pointCount'] = $this->database_model->getUserpoint($userID);
 
         //user information part end
+        //change the content
+        $this->data['content'] = view('profile',$data2); //replace by your own view
+        $this->data['title'] = 'Profile';
+
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('profile');
+        return view("mainTemplate", $this->data);
+    }
+    public function otheruserprofile($userID) {
+        $this->set_common_data('search', 'menu');
+        //RETURN THE PROFILE OF ANOTHER USER
+        //profile user information part
+        //get observation amount
+        $data2['userid']=$userID;
+        $data2['username']=$this->database_model->getUser($userID)->username;
+        $data2['observationCount'] = $this->database_model->getUserObservationCount($userID);
+        $data2['commentCount'] = $this->database_model->getUserCommentCount($userID);
+        $data2['likeCount'] = $this->database_model->getUserLikeCount($userID);
+        $data2['friendCount'] = $this->database_model->getUserFriendCount($userID);
+        $data2['pointCount'] = $this->database_model->getUserpoint($userID);
+        //user information part end
+        //te observations of the user
         //change the content
         $this->data['content'] = view('profile',$data2); //replace by your own view
         $this->data['title'] = 'Profile';
