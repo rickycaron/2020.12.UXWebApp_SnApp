@@ -12,7 +12,7 @@
             <h2><?=$name_first?></h2>
             <h2><?=$points_first?></h2>
         </div>
-        <?php if(isset($name_second)): ?>
+        <?php if(isset($name_third)): ?>
             <div id="third" class="top_three_person">
                 <img src="<?= base_url()?>/image/profile.png">
                 <h2><?=$name_third?></h2>
