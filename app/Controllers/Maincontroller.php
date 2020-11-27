@@ -68,10 +68,9 @@ class Maincontroller extends \CodeIgniter\Controller
     public function hub() {
         $this->set_common_data('eco', 'search');
         helper(['form']);
+        $index = 1;
         //get current user
         $userID = session()->get('id');
-
-
         //get friends of current user
         $friendsArray = $this->database_model->getFriendsUserName($userID);
 
@@ -96,20 +95,22 @@ class Maincontroller extends \CodeIgniter\Controller
                     return $upToDateDiv;
                 }
                 else {
-                    $observationID = $this->request->getPost('obID');
-                    $comment2['comments'] = $this->database_model->getComment($observationID);//34
-
+                    $observationID = $observations[2]->id ;
+                    $index = $index+1;
+                    if($this->request->getPost('commentShow')) {
+                        $observationID = $this->request->getPost('obID');
+                        $comment2['comments'] = $this->database_model->getComment($observationID);
+                    }
                     if ($this->request->getMethod() === 'post')
                     {
                         $message= $this->request->getPost('message');
-
+                        $observationID = $this->request->getPost('obID');
                         $this->database_model-> insertComment($userID,$message,$observationID);
-
                         /*$this->data['content'] = view('hubPage'); //replace by your own view
                         return view("extraTemplate", $this->data);*/
                         return redirect()->to('hub');
-
                     }
+                    $comment2['comments'] = $this->database_model->getComment($observationID);
                     return view('hubPage', $data3, $comment2);
                 }
             }
@@ -117,7 +118,8 @@ class Maincontroller extends \CodeIgniter\Controller
 
         //get observations from friends from current users
         $data2['observations'] = $this->database_model->getFirstObservationsForHub($friendsArray);
-        $observationID = $this->request->getPost('obID');
+        $observations = $data2['observations'];
+        $observationID = $observations[0]->id ;
         $likeStatus = $this->database_model->checkUserLikeStatus($userID, $observationID);
 
         if($this->request->getPost('like')) {
@@ -125,6 +127,10 @@ class Maincontroller extends \CodeIgniter\Controller
         }
         //get observations comment from
 
+        if($this->request->getPost('commentShow')) {
+            $observationID = $this->request->getPost('obID');
+            $comment1['comments'] = $this->database_model->getComment($observationID);
+        }
         $comment1['comments'] = $this->database_model->getComment($observationID);
 
         //check if submit comment
@@ -132,21 +138,18 @@ class Maincontroller extends \CodeIgniter\Controller
         {
             $message= $this->request->getPost('message');
             $observationID = $this->request->getPost('obID');
-
             $this->database_model-> insertComment($userID,$message,$observationID);
 
             /*$this->data['content'] = view('hubPage'); //replace by your own view
             return view("extraTemplate", $this->data);*/
             return redirect()->to('hub');
-
         }
         //comment function end
-
         $this->data['content'] = view('hubPage', $data2, $comment1); //replace by your own view
         $this->data['title'] = 'Observation Feed';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js','showComment.js');
         //$this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreFriendsObservations.js');
         //$this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','UpdateLikes.js');
 

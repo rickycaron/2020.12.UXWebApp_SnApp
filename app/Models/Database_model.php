@@ -487,7 +487,7 @@ class Database_model
      */
     public function getFirstObservationsForHub($friends) {
         //make the query
-        $queryString = 'SELECT t1.id, imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1 
+        $queryString = 'SELECT t1.id, imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1
                                         INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
                                         WHERE username = "" ';
         foreach ($friends as $friend):
@@ -731,8 +731,8 @@ class Database_model
      */
 
     public function getComment ($observationID) {
-        $query = $this->db->query('SELECT message, userID
-                                        FROM a20ux6.comment
+        $query = $this->db->query('SELECT message, userID, username
+                                        FROM a20ux6.comment c  INNER JOIN a20ux6.user u ON u.id = c.userID
                                         WHERE observationID = "'.$observationID.'"; ');
 
         return $query->getResult();

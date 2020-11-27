@@ -63,6 +63,8 @@ $routes->get('loginFromObservation', 'Maincontroller::loginFromObservation');
 $routes->match(['get','post'],'register', 'Maincontroller::register',['filter' => 'noauth']);
 $routes->get('logout','Maincontroller::logout');
 
+$routes->match(['get','post'],'hub', 'Maincontroller::hub',['filter' => 'auth']);
+
 $routes->get('databaseTest', 'Maincontroller::databaseTest');
 
 
