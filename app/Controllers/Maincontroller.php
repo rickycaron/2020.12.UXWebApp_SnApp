@@ -384,12 +384,12 @@ class Maincontroller extends \CodeIgniter\Controller
     }
 
     public function addObservation() {
-        helper(['form']);
         $this->set_common_data('eco', 'search');
 
         //get current user
         $userID = session()->get('id');
 
+        helper(['form']);
         if ($this->request->getMethod() === 'post'&& $this->validate([
                 'specieDescription'  => 'required|min_length[3]',
                 'location'=>'required|min_length[6]|max_length[50]',
@@ -402,7 +402,7 @@ class Maincontroller extends \CodeIgniter\Controller
 
             $specieName = $this->request->getPost('specieName');
             $specieId = $this->database_model->getSpecieID($specieName);
-            $description = $this->request->getPost('specieDescription');
+            $description = $this->request->getPost('description');
             $location = $this->request->getPost('location');
             $date = $this->request->getPost('date');
             $time = $this->request->getPost('time');

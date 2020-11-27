@@ -20,7 +20,7 @@ function sendIdentification() {
         console.log(base64files);
 
         const data = {
-            api_key: "ufp8UeKvKHjc3Qv8997x6MGrMTylzl3Sg6xNqgzjAQvmurLzTP",
+            api_key: "jucxN9i1yltRvEPBKyB8ednOe0yLqxgpjBXnOlYvXKlgq0yeMM",
             images: base64files,
             modifiers: ["crops_fast", "similar_images"],
             plant_language: "en",
@@ -46,7 +46,7 @@ function sendIdentification() {
                 console.log('Success:', data);
                 console.log('suggestions', suggestions);
                 console.log('suggestions', plantDetails);
-                //printInformation(data);
+                printInformation(data);
             })
             .catch((error) => {
                 console.error('Error:', error);
