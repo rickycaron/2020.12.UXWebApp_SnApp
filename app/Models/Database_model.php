@@ -372,11 +372,15 @@ class Database_model
      */
     public function getFriendLeaderboard($period, $userID) {
         $query = $this->db->query('SELECT u.id, u.username, u.points, u.monthlyPoints, u.weeklyPoints
-                                        FROM a20ux6.friendsMapping as m , a20ux6.user as u
+                                        FROM a20ux6.friendsMapping AS m , a20ux6.user AS u
                                         WHERE CASE WHEN m.userID_A = "'.$userID.'" THEN m.userID_B = u.id
                                                     WHEN m.userID_B = "'.$userID.'" THEN m.userID_A = u.id
                                                     END
-                                        ORDER BY u.'.$period.' DESC;');
+                                        UNION
+                                        SELECT u.id, u.username, u.points, u.monthlyPoints, u.weeklyPoints 
+                                        FROM a20ux6.user AS u 
+                                        WHERE u.id = "'.$userID.'"
+                                        ORDER BY '.$period.' DESC;');
         return $query->getResultArray();
     }
 
