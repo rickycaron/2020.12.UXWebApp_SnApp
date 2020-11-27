@@ -8,8 +8,10 @@
                 <?php endif?>
             </div>
         <div id="first" class=" col d-flex justify-content-center top_three_person">
+            <?php if(isset($name_first)):?>
             <!--<img src="<?= base_url()?>/image/profile.png">-->
             <h3><?=$name_first?> <?=$points_first?></h3>
+            <?php endif?>
         </div>
             <div id="third" class=" col d-flex justify-content-center top_three_person">
                 <?php if(isset($name_third)): ?>
@@ -22,11 +24,12 @@
     <img class="d-none d-sm-block" id="podium_img" src="<?= base_url()?>/image/podiumv2.png" alt="podium">
     <div class="d-md-none d-lg-none d-xl-none">
         <ul class="list-group my-3">
-
+            <?php if(isset($name_first)):?>
             <li href="#" class="list-group-item list-group-item-action d-flex justify-content-between bg-third">
                 <h3>1.<?=$name_first?></h3>
                 <h3><?=$points_first?></h3>
             </li>
+            <?php endif?>
             <?php if(isset($name_second)):?>
             <li href="#" class="list-group-item list-group-item-action d-flex justify-content-between bg-secondary">
                 <h3>2.<?=$name_second?></h3>

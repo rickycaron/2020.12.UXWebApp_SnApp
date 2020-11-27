@@ -83,4 +83,5 @@
     </nav>
 </footer>
 </body>
+<input type="hidden" id="hidden_base_url" value="<?=$base_url?>"/>
 </html>

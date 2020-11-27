@@ -19,13 +19,14 @@ function overallClicked() {
 }
 
 function getLeaderboard(period) {
+    console.log(ocument.querySelector('input[id="hidden_base_url"]').value);
     let getUrl = window.location;
     let baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
     let filter = document.querySelector('input[id="hidden_variable_filter"]').value;
 
-    console.log(baseUrl +"/getLeaderboardHTMLajax/"+filter+"/"+period);
+    //console.log(baseUrl +"/html/getLeaderboardHTMLajax/"+filter+"/"+period);
 
-    fetch(baseUrl +"/getLeaderboardHTMLajax/"+filter+"/"+period)
+    fetch(baseUrl +"/html/getLeaderboardHTMLajax/"+filter+"/"+period)
         .then(resp => resp.text())
         .then(data => document.getElementById("leaderboard_container").innerHTML = data)
         .catch(a => console.log(a));

@@ -23,6 +23,8 @@ class Maincontroller extends \CodeIgniter\Controller
     }
 
     private function set_common_data($header_icon_1, $header_icon_2) {
+        $this->data['base_url'] = base_url();
+        //$this->debug_to_console(base_url());
         $this->data['header_icon_1'] = $header_icon_1;
         $this->data['header_icon_2'] = $header_icon_2;
     }

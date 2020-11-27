@@ -36,8 +36,10 @@ trait extra_functions
 
     private function set_leaderboard_data($person_list, $period, $filter) {
         //fill in the first podium data
-        $leaderboard_data['name_first'] = $person_list[0]['username'];
-        $leaderboard_data['points_first'] = $person_list[0][$period];
+        if(isset($person_list[0])) {
+            $leaderboard_data['name_first'] = $person_list[0]['username'];
+            $leaderboard_data['points_first'] = $person_list[0][$period];
+        }
         if(isset($person_list[1]))
         {
             $leaderboard_data['name_second'] = $person_list[1]['username'];
