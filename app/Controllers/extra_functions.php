@@ -61,17 +61,14 @@ trait extra_functions
             }
         }
         if ($worse_then_tenth_flag) {
-            $leaderboard_data['user_placeholder'] = '<div class="after_third">
+            $leaderboard_data['user_placeholder'] = '<li class="list-group-item list-group-item-action d-flex justify-content-between bg-secondary">
                                                         <h1>...</h1>
-                                                     </div>
-                                                     <div class="after_third">
-                                                        <div class="without_points">
-                                                            <h2>'.$current_user["place"].'</h2>
-                                                            <img src="'.base_url().'/image/profile.png">
-                                                            <h3>'.$current_user["name"].'</h3>
-                                                        </div>
-                                                        <h3>'.$current_user["point"].'</h3>
-                                                     </div>';
+                                                     </li>
+                                                     <li href="#" class="list-group-item list-group-item-action d-flex justify-content-between bg-secondary">
+                                                            <h3>'.$current_user["place"].'. '.$current_user["name"].'</h3>
+                                                            <!--<img src="'.base_url().'/image/profile.png">-->
+                                                            <h3>'.$current_user["point"].'</h3>
+                                                            </li>';
         }
         else {
             $leaderboard_data['user_placeholder'] = "";

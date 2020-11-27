@@ -20,7 +20,7 @@ function sendIdentification() {
         console.log(base64files);
 
         const data = {
-            api_key: "ufp8UeKvKHjc3Qv8997x6MGrMTylzl3Sg6xNqgzjAQvmurLzTP",
+            api_key: "jucxN9i1yltRvEPBKyB8ednOe0yLqxgpjBXnOlYvXKlgq0yeMM",
             images: base64files,
             modifiers: ["crops_fast", "similar_images"],
             plant_language: "en",
@@ -55,6 +55,9 @@ function sendIdentification() {
 
 };
 
+
+
+
 function printInformation(input) {
     suggestions = input["suggestions"];
     metaData = input["meta_data"];
@@ -62,7 +65,7 @@ function printInformation(input) {
     plantDescription = plantDetails["wiki_description"];
     document.getElementById("speciesNamePlaceholder").value = plantDetails.common_names[0];
     document.getElementById("scientificNamePlaceholder").value = plantDetails.scientific_name;
-    document.getElementById("textAreaDescription").value = plantDescription.value;
+    document.getElementById("DescriptionPlaceholder").value = plantDescription.value;
     document.getElementById("datePlaceholder").value = metaData.date;
 
     let now = new Date();

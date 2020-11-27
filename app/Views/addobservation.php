@@ -12,41 +12,47 @@
 
     <button class="btn btn-primary w-100 my-3" id="takePictureButton"><h4>Take picture</h4></button>
     <div id="processingText">
-        <h2>Processing...</h2>
+        <h2 hidden>Processing...</h2>
     </div>
 
     <form action="addObservation" method="post" enctype="multipart/form-data">
 
-        <input id="inputFile" type="file"  onchange="readURL(this)" hidden>
+        <input id="inputFile" type="file" name="picture" onchange="readURL(this)" hidden>
 
-        <div class="form-group">
+        <div class="txt_field">
             <label>Species:</label>
-            <input type="text" class="form-control" id="speciesNamePlaceholder" required>
+            <span></span>
+            <input type="text" class="form-control" id="speciesNamePlaceholder" name="specieName" required>
         </div>
 
-        <div class="form-group">
+        <div class="txt_field">
             <label>Scientific name:</label>
-            <input type="text" class="form-control" id="scientificNamePlaceholder" required>
+            <span></span>
+            <input type="text" class="form-control" id="scientificNamePlaceholder" name="scientificName" required>
         </div>
 
-        <div class="form-group">
+        <div class="txt_field">
             <label>Description:</label>
-            <textarea type="text" class="form-control" id="DescriptionPlaceholder" required></textarea>
+            <span></span>
+            <textarea type="text" class="form-control" id="DescriptionPlaceholder" name="description" required></textarea>
         </div>
 
-        <div class="form-group">
+        <div class="txt_field">
             <label>Date:</label>
+            <span></span>
             <input type="date" class="form-control" id="datePlaceholder" name="date" required>
         </div>
 
-        <div class="form-group">
+        <div class="txt_field">
             <label>Time:</label>
+            <span></span>
             <input type="time" class="form-control" id="timePlaceholder" name="time" min="06:00" max="23:00" required>
         </div>
 
-        <div class="form-group">
+        <div class="txt_field">
             <label>Location:</label>
-            <input type="Address" class="form-control" id="LocationPlaceholder" required>
+            <span></span>
+            <input type="Address" class="form-control" id="LocationPlaceholder" name="location">
         </div>
 
         <div class="checkboxInput">
@@ -55,8 +61,12 @@
             <label for="useLocation"><h5> Use current location for this observation </h5></label>
         </div>
 
-        <input class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit" value="Submit">
-        <input class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit" value="Cancel">
+        <button class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit">Submit</button>
+        <button class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit">Cancel</button>
+
+<!--        <input method='post' class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit" value="Submit">-->
+<!--        <input method="post" class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit" value="Cancel">-->
+
     </form>
 </div>
 
