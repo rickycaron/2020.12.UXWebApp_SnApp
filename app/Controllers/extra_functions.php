@@ -109,4 +109,9 @@ trait extra_functions
         }
         return view('observationCommentList', $comment_data);
     }
+
+    function changeLikeStatus ($observationID, $username) {
+        $userID = $this->database_model->getUserID($username);
+        $query_result = $this->database_model->setUserLikeStatus($userID, $observationID);
+    }
 }

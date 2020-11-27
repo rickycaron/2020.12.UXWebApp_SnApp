@@ -1,6 +1,7 @@
 <div id="observationCardsContainer">
 <?php foreach ($observations as $ob): ?>
-        <input type = "hidden" name="obID" id = "obID" value = "<?/*=$ob->id*/?>">
+        <input type = "hidden" name="obID" id = "obID" value = "<?=$ob->id?>">
+        <input type = "hidden" name="username" id = "username" value = "<?=$ob->username?>">
         <div class="card my-2 shadow-sm" style="width:100%;max-width:600px">
 
             <a href="/html/anobservation/<?=$ob->id?>">
@@ -8,7 +9,7 @@
                 <img class="card-img" id="observationCardPicture" src="<?php echo data_uri($ob->imageData,$ob->imageType); ?>">
                 <div class="card-img" style="box-shadow: inset 0px -50px 40px -20px black;position: absolute; width: 100%; height: 100%;top: 0; left: 0;"></div>
                 <h4 class="text-white" style="position: absolute; bottom: 0px; right: 12px;"><?=$ob->username?></h4>
-                <span class="material-icons text-white" style="font-size:30px;position: absolute; bottom: 6px; left: 8px" id = "likeButton">favorite_border</span>
+                <span class="material-icons text-white" style="font-size:30px;position: absolute; bottom: 6px; left: 8px" >favorite_border</span>
             </div>
             </a>
 

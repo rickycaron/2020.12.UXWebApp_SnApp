@@ -245,6 +245,15 @@ class Database_model
     }
 
     /**
+     * @param $userID
+     * @return array|array[]|object[]
+     */
+    public function getUserID($username) {
+        $query = $this->db->query('SELECT * FROM a20ux6.user WHERE username = "'.$username.'";');
+        return $query->getRow();
+    }
+
+    /**
      * @param $email input
      * @return array|array[]|object[]
      */
@@ -435,15 +444,6 @@ class Database_model
             $userName = $query->getRow()->username;
             return $userName;
         }
-    }
-
-    /**
-     * @param $userName
-     * @return string
-     */
-    public function getUserID($userName) {
-        $query = $this->db->query('SELECT id FROM a20ux6.user WHERE username= "'.$userName.'";');
-        return $query->getResult();
     }
 
     /**
