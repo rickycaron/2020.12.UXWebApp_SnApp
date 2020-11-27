@@ -13,7 +13,7 @@
 
     <img class="img-fluid" id="observation_picture" src="https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg" alt="picture of the observation">
     <!-- src="<?php echo data_uri($image_data, $image_type); ?>" -->
-    <div class="d-flex flex-row py-4">
+    <div class="d-flex flex-row py-4 justify-content-center">
         <div class="information_container mx-auto">
             <span class="material-icons">event_note</span>
             <p><?=$date?></p>
@@ -25,20 +25,22 @@
         <div class="information_container mx-auto">
             <span class="material-icons">location_on</span>
             <p id="observation_location"><?=$location?></p>
+
+
         </div>
     </div>
 
-    <div id="map"></div>
+    <div id="map" class="jumbotron" style="height: 200px" ></div>
     <div>
         <h2>Details</h2>
         <p><?=$description?></p>
     </div>
-    <div id="like_and_comment_button" class="d-flex flex-row">
-        <div id="like_button" class="mx-auto">
+    <div id="like_and_comment_button" class="d-flex"  >
+        <div id="like_button" class=" btn btn-primary btn-block my-3 mr-5 ml-5">
             <span class="material-icons">favorite_border</span>
             <p><?=$like_count?> likes</p>
         </div>
-        <div id="comment_button" class="mx-auto">
+        <div id="comment_button" class="btn btn-primary btn-block my-3 mr-5 ml-5">
             <span class="material-icons">chat</span>
             <p><?=$comment_count?> comments</p>
         </div>
