@@ -46,7 +46,7 @@ function sendIdentification() {
                 console.log('Success:', data);
                 console.log('suggestions', suggestions);
                 console.log('suggestions', plantDetails);
-                printInformation(data);
+                //printInformation(data);
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -55,6 +55,9 @@ function sendIdentification() {
 
 };
 
+
+
+
 function printInformation(input) {
     suggestions = input["suggestions"];
     metaData = input["meta_data"];
@@ -62,7 +65,7 @@ function printInformation(input) {
     plantDescription = plantDetails["wiki_description"];
     document.getElementById("speciesNamePlaceholder").value = plantDetails.common_names[0];
     document.getElementById("scientificNamePlaceholder").value = plantDetails.scientific_name;
-    document.getElementById("textAreaDescription").value = plantDescription.value;
+    document.getElementById("DescriptionPlaceholder").value = plantDescription.value;
     document.getElementById("datePlaceholder").value = metaData.date;
 
     let now = new Date();

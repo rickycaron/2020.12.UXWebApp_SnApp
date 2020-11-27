@@ -12,41 +12,47 @@
 
     <button class="btn btn-primary w-100 my-3" id="takePictureButton"><h4>Take picture</h4></button>
     <div id="processingText">
-        <h2>Processing...</h2>
+        <h2 hidden>Processing...</h2>
     </div>
 
     <form action="addObservation" method="post" enctype="multipart/form-data">
 
         <input id="inputFile" type="file"  onchange="readURL(this)" hidden>
 
-        <div class="form-group">
+        <div class="txt_field">
             <label>Species:</label>
+            <span></span>
             <input type="text" class="form-control" id="speciesNamePlaceholder" required>
         </div>
 
-        <div class="form-group">
+        <div class="txt_field">
             <label>Scientific name:</label>
+            <span></span>
             <input type="text" class="form-control" id="scientificNamePlaceholder" required>
         </div>
 
-        <div class="form-group">
+        <div class="txt_field">
             <label>Description:</label>
+            <span></span>
             <textarea type="text" class="form-control" id="DescriptionPlaceholder" required></textarea>
         </div>
 
-        <div class="form-group">
+        <div class="txt_field">
             <label>Date:</label>
+            <span></span>
             <input type="date" class="form-control" id="datePlaceholder" name="date" required>
         </div>
 
-        <div class="form-group">
+        <div class="txt_field">
             <label>Time:</label>
+            <span></span>
             <input type="time" class="form-control" id="timePlaceholder" name="time" min="06:00" max="23:00" required>
         </div>
 
-        <div class="form-group">
+        <div class="txt_field">
             <label>Location:</label>
-            <input type="Address" class="form-control" id="LocationPlaceholder" required>
+            <span></span>
+            <input type="Address" class="form-control" id="LocationPlaceholder">
         </div>
 
         <div class="checkboxInput">
