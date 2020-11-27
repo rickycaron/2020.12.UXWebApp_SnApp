@@ -17,24 +17,24 @@
 
     <form action="addObservation" method="post" enctype="multipart/form-data">
 
-        <input id="inputFile" type="file"  onchange="readURL(this)" hidden>
+        <input id="inputFile" type="file" name="picture" onchange="readURL(this)" hidden>
 
         <div class="txt_field">
             <label>Species:</label>
             <span></span>
-            <input type="text" class="form-control" id="speciesNamePlaceholder" required>
+            <input type="text" class="form-control" id="speciesNamePlaceholder" name="specieName" required>
         </div>
 
         <div class="txt_field">
             <label>Scientific name:</label>
             <span></span>
-            <input type="text" class="form-control" id="scientificNamePlaceholder" required>
+            <input type="text" class="form-control" id="scientificNamePlaceholder" name="scientificName" required>
         </div>
 
         <div class="txt_field">
             <label>Description:</label>
             <span></span>
-            <textarea type="text" class="form-control" id="DescriptionPlaceholder" required></textarea>
+            <textarea type="text" class="form-control" id="DescriptionPlaceholder" name="description" required></textarea>
         </div>
 
         <div class="txt_field">
@@ -52,7 +52,7 @@
         <div class="txt_field">
             <label>Location:</label>
             <span></span>
-            <input type="Address" class="form-control" id="LocationPlaceholder">
+            <input type="Address" class="form-control" id="LocationPlaceholder" name="location">
         </div>
 
         <div class="checkboxInput">
@@ -61,8 +61,12 @@
             <label for="useLocation"><h5> Use current location for this observation </h5></label>
         </div>
 
-        <input class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit" value="Submit">
-        <input class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit" value="Cancel">
+        <button class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit">Submit</button>
+        <button class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit">Cancel</button>
+
+<!--        <input method='post' class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit" value="Submit">-->
+<!--        <input method="post" class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit" value="Cancel">-->
+
     </form>
 </div>
 
