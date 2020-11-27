@@ -50,7 +50,7 @@
             text-decoration: inherit;
             position: fixed;
             font-size: 500px;
-            color: #C6DBD6;
+            color: #E5F4F1;
             top: 50%;
             left: 50%;
             margin: -300px 0 0 -200px;
@@ -60,7 +60,7 @@
     </style>
 
     <?php if (isset($scripts_to_load)) foreach ($scripts_to_load as $script): ?>
-        <script src="<?= base_url()?>/js/<?=$script?>?v=4" defer></script>
+        <script src="<?= base_url()?>/js/<?=$script?>?v=6" defer></script>
     <?php endforeach; ?>
 </head>
 
