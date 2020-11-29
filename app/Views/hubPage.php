@@ -35,7 +35,12 @@
 
 
                 <div class="d-flex flex-row my-3">
-                    <form action="hub" method="post" id = "commentSend">
+                    <?php if( service('uri')->getSegment(1) == 'hub'):?>
+                        <form action="hub" method="post" id = "commentSend">
+                            <?php elseif( service('uri')->getSegment(1) == 'group'):?>
+                            <?php $groupname=service('uri')->getSegment(2)?>
+                            <form action="<?=$groupname ?>" method="post" id = "commentSend">
+                        <?php endif?>
                     <input type = "hidden" name="obID" id = "obID" value = "<?=$ob->id?>">
                     <input class="form-control" name="message" id = "message" value="<?= set_value('message')?>" placeholder="Create new comment">
                     <!--<span type="submit" class="material-icons my-auto ml-3 mr-2 text-primary" id = "sendComment" style="font-size:30px" onclick="sendComment()" >send</span>-->
