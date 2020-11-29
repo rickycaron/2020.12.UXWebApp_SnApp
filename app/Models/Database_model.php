@@ -316,13 +316,30 @@ class Database_model
      * @return array|array[]|object[]
      */
     public function getFriendsFromUser($userID) {
-        $query = $this->db->query('SELECT username, email, points
+        $query = $this->db->query('SELECT u.id, username, email, points, weeklyPoints, monthlyPoints, m.id AS mappingID
                                         FROM a20ux6.friendsMapping as m , a20ux6.user as u
                                         WHERE CASE WHEN m.userID_A = "'.$userID.'" THEN m.userID_B = u.id
 			                                        WHEN m.userID_B = "'.$userID.'" THEN m.userID_A = u.id
-		                                        END;');
+		                                        END
+		                                        AND m.requestStatus = 1;');
         return $query->getResult();
     }
+
+    /**
+     * @param $userID
+     * @return array|array[]|object[]
+     */
+    public function getFriendRequestsFromUser($userID) {
+        $query = $this->db->query('SELECT u.id AS userID, username, m.id AS mappingID
+                                        FROM a20ux6.friendsMapping as m , a20ux6.user as u
+                                        WHERE CASE WHEN m.userID_A = "'.$userID.'" THEN m.userID_B = u.id
+			                                        WHEN m.userID_B = "'.$userID.'" THEN m.userID_A = u.id
+		                                        END
+		                                        AND m.requestStatus = 0;');
+        return $query->getResult();
+    }
+
+
 
     /**
      * @param $userID
@@ -692,6 +709,11 @@ class Database_model
             $this->db->table('like')->update( $data, 'userID = "'.$userID.'" and  observationID = "'.$observationID.'"');
             return 1;
         }
+    }
+
+    public function setFriendsMappingStatus($mappingID,$status) {
+        $data = ['requestStatus'=> $status];
+        $this->db->table('friendsMapping')->update( $data, 'id = "'.$mappingID.'"');
     }
 
 

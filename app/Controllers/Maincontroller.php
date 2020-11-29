@@ -492,11 +492,15 @@ class Maincontroller extends \CodeIgniter\Controller
     public function friendList() {
         $this->set_common_data('arrow_back', 'search');
 
-        //add your code here...
-        $this->data['content'] = view('friendList'); //replace by your own view
+        // retrieve all the information needed from the database
+        $this->data['requests'] = $this->database_model->getFriendRequestsFromUser(session()->get('id'));
+        $this->data['friends'] = $this->database_model->getFriendsFromUser(session()->get('id'));
+
+        $this->data['content'] = view('friendList', $this->data);
         $this->data['title'] = 'Friend List';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
+        $this->data['scripts_to_load'] = array('friendlist.js');
         return view("mainTemplate", $this->data);
     }
 
