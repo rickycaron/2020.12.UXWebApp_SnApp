@@ -26,12 +26,32 @@
                     <input type = "hidden" name="obID" id = "obID" value = "<?/*=$ob->id*/?>">
                     <input type="submit" name="commentShow" value="showComments" />
                 </form>-->
-                <?php foreach ($options['comments'] as $co): ?>
+
+
+               <?php $commentCount = sizeof(explode("♪", $ob->messages))?>
+                <?php $comment = explode("♪", $ob->messages)?>
+                <?php $name = explode(",", $ob->usernames)?>
+                <?php $nameComment = array()?>
+
+
+                <?php
+                for ($i = 0; $i < $commentCount; $i++)
+                {
+                    $nameComment[] = $name[$i];
+                    $nameComment[] = $comment[$i];
+                }
+                ?>
+
+                <?php if ($ob->messages != null) :?>
+
+                    <?php for($i=0;$i<$commentCount*2;$i=$i+2):?>
                     <div class="py-2">
-                       <h5 class="font-weight-bold d-inline"><?=$co->username?>: </h5>
-                       <h5 class="d-inline"><?=$co->message?></h5>
+                    <h5 class="font-weight-bold d-inline"> <?=$nameComment[$i]?>: </h5>
+                    <h5 class="d-inline"> <?=$nameComment[$i+1]?> </h5>
                     </div>
-                <?php endforeach; ?>
+                    <?php endfor;?>
+
+                <?php endif;?>
 
 
                 <div class="d-flex flex-row my-3">

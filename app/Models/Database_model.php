@@ -487,13 +487,14 @@ class Database_model
      */
     public function getFirstObservationsForHub($friends) {
         //make the query
-        $queryString = 'SELECT t1.id, imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1
-                                        INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
-                                        WHERE username = "" ';
+
+        $queryString = 'SELECT t1.id, GROUP_CONCAT(c.message SEPARATOR \'♪\') as messages,  GROUP_CONCAT(t4.username) as usernames, imageData, imageType, description, specieName, t3.username, date, time FROM (a20ux6.observation t1 LEFT JOIN a20ux6.comment c ON c.observationID = t1.id)
+                                        INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id  LEFT JOIN a20ux6.user t4 ON t4.id = c.userID
+                                        WHERE t3.username = "" ';
         foreach ($friends as $friend):
-            $queryString .= 'OR username = "'.$friend->username.'" ';
+            $queryString .= 'OR t3.username = "'.$friend->username.'" ';
         endforeach;
-        $queryString .= 'ORDER BY date DESC, time DESC LIMIT 15;';
+        $queryString .= 'GROUP BY id ORDER BY date DESC, time DESC LIMIT 15;';
         //get observations from friends from database
         $query = $this->db->query($queryString);
         return $query->getResult();
@@ -507,13 +508,13 @@ class Database_model
      */
     public function getMoreObservationsForHub($friends, $lastDate, $lastTime) {
         //make the query
-        $queryString = 'SELECT t1.id, imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1 
-                                        INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
-                                        WHERE (username = "" ';
+        $queryString = 'SELECT t1.id, GROUP_CONCAT(c.message SEPARATOR \'♪\') as messages,  GROUP_CONCAT(t4.username) as usernames, imageData, imageType, description, specieName, t3.username, date, time FROM (a20ux6.observation t1 LEFT JOIN a20ux6.comment c ON c.observationID = t1.id)
+                                        INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id  LEFT JOIN a20ux6.user t4 ON t4.id = c.userID
+                                        WHERE (t3.username = "" ';
         foreach ($friends as $friend):
-            $queryString .= 'OR username = "'.$friend->username.'"';
+            $queryString .= 'OR t3.username = "'.$friend->username.'"';
         endforeach;
-        $queryString .= ') AND (date < "'.$lastDate.'" OR (date = "'.$lastDate.'" AND time < "'.$lastTime.'")) ORDER BY date DESC, time DESC LIMIT 15;';
+        $queryString .= ') AND (date < "'.$lastDate.'" OR (date = "'.$lastDate.'" AND time < "'.$lastTime.'")) GROUP BY id ORDER BY date DESC, time DESC LIMIT 15;';
         //get observations from friends from database
         $query = $this->db->query($queryString);
         return $query->getResult();

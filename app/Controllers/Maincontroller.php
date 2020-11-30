@@ -112,8 +112,7 @@ class Maincontroller extends \CodeIgniter\Controller
                         return view("extraTemplate", $this->data);*/
                         return redirect()->to('hub');
                     }
-                    $comment2['comments'] = $this->database_model->getComment($observationID);
-                    return view('hubPage', $data3, $comment2);
+                    return view('hubPage', $data3);
                 }
             }
         }
@@ -133,7 +132,6 @@ class Maincontroller extends \CodeIgniter\Controller
             $observationID = $this->request->getPost('obID');
             $comment1['comments'] = $this->database_model->getComment($observationID);
         }
-        $comment1['comments'] = $this->database_model->getComment($observationID);
 
         //check if submit comment
         if ($this->request->getMethod() === 'post')
@@ -147,7 +145,7 @@ class Maincontroller extends \CodeIgniter\Controller
             return redirect()->to('hub');
         }
         //comment function end
-        $this->data['content'] = view('hubPage', $data2, $comment1); //replace by your own view
+        $this->data['content'] = view('hubPage', $data2); //replace by your own view
         $this->data['title'] = 'Observation Feed';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
