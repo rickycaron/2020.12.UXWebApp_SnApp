@@ -116,7 +116,7 @@ class Maincontroller extends \CodeIgniter\Controller
 
 
         if($this->request->getPost('like')) {
-            $this->database_model->setUserLikeStatus($userID,$observationID);
+            $this->database_model->setUserLikeStatus($userID, $observationID);
         }
         //get observations comment from
 
@@ -324,7 +324,9 @@ class Maincontroller extends \CodeIgniter\Controller
 
         $userID=session()->get("id");
         //get the groupid by the groupname and userid
-        $groupid = $this->database_model->getGroupName($groupname_filter, $userID)->groupID;
+        $groupquery = $this->database_model->getGroupName($groupname_filter, $userID);
+        $groupid = $groupquery->groupID;
+        $groupadmin = $groupquery->admin;
         //get an array of userid of this group
         $query_result = $this->database_model->getUsersFromGroup($groupid);
         //get an array of user name of this group
@@ -334,6 +336,7 @@ class Maincontroller extends \CodeIgniter\Controller
             array_push($groupmembers,$this->database_model->getUser($row->userID));
         }
         $data['groupmembers']=$groupmembers;
+        $data['groupadmin'] = $groupadmin;
         $this->data['content'] = view('groupmembers',$data); //replace by your own view
         $this->data['title'] = 'Group Members';
 
@@ -451,12 +454,9 @@ class Maincontroller extends \CodeIgniter\Controller
 
     public function addObservation() {
         $this->set_common_data('eco', 'search');
-
+        helper(['form']);
         //get current user
         $userID = session()->get('id');
-
-        helper(['form']);
-
         if ($this->request->getMethod() === 'post'&& $this->validate([
                 'description'  => 'required|min_length[3]',
                 'location'=>'required|min_length[6]|max_length[50]',

@@ -14,9 +14,11 @@
     <div id="processingText">
         <h2 hidden>Processing...</h2>
     </div>
-
+<?php if(session()->get("isLoggedIn")): ?>
     <form action="addObservation" method="post" enctype="multipart/form-data">
-
+<?php else:?>
+    <form action="login" method="post" enctype="multipart/form-data">
+<?php endif?>
         <input id="inputFile" type="file" name="picture" onchange="readURL(this)" hidden>
 
         <div class="txt_field">

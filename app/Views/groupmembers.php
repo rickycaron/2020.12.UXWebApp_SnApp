@@ -11,7 +11,9 @@
                 <p>Total Points: <?= $member->points?></p>
             </address>
             <a href="<?=base_url()?>/otheruserprofile/<?= $member->id?>" class="btn btn-primary">See Profile</a>
-            <a href="<?=base_url()?>/deletememberfromgroup" class="btn btn-third float-right">Delete</a>
+            <?php if(session()->get("id") == $groupadmin):?>
+                <a href="<?=base_url()?>/deletememberfromgroup" class="btn btn-third float-right">Delete</a>
+            <?php endif?>
         </div>
     </div>
 <?php endforeach?>
