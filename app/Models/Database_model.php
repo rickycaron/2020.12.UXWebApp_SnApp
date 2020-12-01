@@ -160,7 +160,7 @@ class Database_model
         if (!$query->getRow()->result) return 0;
         //check if friend mapping already exists (query takes care of both directions)
         $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.friendsMapping 
-                                                     WHERE (userID_A="'.$userID_A.'" AND userID_B="'.$userID_B.'") OR (userID_A="'.$userID_B.'" AND userID_B="'.$userID_A.'")) 
+                                                     WHERE (userID_A="'.$userID_A.'" AND userID_B="'.$userID_B.'" AND requestStatus = "0") OR (userID_A="'.$userID_B.'" AND userID_B="'.$userID_A.'" AND requestStatus = "0")) 
                                                      AS result;');
         if ($query->getRow()->result) return 0;
 
@@ -316,13 +316,44 @@ class Database_model
      * @return array|array[]|object[]
      */
     public function getFriendsFromUser($userID) {
-        $query = $this->db->query('SELECT username, email, points
+        $query = $this->db->query('SELECT u.id, username, email, points, weeklyPoints, monthlyPoints, m.id AS mappingID
                                         FROM a20ux6.friendsMapping as m , a20ux6.user as u
                                         WHERE CASE WHEN m.userID_A = "'.$userID.'" THEN m.userID_B = u.id
 			                                        WHEN m.userID_B = "'.$userID.'" THEN m.userID_A = u.id
-		                                        END;');
+		                                        END
+		                                        AND m.requestStatus = 1;');
         return $query->getResult();
     }
+
+    /**
+     * @param $userID
+     * @return array|array[]|object[]
+     */
+    public function getFriendRequestsFromUser($userID) {
+        $query = $this->db->query('SELECT u.id AS userID, username, m.id AS mappingID
+                                        FROM a20ux6.friendsMapping AS m
+                                        INNER JOIN a20ux6.user AS u ON m.userID_A= u.id
+                                        WHERE requestStatus = 0 AND m.userID_B = "'.$userID.'";');
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID_A
+     * @param $userID_B
+     * @return mixed
+     */
+    public function getFriendrequestStatus($userID_A, $userID_B) {
+        $query = $this->db->query('SELECT m.requestStatus AS status
+                                        FROM a20ux6.friendsMapping AS m
+                                        WHERE (m.userID_A = "'.$userID_A.'" AND m.userID_B = "'.$userID_B.'") OR (m.userID_A="'.$userID_B.'" AND m.userID_B = "'.$userID_A.'");');
+        $result = $query->getRowArray();
+        if (is_null($result)){
+            return 3;
+        }
+        return $query->getRowArray()['status'];
+    }
+
+
 
     /**
      * @param $userID
@@ -693,6 +724,15 @@ class Database_model
             $this->db->table('like')->update( $data, 'userID = "'.$userID.'" and  observationID = "'.$observationID.'"');
             return 1;
         }
+    }
+
+    /**
+     * @param $mappingID
+     * @param $status
+     */
+    public function setFriendsMappingStatus($mappingID, $status) {
+        $data = ['requestStatus'=> $status];
+        $this->db->table('friendsMapping')->update( $data, 'id = "'.$mappingID.'"');
     }
 
 
