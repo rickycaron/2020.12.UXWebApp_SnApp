@@ -423,7 +423,8 @@ class Maincontroller extends \CodeIgniter\Controller
         $data2['observations'] = $this->database_model->getFirstObservationsProfile($userID);
 
         //profile user information part
-
+        //get friendrequest status
+        $data2['requestStatus'] = $this->database_model->getFriendrequestStatus($userID, session()->get('id'));
         //get observation amount
         $data2['userID']=$userID;
         $data2['username']=$username;
@@ -438,7 +439,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['content'] = view('profile',$data2); //replace by your own view
         $this->data['title'] = 'Other User Profile';
         $this->data['menu_items'] = $this->menu_model->get_menuitems('otheruserprofile');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'otheruserprofile.js');
         return view("mainTemplate", $this->data);
     }
 
@@ -508,11 +509,15 @@ class Maincontroller extends \CodeIgniter\Controller
     public function friendList() {
         $this->set_common_data('arrow_back', 'search');
 
-        //add your code here...
-        $this->data['content'] = view('friendList'); //replace by your own view
+        // retrieve all the information needed from the database
+        $this->data['requests'] = $this->database_model->getFriendRequestsFromUser(session()->get('id'));
+        $this->data['friends'] = $this->database_model->getFriendsFromUser(session()->get('id'));
+
+        $this->data['content'] = view('friendList', $this->data);
         $this->data['title'] = 'Friend List';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
+        $this->data['scripts_to_load'] = array('friendlist.js');
         return view("mainTemplate", $this->data);
     }
 

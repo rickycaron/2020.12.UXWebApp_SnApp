@@ -113,4 +113,21 @@ trait extra_functions
         $userID = $this->database_model->getUserID($username);
         $query_result = $this->database_model->setUserLikeStatus($userID, $observationID);
     }
+
+    function acceptFriendRequest($mappingID) {
+        $this->database_model->setFriendsMappingStatus($mappingID, 1);
+        return "<p>$mappingID</p>";
+    }
+
+    function declineFriendRequestOrDelete($mappingID) {
+        $this->database_model->deleteFriendsMapping($mappingID);
+        return "<p>$mappingID</p>";
+    }
+
+    function sendFriendRequest($userID_reciever) {
+        if(!$this->database_model->insertFriendsMapping(session()->get('id'), $userID_reciever)) {
+            $this->debug_to_console("failed to insert friendsmapping");
+        }
+        return "<p>$userID_reciever</p>";
+    }
 }

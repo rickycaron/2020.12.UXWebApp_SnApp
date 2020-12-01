@@ -10,8 +10,8 @@
                 <p>Monthly Points: <?= $member->monthlyPoints?></p>
                 <p>Total Points: <?= $member->points?></p>
             </address>
-            <a href="/html/otheruserprofile/<?= $member->id?>" class="btn btn-primary">See Profile</a>
-            <a href="/html/deletememberfromgroup" class="btn btn-primary">Delete</a>
+            <a href="<?=base_url()?>/otheruserprofile/<?= $member->id?>" class="btn btn-primary">See Profile</a>
+            <a href="<?=base_url()?>/deletememberfromgroup" class="btn btn-third float-right">Delete</a>
         </div>
     </div>
 <?php endforeach?>
