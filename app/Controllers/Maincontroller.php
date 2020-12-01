@@ -433,7 +433,8 @@ class Maincontroller extends \CodeIgniter\Controller
         $data2['observations'] = $this->database_model->getFirstObservationsProfile($userID);
 
         //profile user information part
-
+        //get friendrequest status
+        $data2['requestStatus'] = $this->database_model->getFriendrequestStatus($userID, session()->get('id'));
         //get observation amount
         $data2['userID']=$userID;
         $data2['username']=$username;
@@ -448,7 +449,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['content'] = view('profile',$data2); //replace by your own view
         $this->data['title'] = 'Other User Profile';
         $this->data['menu_items'] = $this->menu_model->get_menuitems('otheruserprofile');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'otheruserprofile.js');
         return view("mainTemplate", $this->data);
     }
 

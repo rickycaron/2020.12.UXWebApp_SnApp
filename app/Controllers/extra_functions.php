@@ -123,4 +123,11 @@ trait extra_functions
         $this->database_model->setFriendsMappingStatus($mappingID, 2);
         return "<p>$mappingID</p>";
     }
+
+    function sendFriendRequest($userID_reciever) {
+        if(!$this->database_model->insertFriendsMapping(session()->get('id'), $userID_reciever)) {
+            $this->debug_to_console("failed to insert friendsmapping");
+        }
+        return "<p>$userID_reciever</p>";
+    }
 }

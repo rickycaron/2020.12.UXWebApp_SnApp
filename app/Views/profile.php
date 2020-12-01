@@ -1,3 +1,4 @@
+<input type="hidden" id="hidden_userID" value="<?=$userID ?>"/>
 <?php if($userID == session()->get('id')):?>
     <a href="logout" class="btn btn-lg btn-primary btn-block my-3" style="width:100%;max-width:600px">Logout</a>
 <?php endif?>
@@ -43,6 +44,35 @@
         <span class = "h6" > <?=$pointCount[0]->pointCount?></span>
     </div>
 </div>
+
+<?php if($userID != session()->get('id')):?>
+    <?php switch ($requestStatus):
+        case 0: ?>
+            <button class="d-flex flex-row btn btn-lg btn-third btn-block my-3" style="width:100%;max-width:600px">
+                <span class="material-icons">person_add_alt_1</span>
+                <p>request sended</p>
+            </button>
+        <?php break; ?>
+        <?php case 1: ?>
+            <button class="d-flex flex-row btn btn-lg btn-third btn-block my-3" style="width:100%;max-width:600px">
+                <span class="material-icons">person_add_alt_1</span>
+                <p>friend</p>
+            </button>
+        <?php break; ?>
+        <?php case 2: ?>
+            <button id="send_friend_request" class="d-flex flex-row btn btn-lg btn-primary btn-block my-3" style="width:100%;max-width:600px">
+                <span class="material-icons">person_add_alt_1</span>
+                <p>add friend</p>
+            </button>
+        <?php break; ?>
+        <?php case 3: ?>
+            <button id="send_friend_request" class="send_friend_request d-flex flex-row btn btn-lg btn-primary btn-block my-3" style="width:100%;max-width:600px">
+                <span class="material-icons">person_add_alt_1</span>
+                <p>add friend</p>
+            </button>
+            <?php break; ?>
+    <?php endswitch; ?>
+<?php endif?>
 
 <div id="observationCardsContainer">
 <?php foreach ($observations as $ob): ?>

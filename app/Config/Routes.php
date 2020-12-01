@@ -46,7 +46,7 @@ $routes->match(['get','post'],'addObservation', 'Maincontroller::addObservation'
 $routes->get('leaderboardSelect', 'Maincontroller::leaderboardSelect',['filter'=>'auth']);
 $routes->get('profile', 'Maincontroller::profile',['filter'=>'auth']);
 $routes->get('otheruserprofile/(:num)', 'Maincontroller::otheruserprofile/$1',['filter'=>'auth']);
-
+$routes->get('sendFriendRequest/(:num)', 'Maincontroller::sendFriendRequest/$1');
 $routes->get('leaderboard/(:alpha)', 'Maincontroller::leaderboard/$1',['filter'=>'auth']);
 $routes->get('getLeaderboardHTMLajax/(:alpha)/(:alpha)', 'Maincontroller::getLeaderboardHTMLajax/$1/$2',['filter'=>'auth']);
 $routes->get('forgotPassword', 'Maincontroller::forgotPassword',['filter' => 'noauth']);
