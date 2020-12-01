@@ -97,14 +97,14 @@
                 <span class="material-icons my-auto" style="font-size: 40px">expand_less</span>
             </div>
             <hr class="mt-0 mb-2">
-            <div class="py-2">
-                <h5 class="font-weight-bold d-inline">Joppe Leers: </h5>
-                <h5 class="d-inline">Wow what a nice flower!</h5>
-            </div>
-            <div class="py-2">
-                <h5 class="font-weight-bold d-inline">Robbe Abts: </h5>
-                <h5 class="d-inline">Awesome!</h5>
-            </div>
+<!--            <div class="py-2">-->
+<!--                <h5 class="font-weight-bold d-inline">Joppe Leers: </h5>-->
+<!--                <h5 class="d-inline">Wow what a nice flower!</h5>-->
+<!--            </div>-->
+<!--            <div class="py-2">-->
+<!--                <h5 class="font-weight-bold d-inline">Robbe Abts: </h5>-->
+<!--                <h5 class="d-inline">Awesome!</h5>-->
+<!--            </div>-->
             <div class="d-flex flex-row my-3">
                 <input type="txt" class="form-control" name="comment" placeholder="Create new comment">
                 <span class="material-icons my-auto ml-3 mr-2 text-primary" style="font-size:30px">send</span>
