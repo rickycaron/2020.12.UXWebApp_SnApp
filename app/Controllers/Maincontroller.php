@@ -120,17 +120,25 @@ class Maincontroller extends \CodeIgniter\Controller
         //get observations from friends from current users
         $data2['observations'] = $this->database_model->getFirstObservationsForHub($friendsArray);
         $observations = $data2['observations'];
-        $observationID = $observations[0]->id ;
-        $likeStatus = $this->database_model->checkUserLikeStatus($userID, $observationID);
-
-        if($this->request->getPost('like')) {
-            $this->database_model->setUserLikeStatus($userID,$observationID);
+        if ($observations == null) {
+            $data2['upToDate'] = "You are up to date! Check your groups or search friends to see their observations";
+            $this->data['content'] = view('hubPage', $data2); //replace by your own view
         }
-        //get observations comment from
+        else {
+            $data2['upToDate'] = "";
+            $observationID = $observations[0]->id ;
+            $likeStatus = $this->database_model->checkUserLikeStatus($userID, $observationID);
 
-        if($this->request->getPost('commentShow')) {
-            $observationID = $this->request->getPost('obID');
-            $comment1['comments'] = $this->database_model->getComment($observationID);
+            if($this->request->getPost('like')) {
+                $this->database_model->setUserLikeStatus($userID,$observationID);
+            }
+            //get observations comment from
+
+            if($this->request->getPost('commentShow')) {
+                $observationID = $this->request->getPost('obID');
+                $comment1['comments'] = $this->database_model->getComment($observationID);
+            }
+            $this->data['content'] = view('hubPage', $data2); //replace by your own view
         }
 
         //check if submit comment
@@ -145,13 +153,11 @@ class Maincontroller extends \CodeIgniter\Controller
             return redirect()->to('hub');
         }
         //comment function end
-        $this->data['content'] = view('hubPage', $data2); //replace by your own view
+
         $this->data['title'] = 'Observation Feed';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js','showComment.js');
-        //$this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreFriendsObservations.js');
-        //$this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','UpdateLikes.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js');
 
         return view("mainTemplate", $this->data);
     }
@@ -353,6 +359,23 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['title'] = 'Group Members';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('groupmembers');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js');
+        return view("mainTemplate", $this->data);
+    }
+
+    // show a list of friends that can be added to the group
+    public function addGroupMembers($groupID, $groupName) {
+        $this->set_common_data('arrow_back', 'search');
+
+        // retrieve all the information needed from the database
+        $this->data['friends'] = $this->database_model->getFriendsToAdd(session()->get('id'), $groupID);
+        $this->data['groupName'] = $groupName;
+
+        $this->data['content'] = view('addGroupMembers', $this->data);
+        $this->data['title'] = 'Friend List';
+
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'addFriendToGroup.js');
         return view("mainTemplate", $this->data);
     }
 

@@ -1,3 +1,5 @@
+
+<div id="nothingToShow"><?=$upToDate?></div>
 <div id="observationCardsContainer">
 <?php foreach ($observations as $ob): ?>
         <input type = "hidden" name="obID" id = "obID" value = "<?=$ob->id?>">

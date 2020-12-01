@@ -40,6 +40,8 @@ $routes->match(['get','post'],'group/(:alpha)', 'Maincontroller::group/$1',['fil
 $routes->match(['get','post'],'newgroup', 'Maincontroller::newgroup',['filter'=>'auth']);
 //$routes->get('groupmembers', 'Maincontroller::groupmembers',['filter'=>'auth']);
 $routes->get('groupmembers/(:alpha)', 'Maincontroller::groupmembers/$1',['filter'=>'auth']);
+$routes->get('addGroupMembers/(:num)/(:alpha)', 'Maincontroller::addGroupMembers/$1/$2',['filter'=>'auth']);
+$routes->get('addFriendToGroup/(:any)/(:alpha)', 'Maincontroller::addFriendToGroup/$1/$2',['filter'=>'auth']);
 
 $routes->get('addObservation', 'Maincontroller::addObservation');
 $routes->match(['get','post'],'addObservation', 'Maincontroller::addObservation');
