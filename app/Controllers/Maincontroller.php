@@ -450,28 +450,12 @@ class Maincontroller extends \CodeIgniter\Controller
         $userID = session()->get('id');
 
         helper(['form']);
-        /*if ($this->request->getMethod() === 'post'&& $this->validate([
-                'specieDescription'  => 'required|min_length[3]',
+
+        if ($this->request->getMethod() === 'post'&& $this->validate([
+                'description'  => 'required|min_length[3]',
                 'location'=>'required|min_length[6]|max_length[50]',
                 'date'=>'required|min_length[6]|max_length[50]',
                 'time'=>'required|min_length[4]|max_length[50]']))
-        {
-            $uploadedPicture = $this->request->getFile('picture');
-            $picture = file_get_contents($uploadedPicture->getTempName());
-            $imageProperties = $uploadedPicture->getMimeType();
-
-            $specieName = $this->request->getPost('species');
-            $specieId = $this->database_model->getSpecieID($specieName);
-            $description = $this->request->getPost('description');
-            $location = $this->request->getPost('address');
-            $date = $this->request->getPost('date');
-            $time = $this->request->getPost('time');
-
-            $this->database_model->insertObservation($picture, $imageProperties, $description, $location, $date, $time, $specieId, $userID); //hardcoded values should be changed if species are filled in in the database with correct name
-            return redirect()->to('hub');
-        }*/
-
-        if ($this->request->getMethod() === 'post')
         {
             $uploadedPicture = $this->request->getFile('picture');
             $picture = file_get_contents($uploadedPicture->getTempName());
