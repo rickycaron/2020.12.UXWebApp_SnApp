@@ -47,12 +47,12 @@ class Database_model
      * @param $points
      * @return int = 0 if query failed, 1 if query executed successfully.
      */
-    public function insertSpecie ($name, $points) {
-        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.specie WHERE name="'.$name.'") AS result;');
+    public function insertSpecie ($name, $scienticificName, $points) {
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.specie WHERE specieName="'.$name.'") AS result;');
         if ($query->getRow()->result) {
             return 0;
         }
-        $data = ['name'=> $name, 'points' => $points];
+        $data = ['specieName'=> $name, 'scientificName' => $scienticificName ,'points' => $points];
         $this->db->table('specie')->insert($data);
         return 1;
     }
@@ -452,7 +452,8 @@ class Database_model
      */
     public function getSpecieID($specieName) {
         $query = $this->db->query('SELECT id FROM a20ux6.specie WHERE specieName= "'.$specieName.'";');
-        return $query->getResult();
+        $specieID =  $query->getResult();
+        return $specieID;
     }
 
     /**

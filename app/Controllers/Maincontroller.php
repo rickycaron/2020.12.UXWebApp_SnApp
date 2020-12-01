@@ -70,7 +70,6 @@ class Maincontroller extends \CodeIgniter\Controller
     public function hub() {
         $this->set_common_data('eco', 'search');
         helper(['form']);
-        $index = 1;
         //get current user
         $userID = session()->get('id');
         //get friends of current user
@@ -97,12 +96,6 @@ class Maincontroller extends \CodeIgniter\Controller
                     return $upToDateDiv;
                 }
                 else {
-                    $observationID = $observations[2]->id ;
-                    $index = $index+1;
-                    if($this->request->getPost('commentShow')) {
-                        $observationID = $this->request->getPost('obID');
-                        $comment2['comments'] = $this->database_model->getComment($observationID);
-                    }
                     if ($this->request->getMethod() === 'post')
                     {
                         $message= $this->request->getPost('message');
@@ -120,8 +113,7 @@ class Maincontroller extends \CodeIgniter\Controller
         //get observations from friends from current users
         $data2['observations'] = $this->database_model->getFirstObservationsForHub($friendsArray);
         $observations = $data2['observations'];
-        $observationID = $observations[0]->id ;
-        $likeStatus = $this->database_model->checkUserLikeStatus($userID, $observationID);
+
 
         if($this->request->getPost('like')) {
             $this->database_model->setUserLikeStatus($userID,$observationID);
@@ -457,7 +449,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $userID = session()->get('id');
 
         helper(['form']);
-        if ($this->request->getMethod() === 'post'&& $this->validate([
+        /*if ($this->request->getMethod() === 'post'&& $this->validate([
                 'specieDescription'  => 'required|min_length[3]',
                 'location'=>'required|min_length[6]|max_length[50]',
                 'date'=>'required|min_length[6]|max_length[50]',
@@ -467,14 +459,40 @@ class Maincontroller extends \CodeIgniter\Controller
             $picture = file_get_contents($uploadedPicture->getTempName());
             $imageProperties = $uploadedPicture->getMimeType();
 
-            $specieName = $this->request->getPost('specieName');
+            $specieName = $this->request->getPost('species');
             $specieId = $this->database_model->getSpecieID($specieName);
+            $description = $this->request->getPost('description');
+            $location = $this->request->getPost('address');
+            $date = $this->request->getPost('date');
+            $time = $this->request->getPost('time');
+
+            $this->database_model->insertObservation($picture, $imageProperties, $description, $location, $date, $time, $specieId, $userID); //hardcoded values should be changed if species are filled in in the database with correct name
+            return redirect()->to('hub');
+        }*/
+
+        if ($this->request->getMethod() === 'post')
+        {
+            $uploadedPicture = $this->request->getFile('picture');
+            $picture = file_get_contents($uploadedPicture->getTempName());
+            $imageProperties = $uploadedPicture->getMimeType();
+            $scientificName = $this->request->getPost('scientificName');
+
+            $specieName = $this->request->getPost('specieName');
+            if ($this->database_model->getSpecieID($specieName))
+            {
+                $specieId = $this->database_model->getSpecieID($specieName);
+            }
+            else
+            {
+                $this->database_model->insertSpecie($specieName,$scientificName,100);
+                $specieId = $this->database_model->getSpecieID($specieName);
+            }
             $description = $this->request->getPost('description');
             $location = $this->request->getPost('location');
             $date = $this->request->getPost('date');
             $time = $this->request->getPost('time');
 
-            $this->database_model->insertObservation($picture, $imageProperties, $description, $location, $date, $time, 14, $userID); //hardcoded values should be changed if species are filled in in the database with correct name
+            $this->database_model->insertObservation($picture, $imageProperties, $description, $location, $date, $time, $specieId[0]->id, $userID); //hardcoded values should be changed if species are filled in in the database with correct name
             return redirect()->to('hub');
         }
 
