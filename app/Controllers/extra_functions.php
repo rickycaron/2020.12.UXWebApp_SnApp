@@ -113,4 +113,13 @@ trait extra_functions
         $userID = $this->database_model->getUserID($username);
         $query_result = $this->database_model->setUserLikeStatus($userID, $observationID);
     }
+
+    public function addUserToGroup() {
+
+    }
+
+    public function deleteUserFromGroup($memberID, $groupID, $groupName) {
+        $this->database_model->deleteUserFromGroup($memberID, $groupID);
+        return redirect()->to(base_url().'/groupmembers/'.$groupName);
+    }
 }

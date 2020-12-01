@@ -313,6 +313,18 @@ class Database_model
 
     /**
      * @param $userID
+     * @param $groupID
+     * @return array|array[]|object[]
+     * This function deletes a user from a group
+     */
+    public function deleteUserFromGroup($userID, $groupID) {
+        $query = $this->db->query('DELETE FROM a20ux6.userGroupMapping WHERE (userID = "'.$userID.'" AND groupID = "'.$groupID.'");');
+        return $query->getResult();
+    }
+
+
+    /**
+     * @param $userID
      * @return array|array[]|object[]
      */
     public function getFriendsFromUser($userID) {
