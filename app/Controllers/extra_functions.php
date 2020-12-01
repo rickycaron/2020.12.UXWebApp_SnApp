@@ -120,7 +120,7 @@ trait extra_functions
     }
 
     function declineFriendRequestOrDelete($mappingID) {
-        $this->database_model->setFriendsMappingStatus($mappingID, 2);
+        $this->database_model->deleteFriendsMapping($mappingID);
         return "<p>$mappingID</p>";
     }
 

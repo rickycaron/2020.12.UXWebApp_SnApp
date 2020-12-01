@@ -120,7 +120,7 @@ class Maincontroller extends \CodeIgniter\Controller
         //get observations from friends from current users
         $data2['observations'] = $this->database_model->getFirstObservationsForHub($friendsArray);
         $observations = $data2['observations'];
-        $observationID = $observations[0]->id ;
+        $observationID = $observations[0]->id;
         $likeStatus = $this->database_model->checkUserLikeStatus($userID, $observationID);
 
         if($this->request->getPost('like')) {

@@ -735,6 +735,10 @@ class Database_model
         $this->db->table('friendsMapping')->update( $data, 'id = "'.$mappingID.'"');
     }
 
+    public function deleteFriendsMapping($mappingID) {
+        $this->db->table('friendsMapping')->delete('id ="'.$mappingID.'"');
+    }
+
 
     /**
      * @param $userID

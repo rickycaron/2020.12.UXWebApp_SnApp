@@ -9,5 +9,5 @@ function sendRequest(recieverID) {
     fetch(baseUrl + "/sendFriendRequest/" + recieverID)
         //.then(data => console.log(data))
         .catch(a => console.log(a));
-    //window.location.reload(); //this line is not tested yet
+    window.location.reload(); //this line is not tested yet
 }
