@@ -331,11 +331,9 @@ class Database_model
      */
     public function getFriendRequestsFromUser($userID) {
         $query = $this->db->query('SELECT u.id AS userID, username, m.id AS mappingID
-                                        FROM a20ux6.friendsMapping as m , a20ux6.user as u
-                                        WHERE CASE WHEN m.userID_A = "'.$userID.'" THEN m.userID_B = u.id
-			                                        WHEN m.userID_B = "'.$userID.'" THEN m.userID_A = u.id
-		                                        END
-		                                        AND m.requestStatus = 0;');
+                                        FROM a20ux6.friendsMapping AS m
+                                        INNER JOIN a20ux6.user AS u ON m.userID_A= u.id
+                                        WHERE requestStatus = 0 AND m.userID_B = "'.$userID.'";');
         return $query->getResult();
     }
 
