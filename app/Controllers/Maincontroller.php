@@ -255,7 +255,8 @@ class Maincontroller extends \CodeIgniter\Controller
         }
         $data2['observations'] = $this->database_model->getFirstObservationsForHub($groupmembers);
         $observations = $data2['observations'];
-        if(sizeof($observations)!=0) {
+        if(sizeof($observations)!=0)
+        {
             $observationID = $observations[0]->id;
             $likeStatus = $this->database_model->checkUserLikeStatus($userID, $observationID);
 
@@ -284,7 +285,9 @@ class Maincontroller extends \CodeIgniter\Controller
             //comment function end
             $this->data['content'] = view('hubPage', $data2, $comment1); //replace by your own view
         }
-        $this->data['content'] = view('hubPage', $data2);
+        else {
+            $this->data['content'] = view('hubPage', $data2);
+        }
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreFriendsObservations.js');
         $this->data['title'] = 'Group';
         $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
@@ -650,12 +653,6 @@ class Maincontroller extends \CodeIgniter\Controller
             'monthlyPoints' => $user->monthlyPoints,
             'weeklyPoints' => $user->weeklyPoints,
             'isLoggedIn' => true,
-//            'id' => $user['id'],
-//            'username' => $user['username'],
-//            'email' => $user['email'],
-//            'points' => $user['points'],
-//            'monthlyPoints' => $user['monthlyPoints'],
-//            'weeklyPoints' => $user['weeklyPoints'],
         ];
         session()->set($data);
         return true;
