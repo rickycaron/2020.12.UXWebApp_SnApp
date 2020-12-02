@@ -1,4 +1,4 @@
-<a href="<?=base_url()?>/addGroupMembers/<?=$groupID?>/<?=$groupName?>" class="btn btn-lg btn-primary btn-block my-3" style="width:400px">Add friend to group</a>
+<a href="<?=base_url()?>/addGroupMembers/<?=$groupID?>/<?=$groupName?>" class="btn btn-lg btn-primary btn-block my-3" style="width:400px">Add friends to <?=$groupName?></a>
 
 <?php foreach ($groupmembers as $member): ?>
     <div class="card shadow my-2 col-lg-6 col-md-8 col-sm-8 col-xs-10" style="width:400px">

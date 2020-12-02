@@ -9,16 +9,14 @@
 
 <?php foreach ($groups as $group): ?>
     <?php if ($group[3] ==session()->get('id')):?>
-        <a class="w-100 active " onclick="location.href='group/<?=$group[0]?>';">
-            <div  class="card my-2 shadow-sm d-flex flex-row" style="width:100%;max-width:600px">
-                <div class="ml-3 mr-auto my-2 mt-3">
-                    <h2><?=$group[0]?></h2>
-                    <p><?=$group[1]?></p>
-                    <a onclick="location.href='groupmembers/<?=$group[0]?>';"><?=$group[2]?> members</a>
-                </div>
-                <span class="material-icons my-auto mx-3" style="font-size: 40px">navigate_next</span>
+        <div  class="card my-2  active shadow-sm d-flex flex-row" style="width:100%;max-width:600px" onclick="location.href='group/<?=$group[0]?>';">
+            <div class="ml-3 mr-auto my-2 mt-3">
+                <h2><?=$group[0]?></h2>
+                <p><?=$group[1]?></p>
+                <a href="<?=base_url()?>/groupmembers/<?=$group[0]?>"><?=$group[2]?> members</a>
             </div>
-        </a>
+            <span class="material-icons my-auto mx-3" style="font-size: 40px">navigate_next</span>
+        </div>
     <?php endif?>
 <?php endforeach; ?>
 
