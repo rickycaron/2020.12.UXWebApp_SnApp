@@ -262,7 +262,7 @@ class Maincontroller extends \CodeIgniter\Controller
                         return redirect()->to($groupname_filter);
                     }
                     $comment2['comments'] = $this->database_model->getComment($observationID);
-                    return view('hubPage', $data3, $comment2);
+                    return view('groupPage', $data3, $comment2);
                 }
             }
         }
@@ -315,10 +315,10 @@ class Maincontroller extends \CodeIgniter\Controller
             }
 
             //comment function end
-            $this->data['content'] = view('hubPage', $data2, $comment1); //replace by your own view
+            $this->data['content'] = view('groupPage', $data2, $comment1); //replace by your own view
         }
         else {
-            $this->data['content'] = view('hubPage', $data2);
+            $this->data['content'] = view('groupPage', $data2);
         }
         //comment function end
 

@@ -42,6 +42,7 @@ $routes->match(['get','post'],'newgroup', 'Maincontroller::newgroup',['filter'=>
 $routes->get('groupmembers/(:alpha)', 'Maincontroller::groupmembers/$1',['filter'=>'auth']);
 $routes->get('addGroupMembers/(:num)/(:alpha)', 'Maincontroller::addGroupMembers/$1/$2',['filter'=>'auth']);
 $routes->get('addFriendToGroup/(:any)/(:alpha)', 'Maincontroller::addFriendToGroup/$1/$2',['filter'=>'auth']);
+$routes->get('deleteUserFromGroup/(:num)/(:num)/(:alpha)', 'Maincontroller::deleteUserFromGroup/$1/$2/$3',['filter'=>'auth']);
 
 $routes->get('addObservation', 'Maincontroller::addObservation');
 $routes->match(['get','post'],'addObservation', 'Maincontroller::addObservation');
@@ -49,7 +50,6 @@ $routes->get('leaderboardSelect', 'Maincontroller::leaderboardSelect',['filter'=
 $routes->get('profile', 'Maincontroller::profile',['filter'=>'auth']);
 $routes->get('otheruserprofile/(:num)', 'Maincontroller::otheruserprofile/$1',['filter'=>'auth']);
 $routes->get('sendFriendRequest/(:num)', 'Maincontroller::sendFriendRequest/$1');
-$routes->get('deleteUserFromGroup/(:num)/(:num)/(:alpha)', 'Maincontroller::deleteUserFromGroup/$1/$2/$3',['filter'=>'auth']);
 
 $routes->get('leaderboard/(:alpha)', 'Maincontroller::leaderboard/$1',['filter'=>'auth']);
 $routes->get('getLeaderboardHTMLajax/(:alpha)/(:alpha)', 'Maincontroller::getLeaderboardHTMLajax/$1/$2',['filter'=>'auth']);
