@@ -69,9 +69,9 @@
 
 <!--        <input method='post' class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit" value="Submit">-->
 <!--        <input method="post" class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit" value="Cancel">-->
-
     </form>
 </div>
+
 
 <!--
 <div class="addObservationContainer">
@@ -141,3 +141,5 @@
     <button class="custom-btn" id="cancelObservationButton">Cancel</button>
 </div>
 -->
+
+<!--    -------------------------------------------------------------------------------------->
