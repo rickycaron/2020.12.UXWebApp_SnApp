@@ -129,9 +129,6 @@ trait extra_functions
             $this->debug_to_console("failed to insert friendsmapping");
         }
         return "<p>$userID_reciever</p>";
-
-    public function addUserToGroup() {
-
     }
 
     public function deleteUserFromGroup($memberID, $groupID, $groupName) {
@@ -142,11 +139,7 @@ trait extra_functions
     public function addFriendToGroup($friendName, $groupName) {
         $userID = $this->database_model->getUserID($friendName);
         $groupID = $this->database_model->getGroupID($groupName);
-
-        //$this->debug_to_console($userID);
-
-
-        $addFriend = $this->database_model->addFriendToGroup($userID->id, $groupID->id);
+        $this->database_model->addFriendToGroup($userID->id, $groupID->id);
         return;
     }
 }

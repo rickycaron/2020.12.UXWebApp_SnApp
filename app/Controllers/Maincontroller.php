@@ -70,6 +70,7 @@ class Maincontroller extends \CodeIgniter\Controller
     public function hub() {
         $this->set_common_data('eco', 'search');
         helper(['form']);
+        $index = 1;
         //get current user
         $userID = session()->get('id');
         //get friends of current user
@@ -96,6 +97,12 @@ class Maincontroller extends \CodeIgniter\Controller
                     return $upToDateDiv;
                 }
                 else {
+                    $observationID = $observations[2]->id ;
+                    $index = $index+1;
+                    if($this->request->getPost('commentShow')) {
+                        $observationID = $this->request->getPost('obID');
+                        $comment2['comments'] = $this->database_model->getComment($observationID);
+                    }
                     if ($this->request->getMethod() === 'post')
                     {
                         $message= $this->request->getPost('message');
@@ -113,12 +120,6 @@ class Maincontroller extends \CodeIgniter\Controller
         //get observations from friends from current users
         $data2['observations'] = $this->database_model->getFirstObservationsForHub($friendsArray);
         $observations = $data2['observations'];
-
-
-
-        if($this->request->getPost('like')) {
-            $this->database_model->setUserLikeStatus($userID,$observationID);
-
         if ($observations == null) {
             $data2['upToDate'] = "You are up to date! Check your groups or search friends to see their observations";
             $this->data['content'] = view('hubPage', $data2); //replace by your own view
