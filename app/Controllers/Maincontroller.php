@@ -126,8 +126,6 @@ class Maincontroller extends \CodeIgniter\Controller
         }
         else {
             $data2['upToDate'] = "";
-            $observationID = $observations[0]->id ;
-            $likeStatus = $this->database_model->checkUserLikeStatus($userID, $observationID);
 
             if($this->request->getPost('like')) {
                 $this->database_model->setUserLikeStatus($userID,$observationID);
@@ -274,8 +272,6 @@ class Maincontroller extends \CodeIgniter\Controller
             $this->data['content'] = view('groupPage', $data2); //replace by your own view
         }
         else {
-            $observationID = $observations[0]->id;
-            $likeStatus = $this->database_model->checkUserLikeStatus($userID, $observationID);
 
             if ($this->request->getPost('like')) {
                 $this->database_model->setUserLikeStatus($userID, $observationID);
