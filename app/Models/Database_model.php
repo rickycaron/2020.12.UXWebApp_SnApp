@@ -245,11 +245,11 @@ class Database_model
     }
 
     /**
-     * @param $userID
+     * @param $userName
      * @return array|array[]|object[]
      */
-    public function getUserID($username) {
-        $query = $this->db->query('SELECT * FROM a20ux6.user WHERE username = "'.$username.'";');
+    public function getUserID($userName) {
+        $query = $this->db->query('SELECT user.id FROM a20ux6.user WHERE username = "'.$userName.'";');
         return $query->getRow();
     }
 
@@ -286,6 +286,17 @@ class Database_model
     }
 
     /**
+     * @param $groupName
+     * @return array|array[]|object[]
+     */
+    public function getGroupID($groupName) {
+        $query = $this->db->query('SELECT id
+                                        FROM a20ux6.userGroup
+                                        WHERE userGroup.name="'.$groupName.'";');
+        return $query->getRow();
+    }
+
+    /**
      * @param $groupname_filter, $userID
      * @return array|array[]|object[]
      * This function return te group id by group name and the current user id
@@ -310,6 +321,48 @@ class Database_model
                                         ORDER BY groupID, userID;');
         return $query->getResult();
     }
+
+    /**
+     * @param $userID
+     * @param $groupID
+     * @return array|array[]|object[]
+     * This function deletes a user from a group
+     */
+    public function deleteUserFromGroup($userID, $groupID) {
+        $query = $this->db->query('DELETE FROM a20ux6.userGroupMapping WHERE (userID = "'.$userID.'" AND groupID = "'.$groupID.'");');
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @param $groupID
+     * @return array|array[]|object[]
+     * This function returns all the friends of the user that are not yet in the current group, so he can choose to add a friend
+     */
+    public function getFriendsToAdd($userID, $groupID) {
+        $query = $this->db->query('SELECT * FROM (SELECT u.id, username
+                                        FROM a20ux6.friendsMapping as m , a20ux6.user as u
+                                        WHERE CASE WHEN m.userID_A = "'.$userID.'" THEN m.userID_B = u.id
+			                                        WHEN m.userID_B = "'.$userID.'" THEN m.userID_A = u.id
+		                                        END) AS friends WHERE friends.id NOT IN (SELECT userID 
+                                                FROM a20ux6.userGroupMapping WHERE groupID = "'.$groupID.'");');
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @param $groupID
+     * @return int = 0 if query failed, 1 if query executed successfully.
+     * This function adds a user to a group
+     */
+    public function addFriendToGroup($userID, $groupID) {
+        $data = ['userID'=> $userID,
+            'groupID' => $groupID
+        ];
+        $this->db->table('userGroupMapping')->insert($data);
+        return 1;
+    }
+
 
     /**
      * @param $userID
