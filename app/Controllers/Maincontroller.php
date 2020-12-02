@@ -415,6 +415,9 @@ class Maincontroller extends \CodeIgniter\Controller
         $data2['likeCount'] = $this->database_model->getUserLikeCount($userID);
         $data2['friendCount'] = $this->database_model->getUserFriendCount($userID);
         $data2['pointCount'] = $this->database_model->getUserpoint($userID);
+        $data2['description'] = $this->database_model->getUserDescription($userID);
+        $data2['image'] = $this->database_model->getUserProfilePicture($userID);
+
 
         //get observations from user
         $data2['observations'] = $this->database_model->getFirstObservationsProfile($userID);
@@ -489,6 +492,7 @@ class Maincontroller extends \CodeIgniter\Controller
         //change the content
         $this->data['title'] = 'Other User Profile';
         $this->data['menu_items'] = $this->menu_model->get_menuitems('otheruserprofile');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'otheruserprofile.js');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'otheruserprofile.js');
         return view("mainTemplate", $this->data);
     }
@@ -667,12 +671,31 @@ class Maincontroller extends \CodeIgniter\Controller
 
     public function edit_profile() {
         $this->set_common_data('arrow_back', 'search');
+        //get current user
+        $userID = session()->get('id');
 
-        //add your code here...
+        helper(['form']);
+        if($this->request->getMethod() === 'post')
+        {
+            $uploadedPicture = $this->request->getFile('picture');
+            $picture = file_get_contents($uploadedPicture->getTempName());
+            $imageProperties = $uploadedPicture->getMimeType();
+
+            $name = $this->request->getPost('Name');
+            //$gender = $this->request->getPost('gender');
+            $email = $this->request->getPost('email');
+            $description = $this->request->getPost('description');
+
+            $this->database_model->setProfileData($userID, $name, $email, $description, $picture, $imageProperties);
+
+            return redirect()->to('profile');
+        }
+
         $this->data['content'] = view('edit_profile'); //replace by your own view
         $this->data['title'] = 'edit profile';
-
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','profilePicture.js', 'previewPicture.js');
+
         return view("mainTemplate", $this->data);
     }
     public function account() {

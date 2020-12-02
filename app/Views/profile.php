@@ -5,12 +5,12 @@
 <div class="d-flex flex-row m-3" style="width:100%;max-width:600px">
 
     <div class="">
-        <img src="https://pic4.zhimg.com/ee44507a59989947c85d60e0b400f0c5_xl.jpg" class="rounded-circle" alt="templatemo easy profile" style="width: 100px;">
+        <img src="<?php echo data_uri($image[0]->imagedata, $image[0]->imagetype); ?>" class="rounded-circle" alt="templatemo easy profile" style="width: 100px;">
     </div>
 
     <div class="mx-4">
         <h3 class="user_name">Hello : <?= $username?></h3>
-        <h4 class="personal_description">A guy who really likes photography.</h4>
+        <h4 class="personal_description"><?=$description[0]->description?></h4>
         <div class = "trophyContainer">
             <span class="material-icons trophy">emoji_events</span>
             <span class="material-icons trophy">emoji_events</span>

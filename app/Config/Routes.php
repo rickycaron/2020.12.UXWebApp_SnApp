@@ -71,6 +71,7 @@ $routes->match(['get','post'],'register', 'Maincontroller::register',['filter' =
 $routes->get('logout','Maincontroller::logout');
 
 $routes->match(['get','post'],'hub', 'Maincontroller::hub',['filter' => 'auth']);
+$routes->match(['get','post'],'edit_profile', 'Maincontroller::edit_profile',['filter' => 'auth']);
 
 $routes->get('databaseTest', 'Maincontroller::databaseTest');
 

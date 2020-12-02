@@ -262,6 +262,7 @@ class Database_model
         return $query->getRow();
     }
 
+
     /**
      * @param $userID
      * @return array|array[]|object[]
@@ -429,6 +430,27 @@ class Database_model
                                         FROM a20ux6.user as u where u.id = "'.$userID.'"');
         return $query->getResult();
     }
+
+    /**
+     * @param $userID
+     * @return array|array[]|object[]
+     */
+    public function getUserDescription($userID) {
+        $query = $this->db->query('SELECT u.p_description as description
+                                        FROM a20ux6.user as u where u.id = "'.$userID.'"');
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @return array|array[]|object[]
+     */
+    public function getUserProfilePicture($userID) {
+        $query = $this->db->query('SELECT u.p_imagetype as imagetype, u.p_imagedata as imagedata
+                                        FROM a20ux6.user as u where u.id = "'.$userID.'"');
+        return $query->getResult();
+    }
+
 
 
     /**
@@ -779,6 +801,28 @@ class Database_model
             return 1;
         }
     }
+
+    /**
+     * @param $userID
+     * @param $description
+     * @param $name
+     * @param $gender
+     * @param $email
+     * @param
+     * @param
+     */
+    public function setProfileData($userID, $name, $email, $description, $imageData, $imageProperties) {
+        $data = ['username' => $name,
+            'email' => $email,
+            'p_description'=> $description,
+            'p_imageData' => $imageData,
+            'p_imageType' => $imageProperties,
+        ];
+
+        $this->db->table('user')->update( $data, 'id = "'.$userID.'"');
+        return 1;
+    }
+
 
     /**
      * @param $mappingID
