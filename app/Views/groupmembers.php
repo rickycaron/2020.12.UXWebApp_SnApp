@@ -12,7 +12,12 @@
                 <p>Monthly Points: <?= $member->monthlyPoints?></p>
                 <p>Total Points: <?= $member->points?></p>
             </address>
+            <?php if(session()->get('id') == $member->id): ?>
+                <a href="<?=base_url()?>/profile" class="btn btn-primary">See Own Profile</a>
+            <?php endif;?>
+            <?php if(session()->get('id') != $member->id): ?>
             <a href="<?=base_url()?>/otheruserprofile/<?= $member->id?>" class="btn btn-primary">See Profile</a>
+            <?php endif;?>
             <a class="delete_friend btn btn-third float-right" href="<?=base_url()?>/deleteUserFromGroup/<?=$member->id?>/<?=$groupID?>/<?=$groupName?>">Delete From Group</a>
         </div>
     </div>

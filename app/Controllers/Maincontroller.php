@@ -262,22 +262,12 @@ class Maincontroller extends \CodeIgniter\Controller
                         return redirect()->to($groupname_filter);
                     }
                     $comment2['comments'] = $this->database_model->getComment($observationID);
-                    return view('groupPage', $data3, $comment2);
+                    return view('hubPage', $data3, $comment2);
                 }
             }
         }
         $data2['observations'] = $this->database_model->getFirstObservationsForHub($groupmembers);
         $observations = $data2['observations'];
-
-        if(sizeof($observations)!=0)
-        {
-            $observationID = $observations[0]->id;
-            $likeStatus = $this->database_model->checkUserLikeStatus($userID, $observationID);
-
-            if ($this->request->getPost('like')) {
-                $this->database_model->setUserLikeStatus($userID, $observationID);
-            }
-            //get observations comment from
 
         if ($observations == null) {
             $data2['nothingYet'] = "No observations to show, Yet!";
@@ -297,30 +287,25 @@ class Maincontroller extends \CodeIgniter\Controller
                 $comment1['comments'] = $this->database_model->getComment($observationID);
             }
             $comment1['comments'] = $this->database_model->getComment($observationID);
-
             $data2['nothingYet'] = "";
             $this->data['content'] = view('groupPage', $data2, $comment1);
         }
 
 
-            //check if submit comment
-            if ($this->request->getMethod() === 'post') {
-                $message = $this->request->getPost('message');
-                $observationID = $this->request->getPost('obID');
-                $this->database_model->insertComment($userID, $message, $observationID);
 
-                /*$this->data['content'] = view('hubPage'); //replace by your own view
-                return view("extraTemplate", $this->data);*/
-                return redirect()->to($groupname_filter);
-            }
+        //check if submit comment
+        if ($this->request->getMethod() === 'post')
+        {
+            $message= $this->request->getPost('message');
+            $observationID = $this->request->getPost('obID');
+            $this->database_model-> insertComment($userID,$message,$observationID);
 
-            //comment function end
-            $this->data['content'] = view('groupPage', $data2, $comment1); //replace by your own view
-        }
-        else {
-            $this->data['content'] = view('groupPage', $data2);
+            /*$this->data['content'] = view('hubPage'); //replace by your own view
+            return view("extraTemplate", $this->data);*/
+            return redirect()->to($groupname_filter);
         }
         //comment function end
+
 
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreFriendsObservations.js');
         $this->data['title'] = 'Group';
