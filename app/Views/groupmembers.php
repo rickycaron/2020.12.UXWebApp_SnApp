@@ -17,8 +17,13 @@
             <?php endif;?>
             <?php if(session()->get('id') != $member->id): ?>
             <a href="<?=base_url()?>/otheruserprofile/<?= $member->id?>" class="btn btn-primary">See Profile</a>
+
+<!--            --><?php //if(session()->get("id") == $groupadmin):?>
+<!--                <a href="--><?//=base_url()?><!--/deletememberfromgroup" class="btn btn-third float-right">Delete</a>-->
+<!--            --><?php //endif?>
             <?php endif;?>
             <a class="delete_friend btn btn-third float-right" href="<?=base_url()?>/deleteUserFromGroup/<?=$member->id?>/<?=$groupID?>/<?=$groupName?>">Delete From Group</a>
+
         </div>
     </div>
 <?php endforeach?>

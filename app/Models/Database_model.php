@@ -303,7 +303,7 @@ class Database_model
      * This function return te group id by group name and the current user id
      */
     public function getGroupName($groupname_filter, $userID){
-        $query = $this->db->query('SELECT m.groupID,m.userID,g.name,g.description 
+        $query = $this->db->query('SELECT m.groupID,m.userID,g.name,g.description,g.admin 
                                         FROM a20ux6.userGroup as g 
                                         INNER JOIN a20ux6.userGroupMapping as m
                                         ON g.id=m.groupID 
