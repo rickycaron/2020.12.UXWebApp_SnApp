@@ -881,6 +881,7 @@ class Database_model
         return $query->getResult();
     }
 
+
     /**
      * Query to get own observations:
      *

@@ -155,7 +155,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['title'] = 'Observation Feed';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'likeFunction.js');
 
         return view("mainTemplate", $this->data);
     }
@@ -675,11 +675,22 @@ class Maincontroller extends \CodeIgniter\Controller
         $userID = session()->get('id');
 
         helper(['form']);
-        if($this->request->getMethod() === 'post')
+        if($this->request->getMethod() === 'post'&& $this->validate([
+                'Name' => 'min_length[3]|max_length[255]|alpha_dash',
+                'email'  => 'min_length[3]|max_length[40]|valid_email',
+                'description' => 'min_length[3]|max_length[200]'
+            ]))
         {
-            $uploadedPicture = $this->request->getFile('picture');
-            $picture = file_get_contents($uploadedPicture->getTempName());
-            $imageProperties = $uploadedPicture->getMimeType();
+            if($this->request->getFile('picture')->getTempName()) {
+                $uploadedPicture = $this->request->getFile('picture');
+                $picture = file_get_contents($uploadedPicture->getTempName());
+                $imageProperties = $uploadedPicture->getMimeType();
+            }
+            else {
+                $imageData = $this->database_model->getUserProfilePicture($userID);
+                $picture = $imageData[0]->imagedata;
+                $imageProperties = $imageData[0]->imagetype;
+            }
 
             $name = $this->request->getPost('Name');
             //$gender = $this->request->getPost('gender');
@@ -690,8 +701,9 @@ class Maincontroller extends \CodeIgniter\Controller
 
             return redirect()->to('profile');
         }
+        $data2['userInformation'] = $this->database_model->getUser($userID);
 
-        $this->data['content'] = view('edit_profile'); //replace by your own view
+        $this->data['content'] = view('edit_profile', $data2); //replace by your own view
         $this->data['title'] = 'edit profile';
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','profilePicture.js', 'previewPicture.js');

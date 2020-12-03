@@ -32,7 +32,7 @@
 
         <div class="form-group mb-1">
             <label for="Name">Name</label>
-            <input type="txt" class="form-control" name="Name" value="<?= set_value('Name')?>">
+            <input type="txt" class="form-control" name="Name" value ="<?= $userInformation->username?>">
         </div>
 
         <!--<div class="form-group mb-1">
@@ -42,12 +42,12 @@
 
         <div class="form-group mb-1">
             <label for="email">Public email</label>
-            <input type="txt" class="form-control" name="email" value="<?= set_value('email')?>">
+            <input type="txt" class="form-control" name="email" value="<?= $userInformation->email?>">
         </div>
 
         <div class="form-group mb-5">
             <label for="description">Description</label>
-            <input type="txt" class="form-control" name="description" value="<?= set_value('description')?>">
+            <input type="txt" class="form-control" name="description" value="<?= $userInformation->p_description?>">
         </div>
         <hr class=" mb-3 my-3"/>
         <div>
