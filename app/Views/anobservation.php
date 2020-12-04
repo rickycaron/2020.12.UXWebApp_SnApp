@@ -11,7 +11,7 @@
         <p><?=$user_note?></p>
     </div>
 
-    <img class="img-fluid" id="observation_picture" src="https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg" alt="picture of the observation">
+    <img class="img-fluid" id="observation_picture" src="<?php echo data_uri($image_data, $image_type); ?>" alt="picture of the observation">
     <!-- src="<?php echo data_uri($image_data, $image_type); ?>" -->
     <div class="d-flex flex-row py-4 justify-content-center">
         <div class="information_container mx-auto">

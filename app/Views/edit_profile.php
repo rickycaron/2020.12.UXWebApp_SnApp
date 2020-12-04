@@ -1,11 +1,5 @@
 
-
-<div class="d-flex justify-content-center mt-5">
-    <img src="https://pic4.zhimg.com/ee44507a59989947c85d60e0b400f0c5_xl.jpg" class="rounded-circle" alt="templatemo easy profile" style="width: 100px;">
-</div>
-
-
-<div >
+<div class="mt-3 w-100" style="max-width:350px">
 
     <div class="wrapper card w-100 d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
         <div class="previewImage" id="previewImageDiv">
