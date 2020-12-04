@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>UXWD Team 6</title>
+    <title>SNAPP nature</title>
     <meta charset="UTF-8" />
     <meta name="keywords" content="Animals Plants Nature Social media" />
     <meta name="description" content="This website is a social madia like page where you can share your observations from nature with your friends and the world" />
@@ -60,7 +60,7 @@
     </style>
 
     <?php if (isset($scripts_to_load)) foreach ($scripts_to_load as $script): ?>
-        <script src="<?= base_url()?>/js/<?=$script?>?v=6" defer></script>
+        <script src="<?= base_url()?>/js/<?=$script?>?v=7" defer></script>
     <?php endforeach; ?>
 </head>
 

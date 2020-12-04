@@ -1,4 +1,3 @@
-<div id="nothingToShow"><?=$nothingYet?></div>
 
 <div id="observationCardsContainer">
     <?php foreach ($observations as $ob): ?>

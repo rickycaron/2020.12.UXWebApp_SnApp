@@ -42,6 +42,11 @@ $routes->match(['get','post'],'newgroup', 'Maincontroller::newgroup',['filter'=>
 $routes->get('groupmembers/(:alpha)', 'Maincontroller::groupmembers/$1',['filter'=>'auth']);
 $routes->get('addGroupMembers/(:num)/(:alpha)', 'Maincontroller::addGroupMembers/$1/$2',['filter'=>'auth']);
 $routes->get('addFriendToGroup/(:any)/(:alpha)', 'Maincontroller::addFriendToGroup/$1/$2',['filter'=>'auth']);
+
+$routes->get('changeLikeStatus/(:num)','Maincontroller::changeLikeStatus/$1',['filter'=>'auth']);
+
+$routes->get('cancelLikeStatus/(:num)','Maincontroller::cancelLikeStatus/$1',['filter'=>'auth']);
+
 $routes->get('deleteUserFromGroup/(:num)/(:num)/(:alpha)', 'Maincontroller::deleteUserFromGroup/$1/$2/$3',['filter'=>'auth']);
 
 $routes->get('addObservation', 'Maincontroller::addObservation');
@@ -71,6 +76,7 @@ $routes->match(['get','post'],'register', 'Maincontroller::register',['filter' =
 $routes->get('logout','Maincontroller::logout');
 
 $routes->match(['get','post'],'hub', 'Maincontroller::hub',['filter' => 'auth']);
+$routes->match(['get','post'],'edit_profile', 'Maincontroller::edit_profile',['filter' => 'auth']);
 
 $routes->get('databaseTest', 'Maincontroller::databaseTest');
 
