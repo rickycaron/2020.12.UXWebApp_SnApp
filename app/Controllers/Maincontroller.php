@@ -73,6 +73,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $index = 1;
         //get current user
         $userID = session()->get('id');
+        $thisUserID['thisUserID'] = session()->get('id');
         //get friends of current user
         $friendsArray = $this->database_model->getFriendsUserName($userID);
 
@@ -112,7 +113,7 @@ class Maincontroller extends \CodeIgniter\Controller
                         return view("extraTemplate", $this->data);*/
                         return redirect()->to('hub');
                     }
-                    return view('hubPage', $data3);
+                    return view('hubPage', $data3, $thisUserID);
                 }
             }
         }
@@ -122,12 +123,12 @@ class Maincontroller extends \CodeIgniter\Controller
         $observations = $data2['observations'];
         if ($observations == null) {
             $data2['upToDate'] = "You are up to date! Check your groups or search friends to see their observations";
-            $this->data['content'] = view('hubPage', $data2); //replace by your own view
+            $this->data['content'] = view('hubPage', $data2, $thisUserID); //replace by your own view
         }
         else {
             $data2['upToDate'] = "";
 
-            if($this->request->getPost('like')) {
+            /*if($this->request->getPost('like')) {
                 $this->database_model->setUserLikeStatus($userID,$observationID);
             }
             //get observations comment from
@@ -135,8 +136,8 @@ class Maincontroller extends \CodeIgniter\Controller
             if($this->request->getPost('commentShow')) {
                 $observationID = $this->request->getPost('obID');
                 $comment1['comments'] = $this->database_model->getComment($observationID);
-            }
-            $this->data['content'] = view('hubPage', $data2); //replace by your own view
+            }*/
+            $this->data['content'] = view('hubPage', $data2, $thisUserID); //replace by your own view
         }
 
         //check if submit comment
@@ -155,7 +156,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['title'] = 'Observation Feed';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'likeFunction.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','likeFunction.js', 'showMoreObservations.js');
 
         return view("mainTemplate", $this->data);
     }
@@ -245,13 +246,8 @@ class Maincontroller extends \CodeIgniter\Controller
                     $upToDateDiv = '<div id="upToDateDiv" hidden>You are up to date</div>';
                     return $upToDateDiv;
                 } else {
-                    $observationID = $observations[2]->id;
-                    $index = $index + 1;
-                    if ($this->request->getPost('commentShow')) {
-                        $observationID = $this->request->getPost('obID');
-                        $comment2['comments'] = $this->database_model->getComment($observationID);
-                    }
-                    if ($this->request->getMethod() === 'post') {
+                    if ($this->request->getMethod() === 'post')
+                    {
                         $message = $this->request->getPost('message');
                         $observationID = $this->request->getPost('obID');
                         $this->database_model->insertComment($userID, $message, $observationID);
@@ -259,35 +255,12 @@ class Maincontroller extends \CodeIgniter\Controller
                         return view("extraTemplate", $this->data);*/
                         return redirect()->to($groupname_filter);
                     }
-                    $comment2['comments'] = $this->database_model->getComment($observationID);
-                    return view('hubPage', $data3, $comment2);
+                    return view('groupPage', $data3);
                 }
             }
         }
         $data2['observations'] = $this->database_model->getFirstObservationsForHub($groupmembers);
         $observations = $data2['observations'];
-
-        if ($observations == null) {
-            $data2['nothingYet'] = "No observations to show, Yet!";
-            $this->data['content'] = view('groupPage', $data2); //replace by your own view
-        }
-        else {
-
-            if ($this->request->getPost('like')) {
-                $this->database_model->setUserLikeStatus($userID, $observationID);
-            }
-            //get observations comment from
-
-            if ($this->request->getPost('commentShow')) {
-                $observationID = $this->request->getPost('obID');
-                $comment1['comments'] = $this->database_model->getComment($observationID);
-            }
-            $comment1['comments'] = $this->database_model->getComment($observationID);
-            $data2['nothingYet'] = "";
-            $this->data['content'] = view('groupPage', $data2, $comment1);
-        }
-
-
 
         //check if submit comment
         if ($this->request->getMethod() === 'post')
@@ -302,6 +275,7 @@ class Maincontroller extends \CodeIgniter\Controller
         }
         //comment function end
 
+        $this->data['content'] = view('groupPage', $data2);
 
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreFriendsObservations.js');
         $this->data['title'] = 'Group';

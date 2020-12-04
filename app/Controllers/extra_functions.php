@@ -109,9 +109,21 @@ trait extra_functions
         return view('observationCommentList', $comment_data);
     }
 
-    function changeLikeStatus ($observationID, $username) {
-        $userID = $this->database_model->getUserID($username);
-        $query_result = $this->database_model->setUserLikeStatus($userID, $observationID);
+    function changeLikeStatus ($observationID) {
+        $userID = session()->get('id');
+        $this->database_model->setUserLikeStatus($userID, $observationID);
+        return;
+    }
+
+    function cancelLikeStatus ($observationID) {
+        $userID = session()->get('id');
+        $this->database_model->cancelUserLikeStatus($userID, $observationID);
+        return;
+    }
+    function checkUserLikeStatus ($observationID) {
+        $userID = session()->get('id');
+        $status = $this->database_model->checkUserLikeStatus($userID, $observationID);
+        return $status;
     }
 
     function acceptFriendRequest($mappingID) {

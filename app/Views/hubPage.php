@@ -2,18 +2,43 @@
 <div id="nothingToShow"><?=$upToDate?></div>
 <div id="observationCardsContainer">
     <?php foreach ($observations as $ob): ?>
+
+        <?php $commentCount = sizeof(explode("♪", $ob->messages))?>
+        <?php $comment = explode("♪", $ob->messages)?>
+        <?php $name = explode(",", $ob->usernames)?>
+        <?php $nameComment = array()?>
+        <?php $likeUserIDs = explode(",",$ob->likeUserIDs) ?>
+        <?php $likeStatus = 0?>
+
+        <?php foreach ($likeUserIDs as $lu): ?>
+            <?php
+            if ($lu == session()->get('id'))
+                $likeStatus = 1;
+            ?>
+        <?php endforeach; ?>
+
         <input type = "hidden" name="obID" id = "obID" value = "<?=$ob->id?>">
         <input type = "hidden" name="username" id = "username" value = "<?=$ob->username?>">
+        <div value = "<?=$likeStatus?>">
+            <input type = "hidden" name= "status" class = "status" value = "<?=$likeStatus?>">
+        </div>
+
         <div class="card my-2 shadow-sm" style="width:100%;max-width:600px">
 
 
-                <div style="position: relative;">
+                <div style="position: relative;" value = "<?=$ob->id?>">
                     <a href="<?= base_url()?>/anobservation/<?=$ob->id?>">
                     <img class="card-img" id="observationCardPicture" src="<?php echo data_uri($ob->imageData,$ob->imageType); ?>">
                     <div class="card-img" style="box-shadow: inset 0px -50px 40px -20px black;position: absolute; width: 100%; height: 100%;top: 0; left: 0;"></div>
                     <h4 class="text-white" style="position: absolute; bottom: 0px; right: 12px;"><?=$ob->username?></h4>
                     </a>
-                    <span class="material-icons text-white" style="font-size:30px;position: absolute; bottom: 6px; left: 8px">favorite_border</span>
+
+                    <?php if ($likeStatus == 1): ?>
+                        <div class="material-icons text-danger likeButton" style="font-size:30px;position: absolute; bottom: 6px; left: 8px">favorite_border</div>
+                    <?php endif;?>
+                    <?php if ($likeStatus == 0): ?>
+                        <div class="material-icons text-white likeButton" style="font-size:30px;position: absolute; bottom: 6px; left: 8px">favorite_border</div>
+                    <?php endif;?>
                 </div>
 
 
@@ -30,13 +55,6 @@
                     <input type = "hidden" name="obID" id = "obID" value = "<?/*=$ob->id*/?>">
                     <input type="submit" name="commentShow" value="showComments" />
                 </form>-->
-
-
-                <?php $commentCount = sizeof(explode("♪", $ob->messages))?>
-                <?php $comment = explode("♪", $ob->messages)?>
-                <?php $name = explode(",", $ob->usernames)?>
-                <?php $nameComment = array()?>
-
 
                 <?php
                 for ($i = 0; $i < $commentCount; $i++)
@@ -83,6 +101,8 @@
         <script type="text/javascript">
             var php_lastDate = "<?php echo $ob->date; ?>";
             var php_lastTime = "<?php echo $ob->time; ?>";
+            var php_observationID = "<?php echo $ob->id; ?>";
+            var php_likeStatus = "<?php echo $likeStatus; ?>"
         </script>
 
     <?php endforeach; ?>
