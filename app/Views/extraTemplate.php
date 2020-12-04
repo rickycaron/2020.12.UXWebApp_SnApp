@@ -34,8 +34,8 @@
         position: fixed;
         font-size: 500px;
         color: #E5F4F1;
-        top: 50%;
-        left: 50%;
+        top: 30%;
+        left: 60%;
         margin: -300px 0 0 -200px;
         z-index: 1;
     }
