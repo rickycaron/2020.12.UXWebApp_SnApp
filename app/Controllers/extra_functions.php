@@ -110,10 +110,11 @@ trait extra_functions
     }
 
 
-    function changeLikeStatus ($observationID, $username) {
+    function changeLikeStatus ($observationID) {
 
-        $userID = $this->database_model->getUserID($username);
+        $userID = session()->get('id');
         $query_result = $this->database_model->setUserLikeStatus($userID, $observationID);
+        return;
     }
 
     function cancelLikeStatus ($observationID) {
@@ -121,6 +122,7 @@ trait extra_functions
         $this->database_model->cancelUserLikeStatus($userID, $observationID);
         return;
     }
+
     function checkUserLikeStatus ($observationID) {
         $userID = session()->get('id');
         $status = $this->database_model->checkUserLikeStatus($userID, $observationID);
