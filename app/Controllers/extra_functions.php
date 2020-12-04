@@ -114,11 +114,6 @@ trait extra_functions
 
         $userID = $this->database_model->getUserID($username);
         $query_result = $this->database_model->setUserLikeStatus($userID, $observationID);
-    
-    function changeLikeStatus ($observationID) {
-        $userID = session()->get('id');
-        $this->database_model->setUserLikeStatus($userID, $observationID);
-        return;
     }
 
     function cancelLikeStatus ($observationID) {
