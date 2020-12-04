@@ -1,7 +1,5 @@
-<h1 class="text-center">Register</h1>
-<div class="justify-content-center d-flex">
-    <span style="font-size: 100px" class="material-icons">account_box</span>
-</div>
+<h1 class="text-center mb-5">Register</h1>
+
 <form action="register" method="post"  autocomplete="on">
     <?= csrf_field() ?>
     <div class="form-group mb-1">
@@ -31,6 +29,6 @@
     <div>
         <input type="submit" name="submit" class="btn btn-lg btn-primary w-100" value="Create your account" />
     </div>
-    <a class="text-info" href="login">Alreay have an account</a>
+    <a class="text-info" href="login">Alreay have an account?</a>
 </form>
 
