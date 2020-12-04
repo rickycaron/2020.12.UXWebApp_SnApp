@@ -1,11 +1,7 @@
-<h1 class="text-center">snAPP Nature</h1>
+<h1 class="text-center mb-5">snAPP Nature</h1>
 
 <form class="form-signin" action="login" method="post">
     <?= csrf_field() ?>
-    <div class="justify-content-center d-flex">
-        <span style="font-size: 100px" class="material-icons">account_box</span>
-    </div>
-    <h1 class="h3 mb-3 font-weight-normal text-center">Please log in</h1>
     <label for="email" class="sr-only">Email address</label>
     <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" value="demo@test.com" required autofocus>
 

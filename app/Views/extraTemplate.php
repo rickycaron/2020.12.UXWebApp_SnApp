@@ -14,9 +14,39 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
+<style>
+    #wrap {
+        width: 100%;
+        position: relative;
+    }
+
+    .inner {
+        position: relative;
+        z-index: 2;
+    }
+
+    #wrap:after {
+        content: "\EA35";
+        font-family: "Material Icons";
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: inherit;
+        position: fixed;
+        font-size: 500px;
+        color: #E5F4F1;
+        top: 50%;
+        left: 50%;
+        margin: -300px 0 0 -200px;
+        z-index: 1;
+    }
+
+</style>
+
 <body class="container-fluid justify-content-center d-flex flex-column mx-auto bg-secondary" style="max-width:330px; height:100vh">
-<main>
-    <?=$content?>
+<main id="wrap">
+    <div class="inner">
+        <?=$content?>
+    </div>
 </main>
 <footer>
     <p class="mt-5 mb-3 text-muted text-center">&copy; 2020 UXWD Team 6</p>
