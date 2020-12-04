@@ -136,7 +136,7 @@
     </div>
 </main>
 <footer>
-    <nav class="navbar fixed-bottom" style="border-radius: 10px 10px 0px 0px ;background-color: #006650">
+    <nav class="navbar fixed-bottom" style=" ;background-color: #006650">
         <?php foreach ($menu_items as $menu): ?>
             <a href="<?= base_url()?>/<?=$menu['link']?>" class="<?=$menu['className']?>"><span class="material-icons" style="font-size:45px; color: #FAFEFD"><?=$menu['iconName']?></span></a>
         <?php endforeach; ?>
