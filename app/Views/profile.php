@@ -9,14 +9,8 @@
     </div>
 
     <div class="mx-4">
-        <h3 class="user_name">Hello : <?= $username?></h3>
+        <h2 class="user_name"><?= $username?></h2>
         <h4 class="personal_description"><?=$description[0]->description?></h4>
-        <div class = "trophyContainer">
-            <span class="material-icons trophy">emoji_events</span>
-            <span class="material-icons trophy">emoji_events</span>
-            <span class="material-icons trophy">emoji_events</span>
-            <span class="material-icons trophy">emoji_events</span>
-        </div>
     </div>
 
 </div>
