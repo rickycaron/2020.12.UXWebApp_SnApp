@@ -350,7 +350,7 @@ class Maincontroller extends \CodeIgniter\Controller
     }
 
     public function profile() {
-        $this->set_common_data('search', 'menu');
+        $this->set_common_data('eco', 'menu');
 
         //get current user
         $userID = session()->get('id');
