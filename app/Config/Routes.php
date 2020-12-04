@@ -40,6 +40,9 @@ $routes->match(['get','post'],'group/(:alpha)', 'Maincontroller::group/$1',['fil
 $routes->match(['get','post'],'newgroup', 'Maincontroller::newgroup',['filter'=>'auth']);
 //$routes->get('groupmembers', 'Maincontroller::groupmembers',['filter'=>'auth']);
 $routes->get('groupmembers/(:alpha)', 'Maincontroller::groupmembers/$1',['filter'=>'auth']);
+$routes->get('addGroupMembers/(:num)/(:alpha)', 'Maincontroller::addGroupMembers/$1/$2',['filter'=>'auth']);
+$routes->get('addFriendToGroup/(:any)/(:alpha)', 'Maincontroller::addFriendToGroup/$1/$2',['filter'=>'auth']);
+$routes->get('deleteUserFromGroup/(:num)/(:num)/(:alpha)', 'Maincontroller::deleteUserFromGroup/$1/$2/$3',['filter'=>'auth']);
 
 $routes->get('addObservation', 'Maincontroller::addObservation');
 $routes->match(['get','post'],'addObservation', 'Maincontroller::addObservation');
@@ -47,6 +50,7 @@ $routes->get('leaderboardSelect', 'Maincontroller::leaderboardSelect',['filter'=
 $routes->get('profile', 'Maincontroller::profile',['filter'=>'auth']);
 $routes->get('otheruserprofile/(:num)', 'Maincontroller::otheruserprofile/$1',['filter'=>'auth']);
 $routes->get('sendFriendRequest/(:num)', 'Maincontroller::sendFriendRequest/$1');
+
 $routes->get('leaderboard/(:alpha)', 'Maincontroller::leaderboard/$1',['filter'=>'auth']);
 $routes->get('getLeaderboardHTMLajax/(:alpha)/(:alpha)', 'Maincontroller::getLeaderboardHTMLajax/$1/$2',['filter'=>'auth']);
 $routes->get('forgotPassword', 'Maincontroller::forgotPassword',['filter' => 'noauth']);
@@ -67,6 +71,7 @@ $routes->match(['get','post'],'register', 'Maincontroller::register',['filter' =
 $routes->get('logout','Maincontroller::logout');
 
 $routes->match(['get','post'],'hub', 'Maincontroller::hub',['filter' => 'auth']);
+$routes->match(['get','post'],'edit_profile', 'Maincontroller::edit_profile',['filter' => 'auth']);
 
 $routes->get('databaseTest', 'Maincontroller::databaseTest');
 

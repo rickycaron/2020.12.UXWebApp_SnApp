@@ -14,45 +14,47 @@
     <div id="processingText">
         <h2 hidden>Processing...</h2>
     </div>
-
+<?php if(session()->get("isLoggedIn")): ?>
     <form action="addObservation" method="post" enctype="multipart/form-data">
-
+<?php else:?>
+    <form action="login" method="post" enctype="multipart/form-data">
+<?php endif?>
         <input id="inputFile" type="file" name="picture" onchange="readURL(this)" hidden>
 
         <div class="txt_field">
             <label>Species:</label>
             <span></span>
-            <input type="text" class="form-control" id="speciesNamePlaceholder" name="specieName" required>
+            <input type="text" class="form-control" id="speciesNamePlaceholder" name="specieName" required value="<?= set_value('specieName')?>">
         </div>
 
         <div class="txt_field">
             <label>Scientific name:</label>
             <span></span>
-            <input type="text" class="form-control" id="scientificNamePlaceholder" name="scientificName" required>
+            <input type="text" class="form-control" id="scientificNamePlaceholder" name="scientificName" required value="<?= set_value('scientificName')?>">
         </div>
 
         <div class="txt_field">
             <label>Description:</label>
             <span></span>
-            <textarea type="text" class="form-control" id="DescriptionPlaceholder" name="description" required></textarea>
+            <textarea type="text" class="form-control" id="DescriptionPlaceholder" name="description" required value="<?= set_value('description')?>"></textarea>
         </div>
 
         <div class="txt_field">
             <label>Date:</label>
             <span></span>
-            <input type="date" class="form-control" id="datePlaceholder" name="date" required>
+            <input type="date" class="form-control" id="datePlaceholder" name="date" required value="<?= set_value('date')?>">
         </div>
 
         <div class="txt_field">
             <label>Time:</label>
             <span></span>
-            <input type="time" class="form-control" id="timePlaceholder" name="time" min="06:00" max="23:00" required>
+            <input type="time" class="form-control" id="timePlaceholder" name="time" min="06:00" max="23:00" required value="<?= set_value('time')?>">
         </div>
 
         <div class="txt_field">
             <label>Location:</label>
             <span></span>
-            <input type="Address" class="form-control" id="LocationPlaceholder" name="location">
+            <input type="Address" class="form-control" id="LocationPlaceholder" name="location" value="<?= set_value('location')?>">
         </div>
 
         <div class="checkboxInput">
@@ -62,13 +64,14 @@
         </div>
 
         <button class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit">Submit</button>
-        <button class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit">Cancel</button>
+       <!-- <button class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit">Cancel</button>-->
+
 
 <!--        <input method='post' class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit" value="Submit">-->
 <!--        <input method="post" class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit" value="Cancel">-->
-
     </form>
 </div>
+
 
 <!--
 <div class="addObservationContainer">
@@ -138,3 +141,5 @@
     <button class="custom-btn" id="cancelObservationButton">Cancel</button>
 </div>
 -->
+
+<!--    -------------------------------------------------------------------------------------->

@@ -120,17 +120,23 @@ class Maincontroller extends \CodeIgniter\Controller
         //get observations from friends from current users
         $data2['observations'] = $this->database_model->getFirstObservationsForHub($friendsArray);
         $observations = $data2['observations'];
-        $observationID = $observations[0]->id;
-        $likeStatus = $this->database_model->checkUserLikeStatus($userID, $observationID);
-
-        if($this->request->getPost('like')) {
-            $this->database_model->setUserLikeStatus($userID,$observationID);
+        if ($observations == null) {
+            $data2['upToDate'] = "You are up to date! Check your groups or search friends to see their observations";
+            $this->data['content'] = view('hubPage', $data2); //replace by your own view
         }
-        //get observations comment from
+        else {
+            $data2['upToDate'] = "";
 
-        if($this->request->getPost('commentShow')) {
-            $observationID = $this->request->getPost('obID');
-            $comment1['comments'] = $this->database_model->getComment($observationID);
+            if($this->request->getPost('like')) {
+                $this->database_model->setUserLikeStatus($userID,$observationID);
+            }
+            //get observations comment from
+
+            if($this->request->getPost('commentShow')) {
+                $observationID = $this->request->getPost('obID');
+                $comment1['comments'] = $this->database_model->getComment($observationID);
+            }
+            $this->data['content'] = view('hubPage', $data2); //replace by your own view
         }
 
         //check if submit comment
@@ -145,13 +151,11 @@ class Maincontroller extends \CodeIgniter\Controller
             return redirect()->to('hub');
         }
         //comment function end
-        $this->data['content'] = view('hubPage', $data2); //replace by your own view
+
         $this->data['title'] = 'Observation Feed';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js','showComment.js');
-        //$this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreFriendsObservations.js');
-        //$this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','UpdateLikes.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'likeFunction.js');
 
         return view("mainTemplate", $this->data);
     }
@@ -205,19 +209,20 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("mainTemplate", $this->data);
     }
 
-    public function group($groupname_filter) {
+    public function group($groupname_filter)
+    {
         $this->set_common_data('arrow_back', 'search');
-        $userID=session()->get("id");
+        $userID = session()->get("id");
         //get the groupid by the groupname and userid
         $groupid = $this->database_model->getGroupName($groupname_filter, $userID)->groupID;
         //get an array of userid of this group
         $query_result = $this->database_model->getUsersFromGroup($groupid);
         //get an array of user name of this group
-        $groupmembers=array();
-        foreach ($query_result as $row)
-        {
-            array_push($groupmembers,$this->database_model->getUser($row->userID));
+        $groupmembers = array();
+        foreach ($query_result as $row) {
+            array_push($groupmembers, $this->database_model->getUser($row->userID));
         }
+
         //below the code should be the same as the hub page
         helper(['form']);
         $index = 1;
@@ -239,19 +244,17 @@ class Maincontroller extends \CodeIgniter\Controller
                 if ($observations[0] == null) {
                     $upToDateDiv = '<div id="upToDateDiv" hidden>You are up to date</div>';
                     return $upToDateDiv;
-                }
-                else {
-                    $observationID = $observations[2]->id ;
-                    $index = $index+1;
-                    if($this->request->getPost('commentShow')) {
+                } else {
+                    $observationID = $observations[2]->id;
+                    $index = $index + 1;
+                    if ($this->request->getPost('commentShow')) {
                         $observationID = $this->request->getPost('obID');
                         $comment2['comments'] = $this->database_model->getComment($observationID);
                     }
-                    if ($this->request->getMethod() === 'post')
-                    {
-                        $message= $this->request->getPost('message');
+                    if ($this->request->getMethod() === 'post') {
+                        $message = $this->request->getPost('message');
                         $observationID = $this->request->getPost('obID');
-                        $this->database_model-> insertComment($userID,$message,$observationID);
+                        $this->database_model->insertComment($userID, $message, $observationID);
                         /*$this->data['content'] = view('hubPage'); //replace by your own view
                         return view("extraTemplate", $this->data);*/
                         return redirect()->to($groupname_filter);
@@ -263,19 +266,28 @@ class Maincontroller extends \CodeIgniter\Controller
         }
         $data2['observations'] = $this->database_model->getFirstObservationsForHub($groupmembers);
         $observations = $data2['observations'];
-        $observationID = $observations[0]->id ;
-        $likeStatus = $this->database_model->checkUserLikeStatus($userID, $observationID);
 
-        if($this->request->getPost('like')) {
-            $this->database_model->setUserLikeStatus($userID,$observationID);
+        if ($observations == null) {
+            $data2['nothingYet'] = "No observations to show, Yet!";
+            $this->data['content'] = view('groupPage', $data2); //replace by your own view
         }
-        //get observations comment from
+        else {
 
-        if($this->request->getPost('commentShow')) {
-            $observationID = $this->request->getPost('obID');
+            if ($this->request->getPost('like')) {
+                $this->database_model->setUserLikeStatus($userID, $observationID);
+            }
+            //get observations comment from
+
+            if ($this->request->getPost('commentShow')) {
+                $observationID = $this->request->getPost('obID');
+                $comment1['comments'] = $this->database_model->getComment($observationID);
+            }
             $comment1['comments'] = $this->database_model->getComment($observationID);
+            $data2['nothingYet'] = "";
+            $this->data['content'] = view('groupPage', $data2, $comment1);
         }
-        $comment1['comments'] = $this->database_model->getComment($observationID);
+
+
 
         //check if submit comment
         if ($this->request->getMethod() === 'post')
@@ -289,7 +301,8 @@ class Maincontroller extends \CodeIgniter\Controller
             return redirect()->to($groupname_filter);
         }
         //comment function end
-        $this->data['content'] = view('hubPage', $data2, $comment1); //replace by your own view
+
+
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreFriendsObservations.js');
         $this->data['title'] = 'Group';
         $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
@@ -336,10 +349,29 @@ class Maincontroller extends \CodeIgniter\Controller
             array_push($groupmembers,$this->database_model->getUser($row->userID));
         }
         $data['groupmembers']=$groupmembers;
+        $data['groupID'] = $groupid;
+        $data['groupName'] = $groupname_filter;
         $this->data['content'] = view('groupmembers',$data); //replace by your own view
         $this->data['title'] = 'Group Members';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('groupmembers');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js');
+        return view("mainTemplate", $this->data);
+    }
+
+    // show a list of friends that can be added to the group
+    public function addGroupMembers($groupID, $groupName) {
+        $this->set_common_data('arrow_back', 'search');
+
+        // retrieve all the information needed from the database
+        $this->data['friends'] = $this->database_model->getFriendsToAdd(session()->get('id'), $groupID);
+        $this->data['groupName'] = $groupName;
+
+        $this->data['content'] = view('addGroupMembers', $this->data);
+        $this->data['title'] = 'Friend List';
+
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'addFriendToGroup.js');
         return view("mainTemplate", $this->data);
     }
 
@@ -374,11 +406,7 @@ class Maincontroller extends \CodeIgniter\Controller
             }
         }
 
-        //get observations from friends from current users
-        $data2['observations'] = $this->database_model->getFirstObservationsProfile($userID);
-
         //profile user information part
-
         //get observation amount
         $data2['userID']=$userID;
         $data2['username']=$username;
@@ -387,10 +415,21 @@ class Maincontroller extends \CodeIgniter\Controller
         $data2['likeCount'] = $this->database_model->getUserLikeCount($userID);
         $data2['friendCount'] = $this->database_model->getUserFriendCount($userID);
         $data2['pointCount'] = $this->database_model->getUserpoint($userID);
+        $data2['description'] = $this->database_model->getUserDescription($userID);
+        $data2['image'] = $this->database_model->getUserProfilePicture($userID);
 
-        //user information part end
-        //change the content
-        $this->data['content'] = view('profile',$data2); //replace by your own view
+
+        //get observations from user
+        $data2['observations'] = $this->database_model->getFirstObservationsProfile($userID);
+        if ($data2['observations'] == null) {
+            $data2['nothingYet'] = "No observations to show, Yet!";
+            $this->data['content'] = view('profile', $data2); //replace by your own view
+        }
+        else {
+            $data2['nothingYet'] = "";
+            $this->data['content'] = view('profile',$data2); //replace by your own view
+        }
+
         $this->data['title'] = 'Profile';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('profile');
@@ -413,26 +452,23 @@ class Maincontroller extends \CodeIgniter\Controller
 
             if (strcasecmp($getMoreObservations, 'true') == 0) {
                 //get more observations from friends from current users
-                $data3['userID']=$userID;
-                $data3['username']=$username;
+                $data3['userID'] = $userID;
+                $data3['username'] = $username;
                 $data3['observations'] = $this->database_model->getMoreObservationsProfile($userID, $lastDate, $lastTime);
                 $observations = $data3['observations'];
                 if ($observations == null) {
                     $upToDateDiv = '<div id="upToDateDiv" hidden>You are up to date</div>';
                     return $upToDateDiv;
-                }
-                else {
+                } else {
                     return view('hubPage', $data3);
                 }
             }
         }
 
-        //get observations from friends from current users
-        $data2['observations'] = $this->database_model->getFirstObservationsProfile($userID);
-
         //profile user information part
         //get friendrequest status
         $data2['requestStatus'] = $this->database_model->getFriendrequestStatus($userID, session()->get('id'));
+
         //get observation amount
         $data2['userID']=$userID;
         $data2['username']=$username;
@@ -442,11 +478,21 @@ class Maincontroller extends \CodeIgniter\Controller
         $data2['friendCount'] = $this->database_model->getUserFriendCount($userID);
         $data2['pointCount'] = $this->database_model->getUserpoint($userID);
 
-        //user information part end
+        //get observations from user
+        $data2['observations'] = $this->database_model->getFirstObservationsProfile($userID);
+        if ($data2['observations'] == null) {
+            $data2['nothingYet'] = "No observations to show, Yet!";
+            $this->data['content'] = view('profile', $data2); //replace by your own view
+        }
+        else {
+            $data2['nothingYet'] = "";
+            $this->data['content'] = view('profile',$data2); //replace by your own view
+        }
+
         //change the content
-        $this->data['content'] = view('profile',$data2); //replace by your own view
         $this->data['title'] = 'Other User Profile';
         $this->data['menu_items'] = $this->menu_model->get_menuitems('otheruserprofile');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'otheruserprofile.js');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'otheruserprofile.js');
         return view("mainTemplate", $this->data);
     }
@@ -458,8 +504,9 @@ class Maincontroller extends \CodeIgniter\Controller
         $userID = session()->get('id');
 
         helper(['form']);
+
         if ($this->request->getMethod() === 'post'&& $this->validate([
-                'specieDescription'  => 'required|min_length[3]',
+                'description'  => 'required|min_length[3]',
                 'location'=>'required|min_length[6]|max_length[50]',
                 'date'=>'required|min_length[6]|max_length[50]',
                 'time'=>'required|min_length[4]|max_length[50]']))
@@ -467,15 +514,24 @@ class Maincontroller extends \CodeIgniter\Controller
             $uploadedPicture = $this->request->getFile('picture');
             $picture = file_get_contents($uploadedPicture->getTempName());
             $imageProperties = $uploadedPicture->getMimeType();
+            $scientificName = $this->request->getPost('scientificName');
 
             $specieName = $this->request->getPost('specieName');
-            $specieId = $this->database_model->getSpecieID($specieName);
+            if ($this->database_model->getSpecieID($specieName))
+            {
+                $specieId = $this->database_model->getSpecieID($specieName);
+            }
+            else
+            {
+                $this->database_model->insertSpecie($specieName,$scientificName,100);
+                $specieId = $this->database_model->getSpecieID($specieName);
+            }
             $description = $this->request->getPost('description');
             $location = $this->request->getPost('location');
             $date = $this->request->getPost('date');
             $time = $this->request->getPost('time');
 
-            $this->database_model->insertObservation($picture, $imageProperties, $description, $location, $date, $time, 14, $userID); //hardcoded values should be changed if species are filled in in the database with correct name
+            $this->database_model->insertObservation($picture, $imageProperties, $description, $location, $date, $time, $specieId[0]->id, $userID); //hardcoded values should be changed if species are filled in in the database with correct name
             return redirect()->to('hub');
         }
 
@@ -615,12 +671,43 @@ class Maincontroller extends \CodeIgniter\Controller
 
     public function edit_profile() {
         $this->set_common_data('arrow_back', 'search');
+        //get current user
+        $userID = session()->get('id');
 
-        //add your code here...
-        $this->data['content'] = view('edit_profile'); //replace by your own view
+        helper(['form']);
+        if($this->request->getMethod() === 'post'&& $this->validate([
+                'Name' => 'min_length[3]|max_length[255]|alpha_dash',
+                'email'  => 'min_length[3]|max_length[40]|valid_email',
+                'description' => 'min_length[3]|max_length[200]'
+            ]))
+        {
+            if($this->request->getFile('picture')->getTempName()) {
+                $uploadedPicture = $this->request->getFile('picture');
+                $picture = file_get_contents($uploadedPicture->getTempName());
+                $imageProperties = $uploadedPicture->getMimeType();
+            }
+            else {
+                $imageData = $this->database_model->getUserProfilePicture($userID);
+                $picture = $imageData[0]->imagedata;
+                $imageProperties = $imageData[0]->imagetype;
+            }
+
+            $name = $this->request->getPost('Name');
+            //$gender = $this->request->getPost('gender');
+            $email = $this->request->getPost('email');
+            $description = $this->request->getPost('description');
+
+            $this->database_model->setProfileData($userID, $name, $email, $description, $picture, $imageProperties);
+
+            return redirect()->to('profile');
+        }
+        $data2['userInformation'] = $this->database_model->getUser($userID);
+
+        $this->data['content'] = view('edit_profile', $data2); //replace by your own view
         $this->data['title'] = 'edit profile';
-
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','profilePicture.js', 'previewPicture.js');
+
         return view("mainTemplate", $this->data);
     }
     public function account() {
@@ -645,12 +732,6 @@ class Maincontroller extends \CodeIgniter\Controller
             'monthlyPoints' => $user->monthlyPoints,
             'weeklyPoints' => $user->weeklyPoints,
             'isLoggedIn' => true,
-//            'id' => $user['id'],
-//            'username' => $user['username'],
-//            'email' => $user['email'],
-//            'points' => $user['points'],
-//            'monthlyPoints' => $user['monthlyPoints'],
-//            'weeklyPoints' => $user['weeklyPoints'],
         ];
         session()->set($data);
         return true;

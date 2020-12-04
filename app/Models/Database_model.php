@@ -47,12 +47,12 @@ class Database_model
      * @param $points
      * @return int = 0 if query failed, 1 if query executed successfully.
      */
-    public function insertSpecie ($name, $points) {
-        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.specie WHERE name="'.$name.'") AS result;');
+    public function insertSpecie ($name, $scienticificName, $points) {
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.specie WHERE specieName="'.$name.'") AS result;');
         if ($query->getRow()->result) {
             return 0;
         }
-        $data = ['name'=> $name, 'points' => $points];
+        $data = ['specieName'=> $name, 'scientificName' => $scienticificName ,'points' => $points];
         $this->db->table('specie')->insert($data);
         return 1;
     }
@@ -245,11 +245,11 @@ class Database_model
     }
 
     /**
-     * @param $userID
+     * @param $userName
      * @return array|array[]|object[]
      */
-    public function getUserID($username) {
-        $query = $this->db->query('SELECT * FROM a20ux6.user WHERE username = "'.$username.'";');
+    public function getUserID($userName) {
+        $query = $this->db->query('SELECT user.id FROM a20ux6.user WHERE username = "'.$userName.'";');
         return $query->getRow();
     }
 
@@ -261,6 +261,7 @@ class Database_model
         $query = $this->db->query('SELECT * FROM a20ux6.user WHERE email = "'.$email.'"  LIMIT 1 ;');
         return $query->getRow();
     }
+
 
     /**
      * @param $userID
@@ -286,12 +287,23 @@ class Database_model
     }
 
     /**
+     * @param $groupName
+     * @return array|array[]|object[]
+     */
+    public function getGroupID($groupName) {
+        $query = $this->db->query('SELECT id
+                                        FROM a20ux6.userGroup
+                                        WHERE userGroup.name="'.$groupName.'";');
+        return $query->getRow();
+    }
+
+    /**
      * @param $groupname_filter, $userID
      * @return array|array[]|object[]
      * This function return te group id by group name and the current user id
      */
     public function getGroupName($groupname_filter, $userID){
-        $query = $this->db->query('SELECT m.groupID,m.userID,g.name,g.description 
+        $query = $this->db->query('SELECT m.groupID,m.userID,g.name,g.description,g.admin 
                                         FROM a20ux6.userGroup as g 
                                         INNER JOIN a20ux6.userGroupMapping as m
                                         ON g.id=m.groupID 
@@ -310,6 +322,48 @@ class Database_model
                                         ORDER BY groupID, userID;');
         return $query->getResult();
     }
+
+    /**
+     * @param $userID
+     * @param $groupID
+     * @return array|array[]|object[]
+     * This function deletes a user from a group
+     */
+    public function deleteUserFromGroup($userID, $groupID) {
+        $query = $this->db->query('DELETE FROM a20ux6.userGroupMapping WHERE (userID = "'.$userID.'" AND groupID = "'.$groupID.'");');
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @param $groupID
+     * @return array|array[]|object[]
+     * This function returns all the friends of the user that are not yet in the current group, so he can choose to add a friend
+     */
+    public function getFriendsToAdd($userID, $groupID) {
+        $query = $this->db->query('SELECT * FROM (SELECT u.id, username
+                                        FROM a20ux6.friendsMapping as m , a20ux6.user as u
+                                        WHERE CASE WHEN m.userID_A = "'.$userID.'" THEN m.userID_B = u.id
+			                                        WHEN m.userID_B = "'.$userID.'" THEN m.userID_A = u.id
+		                                        END) AS friends WHERE friends.id NOT IN (SELECT userID 
+                                                FROM a20ux6.userGroupMapping WHERE groupID = "'.$groupID.'");');
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @param $groupID
+     * @return int = 0 if query failed, 1 if query executed successfully.
+     * This function adds a user to a group
+     */
+    public function addFriendToGroup($userID, $groupID) {
+        $data = ['userID'=> $userID,
+            'groupID' => $groupID
+        ];
+        $this->db->table('userGroupMapping')->insert($data);
+        return 1;
+    }
+
 
     /**
      * @param $userID
@@ -376,6 +430,27 @@ class Database_model
                                         FROM a20ux6.user as u where u.id = "'.$userID.'"');
         return $query->getResult();
     }
+
+    /**
+     * @param $userID
+     * @return array|array[]|object[]
+     */
+    public function getUserDescription($userID) {
+        $query = $this->db->query('SELECT u.p_description as description
+                                        FROM a20ux6.user as u where u.id = "'.$userID.'"');
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @return array|array[]|object[]
+     */
+    public function getUserProfilePicture($userID) {
+        $query = $this->db->query('SELECT u.p_imagetype as imagetype, u.p_imagedata as imagedata
+                                        FROM a20ux6.user as u where u.id = "'.$userID.'"');
+        return $query->getResult();
+    }
+
 
 
     /**
@@ -483,7 +558,8 @@ class Database_model
      */
     public function getSpecieID($specieName) {
         $query = $this->db->query('SELECT id FROM a20ux6.specie WHERE specieName= "'.$specieName.'";');
-        return $query->getResult();
+        $specieID =  $query->getResult();
+        return $specieID;
     }
 
     /**
@@ -727,6 +803,28 @@ class Database_model
     }
 
     /**
+     * @param $userID
+     * @param $description
+     * @param $name
+     * @param $gender
+     * @param $email
+     * @param
+     * @param
+     */
+    public function setProfileData($userID, $name, $email, $description, $imageData, $imageProperties) {
+        $data = ['username' => $name,
+            'email' => $email,
+            'p_description'=> $description,
+            'p_imageData' => $imageData,
+            'p_imageType' => $imageProperties,
+        ];
+
+        $this->db->table('user')->update( $data, 'id = "'.$userID.'"');
+        return 1;
+    }
+
+
+    /**
      * @param $mappingID
      * @param $status
      */
@@ -782,6 +880,7 @@ class Database_model
 
         return $query->getResult();
     }
+
 
     /**
      * Query to get own observations:

@@ -5,12 +5,12 @@
 <div class="d-flex flex-row m-3" style="width:100%;max-width:600px">
 
     <div class="">
-        <img src="https://pic4.zhimg.com/ee44507a59989947c85d60e0b400f0c5_xl.jpg" class="rounded-circle" alt="templatemo easy profile" style="width: 100px;">
+        <img src="<?php echo data_uri($image[0]->imagedata, $image[0]->imagetype); ?>" class="rounded-circle" alt="templatemo easy profile" style="width: 100px;">
     </div>
 
     <div class="mx-4">
         <h3 class="user_name">Hello : <?= $username?></h3>
-        <h4 class="personal_description">A guy who really likes photography.</h4>
+        <h4 class="personal_description"><?=$description[0]->description?></h4>
         <div class = "trophyContainer">
             <span class="material-icons trophy">emoji_events</span>
             <span class="material-icons trophy">emoji_events</span>
@@ -97,14 +97,10 @@
                 <span class="material-icons my-auto" style="font-size: 40px">expand_less</span>
             </div>
             <hr class="mt-0 mb-2">
-            <div class="py-2">
-                <h5 class="font-weight-bold d-inline">Joppe Leers: </h5>
-                <h5 class="d-inline">Wow what a nice flower!</h5>
-            </div>
-            <div class="py-2">
-                <h5 class="font-weight-bold d-inline">Robbe Abts: </h5>
-                <h5 class="d-inline">Awesome!</h5>
-            </div>
+<!--            <div class="py-2">-->
+<!--                <h5 class="font-weight-bold d-inline">Joppe Leers: </h5>-->
+<!--                <h5 class="d-inline">Wow what a nice flower!</h5>-->
+<!--            </div>-->
             <div class="d-flex flex-row my-3">
                 <input type="txt" class="form-control" name="comment" placeholder="Create new comment">
                 <span class="material-icons my-auto ml-3 mr-2 text-primary" style="font-size:30px">send</span>
