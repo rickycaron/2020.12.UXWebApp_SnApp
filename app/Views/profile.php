@@ -1,7 +1,4 @@
 <input type="hidden" id="hidden_userID" value="<?=$userID ?>"/>
-<?php if($userID == session()->get('id')):?>
-    <a href="logout" class="btn btn-lg btn-primary btn-block my-3" style="width:100%;max-width:600px">Logout</a>
-<?php endif?>
 <div class="d-flex flex-row m-3" style="width:100%;max-width:600px">
 
     <div class="">

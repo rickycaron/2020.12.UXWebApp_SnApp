@@ -408,7 +408,7 @@ class Maincontroller extends \CodeIgniter\Controller
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('profile');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js');
-        return view("mainTemplate", $this->data);
+        return view("mainTemplateProfile", $this->data);
     }
     public function otheruserprofile($userID) {
         //this ffunction should the same as profile function, the nly diference is the useid
