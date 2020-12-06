@@ -60,7 +60,7 @@
     </style>
 
     <?php if (isset($scripts_to_load)) foreach ($scripts_to_load as $script): ?>
-        <script src="<?= base_url()?>/js/<?=$script?>?v=7" defer></script>
+        <script src="<?= base_url()?>/js/<?=$script?>?v=8" defer></script>
     <?php endforeach; ?>
 </head>
 

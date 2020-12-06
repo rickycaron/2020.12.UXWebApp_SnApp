@@ -157,4 +157,16 @@ trait extra_functions
         $this->database_model->addFriendToGroup($userID->id, $groupID->id);
         return;
     }
+
+    public function searchGetObservations($filter) {
+        return "<h1>get observations</h1>";
+    }
+
+    public function searchGetGroups($filter) {
+        return "<h1>get groups</h1>";
+    }
+
+    public function searchGetUsers($filter) {
+        return "<h1>get users</h1>";
+    }
 }

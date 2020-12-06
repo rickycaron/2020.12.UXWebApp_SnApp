@@ -536,11 +536,12 @@ class Maincontroller extends \CodeIgniter\Controller
     public function search() {
         $this->set_common_data('arrow_back', 'search');
 
-        //add your code here...
-        $this->data['content'] = view('search'); //replace by your own view
+        $search_data['placeholder'] = "<p>Start typing in the search bar</p>";
+        $this->data['content'] = view('search',$search_data);
         $this->data['title'] = 'Search';
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
+        $this->data['scripts_to_load'] = array('search.js');
         return view("mainTemplate", $this->data);
     }
     public function login() {

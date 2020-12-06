@@ -66,6 +66,11 @@ $routes->get('fetchObservationCommentHTML/(:num)', 'Maincontroller::fetchObserva
 $routes->get('account', 'Maincontroller::account',['filter'=>'auth']);
 $routes->get('edit_profile', 'Maincontroller::edit_profile',['filter'=>'auth']);
 $routes->get('search', 'Maincontroller::search');
+$routes->get('searchGetObservations/(:alpha)', 'Maincontroller::searchGetObservations/$1');
+$routes->get('searchGetGroups/(:alpha)', 'Maincontroller::searchGetGroups/$1');
+$routes->get('searchGetUsers/(:alpha)', 'Maincontroller::searchGetUsers/$1');
+$routes->get('search', 'Maincontroller::search');
+$routes->get('search', 'Maincontroller::search');
 $routes->get('friendList', 'Maincontroller::friendList');
 $routes->get('acceptFriendRequest/(:num)', 'Maincontroller::acceptFriendRequest/$1');
 $routes->get('declineFriendRequestOrDelete/(:num)', 'Maincontroller::declineFriendRequestOrDelete/$1');
