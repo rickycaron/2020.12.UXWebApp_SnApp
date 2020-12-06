@@ -11,48 +11,72 @@ let currentInput;
 let baseUrl = document.querySelector('input[id="hidden_base_url"]').value;
 
 function fetchSearchResult(){
-    console.log(currentInput + " " + currentSearchFilter);
-    //TODO: only fetch search results if currentInput is not empty
-    switch (currentSearchFilter) {
-        case 0:
-            fetchObservations()
-            fetchGroups()
-            fetchUsers()
-            break;
-        case 1:
-            fetchObservations()
-            break;
-        case 2:
-            fetchGroups()
-            break;
-        case 3:
-            fetchUsers()
-            break;
+    //console.log(currentInput + " " + currentSearchFilter);
+    if(currentInput === ""){
+        document.getElementById("placeholder_search_message").innerHTML = "<p>Start typing in the search bar.</p>";
+        document.getElementById("observations_container").innerHTML = "<p></p>";
+        document.getElementById("groups_container").innerHTML = "";
+        document.getElementById("users_container").innerHTML = "";
+    }
+    else {
+        document.getElementById("placeholder_search_message").innerHTML = "";
+        switch (currentSearchFilter) {
+            case 0:
+                fetchObservations()
+                fetchGroups()
+                fetchUsers()
+                break;
+            case 1:
+                fetchObservations()
+                document.getElementById("groups_container").innerHTML = "";
+                document.getElementById("users_container").innerHTML = "";
+                break;
+            case 2:
+                fetchGroups()
+                document.getElementById("observations_container").innerHTML = "";
+                document.getElementById("users_container").innerHTML = "";
+                break;
+            case 3:
+                fetchUsers()
+                document.getElementById("groups_container").innerHTML = "";
+                document.getElementById("observations_container").innerHTML = "";
+                break;
 
+        }
     }
 }
 
 function fetchObservations(){
-    console.log(baseUrl + "/searchGetObservations/" + currentInput);
+    //console.log(baseUrl + "/searchGetObservations/" + currentInput);
     fetch(baseUrl + "/searchGetObservations/" + currentInput)
         .then(resp => resp.text())
-        .then(data => document.getElementById("search_result_container").innerHTML = data)
+        .then(data => document.getElementById("observations_container").innerHTML = data)
         .catch(a => console.log(a));
-
 }
 
 function fetchGroups(){
-    console.log(baseUrl + "/searchGetGroups/" + currentInput);
+    //console.log(baseUrl + "/searchGetGroups/" + currentInput);
+    fetch(baseUrl + "/searchGetGroups/" + currentInput)
+        .then(resp => resp.text())
+        .then(data => document.getElementById("groups_container").innerHTML = data)
+        .catch(a => console.log(a));
 }
 
 function fetchUsers(){
-    console.log(baseUrl + "/searchGetUsers/" + currentInput);
+    //console.log(baseUrl + "/searchGetUsers/" + currentInput);
+    fetch(baseUrl + "/searchGetUsers/" + currentInput)
+        .then(resp => resp.text())
+        .then(data => document.getElementById("users_container").innerHTML = data)
+        .catch(a => console.log(a));
 }
 
 function keyboardPressed() {
     currentInput = document.getElementById("search").value;
-    fetchSearchResult()
+    // change all characters that are not in alpha numeric characters to SPACE
+    currentInput = currentInput.replace(/[^a-zA-Z]/g,"SPACE");
+    fetchSearchResult();
 }
+
 function AllClicked() {
     currentSearchFilter = 0;
     fetchSearchResult()

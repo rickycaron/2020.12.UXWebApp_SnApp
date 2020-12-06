@@ -244,6 +244,11 @@ class Database_model
         return $query->getRow();
     }
 
+    public function getUsersSearch($userName) {
+        $query = $this->db->query('SELECT * FROM a20ux6.user WHERE username LIKE "%'.$userName.'%";');
+        return $query->getResult();
+    }
+
     /**
      * @param $userName
      * @return array|array[]|object[]
@@ -320,6 +325,11 @@ class Database_model
         $query = $this->db->query('SELECT * FROM a20ux6.userGroupMapping 
                                         where groupID = "'.$groupid.'" 
                                         ORDER BY groupID, userID;');
+        return $query->getResult();
+    }
+
+    public function getGroup($Search) {
+        $query = $this->db->query('SELECT * FROM a20ux6.userGroup WHERE name LIKE "%'.$Search.'%";');
         return $query->getResult();
     }
 
@@ -666,6 +676,13 @@ class Database_model
     public function getObservation($observationID) {
         $query = $this->db->query('SELECT * FROM a20ux6.observation WHERE id= "'.$observationID.'";');
         return $query->getRowArray();
+    }
+
+    public function getObservationDescription($Search) {
+        $query = $this->db->query('SELECT *  FROM (a20ux6.observation t1 LEFT JOIN a20ux6.comment c ON c.observationID = t1.id)
+                                        INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id  LEFT JOIN a20ux6.user t4 ON t4.id = c.userID
+                                        WHERE (description LIKE"%'.$Search.'%") OR  (t4.username LIKE "%'.$Search.'%");');
+        return $query->getResult();
     }
 
     /**
