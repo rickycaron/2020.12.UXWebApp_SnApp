@@ -8,7 +8,7 @@ class Database_model
     /**
      * database_model constructor
      */
-
+    use \App\Controllers\extra_functions;
     public function __construct() {
         $this->db = \Config\Database::connect();
     }
@@ -523,7 +523,8 @@ class Database_model
         $searcheresult= $query->getResult();
         if(count($searcheresult)==1){
             $searchedpassword=$query->getRow()->password;
-            if(strcmp($searchedpassword,$password)==0)
+//            if(strcmp($searchedpassword,$password)==0)
+            if(password_verify($password,$searchedpassword))
             {
                 return 0;
             }
@@ -540,7 +541,23 @@ class Database_model
             return 3;
         }
     }
-
+    /**
+     * this function update all the password to its hashed version, it will only be used once
+     * @param
+     * @return
+     */
+    public function updatepasswordhash(){
+        $query = $this->db->query('SELECT * FROM a20ux6.user;');
+        $results= $query->getResult();
+        foreach($results as $row)
+        {
+            $id=$row->id;
+            if(!isset($row->password)){
+                $hashed_password = $this->passwordHash($row->origin_password);
+                $query = $this->db->query('UPDATE  a20ux6.user SET password = "'.$hashed_password.'" WHERE id = "'.$id.'";');
+            }
+        }
+    }
     /**
      * @param $email
      * @return string

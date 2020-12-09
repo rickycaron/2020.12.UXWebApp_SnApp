@@ -157,4 +157,8 @@ trait extra_functions
         $this->database_model->addFriendToGroup($userID->id, $groupID->id);
         return;
     }
+
+    private function passwordHash($password){
+        return password_hash($password,PASSWORD_BCRYPT);
+    }
 }

@@ -612,7 +612,8 @@ class Maincontroller extends \CodeIgniter\Controller
             $username= $this->request->getPost('username');
             $email= $this->request->getPost('email');
             $password=$this->request->getPost('password');
-            $this->database_model-> insertUser($username,$password,$email);
+            $hashed_password=$this->passwordHash($password);
+            $this->database_model-> insertUser($username,$hashed_password,$email);
             session()->setFlashdata('success','Successful Register!');
             return redirect()->to('login');
         }
@@ -622,27 +623,26 @@ class Maincontroller extends \CodeIgniter\Controller
             return view("extraTemplate", $this->data);
         }
     }
-    public function forgotPassword() {
-        $this->set_common_data('eco', 'eco');
-
-        //add your code here...
-        $this->data['content'] = view('forgotPassword'); //replace by your own view
-        $this->data['title'] = 'Forgot Password';
-
-
-        return view("extraTemplate", $this->data);
-    }
-    public function resetPassword() {
-        $this->set_common_data('eco', 'eco');
-
-        //add your code here...
-        $this->data['content'] = view('resetPassword'); //replace by your own view
-        $this->data['title'] = 'Reset Password';
-
-
-        return view("extraTemplate", $this->data);
-    }
-
+//    public function forgotPassword() {
+//        $this->set_common_data('eco', 'eco');
+//
+//        //add your code here...
+//        $this->data['content'] = view('forgotPassword'); //replace by your own view
+//        $this->data['title'] = 'Forgot Password';
+//
+//
+//        return view("extraTemplate", $this->data);
+//    }
+//    public function resetPassword() {
+//        $this->set_common_data('eco', 'eco');
+//
+//        //add your code here...
+//        $this->data['content'] = view('resetPassword'); //replace by your own view
+//        $this->data['title'] = 'Reset Password';
+//
+//
+//        return view("extraTemplate", $this->data);
+//    }
     public function edit_profile() {
         $this->set_common_data('arrow_back', 'search');
         //get current user

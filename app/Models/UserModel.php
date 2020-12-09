@@ -11,7 +11,6 @@ class UserModel extends Model
 
     protected function beforeInsert(array $data){
         $data = $this->passwordHash($data);
-
         return $data;
     }
     protected function beforeUpdate(array $data){
