@@ -549,7 +549,7 @@ class Maincontroller extends \CodeIgniter\Controller
 
         //add your code here...
         helper(['form']);//to remain the user's typed value if the login fails
-        $this->data['error_message'] =' ';
+
         if ($this->request->getMethod() === 'post' && $this->validate([
                 'email'  => 'required|min_length[3]|max_length[40]|valid_email|is_not_unique[user.email]',
                 'password'=>'required|min_length[6]|max_length[50]'
@@ -585,6 +585,10 @@ class Maincontroller extends \CodeIgniter\Controller
                 $this->data['error_message'] = 'Multiple accounts with the same email exsit. Please consult our software developer!';
             }
         }
+        else if($this->request->getMethod() === 'post' )
+        {
+            $this->data['validation']="errors";
+        }
         $this->data['content'] = view('login',$this->data); //replace by your own view
         return view("extraTemplate", $this->data);
     }
@@ -613,15 +617,17 @@ class Maincontroller extends \CodeIgniter\Controller
             $email= $this->request->getPost('email');
             $password=$this->request->getPost('password');
             $hashed_password=$this->passwordHash($password);
-            $this->database_model-> insertUser($username,$hashed_password,$email);
+            $this->database_model-> insertUser($username,$hashed_password,$email,$password);
             session()->setFlashdata('success','Successful Register!');
             return redirect()->to('login');
         }
-        else
+        else if($this->request->getMethod() === 'post')
         {
-            $this->data['content'] = view('register'); //replace by your own view
-            return view("extraTemplate", $this->data);
+            $this->data['validation']="error";
         }
+        $this->data['content'] = view('register',$this->data); //replace by your own view
+        return view("extraTemplate", $this->data);
+
     }
 //    public function forgotPassword() {
 //        $this->set_common_data('eco', 'eco');
@@ -686,6 +692,7 @@ class Maincontroller extends \CodeIgniter\Controller
     }
     public function account() {
         $this->set_common_data('arrow_back', 'search');
+
 
         //add your code here...
         $this->data['content'] = view('account'); //replace by your own view

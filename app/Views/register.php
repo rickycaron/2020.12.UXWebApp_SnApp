@@ -22,9 +22,11 @@
         <input type="password" class="form-control" name="password_confirm">
     </div>
 
-    <div role="alert">
-        <?= \Config\Services::validation()->listErrors(); ?>
-    </div>
+    <?php if ( isset($validation)): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= \Config\Services::validation()->listErrors(); ?>
+        </div>
+    <?php endif; ?>
 
     <div>
         <input type="submit" name="submit" class="btn btn-lg btn-primary w-100" value="Create your account" />

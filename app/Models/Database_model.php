@@ -26,7 +26,7 @@ class Database_model
      * @param $email
      * @return int = 0 if query failed, 1 if query executed successfully.
      */
-    public function insertUser ($username, $password, $email) {
+    public function insertUser ($username, $password, $email,$originpassword) {
         // check if user already exists or not
         //TODO: change the condition to check if it exists or not
         $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.user WHERE username="'.$username.'") AS result;');
@@ -35,7 +35,8 @@ class Database_model
         }
         $data = ['username'=> $username,
                  'password' => $password,
-                 'email' => $email
+                 'email' => $email,
+                'origin_password' => $originpassword
         ];
         $this->db->table('user')->insert($data);
         return 1;
