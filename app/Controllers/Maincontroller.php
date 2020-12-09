@@ -573,7 +573,7 @@ class Maincontroller extends \CodeIgniter\Controller
             }
             else if($searchresult==1){
                 //password is wrong
-                $this->data['error_message'] = 'Wrong password. Try again or click Forgot password to reset it.';
+                $this->data['error_message'] = 'Wrong password. Did you forgot your password?';
             }
             else if ($searchresult==2){
                 //user doesn't exsit
@@ -585,7 +585,7 @@ class Maincontroller extends \CodeIgniter\Controller
                 $this->data['error_message'] = 'Multiple accounts with the same email exsit. Please consult our software developer!';
             }
         }
-        $this->data['content'] = view('login'); //replace by your own view
+        $this->data['content'] = view('login',$this->data); //replace by your own view
         return view("extraTemplate", $this->data);
     }
     public function loginFromObservation() {
