@@ -1,9 +1,5 @@
 <h1 class="text-center mb-5">Change Password</h1>
-<?php if (session()->get('success')): ?>
-    <div class="alert alert-success" role="alert">
-        <?= session()->get('success') ?>
-    </div>
-<?php endif; ?>
+
 
 <form class="form-signin" action="account" method="post">
     <?= csrf_field() ?>
@@ -39,7 +35,11 @@
 
 <div style="max-width:330px; height:100vh" class="my-5">
 <h1 class="text-center">Change Password</h1>
-
+    <?php if (session()->get('success')): ?>
+        <div class="alert alert-success" role="alert">
+            <?= session()->get('success') ?>
+        </div>
+    <?php endif; ?>
 <form method="post">
     <label for="old_password" class="sr-only">Old Password</label>
     <input type="password" id="old_Password" class="form-control" placeholder="Old Password" name="old_password" required>
@@ -50,19 +50,22 @@
     <label for="again_new_password" class="sr-only">Old Password</label>
     <input type="password" id="again_new_password" class="form-control" placeholder="Input again" name="again_new_password" required>
 
+
+
+
     <div class="form-group mb-1">
         <label for="username">Old Password</label>
-        <input type="txt" class="form-control" name="old_password">
+        <input type="password" id="old_Password" class="form-control" name="old_password">
     </div>
 
     <div class="form-group mb-1">
         <label for="new_password">New Password</label>
-        <input type="txt" class="form-control" name="new_password">
+        <input type="password" id="new_password" class="form-control" name="new_password">
     </div>
 
     <div class="form-group mb-1">
         <label for="confirm_new_password">Confim New Password</label>
-        <input type="txt" class="form-control" name="confirm_new_password">
+        <input type="password" id="confirm_new_password" class="form-control" name="confirm_new_password">
     </div>
 
     <div>

@@ -57,10 +57,7 @@ $routes->get('sendFriendRequest/(:num)', 'Maincontroller::sendFriendRequest/$1')
 $routes->get('leaderboard/(:alpha)', 'Maincontroller::leaderboard/$1',['filter'=>'auth']);
 $routes->get('getLeaderboardHTMLajax/(:alpha)/(:alpha)', 'Maincontroller::getLeaderboardHTMLajax/$1/$2',['filter'=>'auth']);
 $routes->match(['get','post'],'forgotPassword', 'Maincontroller::forgotPassword',['filter' => 'noauth']);
-
-//$routes->get('resetPassword/(:num)', 'Maincontroller::resetPassword/$1');
-$routes->match(['get','post'],'resetPassword/(:num)', 'Maincontroller::resetPassword/$1');
-//$routes->match(['get','post'],'resetPassword2', 'Maincontroller::resetPassword2',['filter' => 'auth']);
+$routes->match(['get','post'],'resetPassword/(:num)', 'Maincontroller::resetPassword/$1',['filter'=>'auth']);
 
 $routes->get('anobservation/(:num)', 'Maincontroller::anobservation/$1',['filter'=>'auth']);
 $routes->get('fetchObservationLikeHTML/(:num)', 'Maincontroller::fetchObservationLikeHTML/$1');

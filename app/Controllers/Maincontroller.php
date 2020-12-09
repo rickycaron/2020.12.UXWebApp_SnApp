@@ -642,7 +642,6 @@ class Maincontroller extends \CodeIgniter\Controller
             $searchresult=$this->database_model->validateUserNameEmail($email,$userName);
             if ($searchresult==0){
                 //userName and email are correct
-                //goto create new password
                 $userquery = $this->database_model->getUserByEmail($email);
                 $this->setUserSession($userquery);
                 session()->setFlashdata('success','Successful Login!');
