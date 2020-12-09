@@ -100,11 +100,12 @@ class Database_model
      * @param $location
      * @param $date
      * @param $time
-     * @param $specieID = i am not sure what would be the best option to give as parameter. specie id or name (depends on the implementation from you code)
-     * @param $userID = i am not sure what would be the best option to give as parameter. user id or username (depends on the implementation from you code)
+     * @param $specieID
+     * @param $userID
+     * @param $userNote
      * @return int = 0 if query failed, 1 if query executed successfully.
      */
-    public function insertObservation($imageData, $imageProperties, $description, $location, $date, $time , $specieID, $userID) {
+    public function insertObservation($imageData, $imageProperties, $description, $location, $date, $time , $specieID, $userID, $userNote) {
         //check if specie exists
         $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.specie WHERE id="'.$specieID.'") AS result;');
         if (!$query->getRow()->result) {
@@ -123,7 +124,8 @@ class Database_model
             'date' => $date,
             'time' => $time,
             'specieID' => $specieID,
-            'userID' => $userID
+            'userID' => $userID,
+            'userNote' => $userNote
         ];
         $this->db->table('observation')->insert($data);
         return 1;

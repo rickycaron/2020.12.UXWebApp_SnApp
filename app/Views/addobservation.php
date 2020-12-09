@@ -22,37 +22,37 @@
         <input id="inputFile" type="file" name="picture" onchange="readURL(this)" hidden>
 
         <div class="txt_field">
-            <label>Species:</label>
+            <label>Species</label>
             <span></span>
             <input type="text" class="form-control" id="speciesNamePlaceholder" name="specieName" required value="<?= set_value('specieName')?>">
         </div>
 
-        <div class="txt_field">
-            <label>Scientific name:</label>
+        <div class="txt_field mt-2">
+            <label>Scientific name</label>
             <span></span>
             <input type="text" class="form-control" id="scientificNamePlaceholder" name="scientificName" required value="<?= set_value('scientificName')?>">
         </div>
 
-        <div class="txt_field">
-            <label>Description:</label>
+        <div class="txt_field mt-2">
+            <label>Description</label>
             <span></span>
             <textarea type="text" class="form-control" id="DescriptionPlaceholder" name="description" required value="<?= set_value('description')?>"></textarea>
         </div>
 
-        <div class="txt_field">
-            <label>Date:</label>
+        <div class="txt_field mt-2">
+            <label>Date</label>
             <span></span>
             <input type="date" class="form-control" id="datePlaceholder" name="date" required value="<?= set_value('date')?>">
         </div>
 
-        <div class="txt_field">
-            <label>Time:</label>
+        <div class="txt_field mt-2">
+            <label>Time</label>
             <span></span>
             <input type="time" class="form-control" id="timePlaceholder" name="time" min="06:00" max="23:00" required value="<?= set_value('time')?>">
         </div>
 
-        <div class="txt_field">
-            <label>Location:</label>
+        <div class="txt_field mt-2">
+            <label>Location</label>
             <span></span>
             <input type="Address" class="form-control" id="LocationPlaceholder" name="location" value="<?= set_value('location')?>">
         </div>
@@ -60,9 +60,15 @@
         <div class="checkboxInput">
             <input type="checkbox" id="useLocationCheckbox" name="useLocation">
             <span></span>
-            <label for="useLocation"><h5> Use current location for this observation </h5></label>
+            <label for="useLocation"><h6> Use current location for this observation </h6></label>
         </div>
 
-        <button class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit">Submit</button>
+        <div class="txt_field mt-2">
+            <label>Add personal note</label>
+            <span></span>
+            <input type="text" class="form-control" id="userNotePlaceholder" name="userNote" value="">
+        </div>
+
+        <button class="btn btn-primary w-100 my-2 mt-3" style="font-size:25px" type="submit">Submit</button>
     </form>
 </div>

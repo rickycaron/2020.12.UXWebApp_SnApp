@@ -481,7 +481,6 @@ class Maincontroller extends \CodeIgniter\Controller
 
         if ($this->request->getMethod() === 'post'&& $this->validate([
                 'description'  => 'required|min_length[3]',
-                'location'=>'required|min_length[6]|max_length[50]',
                 'date'=>'required|min_length[6]|max_length[50]',
                 'time'=>'required|min_length[4]|max_length[50]']))
         {
@@ -504,8 +503,9 @@ class Maincontroller extends \CodeIgniter\Controller
             $location = $this->request->getPost('location');
             $date = $this->request->getPost('date');
             $time = $this->request->getPost('time');
+            $userNote = $this->request->getPost('userNote');
 
-            $this->database_model->insertObservation($picture, $imageProperties, $description, $location, $date, $time, $specieId[0]->id, $userID); //hardcoded values should be changed if species are filled in in the database with correct name
+            $this->database_model->insertObservation($picture, $imageProperties, $description, $location, $date, $time, $specieId[0]->id, $userID, $userNote);
             return redirect()->to('hub');
         }
 
