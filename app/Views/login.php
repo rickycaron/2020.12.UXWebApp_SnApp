@@ -13,7 +13,9 @@
     </div>
     <div role="alert" style="color: red; font-size: 14px; padding: 5px;text-space: 1px;">
         <?= \Config\Services::validation()->listErrors(); ?>
+        <?=$error_message?>
     </div>
+
     <button onclick=location.href='hub' class="btn btn-lg btn-primary btn-block mt-7" type="submit">Log in</button>
 </form>
 

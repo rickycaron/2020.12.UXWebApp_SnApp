@@ -1,6 +1,6 @@
 <h1 class="text-center mb-5">Register</h1>
 
-<form action="register" method="post"  autocomplete="on">
+<form class="form" action="register" method="post"  autocomplete="on">
     <?= csrf_field() ?>
     <div class="form-group mb-1">
         <label for="username">Username</label>
