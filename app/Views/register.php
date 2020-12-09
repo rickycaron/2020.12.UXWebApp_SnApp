@@ -22,7 +22,7 @@
         <input type="password" class="form-control" name="password_confirm">
     </div>
 
-    <?php if ( isset($validation)): ?>
+    <?php if (isset($validation)): ?>
         <div class="alert alert-danger" role="alert">
             <?= \Config\Services::validation()->listErrors(); ?>
         </div>

@@ -630,11 +630,10 @@ class Maincontroller extends \CodeIgniter\Controller
 
     public function forgotPassword() {
         $this->data=[];
-
         helper(['form']);//to remain the user's typed value if the login fails
-        $this->data['error_message'] =' ';
         if ($this->request->getMethod() === 'post' && $this->validate([
-                'email'  => 'valid_email|is_not_unique[user.email]'
+                'email'  => 'valid_email|is_not_unique[user.email]',
+                'username' => 'required|min_length[3]|max_length[255]|alpha_dash'
             ]))
         {
             //check the password
@@ -644,8 +643,10 @@ class Maincontroller extends \CodeIgniter\Controller
             if ($searchresult==0){
                 //userName and email are correct
                 //goto create new password
-                $userID = $this->database_model->getUserID($userName);
-                return redirect()->to('resetPassword/'.$userID->id);
+                $userquery = $this->database_model->getUserByEmail($email);
+                $this->setUserSession($userquery);
+                session()->setFlashdata('success','Successful Login!');
+                return redirect()->to('resetPassword/'.$userquery->id);
 //                return view("mainTemplate", $this->data);
             }
             else if($searchresult==1){
@@ -655,48 +656,53 @@ class Maincontroller extends \CodeIgniter\Controller
             else if ($searchresult==2){
                 //email doesn't exsit
                 $this->data['error_message'] = 'This email address does not exists.';
-
             }
             else if ($searchresult==3){
                 //multiple accounts with the same user name,
-                $this->data['error_message'] = 'Multiple accounts with the same username exist. Please consult our software developer!';
+                $this->data['error_message'] = 'Multiple accounts with the same email address exist. Please consult our software developer!';
             }
         }
-
-
+        elseif($this->request->getMethod() === 'post'){
+            $this->data['error_message'] =' ';
+        }
         $this->data['content'] = view('forgotPassword', $this->data); //replace by your own view
         $this->data['title'] = 'Forgot Password';
-
-
         return view("extraTemplate", $this->data);
     }
 
     public function resetPassword($userID) {
-        $this->data=[];
-
+        if($userID != session()->get('id'))
+        {
+            //here should inform you don't have right to do that, you can only modify your own password
+            return redirect()->to('/html');
+        }
         $this->data['userID'] = $userID;
-        helper(['form']);//to remain the user's typed value if the login fails
-        $this->data['error_message'] ='';
+        //helper(['form']);//to remain the user's typed value if the login fails
+        //$this->data['error_message'] ='';
         if ($this->request->getMethod() === 'post' && $this->validate([
-                'newPassword'  => 'required|min_length[6]|max_length[50]'
+                'newPassword'  => 'required|min_length[6]|max_length[50]',
+                'password_confirm'=>'matches[newPassword]'
             ]))
         {
-            return redirect()->to('login');
-            //check the password
-            $password= $this->request->getPost('newpassword');
-            $confirmpassword=$this->request->getPost('confirmpassword');
-            if (strcmp($password,$confirmpassword)==0) {
-                $this->database_model->resetPassword($password, $userID);
-                return redirect()->to('login');
-
+            $password= $this->request->getPost('newPassword');
+            if($this->database_model->validateUser(session()->get('email'),$password)==0)
+            {
+                $this->data['error_message'] ='This password is the same as te old one!';
+                $this->data['content'] = view('resetPassword', $this->data); //replace by your own view
+                return view("extraTemplate", $this->data);
             }
-            else {
-                $this->data['error_message'] = 'Passwords are not identical.';
-            }
+            $hashed_password=$this->passwordHash($password);
+            $this->database_model->resetPassword($hashed_password, $userID,$password);
+            session()->destroy();
+            return redirect()->to('/html');
         }
-
+        elseif ($this->request->getMethod() === 'post')
+        {
+            $this->data['validation'] = "error";
+        }
         $this->data['content'] = view('resetPassword', $this->data); //replace by your own view
         $this->data['title'] = 'Reset Password';
+        return view("extraTemplate", $this->data);
     }
     public function edit_profile() {
         $this->set_common_data('arrow_back', 'search');
@@ -741,8 +747,6 @@ class Maincontroller extends \CodeIgniter\Controller
     }
     public function account() {
         $this->set_common_data('arrow_back', 'search');
-
-
         //add your code here...
         $this->data['content'] = view('account'); //replace by your own view
         $this->data['title'] = 'Account';
@@ -773,7 +777,6 @@ class Maincontroller extends \CodeIgniter\Controller
         session()->destroy();
         return redirect()->to('login');
     }
-
 
     public function check_login(){
         $username = $this->input->post('username');

@@ -1,16 +1,24 @@
 <h1 class="text-center">Reset Password</h1>
+<?php  $uri = service('uri'); ?>
 
-<form class="form" action='resetPassword' method="post">
+<form class="form" action='/html/resetPassword/<?=session()->get('id')?>' method="post">
     <?= csrf_field() ?>
-    <label for="password" class="sr-only ">New password</label>
-    <input type="password" id="newPassword" class="form-control" placeholder="New password" name="newpassword" required autofocus>
+    <label for="newPassword" class="sr-only ">New password</label>
+    <input type="password" id="newPassword" class="form-control" placeholder="New password" name="newPassword" required autofocus>
 
-    <label for="confirmpassword" class="sr-only">confirm password</label>
-    <input type="password" id="confirmpassword" class="form-control" placeholder="Confirm password" name="confirmpassword" required>
+    <label for="password_confirm" class="sr-only">confirm password</label>
+    <input type="password" id="password_confirm" class="form-control" placeholder="Confirm password" name="password_confirm" required>
 
-    <div role="alert" style="color: red; font-size: 14px; padding: 5px;text-space: 1px;">
-        <?= \Config\Services::validation()->listErrors(); ?>
-        <?=$error_message?>
-    </div>
+    <?php if ( isset($validation)): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= \Config\Services::validation()->listErrors(); ?>
+        </div>
+    <?php endif; ?>
+    <?php if ( isset($error_message)): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $error_message?>
+        </div>
+    <?php endif; ?>
+
     <button class="btn btn-lg btn-primary btn-block my-3" type="submit">Create a new password</button>
 </form>

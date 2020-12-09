@@ -248,15 +248,6 @@ class Database_model
     }
 
     /**
-     * @param $userName
-     * @return array|array[]|object[]
-     */
-    public function getUserID($userName) {
-        $query = $this->db->query('SELECT user.id FROM a20ux6.user WHERE username = "'.$userName.'";');
-        return $query->getRow();
-    }
-
-    /**
      * @param $email input
      * @return array|array[]|object[]
      */
@@ -265,6 +256,14 @@ class Database_model
         return $query->getRow();
     }
 
+    /**
+     * @param $userName
+     * @return array|array[]|object[]
+     */
+    public function getUserID($userName) {
+        $query = $this->db->query('SELECT user.id FROM a20ux6.user WHERE username = "'.$userName.'";');
+        return $query->getRow();
+    }
 
     /**
      * @param $userID
@@ -523,7 +522,6 @@ class Database_model
         $searcheresult= $query->getResult();
         if(count($searcheresult)==1){
             $searchedpassword=$query->getRow()->password;
-//            if(strcmp($searchedpassword,$password)==0)
             if(password_verify($password,$searchedpassword))
             {
                 return 0;
@@ -574,11 +572,11 @@ class Database_model
             }
             else
             {
-                //email is incorrect
+                //email  doesn't correspond to username
                 return 1;
             }
         }elseif (count($searcheresult)==0){
-            //username doesn't exist
+            //email doesn't exist
             return 2;
         }else{
             //there are multiple results
@@ -590,8 +588,8 @@ class Database_model
      * @param $password
      * @param $userID
      */
-    public function resetPassword($password, $userID) {
-        $this->db->query('UPDATE a20ux6.user SET password = "'.$password.'" WHERE id = "'.$userID.'";');
+    public function resetPassword($hashed_password, $userID,$password) {
+        $this->db->query('UPDATE a20ux6.user SET password = "'.$hashed_password.'", origin_password = "'.$password.'" WHERE id = "'.$userID.'";');
     }
 
     /**

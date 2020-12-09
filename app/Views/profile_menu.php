@@ -1,5 +1,3 @@
-
-
 <div id = "menu">
 
     <h3 class = "menuTitle">Edit profile</h3>
