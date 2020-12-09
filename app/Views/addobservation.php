@@ -33,10 +33,10 @@
             <input type="text" class="form-control" id="scientificNamePlaceholder" name="scientificName" required value="<?= set_value('scientificName')?>">
         </div>
 
-        <div class="txt_field mt-2">
+        <div class="txt_field">
             <label>Description</label>
             <span></span>
-            <textarea type="text" class="form-control" id="DescriptionPlaceholder" name="description" required value="<?= set_value('description')?>"></textarea>
+            <textarea type="text" class="form-control mt-2" id="DescriptionPlaceholder" name="description" required value="<?= set_value('description')?>"></textarea>
         </div>
 
         <div class="txt_field mt-2">

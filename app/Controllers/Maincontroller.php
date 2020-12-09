@@ -490,16 +490,16 @@ class Maincontroller extends \CodeIgniter\Controller
             $scientificName = $this->request->getPost('scientificName');
 
             $specieName = $this->request->getPost('specieName');
+            $description = $this->request->getPost('description');
             if ($this->database_model->getSpecieID($specieName))
             {
                 $specieId = $this->database_model->getSpecieID($specieName);
             }
             else
             {
-                $this->database_model->insertSpecie($specieName,$scientificName,100);
+                $this->database_model->insertSpecie($specieName,$scientificName,100,$description);
                 $specieId = $this->database_model->getSpecieID($specieName);
             }
-            $description = $this->request->getPost('description');
             $location = $this->request->getPost('location');
             $date = $this->request->getPost('date');
             $time = $this->request->getPost('time');
