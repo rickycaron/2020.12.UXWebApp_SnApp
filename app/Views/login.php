@@ -13,6 +13,7 @@
     <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
 
     <div class="d-flex justify-content-between">
+
         <a class="text-info text-left w-100 mb-3" href="forgotPassword">Forgot password?</a>
         <a class="text-info text-right w-100 mb-3" href="register">Register</a>
     </div>

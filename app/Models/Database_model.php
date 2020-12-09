@@ -514,10 +514,9 @@ class Database_model
     }
 
     /**
-     * created by rui
      * @param $email
      * @param $password
-     * @return int (correct)/1(password is wrong)/2(the user email doesn't exist)/3(multiple enail exsit, this shouldn't happen)
+     * @return int 0(correct)/1(password is wrong)/2(the user email doesn't exist)/3(multiple email exist, this shouldn't happen)
      */
     public function validateUser($email, $password) {
         $query = $this->db->query('SELECT password FROM a20ux6.user WHERE email = "'.$email.'";');
@@ -559,6 +558,42 @@ class Database_model
             }
         }
     }
+    /**
+     * @param $email
+     * @param $userName
+     * @return int 0(correct)/1(username is wrong)/2(the email doesn't exist)/3(multiple emails exist, this shouldn't happen)
+     */
+    public function validateUserNameEmail($email, $userName) {
+        $query = $this->db->query('SELECT username FROM a20ux6.user WHERE email = "'.$email.'";');
+        $searcheresult= $query->getResult();
+        if(count($searcheresult)==1){
+            $searchedname=$query->getRow()->username;
+            if(strcmp($searchedname,$userName)==0)
+            {
+                return 0;
+            }
+            else
+            {
+                //email is incorrect
+                return 1;
+            }
+        }elseif (count($searcheresult)==0){
+            //username doesn't exist
+            return 2;
+        }else{
+            //there are multiple results
+            return 3;
+        }
+    }
+
+    /**
+     * @param $password
+     * @param $userID
+     */
+    public function resetPassword($password, $userID) {
+        $this->db->query('UPDATE a20ux6.user SET password = "'.$password.'" WHERE id = "'.$userID.'";');
+    }
+
     /**
      * @param $email
      * @return string

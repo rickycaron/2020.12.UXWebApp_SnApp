@@ -543,13 +543,12 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
         return view("mainTemplate", $this->data);
     }
+
     public function login() {
         $this->data=[];
-        $this->set_common_data('eco', 'eco');
 
         //add your code here...
         helper(['form']);//to remain the user's typed value if the login fails
-
         if ($this->request->getMethod() === 'post' && $this->validate([
                 'email'  => 'required|min_length[3]|max_length[40]|valid_email|is_not_unique[user.email]',
                 'password'=>'required|min_length[6]|max_length[50]'
@@ -577,12 +576,12 @@ class Maincontroller extends \CodeIgniter\Controller
             }
             else if ($searchresult==2){
                 //user doesn't exsit
-                $this->data['error_message'] = 'Invalid username. Please register one account.';
+                $this->data['error_message'] = 'There is no account with this email address.';
 
             }
             else if ($searchresult==3){
                 //multiple accounts with the same user name,
-                $this->data['error_message'] = 'Multiple accounts with the same email exsit. Please consult our software developer!';
+                $this->data['error_message'] = 'Multiple accounts with the same email exist. Please consult our software developer!';
             }
         }
         else if($this->request->getMethod() === 'post' )
@@ -593,7 +592,6 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("extraTemplate", $this->data);
     }
     public function loginFromObservation() {
-        $this->set_common_data('eco', 'eco');
 
         //add your code here...
         $this->data['content'] = view('loginFromObservation'); //replace by your own view
@@ -601,10 +599,9 @@ class Maincontroller extends \CodeIgniter\Controller
 
         return view("extraTemplate", $this->data);
     }
+
     public function register() {
         $this->data=[];
-        $this->set_common_data('eco', 'eco');
-        //add your code here...
         helper(['form']);
         if ($this->request->getMethod() === 'post' && $this->validate([
                 'username' => 'required|min_length[3]|max_length[255]|alpha_dash|is_unique[user.username]',
@@ -618,8 +615,10 @@ class Maincontroller extends \CodeIgniter\Controller
             $password=$this->request->getPost('password');
             $hashed_password=$this->passwordHash($password);
             $this->database_model-> insertUser($username,$hashed_password,$email,$password);
+            $user = $this->database_model->getUserByEmail($email);
+            $this->setUserSession($user);
             session()->setFlashdata('success','Successful Register!');
-            return redirect()->to('login');
+            return redirect()->to('hub');
         }
         else if($this->request->getMethod() === 'post')
         {
@@ -627,28 +626,78 @@ class Maincontroller extends \CodeIgniter\Controller
         }
         $this->data['content'] = view('register',$this->data); //replace by your own view
         return view("extraTemplate", $this->data);
-
     }
-//    public function forgotPassword() {
-//        $this->set_common_data('eco', 'eco');
-//
-//        //add your code here...
-//        $this->data['content'] = view('forgotPassword'); //replace by your own view
-//        $this->data['title'] = 'Forgot Password';
-//
-//
-//        return view("extraTemplate", $this->data);
-//    }
-//    public function resetPassword() {
-//        $this->set_common_data('eco', 'eco');
-//
-//        //add your code here...
-//        $this->data['content'] = view('resetPassword'); //replace by your own view
-//        $this->data['title'] = 'Reset Password';
-//
-//
-//        return view("extraTemplate", $this->data);
-//    }
+
+    public function forgotPassword() {
+        $this->data=[];
+
+        helper(['form']);//to remain the user's typed value if the login fails
+        $this->data['error_message'] =' ';
+        if ($this->request->getMethod() === 'post' && $this->validate([
+                'email'  => 'valid_email|is_not_unique[user.email]'
+            ]))
+        {
+            //check the password
+            $email= $this->request->getPost('email');
+            $userName=$this->request->getPost('username');
+            $searchresult=$this->database_model->validateUserNameEmail($email,$userName);
+            if ($searchresult==0){
+                //userName and email are correct
+                //goto create new password
+                $userID = $this->database_model->getUserID($userName);
+                return redirect()->to('resetPassword/'.$userID->id);
+//                return view("mainTemplate", $this->data);
+            }
+            else if($searchresult==1){
+                //username is wrong
+                $this->data['error_message'] = 'Wrong username.';
+            }
+            else if ($searchresult==2){
+                //email doesn't exsit
+                $this->data['error_message'] = 'This email address does not exists.';
+
+            }
+            else if ($searchresult==3){
+                //multiple accounts with the same user name,
+                $this->data['error_message'] = 'Multiple accounts with the same username exist. Please consult our software developer!';
+            }
+        }
+
+
+        $this->data['content'] = view('forgotPassword', $this->data); //replace by your own view
+        $this->data['title'] = 'Forgot Password';
+
+
+        return view("extraTemplate", $this->data);
+    }
+
+    public function resetPassword($userID) {
+        $this->data=[];
+
+        $this->data['userID'] = $userID;
+        helper(['form']);//to remain the user's typed value if the login fails
+        $this->data['error_message'] ='';
+        if ($this->request->getMethod() === 'post' && $this->validate([
+                'newPassword'  => 'required|min_length[6]|max_length[50]'
+            ]))
+        {
+            return redirect()->to('login');
+            //check the password
+            $password= $this->request->getPost('newpassword');
+            $confirmpassword=$this->request->getPost('confirmpassword');
+            if (strcmp($password,$confirmpassword)==0) {
+                $this->database_model->resetPassword($password, $userID);
+                return redirect()->to('login');
+
+            }
+            else {
+                $this->data['error_message'] = 'Passwords are not identical.';
+            }
+        }
+
+        $this->data['content'] = view('resetPassword', $this->data); //replace by your own view
+        $this->data['title'] = 'Reset Password';
+    }
     public function edit_profile() {
         $this->set_common_data('arrow_back', 'search');
         //get current user
