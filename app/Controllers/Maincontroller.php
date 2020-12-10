@@ -167,12 +167,13 @@ class Maincontroller extends \CodeIgniter\Controller
         // retrieve all the information needed from the database and write values in placeholders
         $observation = $this->database_model->getObservation($observationID);
         $observation_data['username'] = $this->database_model->getUser($observation['userID'])->username;
-        $observation_data['specie_name'] = $this->database_model->getSpecie($observation['specieID'])->specieName;
+        $specie_query = $this->database_model->getSpecie($observation['specieID']);
+        $observation_data['specie_name'] = $specie_query->specieName;
+        $observation_data['description'] = $specie_query->specieDescription;
         $observation_data['user_note'] = $observation['userNote'];
         $observation_data['date'] = $observation['date'];
         $observation_data['time'] = $observation['time'];
         $observation_data['location'] = $observation['location'];
-        $observation_data['description'] = $observation['description'];
         $observation_data['like_count'] = $observation['likes'];
         $observation_data['comment_count'] = $observation['comments'];
         $observation_data['image_data'] = $observation['imageData'];
@@ -490,22 +491,24 @@ class Maincontroller extends \CodeIgniter\Controller
             $scientificName = $this->request->getPost('scientificName');
 
             $specieName = $this->request->getPost('specieName');
+            $description = $this->request->getPost('description');
             if ($this->database_model->getSpecieID($specieName))
             {
+                //this specie exsits in the database
                 $specieId = $this->database_model->getSpecieID($specieName);
             }
             else
             {
-                $this->database_model->insertSpecie($specieName,$scientificName,100);
+                //this specie is new
+                $this->database_model->insertSpecie($specieName,$scientificName,100,$description);
                 $specieId = $this->database_model->getSpecieID($specieName);
             }
-            $description = $this->request->getPost('description');
             $location = $this->request->getPost('location');
             $date = $this->request->getPost('date');
             $time = $this->request->getPost('time');
             $userNote = $this->request->getPost('userNote');
 
-            $this->database_model->insertObservation($picture, $imageProperties, $description, $location, $date, $time, $specieId[0]->id, $userID, $userNote);
+            $this->database_model->insertObservation($picture, $imageProperties, $location, $date, $time, $specieId[0]->id, $userID, $userNote);
             return redirect()->to('hub');
         }
 
@@ -515,7 +518,6 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'plantAPI.js','previewPicture.js');
         return view("mainTemplate", $this->data);
-
     }
 
     public function friendList() {

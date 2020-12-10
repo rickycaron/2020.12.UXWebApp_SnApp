@@ -48,12 +48,12 @@ class Database_model
      * @param $points
      * @return int = 0 if query failed, 1 if query executed successfully.
      */
-    public function insertSpecie ($name, $scienticificName, $points) {
+    public function insertSpecie ($name, $scienticificName, $points, $description) {
         $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.specie WHERE specieName="'.$name.'") AS result;');
         if ($query->getRow()->result) {
             return 0;
         }
-        $data = ['specieName'=> $name, 'scientificName' => $scienticificName ,'points' => $points];
+        $data = ['specieName'=> $name, 'scientificName' => $scienticificName ,'points' => $points,'specieDescription' => $description];
         $this->db->table('specie')->insert($data);
         return 1;
     }
@@ -106,7 +106,7 @@ class Database_model
      * @param $userNote
      * @return int = 0 if query failed, 1 if query executed successfully.
      */
-    public function insertObservation($imageData, $imageProperties, $description, $location, $date, $time , $specieID, $userID, $userNote) {
+    public function insertObservation($imageData, $imageProperties, $location, $date, $time , $specieID, $userID, $userNote) {
         //check if specie exists
         $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.specie WHERE id="'.$specieID.'") AS result;');
         if (!$query->getRow()->result) {
@@ -120,7 +120,6 @@ class Database_model
         $data = [
             'imageData' => $imageData,
             'imageType' => $imageProperties,
-            'description' => $description,
             'location' => $location,
             'date' => $date,
             'time' => $time,
