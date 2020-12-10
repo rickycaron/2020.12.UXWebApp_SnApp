@@ -43,7 +43,7 @@
     <hr class="mt-2 mb-3 my-3"/>
     <a href="<?= base_url()?>/friendList"><?php echo lang('app.Friends') ?></a>
     <hr class="mt-2 mb-3 my-3"/>
-    <a href="<?= base_url()?>/account"><?php echo lang('app.Change_password') ?></a>
+    <a href="<?= base_url()?>/account/<?= session()->get('id')?>"><?php echo lang('app.Change_password') ?></a>
     <hr class="mt-2 mb-3 my-3"/>
     <a href="<?= base_url()?>/edit_profile"><?php echo lang('app.Edit_profile') ?></a>
     <hr class="mt-2 mb-3 my-3"/>
