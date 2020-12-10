@@ -2,7 +2,7 @@
 <div style="width:100%;max-width:600px">
 <?php foreach ($groups as $group): ?>
     <?php if ($group[3] == session()->get('id')):?>
-        <h4>Groups created by me:</h4>
+        <h4><?php echo lang('app.Groups_created_by_me') ?></h4>
         <?php break;?>
     <?php endif?>
 <?php endforeach;?>
@@ -27,12 +27,12 @@
     <?php endif?>
 <?php endforeach; ?>
 
-<a href="newgroup" class="btn btn-lg btn-primary btn-block my-3" style="width:100%;max-width:600px">Create a new group</a>
+<a href="newgroup" class="btn btn-lg btn-primary btn-block my-3" style="width:100%;max-width:600px"><?php echo lang('app.Create_a_new_group') ?></a>
 
 
     <?php foreach ($groups as $group): ?>
         <?php if ($group[3] !=session()->get('id')):?>
-            <h4>Groups I joined: </h4>
+            <h4><?php echo lang('app.Groups_I_joined') ?></h4>
             <?php break;?>
         <?php endif?>
     <?php endforeach;?>
@@ -49,7 +49,7 @@
                 <span class="material-icons my-auto mx-3" style="font-size: 40px">navigate_next</span>
             </div>
         </a>
-        <a class="px-3 pb-3" href="<?=base_url()?>/groupmembers/<?=$group[0]?>"><?=$group[2]?> members</a>
+        <a class="px-3 pb-3" href="<?=base_url()?>/groupmembers/<?=$group[0]?>"><?=$group[2]?> <?php echo lang('app.members') ?></a>
 
         </div>
     <?php endif?>
