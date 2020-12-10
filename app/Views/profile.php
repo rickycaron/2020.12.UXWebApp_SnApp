@@ -41,14 +41,14 @@
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class=" material-icons" onclick="closeNav()">navigate_next</a>
     <hr class="mt-2 mb-3 my-3"/>
-    <a href="<?= base_url()?>/friendList">Friends</a>
+    <a href="<?= base_url()?>/friendList"><?php echo lang('app.Friends') ?></a>
     <hr class="mt-2 mb-3 my-3"/>
-    <a href="<?= base_url()?>/account">Change password</a>
+    <a href="<?= base_url()?>/account"><?php echo lang('app.Change_password') ?></a>
     <hr class="mt-2 mb-3 my-3"/>
-    <a href="<?= base_url()?>/edit_profile">Edit profile</a>
+    <a href="<?= base_url()?>/edit_profile"><?php echo lang('app.Edit_profile') ?></a>
     <hr class="mt-2 mb-3 my-3"/>
     <?php if($userID == session()->get('id')):?>
-        <a href="<?= base_url()?>/logout">Logout</a>
+        <a href="<?= base_url()?>/logout"><?php echo lang('app.Logout') ?></a>
     <?php endif?>
     <hr class="mt-2 mb-3 my-3"/>
 </div>

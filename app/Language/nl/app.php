@@ -1,6 +1,7 @@
 <?php
 return [
     'Make_an_observation' => 'Maak een observatie',
+    'Log_in' => 'Aanmelden',
     'Forgot_password?' => 'Wachtwoord vergeten?',
     'Register' => 'Registreer',
     'Email_address' => 'Email adres',
@@ -31,5 +32,9 @@ return [
     'Location' => 'Locatie',
     'Use_current_location_for_this_observation' => 'Gebruik huidige locatie',
     'Add_personal_note' => 'Voeg opmerking toe',
-    'Submit' => 'Voeg toe'
+    'Submit' => 'Voeg toe',
+    'Friends' => 'Vrienden',
+    'Change_password' => 'Wachtwoord veranderen',
+    'Edit_profile' => 'Profiel bewerken',
+    'Logout' => 'Afmelden'
 ];

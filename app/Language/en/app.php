@@ -1,6 +1,7 @@
 <?php
 return [
     'Make_an_observation' => 'Make an observation',
+    'Log_in' => 'Log in',
     'Forgot_password?' => 'Forgot Password?',
     'Register' => 'Register',
     'Email_address' => 'Email address',
@@ -31,5 +32,9 @@ return [
     'Location' => 'Location',
     'Use_current_location_for_this_observation' => 'Use current location for this observation',
     'Add_personal_note' => 'Add personal note',
-    'Submit' => 'Submit'
+    'Submit' => 'Submit',
+    'Friends' => 'Friends',
+    'Change_password' => 'Change password',
+    'Edit_profile' => 'Edit profile',
+    'Logout' => 'Logout'
 ];

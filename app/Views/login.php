@@ -27,7 +27,7 @@
             <?= $error_message?>
         </div>
     <?php endif; ?>
-    <button onclick=location.href='hub' class="btn btn-lg btn-primary btn-block mt-9" type="submit">Log in</button>
+    <button onclick=location.href='hub' class="btn btn-lg btn-primary btn-block mt-9" type="submit"><?php echo lang('app.Log_in') ?></button>
 </form>
 
 <hr class="mt-2 mb-3 my-3"/>
