@@ -1,16 +1,85 @@
+<style>
+    .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        background-color: #E5F4F1;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+    }
+
+    .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+
+    .sidenav a:hover {
+        color: #006650;
+    }
+
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+    @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+    }
+</style>
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class=" material-icons" onclick="closeNav()">navigate_next</a>
+    <hr class="mt-2 mb-3 my-3"/>
+    <a href="<?= base_url()?>/friendList">Friends</a>
+    <hr class="mt-2 mb-3 my-3"/>
+    <a href="<?= base_url()?>/account">Change password</a>
+    <hr class="mt-2 mb-3 my-3"/>
+    <a href="<?= base_url()?>/edit_profile">Edit profile</a>
+    <hr class="mt-2 mb-3 my-3"/>
+    <?php if($userID == session()->get('id')):?>
+        <a href="<?= base_url()?>/logout">Logout</a>
+    <?php endif?>
+    <hr class="mt-2 mb-3 my-3"/>
+</div>
 <input type="hidden" id="hidden_userID" value="<?=$userID ?>"/>
 <div class="d-flex flex-row m-3" style="width:100%;max-width:600px">
 
     <div class="">
         <img src="<?php echo data_uri($image[0]->imagedata, $image[0]->imagetype); ?>" class="rounded-circle" alt="templatemo easy profile" style="width: 100px;">
     </div>
+    <div class="mx-4 w-100">
+        <div class="row justify-content-between">
+            <h2 class="user_name"><?= $username?> </h2>
+            <a><span onclick="openNav()" class="material-icons " style="font-size:50px;" id="header_icon_2">more_horiz</span></a>
+            <script>
+                function openNav() {
+                    document.getElementById("mySidenav").style.width = "250px";
+                }
 
-    <div class="mx-4">
-        <h2 class="user_name"><?= $username?></h2>
-        <h4 class="personal_description"><?=$description[0]->description?></h4>
+                function closeNav() {
+                    document.getElementById("mySidenav").style.width = "0";
+                }
+            </script>
+
+        </div>
+        <div class="row">
+            <h4 class="personal_description"><?=$description[0]->description?></h4>
+        </div>
     </div>
 
 </div>
+
 
 
 <div class="d-flex flex-row my-3">

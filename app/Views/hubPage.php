@@ -1,4 +1,8 @@
-
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
 <div id="nothingToShow"><?=$upToDate?></div>
 <div id="observationCardsContainer">
     <?php foreach ($observations as $ob): ?>
@@ -23,6 +27,8 @@
             <input type = "hidden" name= "status" class = "status" value = "<?=$likeStatus?>">
         </div>
 
+
+
         <div class="card my-2 shadow-sm " style="width:100%;max-width:600px">
 
 
@@ -43,14 +49,18 @@
                 </div>
 
 
-            <div class="card-body pt-2 pb-0">
-                <div class=" d-flex flex-row py-1">
+            <div class="card-body pt-2 pb-0 ">
+
+                <div class=" d-flex flex-row py-1  " >
                     <div class="mr-auto">
                         <h3 class="mb-0"><?=$ob->specieName?></h3>
                     </div>
-                    <span class="material-icons my-auto" style="font-size: 40px">expand_less</span>
-                </div>
-                <hr class="mt-0 mb-2">
+                    <nav class="navbar navbar-expand-sm ">
+                        <span class=" material-icons my-auto"  type="button" data-toggle="collapse" data-target="#demo"  style="font-size: 40px">expand_more</span>
+                     </div>
+
+
+                    <hr class="mt-0 mb-2">
 
                 <!--<form action="hub" method="post">
                     <input type = "hidden" name="obID" id = "obID" value = "<?/*=$ob->id*/?>">
@@ -66,15 +76,22 @@
                 ?>
 
                 <?php if ($ob->messages != null) :?>
+                    <div  id="demo" class="collapse" >
 
                     <?php for($i=0;$i<$commentCount*2;$i=$i+2):?>
                         <div class="py-2">
-                            <h5 class="font-weight-bold d-inline"> <?=$nameComment[$i]?>: </h5>
-                            <h5 class="d-inline"> <?=$nameComment[$i+1]?> </h5>
+                                    <h5 class="font-weight-bold d-inline"> <?=$nameComment[$i]?>: </h5>
+                                    <h5 class="d-inline"> <?=$nameComment[$i+1]?> </h5>
                         </div>
                     <?php endfor;?>
 
+                    </div>
+
+
                 <?php endif;?>
+                </nav>
+
+
 
 
                 <div class="d-flex flex-row my-3">
