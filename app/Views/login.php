@@ -7,10 +7,10 @@
 <form class="form-signin" action="login" method="post">
     <?= csrf_field() ?>
     <label for="email" class="sr-only">Email address</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" value="demo@test.com" required autofocus>
+    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" value="<?= set_value("email")?>" required autofocus>
 
     <label for="password" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" value="<?= set_value("password")?>" required>
 
     <div class="d-flex justify-content-between">
 
