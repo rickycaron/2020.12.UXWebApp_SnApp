@@ -6,13 +6,13 @@
         </div>
         <div class="content d-flex flex-column align-items-center">
             <div class="material-icons" id="backupIcon" style="font-size:40px;color: #25AC71;">backup</div>
-            <div class="text" id="noFileText">No picture made, yet!</div>
+            <div class="text" id="noFileText"><?php echo lang('app.No_picture_made,_yet!') ?></div>
         </div>
     </div>
 
-    <button class="btn btn-primary w-100 my-3" id="takePictureButton"><h4>Take picture</h4></button>
+    <button class="btn btn-primary w-100 my-3" id="takePictureButton"><h4><?php echo lang('app.Take_picture') ?></h4></button>
     <div id="processingText">
-        <h2 hidden>Processing...</h2>
+        <h2 hidden><?php echo lang('app.Processing...') ?></h2>
     </div>
 <?php if(session()->get("isLoggedIn")): ?>
     <form action="addObservation" method="post" enctype="multipart/form-data">
@@ -22,37 +22,37 @@
         <input id="inputFile" type="file" name="picture" onchange="readURL(this)" hidden>
 
         <div class="txt_field">
-            <label>Species</label>
+                <label><?php echo lang('app.Species') ?></label>
             <span></span>
             <input type="text" class="form-control" id="speciesNamePlaceholder" name="specieName" required value="<?= set_value('specieName')?>">
         </div>
 
         <div class="txt_field mt-2">
-            <label>Scientific name</label>
+            <label><?php echo lang('app.Scientific_name') ?></label>
             <span></span>
             <input type="text" class="form-control" id="scientificNamePlaceholder" name="scientificName" required value="<?= set_value('scientificName')?>">
         </div>
 
         <div class="txt_field">
-            <label>Description</label>
+            <label><?php echo lang('app.Description') ?></label>
             <span></span>
             <textarea readonly type="text" class="form-control mt-2" style="min-height: 120px;" id="DescriptionPlaceholder" name="description" required value="<?= set_value('description')?>"></textarea>
         </div>
 
         <div class="txt_field mt-2">
-            <label>Date</label>
+            <label><?php echo lang('app.Date') ?></label>
             <span></span>
             <input type="date" class="form-control" id="datePlaceholder" name="date" required value="<?= set_value('date')?>">
         </div>
 
         <div class="txt_field mt-2">
-            <label>Time</label>
+            <label><?php echo lang('app.Time') ?></label>
             <span></span>
             <input type="time" class="form-control" id="timePlaceholder" name="time" min="06:00" max="23:00" required value="<?= set_value('time')?>">
         </div>
 
         <div class="txt_field mt-2">
-            <label>Location</label>
+            <label><?php echo lang('app.Location') ?></label>
             <span></span>
             <input type="Address" class="form-control" id="LocationPlaceholder" name="location" value="<?= set_value('location')?>">
         </div>
@@ -60,11 +60,11 @@
         <div class="checkboxInput">
             <input type="checkbox" id="useLocationCheckbox" name="useLocation">
             <span></span>
-            <label for="useLocation"><h6> Use current location for this observation </h6></label>
+            <label for="useLocation"><h6> <?php echo lang('app.Use_current_location_for_this_observation') ?> </h6></label>
         </div>
 
         <div class="txt_field mt-2">
-            <label>Add personal note</label>
+            <label><?php echo lang('app.Add_personal_note') ?></label>
             <span></span>
             <input type="text" class="form-control" id="userNotePlaceholder" name="userNote" value="">
         </div>

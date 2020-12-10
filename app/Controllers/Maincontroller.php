@@ -42,7 +42,7 @@ class Maincontroller extends \CodeIgniter\Controller
         }
         $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
         $this->data['content'] = view('leaderboardSelect', $this->data); //replace by your own view
-        $this->data['title'] = 'Leaderboard Filter';
+        $this->data['title'] =  lang('app.Leaderboard');
         return view("mainTemplate", $this->data);
     }
 
@@ -153,7 +153,7 @@ class Maincontroller extends \CodeIgniter\Controller
         }
         //comment function end
 
-        $this->data['title'] = 'Observation Feed';
+        $this->data['title'] = lang('app.Observation_Feed');
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','likeFunction.js', 'showMoreObservations.js');
@@ -207,7 +207,7 @@ class Maincontroller extends \CodeIgniter\Controller
         }
         $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
         $this->data['content'] = view('groupsOverviewPage', $this->data); //replace by your own view
-        $this->data['title'] = 'Groups';
+        $this->data['title'] = lang('app.Groups');
         return view("mainTemplate", $this->data);
     }
 
@@ -351,7 +351,7 @@ class Maincontroller extends \CodeIgniter\Controller
     }
 
     public function profile() {
-        $this->set_common_data('eco', 'menu');
+        $this->set_common_data('eco', 'search');
 
         //get current user
         $userID = session()->get('id');
@@ -405,10 +405,11 @@ class Maincontroller extends \CodeIgniter\Controller
             $this->data['content'] = view('profile',$data2); //replace by your own view
         }
 
-        $this->data['title'] = 'Profile';
+        $this->data['title'] =  lang('app.Profile');
+
         $this->data['menu_items'] = $this->menu_model->get_menuitems('profile');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js');
-        return view("mainTemplateProfile", $this->data);
+        return view("mainTemplate", $this->data);
     }
     public function otheruserprofile($userID) {
         //this ffunction should the same as profile function, the nly diference is the useid
@@ -513,7 +514,7 @@ class Maincontroller extends \CodeIgniter\Controller
 
         //add your code here...
         $this->data['content'] = view('addobservation'); //replace by your own view
-        $this->data['title'] = 'Explore';
+        $this->data['title'] = lang('app.Add_Observation');
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'plantAPI.js','previewPicture.js');
         return view("mainTemplate", $this->data);

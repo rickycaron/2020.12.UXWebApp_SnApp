@@ -1,12 +1,12 @@
-<h1 class="text-center">Forgot Password</h1>
+<h1 class="text-center"><?php echo lang('app.Forgot_password?') ?></h1>
 
 <form class="form" action="forgotPassword" method="post">
     <?= csrf_field() ?>
-    <label for="email" class="sr-only ">Email address</label>
-    <input type="email" id="inputemail" class="form-control" placeholder="Email address" name="email" required autofocus>
+    <label for="email" class="sr-only "><?php echo lang('app.Email_address') ?></label>
+    <input type="email" id="inputemail" class="form-control" placeholder="<?php echo lang('app.Email_address') ?>" name="email" required autofocus>
 
-    <label for="username" class="sr-only">Username</label>
-    <input type="text" id="usereame" class="form-control" placeholder="Username" name="username" required>
+    <label for="username" class="sr-only"><?php echo lang('app.Username') ?></label>
+    <input type="text" id="usereame" class="form-control" placeholder="<?php echo lang('app.Username') ?>" name="<?php echo lang('app.Username') ?>" required>
 
     <?php if ( isset($validation)): ?>
         <div class="alert alert-danger" role="alert">
@@ -19,5 +19,5 @@
         </div>
     <?php endif; ?>
 
-    <button class="btn btn-lg btn-primary btn-block my-3" type="submit">Create a new password</button>
+    <button class="btn btn-lg btn-primary btn-block my-3" type="submit"><?php echo lang('app.Create_a_new_password') ?></button>
 </form>
