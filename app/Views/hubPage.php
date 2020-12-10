@@ -102,9 +102,10 @@
                         <form action="<?=$groupname ?>" method="post" id = "commentSend">
                             <?php endif?>
                             <input type = "hidden" name="obID" id = "obID" value = "<?=$ob->id?>">
-                            <input class="form-control" name="message" id = "message" value="<?= set_value('message')?>" placeholder="Create new comment">
-                            <!--<span type="submit" class="material-icons my-auto ml-3 mr-2 text-primary" id = "sendComment" style="font-size:30px" onclick="sendComment()" >send</span>-->
-                            <input type="submit" name="submitCommit" value="submit" />
+                            <div class="d-flex flex-row">
+                            <input class="form-control w-100" name="message" id = "message" value="<?= set_value('message')?>" placeholder="Create new comment">
+                            <button type="submit" name="submitCommit" class="btn btn-primary material-icons text-white mx-3" style="font-size:25px">send</button>
+                            </div>
                         </form>
                 </div>
                 <div class="my-2">
