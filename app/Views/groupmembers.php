@@ -27,7 +27,6 @@
 <!--            --><?php //endif?>
             <?php endif;?>
             <a class="delete_friend btn btn-third float-right" href="<?=base_url()?>/deleteUserFromGroup/<?=$member->id?>/<?=$groupID?>/<?=$groupName?>">Delete From Group</a>
-
         </div>
     </div>
 <?php endforeach?>

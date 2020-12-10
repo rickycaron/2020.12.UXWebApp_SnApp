@@ -371,7 +371,7 @@ class Database_model
      * @return array|array[]|object[]
      */
     public function getFriendsFromUser($userID) {
-        $query = $this->db->query('SELECT u.id, username, email, points, weeklyPoints, monthlyPoints, m.id AS mappingID
+        $query = $this->db->query('SELECT u.id, username, email, points, weeklyPoints, monthlyPoints,p_imagedata,p_imagedata, m.id AS mappingID
                                         FROM a20ux6.friendsMapping as m , a20ux6.user as u
                                         WHERE CASE WHEN m.userID_A = "'.$userID.'" THEN m.userID_B = u.id
 			                                        WHEN m.userID_B = "'.$userID.'" THEN m.userID_A = u.id

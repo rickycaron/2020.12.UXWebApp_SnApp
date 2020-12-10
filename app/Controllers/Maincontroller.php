@@ -413,10 +413,33 @@ class Maincontroller extends \CodeIgniter\Controller
     }
     public function otheruserprofile($userID) {
         //this ffunction should the same as profile function, the nly diference is the useid
-        $this->set_common_data('search', 'menu');
+        $this->set_common_data('eco', 'search');
+//
+//        //check if the url contains parameter for new observations
+//        $variableActive = $this->request->getVar('extra');
+//        if ($variableActive != null) {
+//            $getMoreObservations = $_GET['extra'];
+//            $lastDate = $_GET['lastDate'];
+//            $lastTime = $_GET['lastTime'];
+//            #$tomorrow = $_GET['tomorrow'];
+//
+//            if (strcasecmp($getMoreObservations, 'true') == 0) {
+//                //get more observations from friends from current users
+//                $data3['userID'] = $userID;
+//                $data3['username'] = $username;
+//                $data3['observations'] = $this->database_model->getMoreObservationsProfile($userID, $lastDate, $lastTime);
+//                $observations = $data3['observations'];
+//                if ($observations == null) {
+//                    $upToDateDiv = '<div id="upToDateDiv" hidden>You are up to date</div>';
+//                    return $upToDateDiv;
+//                } else {
+//                    return view('hubPage', $data3);
+//                }
+//            }
+//        }
+//
         //get current user
         $username = $this->database_model->getUser($userID)->username;
-
         //check if the url contains parameter for new observations
         $variableActive = $this->request->getVar('extra');
         if ($variableActive != null) {
@@ -427,23 +450,20 @@ class Maincontroller extends \CodeIgniter\Controller
 
             if (strcasecmp($getMoreObservations, 'true') == 0) {
                 //get more observations from friends from current users
-                $data3['userID'] = $userID;
-                $data3['username'] = $username;
+                $data3['userID']=$userID;
+                $data3['username']=$username;
                 $data3['observations'] = $this->database_model->getMoreObservationsProfile($userID, $lastDate, $lastTime);
                 $observations = $data3['observations'];
                 if ($observations == null) {
                     $upToDateDiv = '<div id="upToDateDiv" hidden>You are up to date</div>';
                     return $upToDateDiv;
-                } else {
+                }
+                else {
                     return view('hubPage', $data3);
                 }
             }
         }
-
         //profile user information part
-        //get friendrequest status
-        $data2['requestStatus'] = $this->database_model->getFriendrequestStatus($userID, session()->get('id'));
-
         //get observation amount
         $data2['userID']=$userID;
         $data2['username']=$username;
@@ -452,7 +472,11 @@ class Maincontroller extends \CodeIgniter\Controller
         $data2['likeCount'] = $this->database_model->getUserLikeCount($userID);
         $data2['friendCount'] = $this->database_model->getUserFriendCount($userID);
         $data2['pointCount'] = $this->database_model->getUserpoint($userID);
-
+        $data2['description'] = $this->database_model->getUserDescription($userID);
+        $data2['image'] = $this->database_model->getUserProfilePicture($userID);
+        //profile user information part
+        //get friendrequest status
+        $data2['requestStatus'] = $this->database_model->getFriendrequestStatus($userID, session()->get('id'));
         //get observations from user
         $data2['observations'] = $this->database_model->getFirstObservationsProfile($userID);
         if ($data2['observations'] == null) {
@@ -463,13 +487,27 @@ class Maincontroller extends \CodeIgniter\Controller
             $data2['nothingYet'] = "";
             $this->data['content'] = view('profile',$data2); //replace by your own view
         }
-
-        //change the content
-        $this->data['title'] = 'Other User Profile';
+        $this->data['title'] =  lang('app.Profile');
         $this->data['menu_items'] = $this->menu_model->get_menuitems('otheruserprofile');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'otheruserprofile.js');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'otheruserprofile.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js');
         return view("mainTemplate", $this->data);
+//        //get observation amount
+//        //get observations from user
+//        $data2['observations'] = $this->database_model->getFirstObservationsProfile($userID);
+//        if ($data2['observations'] == null) {
+//            $data2['nothingYet'] = "No observations to show, Yet!";
+//            $this->data['content'] = view('profile', $data2); //replace by your own view
+//        }
+//        else {
+//            $data2['nothingYet'] = "";
+//            $this->data['content'] = view('profile',$data2); //replace by your own view
+//        }
+//
+//        //change the content
+//        $this->data['title'] = 'Other User Profile';
+//        $this->data['menu_items'] = $this->menu_model->get_menuitems('otheruserprofile');
+//        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'otheruserprofile.js');
+//        return view("mainTemplate", $this->data);
     }
 
     public function addObservation() {
