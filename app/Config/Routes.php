@@ -33,7 +33,7 @@ $routes->setAutoRoute(true);
 //['filter' => 'noauth'], this website can only be shown when the user hasn'r logged in
 //['filter' => 'auth'], this website can only be shown when the user has logged in
 $routes->get('/', 'Maincontroller::login',['filter' => 'noauth']);
-$routes->get('hub', 'Maincontroller::hub',['filter'=>'auth']);
+$routes->get('/hub', 'Maincontroller::hub',['filter'=>'auth']);
 $routes->get('groups', 'Maincontroller::groups',['filter'=>'auth']);
 $routes->match(['get','post'],'group/(:alpha)', 'Maincontroller::group/$1',['filter'=>'auth']);
 $routes->match(['get','post'],'newgroup', 'Maincontroller::newgroup',['filter'=>'auth']);
