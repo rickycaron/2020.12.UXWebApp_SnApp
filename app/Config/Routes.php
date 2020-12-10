@@ -62,7 +62,7 @@ $routes->match(['get','post'],'resetPassword/(:num)', 'Maincontroller::resetPass
 $routes->get('anobservation/(:num)', 'Maincontroller::anobservation/$1',['filter'=>'auth']);
 $routes->get('fetchObservationLikeHTML/(:num)', 'Maincontroller::fetchObservationLikeHTML/$1');
 $routes->get('fetchObservationCommentHTML/(:num)', 'Maincontroller::fetchObservationCommentHTML/$1');
-$routes->get('account', 'Maincontroller::account',['filter'=>'auth']);
+$routes->match(['get','post'],'account/(:num)', 'Maincontroller::account/$1',['filter'=>'auth']);
 $routes->get('edit_profile', 'Maincontroller::edit_profile',['filter'=>'auth']);
 $routes->get('search', 'Maincontroller::search');
 $routes->get('friendList', 'Maincontroller::friendList');

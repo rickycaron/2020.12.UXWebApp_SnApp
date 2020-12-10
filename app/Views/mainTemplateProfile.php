@@ -108,7 +108,7 @@
         <hr class="mt-2 mb-3 my-3"/>
         <a href="<?= base_url()?>/friendList">Friends</a>
         <hr class="mt-2 mb-3 my-3"/>
-        <a href="<?= base_url()?>/account">Change password</a>
+        <a href="<?= base_url()?>/account/<?= session()->get('id')?>">Change password</a>
         <hr class="mt-2 mb-3 my-3"/>
         <a href="<?= base_url()?>/edit_profile">Edit profile</a>
         <hr class="mt-2 mb-3 my-3"/>
