@@ -4,7 +4,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <div id="nothingToShow"><?=$upToDate?></div>
-<div id="observationCardsContainer" class="w-100">
+<div id="observationCardsContainer" class="w-100 mt-2">
     <?php foreach ($observations as $ob): ?>
 
         <?php $commentCount = sizeof(explode("♪", $ob->messages))?>
