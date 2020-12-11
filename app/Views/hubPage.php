@@ -27,7 +27,7 @@
             <input type = "hidden" name= "status" class = "status" value = "<?=$likeStatus?>">
         </div>
 
-        <div class="card my-2 shadow-sm " style="width:100%;max-width:600px">
+        <div class="card my-2 shadow-sm " >
 
 
                 <div style="position: relative;" value = "<?=$ob->id?>">
