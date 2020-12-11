@@ -1,11 +1,11 @@
 //do this function when scrolled to the bottom of the page
-$(window).scroll(function() {
-    if($(window).scrollTop() == $(document).height() - $(window).height()) {
-        console.log('Entered showMoreFriendsObservations.s scroll function');
-        // ajax call get data from server and append to the div
-        getOtherObservations()
-    }
-});
+// $(window).scroll(function() {
+//     if($(window).scrollTop() == $(document).height() - $(window).height()) {
+//         console.log('Entered showMoreFriendsObservations.s scroll function');
+//         // ajax call get data from server and append to the div
+//         getOtherObservations()
+//     }
+// });
 
 let base_url = window.location;
 var lastDate = php_lastDate;
