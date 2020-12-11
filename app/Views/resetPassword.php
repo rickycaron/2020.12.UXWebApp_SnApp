@@ -1,10 +1,6 @@
 <h1 class="text-center">Reset Password</h1>
 <?php  $uri = service('uri'); ?>
-<?php if (session()->get('success')): ?>
-    <div class="alert alert-success" role="alert">
-        <?= session()->get('success') ?>
-    </div>
-<?php endif; ?>
+
 <form class="form" action='/html/resetPassword/<?=session()->get('id')?>' method="post">
     <?= csrf_field() ?>
     <label for="newPassword" class="sr-only ">New password</label>

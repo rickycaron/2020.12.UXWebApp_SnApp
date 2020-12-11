@@ -1,5 +1,5 @@
 
-<div>
+<div class="w-100">
 <?php foreach ($groups as $group): ?>
     <?php if ($group[3] == session()->get('id')):?>
         <h4 class="font-light"><?php echo lang('app.Groups_created_by_me') ?></h4>
@@ -11,7 +11,7 @@
     <?php if ($group[3] ==session()->get('id')):?>
 
     <div  class="card my-2 shadow-sm">
-        <a class="w-100 active" href="<?=$base_url?>/group/<?=$group[0]?>">
+        <a class="w-100" style="color: black;" href="<?=$base_url?>/group/<?=$group[0]?>">
                 <div class="d-flex flex-row">
                     <div class="ml-3 mr-auto my-2 mt-3">
                         <h2><?=$group[0]?></h2>
@@ -40,7 +40,7 @@
 <?php foreach ($groups as $group): ?>
     <?php if ($group[3] !=session()->get('id')):?>
         <div  class="card my-2 shadow-sm" style="width:100%;max-width:600px";">
-        <a class="w-100 active" href="<?=$base_url?>/group/<?=$group[0]?>">
+        <a class="w-100" style="color: black;" href="<?=$base_url?>/group/<?=$group[0]?>">
             <div class="d-flex flex-row">
                 <div class="ml-3 mr-auto my-2 mt-3">
                     <h2><?=$group[0]?></h2>
