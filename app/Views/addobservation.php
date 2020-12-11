@@ -22,37 +22,37 @@
         <input id="inputFile" type="file" name="picture" onchange="readURL(this)" hidden>
 
         <div class="txt_field">
-                <label><?php echo lang('app.Species') ?></label>
+            <label class="mb-0"><?php echo lang('app.Species') ?></label>
             <span></span>
             <input type="text" class="form-control" id="speciesNamePlaceholder" name="specieName" required value="<?= set_value('specieName')?>">
         </div>
 
-        <div class="txt_field mt-2">
-            <label><?php echo lang('app.Scientific_name') ?></label>
+        <div class="txt_field mt-3">
+            <label class="mb-0"><?php echo lang('app.Scientific_name') ?></label>
             <span></span>
             <input type="text" class="form-control" id="scientificNamePlaceholder" name="scientificName" required value="<?= set_value('scientificName')?>">
         </div>
 
-        <div class="txt_field">
-            <label><?php echo lang('app.Description') ?></label>
+        <div class="txt_field mt-3">
+            <label class="mb-0"><?php echo lang('app.Description') ?></label>
             <span></span>
-            <textarea readonly type="text" class="form-control mt-2" style="min-height: 120px;" id="DescriptionPlaceholder" name="description" required value="<?= set_value('description')?>"></textarea>
+            <textarea readonly type="text" class="form-control mt-0" style="min-height: 120px;" id="DescriptionPlaceholder" name="description" required value="<?= set_value('description')?>"></textarea>
         </div>
 
-        <div class="txt_field mt-2">
-            <label><?php echo lang('app.Date') ?></label>
+        <div class="txt_field mt-3">
+            <label class="mb-0"><?php echo lang('app.Date') ?></label>
             <span></span>
             <input type="date" class="form-control" id="datePlaceholder" name="date" required value="<?= set_value('date')?>">
         </div>
 
-        <div class="txt_field mt-2">
-            <label><?php echo lang('app.Time') ?></label>
+        <div class="txt_field mt-3">
+            <label class="mb-0"><?php echo lang('app.Time') ?></label>
             <span></span>
             <input type="time" class="form-control" id="timePlaceholder" name="time" min="06:00" max="23:00" required value="<?= set_value('time')?>">
         </div>
 
-        <div class="txt_field mt-2">
-            <label><?php echo lang('app.Location') ?></label>
+        <div class="txt_field mt-3">
+            <label class="mb-0"><?php echo lang('app.Location') ?></label>
             <span></span>
             <input type="Address" class="form-control" id="LocationPlaceholder" name="location" value="<?= set_value('location')?>">
         </div>
@@ -60,11 +60,11 @@
         <div class="checkboxInput">
             <input type="checkbox" id="useLocationCheckbox" name="useLocation">
             <span></span>
-            <label for="useLocation"><h6> <?php echo lang('app.Use_current_location_for_this_observation') ?> </h6></label>
+            <label class="mb-0" for="useLocation"><h6> <?php echo lang('app.Use_current_location_for_this_observation') ?> </h6></label>
         </div>
 
-        <div class="txt_field mt-2">
-            <label><?php echo lang('app.Add_personal_note') ?></label>
+        <div class="txt_field mt-3">
+            <label class="mb-0"><?php echo lang('app.Add_personal_note') ?></label>
             <span></span>
             <input type="text" class="form-control" id="userNotePlaceholder" name="userNote" value="">
         </div>
