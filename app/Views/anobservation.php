@@ -35,14 +35,12 @@
         <h2>Details</h2>
         <p><?=$description?></p>
     </div>
-    <div id="like_and_comment_button" class="d-flex"  >
-        <div id="like_button" class=" btn btn-primary btn-block my-3 mr-5 ml-5">
+    <div id="like_and_comment_button " class="d-flex justify-content-center"  >
+        <div id="like_button" class=" btn btn-primary btn-block w-10  my-3 mr-1">
             <span class="material-icons">favorite_border</span>
-            <p><?=$like_count?> likes</p>
         </div>
-        <div id="comment_button" class="btn btn-primary btn-block my-3 mr-5 ml-5">
+        <div id="comment_button" class="btn btn-primary btn-block w-10 my-3 ml-1">
             <span class="material-icons">chat</span>
-            <p><?=$comment_count?> comments</p>
         </div>
     </div>
     <hr>

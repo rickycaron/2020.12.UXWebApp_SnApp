@@ -27,7 +27,7 @@ function likeClicked() {
 
     let getUrl = window.location;
     let baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-    let url = baseUrl + "/html/fetchObservationLikeHTML/" + document.querySelector('input[id="hidden_variable_filter"]').value;
+    let url = baseUrl + "/fetchObservationLikeHTML/" + document.querySelector('input[id="hidden_variable_filter"]').value;
     console.log(url);
     setLikesOrComments(url);
 }
@@ -37,7 +37,7 @@ function commentClicked() {
 
     let getUrl = window.location;
     let baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-    let url = baseUrl + "/html/fetchObservationCommentHTML/" + document.querySelector('input[id="hidden_variable_filter"]').value;
+    let url = baseUrl + "/fetchObservationCommentHTML/" + document.querySelector('input[id="hidden_variable_filter"]').value;
     console.log(url);
     setLikesOrComments(url);
 }

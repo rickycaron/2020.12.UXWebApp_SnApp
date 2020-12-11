@@ -11,11 +11,11 @@ class Menu_model
     public function __construct()
     {
         $this->menu_items = array(
-            array('iconName'=>'home', 'link'=>'hub', 'className'=>'inactive'),
-            array('iconName'=>'people_alt', 'link'=>'groups', 'className'=>'inactive'),
-            array('iconName'=>'add_circle', 'link'=>'addObservation', 'className'=>'active'),
-            array('iconName'=>'leaderboard', 'link'=>'leaderboardSelect', 'className'=>'inactive'),
-            array('iconName'=>'person', 'link'=>'profile', 'className'=>'inactive')
+            array('iconName'=>'home', 'link'=>'hub', 'className'=>'inactive','id'=>'icon'),
+            array('iconName'=>'people_alt', 'link'=>'groups', 'className'=>'inactive','id'=>'icon'),
+            array('iconName'=>'add_circle', 'link'=>'addObservation', 'className'=>' active', 'id'=>'add_icon'),
+            array('iconName'=>'leaderboard', 'link'=>'leaderboardSelect', 'className'=>'inactive','id'=>'icon'),
+            array('iconName'=>'person', 'link'=>'profile', 'className'=>'inactive','id'=>'icon')
         );
     }
 
@@ -32,6 +32,7 @@ class Menu_model
 
     public function get_menuitems($menuLink = 'addObservation'){
         $this->set_active($menuLink);
+
         return $this->menu_items;
     }
 }
