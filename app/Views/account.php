@@ -32,7 +32,6 @@
     <?php endif; ?>
     <div>
         <input type="submit" name="submit" class="btn btn-lg btn-primary w-100 my-3" value="Change Password" />
-
     </div>
 </form>
     <button onclick=location.href='/html/profile' class="btn btn-lg btn-primary w-100 my-3" type="submit">Cancel</button>

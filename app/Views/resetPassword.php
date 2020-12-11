@@ -1,6 +1,7 @@
 <h1 class="text-center">Reset Password</h1>
 <?php  $uri = service('uri'); ?>
-<form class="form" action='<?= base_url()?>' method="post">
+
+<form class="form" action='<?= base_url()?>/resetPassword/<?=session()->get('id')?>' method="post">
 <!--<form class="form" action='/html/resetPassword/--><?//=session()->get('id')?><!--' method="post">-->
     <?= csrf_field() ?>
     <label for="newPassword" class="sr-only ">New password</label>
@@ -22,4 +23,4 @@
 
     <button class="btn btn-lg btn-primary btn-block mt-5" type="submit">Create a new password</button>
 </form>
-<button onclick=location.href='/html/logout' class="btn btn-lg btn-primary w-100 my-4" type="submit">Cancel</button>
+<button onclick=location.href='<?= base_url()?>/resetPassword/<?=session()->get('id')?>' class="btn btn-lg btn-primary w-100 my-4" type="submit">Cancel</button>

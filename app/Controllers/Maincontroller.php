@@ -692,7 +692,6 @@ class Maincontroller extends \CodeIgniter\Controller
                 $this->setUserSession($userquery);
                 session()->setFlashdata('success','Successfully Login!');
                 return redirect()->to('resetPassword/'.$userquery->id);
-//                return view("mainTemplate", $this->data);
             }
             else if($searchresult==1){
                 //username is wrong
@@ -723,8 +722,6 @@ class Maincontroller extends \CodeIgniter\Controller
             return redirect()->to(base_url());
         }
         $this->data['userID'] = $userID;
-        //helper(['form']);//to remain the user's typed value if the login fails
-        //$this->data['error_message'] ='';
         if ($this->request->getMethod() === 'post' && $this->validate([
                 'newPassword'  => 'required|min_length[6]|max_length[50]',
                 'password_confirm'=>'matches[newPassword]'
