@@ -64,7 +64,7 @@
 <body class="d-flex flex-column font-dark bg-primary">
 <header class="navbar fixed-top py-0" style=" height: 50px ;background-color: #006650; color: #FAFEFD">
     <span  class="material-icons my-auto" style="font-size:45px" id="header_icon_1"><?=$header_icon_1?></span>
-    <h3><?=$title?></h3>
+    <h3 class="my-auto"><?=$title?></h3>
     <a class="d-flex align-items-center" href="<?= base_url()?>/search"><span class="material-icons my-auto" style="font-size:45px; color: #FAFEFD" id="header_icon_2"><?=$header_icon_2?></span></a>
 </header>
 <main id="wrap" class="" style="min-height:100vh;background-color: #FAFEFD; margin-top:50px; margin-bottom:60px; border-radius: 25px 25px 0px 0px">
