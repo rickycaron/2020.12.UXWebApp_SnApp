@@ -117,10 +117,21 @@ trait extra_functions
         return;
     }
 
+    function sendComment ($comment, $observationID) {
+
+        $userID = session()->get('id');
+        $query_result = $this->database_model->insertComment($userID, $comment, $observationID);//insertComment ($userID, $message, $observationID)
+        return;
+    }
+
     function cancelLikeStatus ($observationID) {
         $userID = session()->get('id');
         $this->database_model->cancelUserLikeStatus($userID, $observationID);
         return;
+    }
+
+    function getUsername () {
+        return session()->get('username');
     }
 
     function checkUserLikeStatus ($observationID) {

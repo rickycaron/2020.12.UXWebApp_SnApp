@@ -1,5 +1,23 @@
 let likeButton = document.getElementsByClassName("likeButton");
 let likeStatus = document.getElementsByClassName("status");
+let commentButton = document.getElementsByClassName("commentButton");
+let commentContent = document.getElementsByClassName("commentContent")
+let commentShow = document.getElementsByClassName("collapse")
+
+for (let i = 0; i < commentButton.length; i++) {
+    commentButton[i].addEventListener('click', function () {
+        console.log('test comment button:');
+        document.getElementById('commentForm').submit()
+        sendComment(commentContent[i].commentID.value, commentButton[i].parentElement.getAttribute("value"))
+
+        username = getUsername()
+
+        commentShow[i].insertAdjacentHTML("afterend", "<h5 class=\"font-weight-bold d-inline\">You: </h5>\n" +
+            "<h5 class=\"d-inline\">" + commentContent[i].commentID.value + "</h5>")
+
+        //alert("comment success!")
+    }, true)
+}
 
 for (let i = 0; i < likeButton.length; i++) {
     likeButton[i].addEventListener('click', function() {
@@ -20,6 +38,19 @@ for (let i = 0; i < likeButton.length; i++) {
             console.log('likeStatus:', likeStatus[i].parentElement.getAttribute("value"));
         }
     }, true);
+}
+function getUsername() {
+    let base_url = document.querySelector('input[id="hidden_base_url"]').value;
+    fetch(base_url + "/getUsername")
+        //.then(data => console.log(data))
+        .catch(a => console.log(a));
+}
+function sendComment(comment, observationID) {
+    console.log('observationID + comment:', observationID, comment);
+    let base_url = document.querySelector('input[id="hidden_base_url"]').value;
+    fetch(base_url + "/sendComment/" + comment + "/" +observationID)
+        //.then(data => console.log(data))
+        .catch(a => console.log(a));
 }
 
 function accept_clicked(observationID) {
