@@ -172,4 +172,33 @@ trait extra_functions
     private function passwordHash($password){
         return password_hash($password,PASSWORD_BCRYPT);
     }
+
+    public function searchGetObservations($filter) {
+        $result['ob'] = $this->database_model->getObservationDescription($filter);
+        if($result['ob'] != null) {
+           return view('searchObservation', $result);
+        }
+        return "<h3>Observations:</h3>
+                <p>no observations found</p>";
+    }
+
+    public function searchGetGroups($filter) {
+        $result['group'] = $this->database_model->getGroup($filter);
+        if($result['group'] != null) {
+            return view('searchGroup', $result);
+        }
+        return "<h3>Groups:</h3>
+                <p>no groups found</p>";
+    }
+
+    public function searchGetUsers($filter) {
+        $filter = str_replace("SPACE", " ", $filter);
+        $this->debug_to_console($filter);
+        $result['user'] = $this->database_model->getUsersSearch($filter);
+        if($result['user'] != null) {
+            return view('searchUser', $result);
+        }
+        return "<h3>Users:</h3>
+                <p>no users found</p>";
+    }
 }

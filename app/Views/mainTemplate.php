@@ -23,7 +23,11 @@
 
 <body class="d-flex flex-column font-dark bg-primary">
     <header class="navbar fixed-top py-0 text-secondary bg-primary">
-        <span  class="material-icons my-auto" style="font-size:45px" id="header_icon_1"><?=$header_icon_1?></span>
+        <?php if(isset($back_route)):?>
+            <a href="<?= base_url()?>/<?=$back_route?>"><span class="material-icons my-auto" style="font-size:45px; color: #FAFEFD" id="header_icon_1"><?=$header_icon_1?></span></a>
+        <?php else:?>
+            <span class="material-icons my-auto" style="font-size:45px; color: #FAFEFD" id="header_icon_1"><?=$header_icon_1?></span>
+        <?php endif;?>
         <h3 class="my-auto"><?=$title?></h3>
         <a class="d-flex align-items-center" href="<?= base_url()?>/search"><span class="material-icons my-auto text-secondary" style="font-size:45px;" id="header_icon_2"><?=$header_icon_2?></span></a>
     </header>

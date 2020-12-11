@@ -22,15 +22,16 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->database_model = new \Database_model();
     }
 
-    private function set_common_data($header_icon_1, $header_icon_2) {
+    private function set_common_data($header_icon_1, $back_route, $header_icon_2) {
         $this->data['base_url'] = base_url();
         //$this->debug_to_console(base_url());
         $this->data['header_icon_1'] = $header_icon_1;
         $this->data['header_icon_2'] = $header_icon_2;
+        $this->data['back_route'] = $back_route;
     }
 
     public function leaderboardSelect() {
-        $this->set_common_data('eco', 'search');
+        $this->set_common_data('eco', null,'search');
 
         $this->leaderboard_userID=session()->get('id');
         $groups = $this->database_model->getGroupsFromUser($this->leaderboard_userID);
@@ -43,13 +44,13 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
         $this->data['content'] = view('leaderboardSelect', $this->data); //replace by your own view
         $this->data['title'] =  lang('app.Leaderboard');
+        session()->set('lastMainPageLink', 'leaderboardSelect');
         return view("mainTemplate", $this->data);
     }
 
-    //TODO: when you use the friends filter you can't see your own score i think?
     //TODO: when you select a filter with a space it gives an error -> set a restriction to the group name so no spaces are accepted or deal with it.
     public function leaderboard($leaderboard_filter) {
-        $this->set_common_data('arrow_back', 'search');
+        $this->set_common_data('arrow_back', 'leaderboardSelect','search');
         $leaderboard_period = "monthlyPoints";
         $this->leaderboard_userID = session()->get('id');
 
@@ -62,13 +63,13 @@ class Maincontroller extends \CodeIgniter\Controller
 
         $this->data['content'] = view('leaderboard', $pass_leaderboard_content);
         $this->data['title'] = 'Leaderboard';
-        $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
+        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
         $this->data['scripts_to_load'] = array('leaderboard.js', 'jquery-3.5.1.min');
         return view("mainTemplate", $this->data);
     }
 
     public function hub() {
-        $this->set_common_data('eco', 'search');
+        $this->set_common_data('eco',null, 'search');
         helper(['form']);
         $index = 1;
         //get current user
@@ -155,11 +156,12 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'showMoreObservations.js', 'likeFunction.js');
 
+        session()->set('lastMainPageLink', 'hub');
         return view("mainTemplate", $this->data);
     }
 
     public function anobservation($observationID) {
-        $this->set_common_data('arrow_back', 'search');
+        $this->set_common_data('arrow_back', null, 'search');
 
         // retrieve all the information needed from the database and write values in placeholders
         $observation = $this->database_model->getObservation($observationID);
@@ -181,13 +183,13 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['content'] = view('anobservation', $observation_data);
         $this->data['title'] = 'Observation';
 
-        $this->data['menu_items'] = $this->menu_model->get_menuitems('none');
+        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
         $this->data['scripts_to_load'] = array('anobservation.js');
         return view("mainTemplate", $this->data);
     }
 
     public function groups() {
-        $this->set_common_data('eco', 'search');
+        $this->set_common_data('eco', null,'search');
         //$username=session()->get('username');
 
         $this->leaderboard_userID=session()->get('id');
@@ -205,12 +207,13 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
         $this->data['content'] = view('groupsOverviewPage', $this->data); //replace by your own view
         $this->data['title'] = lang('app.Groups');
+        session()->set('lastMainPageLink', 'groups');
         return view("mainTemplate", $this->data);
     }
 
     public function group($groupname_filter)
     {
-        $this->set_common_data('arrow_back', 'search');
+        $this->set_common_data('arrow_back', 'groups','search');
         $userID = session()->get("id");
         $thisUserID['thisUserID'] = session()->get('id');
         //get the groupid by the groupname and userid
@@ -284,14 +287,15 @@ class Maincontroller extends \CodeIgniter\Controller
         //comment function end
 
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'likeFunction.js');
-        $this->data['title'] = 'Group';
-        $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
+        $this->data['content'] = view('groupPage', $data2);
+        $this->data['title'] = $groupname_filter;
+        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
         return view("mainTemplate", $this->data);
     }
 
     public function newgroup(){
         $this->data=[];
-        $this->set_common_data('eco', 'eco');
+        $this->set_common_data('eco', null,'eco');
         //add your code here...
         helper(['form']);
         if ($this->request->getMethod() === 'post' && $this->validate([
@@ -309,13 +313,13 @@ class Maincontroller extends \CodeIgniter\Controller
         {
             $this->data['content'] = view('newgroup'); //replace by your own view
             $this->data['title'] = 'New Group';
-            $this->data['menu_items'] = $this->menu_model->get_menuitems('newgroup');
+            $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
             return view("mainTemplate", $this->data);
         }
     }
 
     public function groupmembers($groupname_filter) {
-        $this->set_common_data('arrow_back', 'search');
+        $this->set_common_data('arrow_back', 'groups','search');
 
         $userID=session()->get("id");
         //get the groupid by the groupname and userid
@@ -334,14 +338,14 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['content'] = view('groupmembers',$data); //replace by your own view
         $this->data['title'] = 'Group Members';
 
-        $this->data['menu_items'] = $this->menu_model->get_menuitems('groupmembers');
+        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js');
         return view("mainTemplate", $this->data);
     }
 
     // show a list of friends that can be added to the group
     public function addGroupMembers($groupID, $groupName) {
-        $this->set_common_data('arrow_back', 'search');
+        $this->set_common_data('arrow_back', 'groupmembers/'.$groupName,'search');
 
         // retrieve all the information needed from the database
         $this->data['friends'] = $this->database_model->getFriendsToAdd(session()->get('id'), $groupID);
@@ -350,14 +354,16 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['content'] = view('addGroupMembers', $this->data);
         $this->data['title'] = 'Friend List';
 
-        $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
+        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'addFriendToGroup.js');
         return view("mainTemplate", $this->data);
     }
 
     public function profile() {
-        $this->set_common_data('eco', 'search');
+        $this->set_common_data('eco', null,'menu');
+        session()->set('lastMainPageLink', 'profile');
         helper(['form']);
+
         //get current user
         $userID = session()->get('id');
         $thisUserID['thisUserID'] = session()->get('id');
@@ -419,7 +425,7 @@ class Maincontroller extends \CodeIgniter\Controller
     }
     public function otheruserprofile($userID) {
         //this ffunction should the same as profile function, the nly diference is the useid
-        $this->set_common_data('eco', 'search');
+        $this->set_common_data('eco',null,  'search');
 //
 //        //check if the url contains parameter for new observations
 //        $variableActive = $this->request->getVar('extra');
@@ -494,8 +500,8 @@ class Maincontroller extends \CodeIgniter\Controller
             $this->data['content'] = view('profile',$data2); //replace by your own view
         }
         $this->data['title'] =  lang('app.Profile');
-        $this->data['menu_items'] = $this->menu_model->get_menuitems('otheruserprofile');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js');
+        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
         return view("mainTemplate", $this->data);
 //        //get observation amount
 //        //get observations from user
@@ -517,8 +523,8 @@ class Maincontroller extends \CodeIgniter\Controller
     }
 
     public function addObservation() {
-        $this->set_common_data('eco', 'search');
-
+        $this->set_common_data('eco', null,'search');
+        session()->set('lastMainPageLink', 'addObservation');
         //get current user
         $userID = session()->get('id');
 
@@ -565,7 +571,7 @@ class Maincontroller extends \CodeIgniter\Controller
     }
 
     public function friendList() {
-        $this->set_common_data('arrow_back', 'search');
+        $this->set_common_data('arrow_back', 'profile','search');
 
         // retrieve all the information needed from the database
         $this->data['requests'] = $this->database_model->getFriendRequestsFromUser(session()->get('id'));
@@ -574,24 +580,26 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['content'] = view('friendList', $this->data);
         $this->data['title'] = 'Friend List';
 
-        $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
+        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
         $this->data['scripts_to_load'] = array('friendlist.js');
         return view("mainTemplate", $this->data);
     }
 
     public function search() {
-        $this->set_common_data('arrow_back', 'search');
+        $this->set_common_data('arrow_back', session()->get('lastMainPageLink'),'search');
 
-        //add your code here...
-        $this->data['content'] = view('search'); //replace by your own view
+        $search_data['placeholder'] = "<p>Start typing in the search bar</p>";
+        $this->data['content'] = view('search',$search_data);
         $this->data['title'] = 'Search';
 
-        $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
+        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
+        $this->data['scripts_to_load'] = array('search.js');
         return view("mainTemplate", $this->data);
     }
 
     public function login() {
         $this->data=[];
+        $this->set_common_data('eco', null,'eco');
 
         //add your code here...
         helper(['form']);//to remain the user's typed value if the login fails
@@ -747,8 +755,9 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['title'] = 'Reset Password';
         return view("extraTemplate", $this->data);
     }
+
     public function edit_profile() {
-        $this->set_common_data('arrow_back', 'search');
+        $this->set_common_data('arrow_back','profile', 'search');
         //get current user
         $userID = session()->get('id');
 
@@ -783,13 +792,14 @@ class Maincontroller extends \CodeIgniter\Controller
 
         $this->data['content'] = view('edit_profile', $data2); //replace by your own view
         $this->data['title'] = 'edit profile';
-        $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
+        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','profilePicture.js', 'previewPicture.js');
 
         return view("mainTemplate", $this->data);
     }
     public function account($userID) {
-        $this->set_common_data('arrow_back', 'search');
+        $this->set_common_data('arrow_back', 'profile','search');
+
         //add your code here...
         if($userID != session()->get('id'))
         {
@@ -829,7 +839,8 @@ class Maincontroller extends \CodeIgniter\Controller
         }
         $this->data['content'] = view('account',$this->data); //replace by your own view
         $this->data['title'] = 'Account';
-        $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
+
+        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
         return view("mainTemplate", $this->data);
     }
     /* created by rui
@@ -844,10 +855,12 @@ class Maincontroller extends \CodeIgniter\Controller
             'monthlyPoints' => $user->monthlyPoints,
             'weeklyPoints' => $user->weeklyPoints,
             'isLoggedIn' => true,
+            'lastMainPageLink' => 'null'
         ];
         session()->set($data);
         return true;
     }
+
     /* created by rui
      * logout, clean the data of the current information
      * */
