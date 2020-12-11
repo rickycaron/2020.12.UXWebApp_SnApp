@@ -2,7 +2,6 @@
 <?php  $uri = service('uri'); ?>
 
 <form class="form" action='<?= base_url()?>/resetPassword/<?=session()->get('id')?>' method="post">
-<!--<form class="form" action='/html/resetPassword/--><?//=session()->get('id')?><!--' method="post">-->
     <?= csrf_field() ?>
     <label for="newPassword" class="sr-only ">New password</label>
     <input type="password" id="newPassword" class="form-control" placeholder="New password" name="newPassword" required autofocus>
@@ -20,7 +19,6 @@
             <?= $error_message?>
         </div>
     <?php endif; ?>
-
     <button class="btn btn-lg btn-primary btn-block mt-5" type="submit">Create a new password</button>
 </form>
 <button onclick=location.href='<?= base_url()?>/resetPassword/<?=session()->get('id')?>' class="btn btn-lg btn-primary w-100 my-4" type="submit">Cancel</button>

@@ -5,7 +5,7 @@
             <?= session()->get('success') ?>
         </div>
     <?php endif; ?>
-<form method="post" class="mt-5">
+<form method="post" class="mt-5" action="<?= base_url()?>/account/<?=session()->get('id')?>">
     <div class="form-group mb-1">
         <label for="oldPassword">Old Password</label>
         <input type="password" id="oldPassword" class="form-control" name="oldPassword"  >
@@ -32,7 +32,8 @@
     <?php endif; ?>
     <div>
         <input type="submit" name="submit" class="btn btn-lg btn-primary w-100 my-3" value="Change Password" />
+
     </div>
 </form>
-    <button onclick=location.href='/html/profile' class="btn btn-lg btn-primary w-100 my-3" type="submit">Cancel</button>
+    <button onclick=location.href='<?= base_url()?>/profile' class="btn btn-lg btn-primary w-100 my-3" type="submit">Cancel</button>
 </div>
