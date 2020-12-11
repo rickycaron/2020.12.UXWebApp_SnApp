@@ -78,7 +78,7 @@
 <footer>
     <nav class="navbar fixed-bottom" style=";background-color: #006650">
         <?php foreach ($menu_items as $menu): ?>
-            <a href="<?= base_url()?>/<?=$menu['link']?>" class="<?=$menu['className']?>"><span class="material-icons" style="font-size:45px; color: #FAFEFD"><?=$menu['iconName']?></span></a>
+            <a href="<?= base_url()?>/<?=$menu['link']?>" class="<?=$menu['className']?> d-flex align-items-center"><span class="material-icons" style="font-size:45px; color: #FAFEFD"><?=$menu['iconName']?></span></a>
         <?php endforeach; ?>
     </nav>
 </footer>
