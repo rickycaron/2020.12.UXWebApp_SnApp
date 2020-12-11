@@ -24,5 +24,6 @@
         </div>
     <?php endif; ?>
 
-    <button class="btn btn-lg btn-primary btn-block my-3" type="submit">Create a new password</button>
+    <button class="btn btn-lg btn-primary btn-block mt-5" type="submit">Create a new password</button>
 </form>
+<button onclick=location.href='/html/logout' class="btn btn-lg btn-primary w-100 my-4" type="submit">Cancel</button>
