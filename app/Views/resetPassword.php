@@ -1,7 +1,7 @@
 <h1 class="text-center">Reset Password</h1>
 <?php  $uri = service('uri'); ?>
-
-<form class="form" action='/html/resetPassword/<?=session()->get('id')?>' method="post">
+<form class="form" action='<?= base_url()?>' method="post">
+<!--<form class="form" action='/html/resetPassword/--><?//=session()->get('id')?><!--' method="post">-->
     <?= csrf_field() ?>
     <label for="newPassword" class="sr-only ">New password</label>
     <input type="password" id="newPassword" class="form-control" placeholder="New password" name="newPassword" required autofocus>

@@ -720,7 +720,7 @@ class Maincontroller extends \CodeIgniter\Controller
         if($userID != session()->get('id'))
         {
             //here should inform you don't have right to do that, you can only modify your own password
-            return redirect()->to('');
+            return redirect()->to(base_url());
         }
         $this->data['userID'] = $userID;
         //helper(['form']);//to remain the user's typed value if the login fails
@@ -797,7 +797,7 @@ class Maincontroller extends \CodeIgniter\Controller
         if($userID != session()->get('id'))
         {
             //here should inform you don't have right to do that, you can only modify your own password
-            return redirect()->to('/html/profile');
+            return redirect()->to(base_url());
         }
         $this->data['userID'] = $userID;
         if ($this->request->getMethod() === 'post' && $this->validate([
@@ -820,7 +820,7 @@ class Maincontroller extends \CodeIgniter\Controller
                 $hashed_password=$this->passwordHash($newPassword);
                 $this->database_model->resetPassword($hashed_password, $userID,$newPassword);
                 session()->destroy();
-                return redirect()->to('/html');
+                return redirect()->to(base_url());
             }else
             {
                 $this->data['error_message'] ='Your password is incorrect!';
