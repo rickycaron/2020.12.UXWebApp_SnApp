@@ -15,59 +15,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <style>
-        .active {
-            color: black;
-
-        }
-        .inactive {
-            color: #25AC71;
-        }
-        .test{
-            background-image: url("https://mdbootstrap.com/img/Photos/Others/img%20%2848%29.jpg");
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center center;
-        }
-        #wrap {
-            width: 100%;
-            position: relative;
-        }
-
-        .inner {
-            position: relative;
-            z-index: 2;
-        }
-
-        #wrap:after {
-            content: "\EA35";
-            font-family: "Material Icons";
-            font-style: normal;
-            font-weight: normal;
-            text-decoration: inherit;
-            position: fixed;
-            font-size: 500px;
-            color: #E5F4F1;
-            top: 50%;
-            left: 50%;
-            margin: -300px 0 0 -200px;
-            z-index: 1;
-        }
-
-    </style>
-
     <?php if (isset($scripts_to_load)) foreach ($scripts_to_load as $script): ?>
         <script src="<?= base_url()?>/js/<?=$script?>?v=7" defer></script>
     <?php endforeach; ?>
 </head>
 
 <body class="d-flex flex-column font-dark bg-primary">
-<header class="navbar fixed-top py-0" style=" height: 50px ;background-color: #006650; color: #FAFEFD">
+<header class="navbar fixed-top py-0 text-secondary bg-primary" style="height:50px;">
     <span  class="material-icons my-auto" style="font-size:45px" id="header_icon_1"><?=$header_icon_1?></span>
     <h3 class="my-auto"><?=$title?></h3>
-    <a class="d-flex align-items-center" href="<?= base_url()?>/search"><span class="material-icons my-auto" style="font-size:45px; color: #FAFEFD" id="header_icon_2"><?=$header_icon_2?></span></a>
+    <a class="d-flex align-items-center" href="<?= base_url()?>/search"><span class="material-icons my-auto text-secondary" style="font-size:45px;" id="header_icon_2"><?=$header_icon_2?></span></a>
 </header>
-<main id="wrap" class="" style="min-height:100vh;background-color: #FAFEFD; margin-top:50px; margin-bottom:60px; border-radius: 25px 25px 0px 0px">
+<main id="wrap" class="bg-secondary">
     <div class="container-fluid py-1 inner d-flex flex-column align-items-center" style="height:100%">
         <?=$content?>
     </div>
