@@ -2,11 +2,15 @@
 
 <form class="form" action="forgotPassword" method="post">
     <?= csrf_field() ?>
-    <label for="email" class="sr-only "><?php echo lang('app.Email_address') ?></label>
-    <input type="email" id="email" class="form-control" placeholder="<?php echo lang('app.Email_address') ?>" name="email" required autofocus>
+    <div class="form-group mb-1">
+    <label for="email"><?php echo lang('app.Email_address') ?></label>
+    <input type="email" id="email" class="form-control" name="email" required autofocus>
+    </div>
 
-    <label for="username" class="sr-only"><?php echo lang('app.Username') ?></label>
-    <input type="text" id="username" class="form-control" placeholder="<?php echo lang('app.Username') ?>" name="username" required>
+    <div class="form-group mb-1">
+    <label for="username"><?php echo lang('app.Username') ?></label>
+    <input type="text" id="username" class="form-control" name="username" required>
+    </div>
 
     <?php if ( isset($validation)): ?>
         <div class="alert alert-danger" role="alert">

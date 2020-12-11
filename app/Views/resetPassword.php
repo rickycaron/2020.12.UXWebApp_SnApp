@@ -3,11 +3,15 @@
 
 <form class="form" action='<?= base_url()?>/resetPassword/<?=session()->get('id')?>' method="post">
     <?= csrf_field() ?>
-    <label for="newPassword" class="sr-only ">New password</label>
+    <div class="form-group mb-1">
+    <label for="newPassword">New password</label>
     <input type="password" id="newPassword" class="form-control" placeholder="New password" name="newPassword" required autofocus>
+    </div>
 
-    <label for="password_confirm" class="sr-only">confirm password</label>
+    <div class="form-group mb-1">
+    <label for="password_confirm">confirm password</label>
     <input type="password" id="password_confirm" class="form-control" placeholder="Confirm password" name="password_confirm" required>
+    </div>
 
     <?php if ( isset($validation)): ?>
         <div class="alert alert-danger" role="alert">
