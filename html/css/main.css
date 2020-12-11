@@ -1,79 +1,13 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
 body {
-    background: #7EA273;
-    font-family: 'Roboto', sans-serif;
-    font-size: 10px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    min-height:100vh;
+    font-family: 'Dosis', sans-serif;
 }
 
-#page-container {
-    width: 900px;
-    min-height: 100vh;
-    background: #E1F2DB;
+.font-dark {
+    font-weight: 500;
 }
 
-header, footer {
-    width: inherit;
+.font-light{
+    font-weight: 300;
 }
 
-header {
-    /*background-color: #F8F8F8;*/
-    background: #F8F8F8;
-    height: 50px;
-    display: flex;
-    flex-direction: row;
-
-    justify-content: space-between;
-    text-transform: uppercase;
-    align-items: center;
-    position: fixed;
-    top:0;
-}
-
-main {
-    padding-top: 50px;
-    padding-bottom: 60px;
-    background: #E1F2DB;
-    width: inherit;
-}
-
-footer {
-    height: 60px;
-    /*background: #F8F8F8;*/
-    background-color: #F8F8F8;
-    text-align: center;
-    position: fixed;
-    bottom:0;
-}
-
-nav {
-    width: inherit;
-    height: inherit;
-    display: flex;
-    justify-content: space-between;
-}
-
-nav a { /* used to center icons in footer*/
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-span.material-icons {
-    color: #242424;
-    font-size: 4em;
-    padding-left: 25px;
-    padding-right: 25px;
-}
-
-nav a.active span.material-icons{
-    color: #25AC71;
-}
