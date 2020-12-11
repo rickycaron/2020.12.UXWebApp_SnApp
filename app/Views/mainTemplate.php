@@ -62,18 +62,18 @@
 </head>
 
 <body class="d-flex flex-column font-dark bg-primary">
-<header class="navbar fixed-top py-0" style=" max-height: 60px ;background-color: #006650; color: #FAFEFD">
+<header class="navbar fixed-top py-0" style=" height: 50px ;background-color: #006650; color: #FAFEFD">
     <span  class="material-icons my-auto" style="font-size:45px" id="header_icon_1"><?=$header_icon_1?></span>
     <h3><?=$title?></h3>
-    <a href="<?= base_url()?>/search"><span class="material-icons my-auto" style="font-size:45px; color: #FAFEFD" id="header_icon_2"><?=$header_icon_2?></span></a>
+    <a class="d-flex align-items-center" href="<?= base_url()?>/search"><span class="material-icons my-auto" style="font-size:45px; color: #FAFEFD" id="header_icon_2"><?=$header_icon_2?></span></a>
 </header>
-<main id="wrap" class="mt-5" style="min-height:100vh;background-color: #FAFEFD; padding-bottom:63.5px; border-radius: 25px 25px 0px 0px">
+<main id="wrap" class="" style="min-height:100vh;background-color: #FAFEFD; margin-top:50px; margin-bottom:60px; border-radius: 25px 25px 0px 0px">
     <div class="container-fluid py-1 inner d-flex flex-column align-items-center" style="height:100%">
         <?=$content?>
     </div>
 </main>
 <footer>
-    <nav class="navbar fixed-bottom" style=";background-color: #006650">
+    <nav class="navbar fixed-bottom" style=";background-color: #006650;height:60px">
         <?php foreach ($menu_items as $menu): ?>
             <a href="<?= base_url()?>/<?=$menu['link']?>" class="<?=$menu['className']?> d-flex align-items-center"><span class="material-icons" style="font-size:45px; color: #FAFEFD"><?=$menu['iconName']?></span></a>
         <?php endforeach; ?>
