@@ -73,8 +73,8 @@
 
                     <?php for($i=0;$i<$commentCount*2;$i=$i+2):?>
                         <div class="py-2">
-                                    <h5 class="font-weight-bold d-inline"> <?=$nameComment[$i]?>: </h5>
-                                    <h5 class="d-inline"> <?=$nameComment[$i+1]?> </h5>
+                                    <h5 class="font-weight-bold d-inline font-light"> <?=$nameComment[$i]?>: </h5>
+                                    <h5 class="d-inline font-light"> <?=$nameComment[$i+1]?> </h5>
                         </div>
                     <?php endfor;?>
 
@@ -110,7 +110,7 @@
                         </div>
                 </div>
                 <div class="my-2">
-                    <h6><?=$ob->date?> at <?=$ob->time?></h6>
+                    <h6 class="font-light"><?=$ob->date?> at <?=$ob->time?></h6>
                 </div>
             </div>
 
