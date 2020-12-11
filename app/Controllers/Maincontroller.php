@@ -354,7 +354,7 @@ class Maincontroller extends \CodeIgniter\Controller
     }
 
     public function profile() {
-        $this->set_common_data('eco', null,'menu');
+        $this->set_common_data('eco', null,'search');
         session()->set('lastMainPageLink', 'profile');
         helper(['form']);
 
@@ -586,7 +586,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['content'] = view('search',$search_data);
         $this->data['title'] = 'Search';
 
-        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
+        $this->data['menu_items'] = $this->menu_model->get_menuitems(session()->get('lastMainPageLink'));
         $this->data['scripts_to_load'] = array('search.js');
         return view("mainTemplate", $this->data);
     }

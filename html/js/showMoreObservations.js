@@ -24,7 +24,3 @@ function getOtherObservations() {
         .catch(a => console.log(a));
     document.getElementById("placeholderLoading").innerHTML = "<span></span>"
 }
-
-document.getElementById("upToDateDiv").innerText = function showUpToDate() {
-    document.getElementById("endOfObservations").innerHTML = "You are up to date"
-};

@@ -23,15 +23,23 @@ main {
 footer {
     height:60px;
 }
+
 #add_icon span {
     font-size: 55px;
 }
+
 #icon span{
     font-size: 40px;
 }
+
 footer a:hover{
     text-decoration: underline;
     color: white;
+}
+
+
+header a:hover{
+    text-decoration: none;
 }
 
 #wrap {
