@@ -28,7 +28,7 @@
         <a class="d-flex align-items-center" href="<?= base_url()?>/search"><span class="material-icons my-auto text-secondary" style="font-size:45px;" id="header_icon_2"><?=$header_icon_2?></span></a>
     </header>
     <main id="wrap" class="bg-secondary">
-        <div class="main-content container-fluid py-1 inner d-flex flex-column align-items-center">
+        <div class="main-content w-100 container-fluid py-1 inner d-flex flex-column align-items-center">
             <?=$content?>
         </div>
     </main>

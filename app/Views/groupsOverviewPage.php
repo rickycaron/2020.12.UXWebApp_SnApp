@@ -1,5 +1,5 @@
 
-<div>
+<div class="w-100">
 <?php foreach ($groups as $group): ?>
     <?php if ($group[3] == session()->get('id')):?>
         <h4 class="font-light"><?php echo lang('app.Groups_created_by_me') ?></h4>
