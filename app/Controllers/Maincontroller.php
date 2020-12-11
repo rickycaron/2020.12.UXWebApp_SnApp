@@ -266,7 +266,7 @@ class Maincontroller extends \CodeIgniter\Controller
 
         if ($observations == null) {
             $data2['upToDate'] = "You are up to date! Check your groups or search friends to see their observations";
-            $this->data['content'] = view('hubPage', $data2, $thisUserID); //replace by your own view
+            $this->data['content'] = view('groupPage', $data2, $thisUserID); //replace by your own view
         }
         else {
             $data2['upToDate'] = "";
