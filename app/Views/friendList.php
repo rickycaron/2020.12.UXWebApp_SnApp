@@ -18,7 +18,7 @@
 <h4>Friend list</h4>
 <?php endif;?>
 <?php foreach ($friends as $f): ?>
-<div class="card shadow my-2 col-lg-6 col-md-8 col-sm-8 col-xs-10" style="width:400px">
+<div class="card shadow my-2 w-100" style="max-width:400px">
     <?php if(isset($f->p_imagedata)&&isset($f->p_imagetype)): ?>
         <img class="personCardPhoto card-header d-flex flex-row mx-auto mt-4 p-1 rounded-circle" width = "250" height = "250" alt="Bootstrap Image Preview" src="<?php echo data_uri($f->p_imagedata, $f->p_imagetype); ?>">
     <?php else:?>

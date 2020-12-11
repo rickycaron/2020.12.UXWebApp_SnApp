@@ -25,9 +25,10 @@ document.getElementById("comment_button").addEventListener("click", commentClick
 function likeClicked() {
     console.log("like clicked");
 
-    let getUrl = window.location;
-    let baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-    let url = baseUrl + "/fetchObservationLikeHTML/" + document.querySelector('input[id="hidden_variable_filter"]').value;
+    let base_url = document.querySelector('input[id="hidden_base_url"]').value;
+    // let getUrl = window.location;
+    // let baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    let url = base_url + "/fetchObservationLikeHTML/" + document.querySelector('input[id="hidden_variable_filter"]').value;
     console.log(url);
     setLikesOrComments(url);
 }
@@ -35,9 +36,10 @@ function likeClicked() {
 function commentClicked() {
     console.log("comment clicked");
 
-    let getUrl = window.location;
-    let baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-    let url = baseUrl + "/fetchObservationCommentHTML/" + document.querySelector('input[id="hidden_variable_filter"]').value;
+    let base_url = document.querySelector('input[id="hidden_base_url"]').value;
+    // let getUrl = window.location;
+    // let baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    let url =  base_url + "/fetchObservationCommentHTML/" + document.querySelector('input[id="hidden_variable_filter"]').value;
     console.log(url);
     setLikesOrComments(url);
 }

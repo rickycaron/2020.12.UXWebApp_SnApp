@@ -320,14 +320,8 @@ class Maincontroller extends \CodeIgniter\Controller
         $userID=session()->get("id");
         //get the groupid by the groupname and userid
         $groupid = $this->database_model->getGroupName($groupname_filter, $userID)->groupID;
-        //get an array of userid of this group
-        $query_result = $this->database_model->getUsersFromGroup($groupid);
-        //get an array of user name of this group
-        $groupmembers=array();
-        foreach ($query_result as $row)
-        {
-            array_push($groupmembers,$this->database_model->getUser($row->userID));
-        }
+        //get an array groupMembers
+        $groupmembers = $this->database_model->getUsersFromGroup($groupid);
         $data['groupmembers']=$groupmembers;
         $data['groupID'] = $groupid;
         $data['groupName'] = $groupname_filter;

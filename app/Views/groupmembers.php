@@ -1,7 +1,7 @@
-<a href="<?=base_url()?>/addGroupMembers/<?=$groupID?>/<?=$groupName?>" class="btn btn-lg btn-primary btn-block my-3" style="width:400px">Add friends to <?=$groupName?></a>
+<a href="<?=base_url()?>/addGroupMembers/<?=$groupID?>/<?=$groupName?>" class="btn btn-lg btn-primary btn-block my-3 w-100" style="max-width:400px">Add friends to <?=$groupName?></a>
 
 <?php foreach ($groupmembers as $member): ?>
-    <div class="card shadow my-2 col-lg-6 col-md-8 col-sm-8 col-xs-10" style="width:400px">
+    <div class="card shadow my-2 w-100" style="max-width: 400px">
         <?php if(isset($member->p_imagedata)&&isset($member->p_imagetype)): ?>
             <img class="personCardPhoto card-header d-flex flex-row mx-auto mt-4 p-1 rounded-circle" width = "250" height = "250" alt="Bootstrap Image Preview" src="<?php echo data_uri($member->p_imagedata, $member->p_imagetype); ?>">
         <?php else:?>

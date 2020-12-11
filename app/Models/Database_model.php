@@ -318,9 +318,9 @@ class Database_model
      * This function return all the user information of a group
      */
     public function getUsersFromGroup($groupid) {
-        $query = $this->db->query('SELECT * FROM a20ux6.userGroupMapping 
+        $query = $this->db->query('SELECT * FROM a20ux6.userGroupMapping AS t1 INNER JOIN a20ux6.user AS t2 ON t1.userID = t2.id
                                         where groupID = "'.$groupid.'" 
-                                        ORDER BY groupID, userID;');
+                                        ORDER BY username;');
         return $query->getResult();
     }
 
@@ -376,7 +376,8 @@ class Database_model
                                         WHERE CASE WHEN m.userID_A = "'.$userID.'" THEN m.userID_B = u.id
 			                                        WHEN m.userID_B = "'.$userID.'" THEN m.userID_A = u.id
 		                                        END
-		                                        AND m.requestStatus = 1;');
+		                                        AND m.requestStatus = 1
+		                                        ORDER BY username;');
         return $query->getResult();
     }
 
