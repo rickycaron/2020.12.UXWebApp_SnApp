@@ -20,7 +20,7 @@ function getOtherObservations() {
     document.getElementById("placeholderLoading").innerHTML = "<span style='color: green;'>Waiting...</span>"
     fetch(base_url + "?extra=true&lastDate=" + lastDate + "&lastTime=" + lastTime)
         .then(resp => resp.text())
-        .then(myHTML => document.getElementById("observationCardsContainer").innerHTML += myHTML,)
+        .then(myHTML => document.getElementById("observationCardsContainer").innerHTML += myHTML)
         .catch(a => console.log(a));
     document.getElementById("placeholderLoading").innerHTML = "<span></span>"
 }

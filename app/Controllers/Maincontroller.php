@@ -113,7 +113,7 @@ class Maincontroller extends \CodeIgniter\Controller
                         $this->database_model-> insertComment($userID,$message,$observationID);
                         return redirect()->to('hub');
                     }*/
-                    return view('hubPage', $data3, $thisUserID);
+                    return view('observationCard', $data3, $thisUserID);
                 }
             }
         }
