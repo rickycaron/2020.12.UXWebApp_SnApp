@@ -684,7 +684,7 @@ class Maincontroller extends \CodeIgniter\Controller
                 //userName and email are correct
                 $userquery = $this->database_model->getUserByEmail($email);
                 $this->setUserSession($userquery);
-                session()->setFlashdata('success','Successful Login!');
+                session()->setFlashdata('success','Successfully Login!');
                 return redirect()->to('resetPassword/'.$userquery->id);
 //                return view("mainTemplate", $this->data);
             }
@@ -701,7 +701,8 @@ class Maincontroller extends \CodeIgniter\Controller
                 $this->data['error_message'] = 'Multiple accounts with the same email address exist. Please consult our software developer!';
             }
         }
-        elseif($this->request->getMethod() === 'post'){
+        elseif($this->request->getMethod() === 'post')
+        {
             $this->data['error_message'] =' ';
         }
         $this->data['content'] = view('forgotPassword', $this->data); //replace by your own view
