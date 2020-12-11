@@ -21,23 +21,23 @@
 </head>
 
 <body class="d-flex flex-column font-dark bg-primary">
-<header class="navbar fixed-top py-0 text-secondary bg-primary">
-    <span  class="material-icons my-auto" style="font-size:45px" id="header_icon_1"><?=$header_icon_1?></span>
-    <h3 class="my-auto"><?=$title?></h3>
-    <a class="d-flex align-items-center" href="<?= base_url()?>/search"><span class="material-icons my-auto text-secondary" style="font-size:45px;" id="header_icon_2"><?=$header_icon_2?></span></a>
-</header>
-<main id="wrap" class="bg-secondary">
-    <div class="main-content container-fluid py-1 inner d-flex flex-column align-items-center">
-        <?=$content?>
-    </div>
-</main>
-<footer>
-    <nav class="navbar fixed-bottom bg-primary">
-        <?php foreach ($menu_items as $menu): ?>
-            <a href="<?= base_url()?>/<?=$menu['link']?>" class="<?=$menu['className']?> d-flex align-items-center"><span class="material-icons" style="font-size:45px; color: #FAFEFD"><?=$menu['iconName']?></span></a>
-        <?php endforeach; ?>
-    </nav>
-</footer>
+    <header class="navbar fixed-top py-0 text-secondary bg-primary">
+        <span  class="material-icons my-auto" style="font-size:45px" id="header_icon_1"><?=$header_icon_1?></span>
+        <h3 class="my-auto"><?=$title?></h3>
+        <a class="d-flex align-items-center" href="<?= base_url()?>/search"><span class="material-icons my-auto text-secondary" style="font-size:45px;" id="header_icon_2"><?=$header_icon_2?></span></a>
+    </header>
+    <main id="wrap" class="bg-secondary">
+        <div class="main-content container-fluid py-1 inner d-flex flex-column align-items-center">
+            <?=$content?>
+        </div>
+    </main>
+    <footer>
+        <nav class="navbar fixed-bottom bg-primary">
+            <?php foreach ($menu_items as $menu): ?>
+                <a href="<?= base_url()?>/<?=$menu['link']?>" class="<?=$menu['className']?> d-flex align-items-center"><span class="material-icons text-secondary" style="font-size:45px;"><?=$menu['iconName']?></span></a>
+            <?php endforeach; ?>
+        </nav>
+    </footer>
 </body>
 <input type="hidden" id="hidden_base_url" value="<?=$base_url?>"/>
 </html>
