@@ -6,9 +6,9 @@ $uri = service('uri');
 <?php endif; ?>
 <a  <?= ($uri->getSegment(1) == 'leaderboardSelect'?'active' : null)?> href="/"></a>
 
-<div style="width:100%;max-width:600px">
+<div class="w-100">
 
-    <a class="w-100 active" href="leaderboard/friends">
+    <a class="w-100" style="color: black;" href="leaderboard/friends">
         <div class="card my-2 shadow-sm d-flex flex-row" style="width:100%;max-width:600px">
             <div class="ml-3 mr-auto my-2">
                 <h2> Friends </h2>
@@ -17,7 +17,7 @@ $uri = service('uri');
         </div>
     </a>
 
-    <a class="w-100 active" href="leaderboard/worldwide">
+    <a class="w-100" style="color: black;" href="leaderboard/worldwide">
         <div class="card my-2 shadow-sm d-flex flex-row" style="width:100%;max-width:600px">
             <div class="ml-3 mr-auto my-2">
                 <h2> Worldwide </h2>
@@ -27,7 +27,7 @@ $uri = service('uri');
     </a>
 
     <?php foreach ($groups as $groupname): ?>
-        <a class="w-100 active" href="leaderboard/<?=$groupname?>">
+        <a class="w-100" style="color: black;" href="leaderboard/<?=$groupname?>">
             <div class="card my-2 shadow-sm d-flex flex-row" style="width:100%;max-width:600px">
                 <div class="ml-3 mr-auto my-2">
                     <h2> <?=$groupname?> </h2>
