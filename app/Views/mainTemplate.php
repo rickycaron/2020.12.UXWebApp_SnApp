@@ -35,7 +35,7 @@
     <footer>
         <nav class="navbar fixed-bottom bg-primary">
             <?php foreach ($menu_items as $menu): ?>
-                <a href="<?= base_url()?>/<?=$menu['link']?>" class="<?=$menu['className']?> d-flex align-items-center"><span class="material-icons text-secondary" style="font-size:45px;"><?=$menu['iconName']?></span></a>
+                <a href="<?= base_url()?>/<?=$menu['link']?>" id="<?=$menu['id']?>" class="<?=$menu['className']?> d-flex align-items-center"><span class="material-icons " ><?=$menu['iconName']?></span></a>
             <?php endforeach; ?>
         </nav>
     </footer>

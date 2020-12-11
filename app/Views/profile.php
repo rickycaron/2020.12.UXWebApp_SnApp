@@ -66,13 +66,13 @@
     <div class="">
         <img src="<?php echo data_uri($image[0]->imagedata, $image[0]->imagetype); ?>" class="rounded-circle" alt="templatemo easy profile" style="width: 100px;">
     </div>
-    <div class="mx-4 w-100">
+    <div class="mx-4 w-100 ">
         <div class="row justify-content-between">
             <h2 class="user_name"><?= $username?> </h2>
-            <a><span onclick="openNav()" class="material-icons " style="font-size:50px;" id="header_icon_2">more_horiz</span></a>
+            <a><span onclick="openNav()" class="material-icons text-primary " style="font-size:50px;" id="header_icon_2">more_horiz</span></a>
             <script>
                 function openNav() {
-                    document.getElementById("mySidenav").style.width = "250px";
+                    document.getElementById("mySidenav").style.width = "150px";
                 }
 
                 function closeNav() {

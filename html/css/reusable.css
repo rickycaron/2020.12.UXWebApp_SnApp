@@ -5,3 +5,10 @@
 .font-light{
     font-weight: 300;
 }
+.active span{
+    text-decoration: underline;
+    color:#FAFEFD;
+}
+.inactive span{
+    color:#FAFEFD;
+}
