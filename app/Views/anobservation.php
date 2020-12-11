@@ -1,6 +1,6 @@
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7KOWpmjEHMRXKd19aMz8CT4ig14kHDw4&callback=initMap&libraries=&v=weekly" defer></script>
-<div style="width:100%;max-width:600px">
+<div>
     <div class="d-flex flex-row my-4">
         <img class="rounded-circle" id="observation_profilePicture" style="width: 100px;" src="<?= base_url()?>/image/profile.png">
         <h3 id="observation_profileName" class="my-auto mx-4"><?=$username?></h3>
