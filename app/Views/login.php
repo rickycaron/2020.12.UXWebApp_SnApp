@@ -13,7 +13,7 @@
 
     <div class="form-group mb-1">
     <label for="password"><?php echo lang('app.Password') ?></label>
-    <input type="password" id="inputPassword" class="form-control" name="password" value="<?= set_value("password")?>" required>
+    <input type="password" id="inputPassword" class="form-control" name="password" required>
     </div>
 
     <div class="d-flex justify-content-between">

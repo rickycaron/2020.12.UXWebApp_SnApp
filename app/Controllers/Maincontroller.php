@@ -692,7 +692,6 @@ class Maincontroller extends \CodeIgniter\Controller
                 $this->setUserSession($userquery);
                 session()->setFlashdata('success','Successfully Login!');
                 return redirect()->to('resetPassword/'.$userquery->id);
-//                return view("mainTemplate", $this->data);
             }
             else if($searchresult==1){
                 //username is wrong
@@ -720,11 +719,9 @@ class Maincontroller extends \CodeIgniter\Controller
         if($userID != session()->get('id'))
         {
             //here should inform you don't have right to do that, you can only modify your own password
-            return redirect()->to('/html');
+            return redirect()->to(base_url());
         }
         $this->data['userID'] = $userID;
-        //helper(['form']);//to remain the user's typed value if the login fails
-        //$this->data['error_message'] ='';
         if ($this->request->getMethod() === 'post' && $this->validate([
                 'newPassword'  => 'required|min_length[6]|max_length[50]',
                 'password_confirm'=>'matches[newPassword]'
@@ -740,7 +737,7 @@ class Maincontroller extends \CodeIgniter\Controller
             $hashed_password=$this->passwordHash($password);
             $this->database_model->resetPassword($hashed_password, $userID,$password);
             session()->destroy();
-            return redirect()->to('/html');
+            return redirect()->to(base_url());
         }
         elseif ($this->request->getMethod() === 'post')
         {
@@ -797,7 +794,7 @@ class Maincontroller extends \CodeIgniter\Controller
         if($userID != session()->get('id'))
         {
             //here should inform you don't have right to do that, you can only modify your own password
-            return redirect()->to('/html/profile');
+            return redirect()->to(base_url());
         }
         $this->data['userID'] = $userID;
         if ($this->request->getMethod() === 'post' && $this->validate([
@@ -820,7 +817,7 @@ class Maincontroller extends \CodeIgniter\Controller
                 $hashed_password=$this->passwordHash($newPassword);
                 $this->database_model->resetPassword($hashed_password, $userID,$newPassword);
                 session()->destroy();
-                return redirect()->to('/html');
+                return redirect()->to(base_url());
             }else
             {
                 $this->data['error_message'] ='Your password is incorrect!';
