@@ -1,6 +1,6 @@
 <?php
 return [
-    'Make_an_observation' => '开始一个观察',
+    'Make_an_observation' => '开始一个观察！',
     'Log_in' => '登录',
     'Forgot_password?' => '忘记密码？',
     'Register' => '注册',
