@@ -66,7 +66,11 @@
 
 <body class="d-flex flex-column" style="min-height:100vh; font-family: 'Dosis', sans-serif; background-color: #006650">
 <header class="navbar fixed-top py-0" style=" max-height: 60px ;background-color: #006650; color: #FAFEFD">
-    <span  class="material-icons my-auto" style="font-size:45px" id="header_icon_1"><?=$header_icon_1?></span>
+    <?php if(isset($back_route)):?>
+        <a href="<?= base_url()?>/<?=$back_route?>"><span class="material-icons my-auto" style="font-size:45px; color: #FAFEFD" id="header_icon_1"><?=$header_icon_1?></span></a>
+    <?php else:?>
+        <span class="material-icons my-auto" style="font-size:45px; color: #FAFEFD" id="header_icon_1"><?=$header_icon_1?></span>
+    <?php endif;?>
     <h3><?=$title?></h3>
     <a href="<?= base_url()?>/search"><span class="material-icons my-auto" style="font-size:45px; color: #FAFEFD" id="header_icon_2"><?=$header_icon_2?></span></a>
 </header>

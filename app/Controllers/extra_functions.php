@@ -159,7 +159,6 @@ trait extra_functions
     }
 
     public function searchGetObservations($filter) {
-        $filter = str_replace("SPACE", " ", $filter);
         $result['ob'] = $this->database_model->getObservationDescription($filter);
         if($result['ob'] != null) {
            return view('searchObservation', $result);
@@ -169,7 +168,6 @@ trait extra_functions
     }
 
     public function searchGetGroups($filter) {
-        $filter = str_replace("SPACE", " ", $filter);
         $result['group'] = $this->database_model->getGroup($filter);
         if($result['group'] != null) {
             return view('searchGroup', $result);
@@ -179,7 +177,6 @@ trait extra_functions
     }
 
     public function searchGetUsers($filter) {
-        $this->debug_to_console($filter);
         $filter = str_replace("SPACE", " ", $filter);
         $this->debug_to_console($filter);
         $result['user'] = $this->database_model->getUsersSearch($filter);
