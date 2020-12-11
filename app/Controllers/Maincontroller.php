@@ -596,7 +596,7 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("extraTemplate", $this->data);
     }
     public function loginFromObservation() {
-        $this->set_common_data('eco', 'eco');
+        $this->set_common_data('eco', null,'eco');
 
         //add your code here...
         $this->data['content'] = view('loginFromObservation'); //replace by your own view
@@ -606,7 +606,7 @@ class Maincontroller extends \CodeIgniter\Controller
     }
     public function register() {
         $this->data=[];
-        $this->set_common_data('eco', 'eco');
+        $this->set_common_data('eco', null,'eco');
         //add your code here...
         helper(['form']);
         if ($this->request->getMethod() === 'post' && $this->validate([
@@ -630,7 +630,7 @@ class Maincontroller extends \CodeIgniter\Controller
         }
     }
     public function forgotPassword() {
-        $this->set_common_data('eco', 'eco');
+        $this->set_common_data('eco', null,'eco');
 
         //add your code here...
         $this->data['content'] = view('forgotPassword'); //replace by your own view
@@ -640,7 +640,7 @@ class Maincontroller extends \CodeIgniter\Controller
         return view("extraTemplate", $this->data);
     }
     public function resetPassword() {
-        $this->set_common_data('eco', 'eco');
+        $this->set_common_data('eco', null,'eco');
 
         //add your code here...
         $this->data['content'] = view('resetPassword'); //replace by your own view
