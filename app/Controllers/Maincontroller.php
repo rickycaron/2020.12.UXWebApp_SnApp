@@ -44,6 +44,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
         $this->data['content'] = view('leaderboardSelect', $this->data); //replace by your own view
         $this->data['title'] = 'Leaderboard Filter';
+        session()->set('lastMainPageLink', 'leaderboardSelect');
         return view("mainTemplate", $this->data);
     }
 
@@ -157,7 +158,8 @@ class Maincontroller extends \CodeIgniter\Controller
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('hub');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','likeFunction.js', 'showMoreObservations.js');
-
+        //session()->set_userdata('lastMainPageLink', 'hub');
+        session()->set('lastMainPageLink', 'hub');
         return view("mainTemplate", $this->data);
     }
 
@@ -207,6 +209,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
         $this->data['content'] = view('groupsOverviewPage', $this->data); //replace by your own view
         $this->data['title'] = 'Groups';
+        session()->set('lastMainPageLink', 'groups');
         return view("mainTemplate", $this->data);
     }
 
@@ -408,6 +411,7 @@ class Maincontroller extends \CodeIgniter\Controller
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('profile');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js');
+        session()->set('lastMainPageLink', 'profile');
         return view("mainTemplateProfile", $this->data);
     }
     public function otheruserprofile($userID) {
@@ -514,6 +518,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['title'] = 'Explore';
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'plantAPI.js','previewPicture.js');
+        session()->set('lastMainPageLink', 'addObservation');
         return view("mainTemplate", $this->data);
 
     }
@@ -534,8 +539,8 @@ class Maincontroller extends \CodeIgniter\Controller
     }
 
     public function search() {
-        $this->set_common_data('arrow_back', session()->get('id'),'search');
-        $this->debug_to_console(session()->get('id'));
+        $this->set_common_data('arrow_back', session()->get('lastMainPageLink'),'search');
+        $this->debug_to_console(session()->get('lastMainPageLink'));
 
         $search_data['placeholder'] = "<p>Start typing in the search bar</p>";
         $this->data['content'] = view('search',$search_data);
@@ -547,7 +552,7 @@ class Maincontroller extends \CodeIgniter\Controller
     }
     public function login() {
         $this->data=[];
-        $this->set_common_data('eco', 'eco');
+        $this->set_common_data('eco', null,'eco');
 
         //add your code here...
         helper(['form']);//to remain the user's typed value if the login fails
@@ -708,11 +713,12 @@ class Maincontroller extends \CodeIgniter\Controller
             'monthlyPoints' => $user->monthlyPoints,
             'weeklyPoints' => $user->weeklyPoints,
             'isLoggedIn' => true,
-            'lastMainPageLink' => 'hub',
+            'lastMainPageLink' => 'null'
         ];
         session()->set($data);
         return true;
     }
+
     /* created by rui
      * logout, clean the data of the current information
      * */
