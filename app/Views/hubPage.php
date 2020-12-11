@@ -5,6 +5,7 @@
 </head>
 <div id="nothingToShow"><?=$upToDate?></div>
 <div id="observationCardsContainer" class="w-100 mt-2">
+
     <?php foreach ($observations as $ob): ?>
 
         <?php $commentCount = sizeof(explode("♪", $ob->messages))?>
@@ -56,7 +57,7 @@
                         <h3 class="mb-0"><?=$ob->specieName?></h3>
                     </div>
                     <nav class="navbar navbar-expand-sm ">
-                        <span class=" material-icons my-auto"  type="button" data-toggle="collapse" data-target="#demo"  style="font-size: 40px">expand_more</span>
+                        <span class=" material-icons my-auto"  type="button" data-toggle="collapse" data-target="#demo_<?=$ob->id?>"  style="font-size: 40px">expand_more</span>
                      </div>
 
 
@@ -71,7 +72,7 @@
                 ?>
 
                 <?php if ($ob->messages != null) :?>
-                    <div  id="demo" class="collapse" >
+                    <div  id="demo_<?=$ob->id?>" class="collapse" >
 
                     <?php for($i=0;$i<$commentCount*2;$i=$i+2):?>
                         <div class="py-2">
