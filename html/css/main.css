@@ -3,11 +3,47 @@ body {
     font-family: 'Dosis', sans-serif;
 }
 
-.font-dark {
-    font-weight: 500;
+header {
+    height:50px;
 }
 
-.font-light{
-    font-weight: 300;
+main {
+    min-height:100vh;
+    margin-top:50px;
+    border-radius: 25px 25px 0 0;
 }
 
+.main-content {
+    height:100%;
+    width:100%;
+    max-width:600px;
+}
+
+footer {
+    height:60px;
+}
+
+#wrap {
+    width: 100%;
+    position: relative;
+}
+
+.inner {
+    position: relative;
+    z-index: 2;
+}
+
+#wrap:after {
+    content: "\EA35";
+    font-family: "Material Icons";
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    position: fixed;
+    font-size: 500px;
+    color: #E5F4F1;
+    top: 50%;
+    left: 50%;
+    margin: -300px 0 0 -200px;
+    z-index: 1;
+}
