@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="<?= base_url()?>/css/bootstrap.css">
     <link rel="stylesheet" href="<?= base_url()?>/css/main.css">
+    <link rel="stylesheet" href="<?= base_url()?>/css/reusable.css">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;500&display=swap" rel="stylesheet">
