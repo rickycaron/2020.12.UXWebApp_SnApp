@@ -45,6 +45,10 @@ $routes->get('changeLikeStatus/(:num)','Maincontroller::changeLikeStatus/$1',['f
 
 $routes->get('cancelLikeStatus/(:num)','Maincontroller::cancelLikeStatus/$1',['filter'=>'auth']);
 
+$routes->get('sendComment/(:any)/(:num)','Maincontroller::sendComment/$1/$2',['filter'=>'auth']);
+
+$routes->get('getUsername','Maincontroller::getUsername',['filter'=>'auth']);
+
 $routes->get('deleteUserFromGroup/(:num)/(:num)/(:alpha)', 'Maincontroller::deleteUserFromGroup/$1/$2/$3',['filter'=>'auth']);
 
 $routes->get('addObservation', 'Maincontroller::addObservation');
@@ -69,12 +73,13 @@ $routes->get('friendList', 'Maincontroller::friendList');
 $routes->get('acceptFriendRequest/(:num)', 'Maincontroller::acceptFriendRequest/$1');
 $routes->get('declineFriendRequestOrDelete/(:num)', 'Maincontroller::declineFriendRequestOrDelete/$1');
 
+$routes->match(['get','post'],'hub', 'Maincontroller::hub',['filter' => 'auth']);
 $routes->match(['get','post'],'login', 'Maincontroller::login',['filter' => 'noauth']);
 $routes->get('loginFromObservation', 'Maincontroller::loginFromObservation');
 $routes->match(['get','post'],'register', 'Maincontroller::register',['filter' => 'noauth']);
 $routes->get('logout','Maincontroller::logout');
 
-$routes->match(['get','post'],'hub', 'Maincontroller::hub',['filter' => 'auth']);
+
 $routes->match(['get','post'],'edit_profile', 'Maincontroller::edit_profile',['filter' => 'auth']);
 
 $routes->get('databaseTest', 'Maincontroller::databaseTest');

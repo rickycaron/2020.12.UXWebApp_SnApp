@@ -27,8 +27,6 @@
             <input type = "hidden" name= "status" class = "status" value = "<?=$likeStatus?>">
         </div>
 
-
-
         <div class="card my-2 shadow-sm " style="width:100%;max-width:600px">
 
 
@@ -62,11 +60,6 @@
 
                     <hr class="mt-0 mb-2">
 
-                <!--<form action="hub" method="post">
-                    <input type = "hidden" name="obID" id = "obID" value = "<?/*=$ob->id*/?>">
-                    <input type="submit" name="commentShow" value="showComments" />
-                </form>-->
-
                 <?php
                 for ($i = 0; $i < $commentCount; $i++)
                 {
@@ -92,21 +85,29 @@
                 </nav>
 
 
-
-
                 <div class="d-flex flex-row my-3">
                     <?php if( service('uri')->getSegment(1) == 'hub'):?>
+                    <!--
                     <form action="hub" method="post" id = "commentSend">
                         <?php elseif( service('uri')->getSegment(1) == 'group'):?>
                         <?php $groupname=service('uri')->getSegment(2)?>
+
                         <form action="<?=$groupname ?>" method="post" id = "commentSend">
                             <?php endif?>
                             <input type = "hidden" name="obID" id = "obID" value = "<?=$ob->id?>">
-                            <div class="d-flex flex-row">
-                            <input class="form-control w-100" name="message" id = "message" value="<?= set_value('message')?>" placeholder="Create new comment">
-                            <button type="submit" name="submitCommit" class="btn btn-primary material-icons text-white mx-3" style="font-size:25px">send</button>
-                            </div>
+                            <input class="form-control" name="message" id = "message" value="<?= set_value('message')?>" placeholder="Create new comment">
+
+                            <input type="submit" name="submitCommit" value="submit" />
                         </form>
+-->
+
+                        <div class="d-flex flex-row my-3"  value = "<?=$ob->id?>">
+                            <form id = "commentForm" class = "commentContent" target="iframe">
+                                <input type="txt" id = "commentID" class="form-control " name="comment" placeholder="Create new comment">
+                            </form>
+                            <iframe id="iframe" name="iframe" style="display:none;"></iframe>
+                            <div class="material-icons my-auto ml-3 mr-2 text-primary commentButton" style="font-size:30px">send</div>
+                        </div>
                 </div>
                 <div class="my-2">
                     <h6><?=$ob->date?> at <?=$ob->time?></h6>
