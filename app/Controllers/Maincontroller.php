@@ -62,7 +62,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $pass_leaderboard_content['leaderboard_filter'] = $leaderboard_filter;
 
         $this->data['content'] = view('leaderboard', $pass_leaderboard_content);
-        $this->data['title'] = 'Leaderboard';
+        $this->data['title'] = lang('app.Leaderboard');
         $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
         $this->data['scripts_to_load'] = array('leaderboard.js', 'jquery-3.5.1.min');
         return view("mainTemplate", $this->data);
@@ -181,7 +181,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $observation_data['id'] = $observation['id'];
 
         $this->data['content'] = view('anobservation', $observation_data);
-        $this->data['title'] = 'Observation';
+        $this->data['title'] = lang('app.Observation');
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
         $this->data['scripts_to_load'] = array('anobservation.js');
@@ -312,7 +312,7 @@ class Maincontroller extends \CodeIgniter\Controller
         }else
         {
             $this->data['content'] = view('newgroup'); //replace by your own view
-            $this->data['title'] = 'New Group';
+            $this->data['title'] = lang('app.New_Group');
             $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
             return view("mainTemplate", $this->data);
         }
@@ -330,7 +330,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $data['groupID'] = $groupid;
         $data['groupName'] = $groupname_filter;
         $this->data['content'] = view('groupmembers',$data); //replace by your own view
-        $this->data['title'] = 'Group Members';
+        $this->data['title'] = lang('app.Group_Members');
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js');
@@ -346,7 +346,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['groupName'] = $groupName;
 
         $this->data['content'] = view('addGroupMembers', $this->data);
-        $this->data['title'] = 'Friend List';
+        $this->data['title'] = lang('app.Friend_List');
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'addFriendToGroup.js');
@@ -572,7 +572,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $this->data['friends'] = $this->database_model->getFriendsFromUser(session()->get('id'));
 
         $this->data['content'] = view('friendList', $this->data);
-        $this->data['title'] = 'Friend List';
+        $this->data['title'] = lang('app.Friend_List');
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
         $this->data['scripts_to_load'] = array('friendlist.js');
@@ -582,9 +582,9 @@ class Maincontroller extends \CodeIgniter\Controller
     public function search() {
         $this->set_common_data('arrow_back', session()->get('lastMainPageLink'),'search');
 
-        $search_data['placeholder'] = "<p>Start typing in the search bar</p>";
+        $search_data['placeholder'] = lang('app.Start_typing_in_the_search_bar');
         $this->data['content'] = view('search',$search_data);
-        $this->data['title'] = 'Search';
+        $this->data['title'] = lang('app.Search');
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems(session()->get('lastMainPageLink'));
         $this->data['scripts_to_load'] = array('search.js');
@@ -643,7 +643,7 @@ class Maincontroller extends \CodeIgniter\Controller
 
         //add your code here...
         $this->data['content'] = view('loginFromObservation'); //replace by your own view
-        $this->data['title'] = 'Login From Observation';
+        $this->data['title'] = lang('app.Login_From_Observation');
 
         return view("extraTemplate", $this->data);
     }
@@ -713,7 +713,7 @@ class Maincontroller extends \CodeIgniter\Controller
             $this->data['error_message'] =' ';
         }
         $this->data['content'] = view('forgotPassword', $this->data); //replace by your own view
-        $this->data['title'] = 'Forgot Password';
+        $this->data['title'] = lang('app.Forgot_password?');
         return view("extraTemplate", $this->data);
     }
 
@@ -746,7 +746,7 @@ class Maincontroller extends \CodeIgniter\Controller
             $this->data['validation'] = "error";
         }
         $this->data['content'] = view('resetPassword', $this->data); //replace by your own view
-        $this->data['title'] = 'Reset Password';
+        $this->data['title'] = lang('app.Reset_Password');
         return view("extraTemplate", $this->data);
     }
 
@@ -785,7 +785,7 @@ class Maincontroller extends \CodeIgniter\Controller
         $data2['userInformation'] = $this->database_model->getUser($userID);
 
         $this->data['content'] = view('edit_profile', $data2); //replace by your own view
-        $this->data['title'] = 'edit profile';
+        $this->data['title'] = lang('app.Edit_profile');
         $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','profilePicture.js', 'previewPicture.js');
 
@@ -832,7 +832,7 @@ class Maincontroller extends \CodeIgniter\Controller
             $this->data['validation'] = "error";
         }
         $this->data['content'] = view('account',$this->data); //replace by your own view
-        $this->data['title'] = 'Account';
+        $this->data['title'] = lang('app.Account');
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
         return view("mainTemplate", $this->data);

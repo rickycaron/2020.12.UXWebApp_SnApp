@@ -34,7 +34,7 @@ return [
     'Add_personal_note' => '添加记录',
     'Submit' => '提交',
     'Friends' => '好友',
-    'Change_password' => '更改密码',
+    'Change_Password' => '更改密码',
     'Edit_profile' => '编辑个人资料',
     'Logout' => '退出登录'
 ];

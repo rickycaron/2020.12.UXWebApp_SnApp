@@ -15,7 +15,7 @@
 </a>
 <?php endforeach?>
 <?php if (count($requests)): ?>
-<h4>Friend list</h4>
+<h4><?php echo lang('app.Friend_List') ?></h4>
 <?php endif;?>
 <?php foreach ($friends as $f): ?>
 <div class="card shadow my-2 w-100" style="max-width:400px">
@@ -33,8 +33,8 @@
             <p>Monthly Points: <?= $f->monthlyPoints?></p>
             <p>Total Points: <?= $f->points?></p>
         </address>
-        <a href="<?=$base_url?>/otheruserprofile/<?= $f->id?>" class="btn btn-primary">See Profile</a>
-        <a class="delete_friend btn btn-third float-right" value="<?= $f->mappingID?>">Delete</a>
+        <a href="<?=$base_url?>/otheruserprofile/<?= $f->id?>" class="btn btn-primary"><?php echo lang('app.See_Profile') ?></a>
+        <a class="delete_friend btn btn-third float-right" value="<?= $f->mappingID?>"><?php echo lang('app.Delete') ?></a>
     </div>
 </div>
 <?php endforeach?>
