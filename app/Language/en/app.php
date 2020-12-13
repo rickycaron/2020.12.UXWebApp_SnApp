@@ -68,5 +68,11 @@ return [
     'Leave_this_Group' => 'Leave this Group',
     'Daily' => 'Daily',
     'Monthly' => 'Monthly',
-    'Yearly' => 'Yearly'
+    'Yearly' => 'Yearly',
+    'Worldwide' => 'Worldwide',
+    'New_User?' => 'New User?',
+    'Group_Name' => 'Group Name',
+    'Likes' => 'Likes',
+    'Comments' => 'Comments',
+    'Points' => 'Points'
 ];

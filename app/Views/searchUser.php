@@ -11,7 +11,7 @@
                 <p>Monthly Points: <?= $u->monthlyPoints?></p>
                 <p>Total Points: <?= $u->points?></p>
             </address>
-            <a href="<?=base_url()?>/otheruserprofile/<?= $u->id?>" class="btn btn-primary">See Profile</a>
+            <a href="<?=base_url()?>/otheruserprofile/<?= $u->id?>" class="btn btn-primary"><?php echo lang('app.See_Profile') ?></a>
         </div>
     </div>
 <?php endforeach?>

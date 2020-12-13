@@ -92,23 +92,23 @@
 
 <div class="d-flex flex-row my-3">
     <div class="d-flex flex-column align-items-center mx-2">
-        <span class = "h6" > observations</span>
+        <span class = "h6" > <?php echo lang('app.Observations') ?></span>
         <span class = "h6" > <?=$observationCount[0]->observationCount?></span>
     </div>
     <div class="d-flex flex-column align-items-center mx-2">
-        <span class = "h6" > likes</span>
+        <span class = "h6" > <?php echo lang('app.Likes') ?></span>
         <span class = "h6" > <?=$likeCount[0]->likeCount?></span>
     </div>
     <div class="d-flex flex-column align-items-center mx-2">
-        <span class = "h6" > comments</span>
+        <span class = "h6" > <?php echo lang('app.Comments') ?></span>
         <span class = "h6" > <?=$commentCount[0]->commentCount?></span>
     </div>
     <div class="d-flex flex-column align-items-center mx-2">
-        <span class = "h6" > friends</span>
+        <span class = "h6" > <?php echo lang('app.Friends') ?></span>
         <span class = "h6" > <?=$friendCount[0]->friendCount?></span>
     </div>
     <div class="d-flex flex-column align-items-center mx-2">
-        <span class = "h6" > points</span>
+        <span class = "h6" > <?php echo lang('app.Points') ?></span>
         <span class = "h6" > <?=$pointCount[0]->pointCount?></span>
     </div>
 </div>
@@ -227,7 +227,7 @@
 
                     <div class="d-flex flex-row my-3"  value = "<?=$ob->id?>">
                         <form id = "commentForm" class = "commentContent" target="iframe">
-                            <input type="txt" id = "commentID" class="form-control " name="comment" placeholder="Create new comment">
+                            <input type="txt" id = "commentID" class="form-control " name="comment" placeholder="<?php echo lang('app.Create_new_comment') ?>">
                         </form>
                         <iframe id="iframe" name="iframe" style="display:none;"></iframe>
                         <div class="material-icons my-auto ml-3 mr-2 text-primary commentButton" style="font-size:30px">send</div>
