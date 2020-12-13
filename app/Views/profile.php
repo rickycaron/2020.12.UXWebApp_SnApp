@@ -170,7 +170,7 @@
 
             <div style="position: relative;" value = "<?=$ob->id?>">
                 <a href="<?= base_url()?>/anobservation/<?=$ob->id?>">
-                    <img class="card-img" id="observationCardPicture" src="<?php echo data_uri($ob->imageData,$ob->imageType); ?>">
+                    <img class="card-img" style="height: 400px; object-fit: cover;" id="observationCardPicture" src="<?php echo data_uri($ob->imageData,$ob->imageType); ?>">
                     <div class="card-img" style="box-shadow: inset 0px -50px 40px -20px black;position: absolute; width: 100%; height: 100%;top: 0; left: 0;"></div>
                     <h4 class="text-white" style="position: absolute; bottom: 0px; right: 12px;"><?=$ob->username?></h4>
                     <div class="material-icons text-white" style="font-size:30px;position: absolute; bottom: 6px; left: 8px" >favorite</div>
