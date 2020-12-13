@@ -6,7 +6,7 @@ namespace App\Controllers;
 
 use App\Models\extra_functions;
 
-class Maincontroller extends \CodeIgniter\Controller
+class Maincontroller extends BaseController
 {
     private $menu_model;
     private $database_model;
