@@ -18,16 +18,16 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" id="All" ><?php echo lang('app.All') ?></a>
+                <a class="nav-link" type="button" id="All" ><?php echo lang('app.All') ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="Observations" ><?php echo lang('app.Observations') ?></a>
+                <a class="nav-link" type="button" id="Observations" ><?php echo lang('app.Observations') ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="Groups"><?php echo lang('app.Groups') ?></a>
+                <a class="nav-link" type="button" id="Groups"><?php echo lang('app.Groups') ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="Users"><?php echo lang('app.Users') ?></a>
+                <a class="nav-link" type="button" id="Users"><?php echo lang('app.Users') ?></a>
             </li>
         </ul>
     </div>

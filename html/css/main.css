@@ -66,3 +66,13 @@ header a:hover{
     margin: -300px 0 0 -200px;
     z-index: 1;
 }
+
+.navbar .btn::before {
+    font-family: "Material Icons";
+    font-weight:900;
+    content:"\e5ce";
+    padding-right: 4px;
+}
+.navbar .btn.collapsed::before {
+    content:"\e5cf";
+}

@@ -35,7 +35,7 @@
 
                 <div style="position: relative; object-fit: cover" value = "<?=$ob->id?>">
                     <a href="<?= base_url()?>/anobservation/<?=$ob->id?>">
-                    <img class="card-img img-fluid" style="max-height: 500px" id="observationCardPicture" src="<?php echo data_uri($ob->imageData,$ob->imageType); ?>">
+                    <img class="card-img img-fluid " style="height: 400px;" src="<?php echo data_uri($ob->imageData,$ob->imageType); ?>">
                     <div class="card-img" style="box-shadow: inset 0px -50px 40px -20px black; position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></div>
                     <h4 class="text-white" style="position: absolute; bottom: 0px; right: 12px;"><?=$ob->username?></h4>
                     <div class="material-icons text-white" style="font-size:30px;position: absolute; bottom: 6px; left: 8px" >favorite</div>
@@ -57,7 +57,7 @@
                         <h3 class="mb-0"><?=$ob->specieName?></h3>
                     </div>
                     <nav class="navbar navbar-expand-sm ">
-                        <span class=" material-icons my-auto"  type="button" data-toggle="collapse" data-target="#demo_<?=$ob->id?>"  style="font-size: 40px">expand_more</span>
+                        <button class=" btn material-icons my-auto collapsed" type="button" id="test" data-toggle="collapse" data-target="#demo_<?=$ob->id?>"  style="font-size: 40px"></button>
                      </div>
 
 
@@ -130,7 +130,6 @@
 
     <?php endforeach; ?>
 </div>
-
 <div id="placeholderLoading"></div>
 
 <?php
