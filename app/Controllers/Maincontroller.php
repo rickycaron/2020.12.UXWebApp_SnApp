@@ -494,7 +494,7 @@ class Maincontroller extends BaseController
             $this->data['content'] = view('profile',$data2); //replace by your own view
         }
         $this->data['title'] =  lang('app.Profile');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js','otheruserprofile.js');
         $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
         return view("mainTemplate", $this->data);
 //        //get observation amount
