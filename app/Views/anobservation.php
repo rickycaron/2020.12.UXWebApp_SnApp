@@ -11,8 +11,7 @@
         <p><?=$user_note?></p>
     </div>
 
-    <img class="img-fluid" id="observation_picture" src="<?php echo data_uri($image_data, $image_type); ?>" alt="picture of the observation">
-    <!-- src="<?php echo data_uri($image_data, $image_type); ?>" -->
+    <img class="img-fluid" id="observation_picture" src="<?=$encoded_image?>" alt="picture of the observation">
     <div class="d-flex flex-row py-4 justify-content-center">
         <div class="information_container mx-auto">
             <span class="material-icons">event_note</span>
@@ -50,11 +49,3 @@
 </div>
 
 <input type="hidden" id="hidden_variable_filter" value="<?=$id?>"/>
-
-<?php
-function data_uri($file, $mime)
-{
-    $base64   = base64_encode($file);
-    return ('data:' . $mime . ';base64,' . $base64);
-}
-?>

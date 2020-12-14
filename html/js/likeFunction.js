@@ -1,8 +1,8 @@
 let likeButton = document.getElementsByClassName("likeButton");
 let likeStatus = document.getElementsByClassName("status");
 let commentButton = document.getElementsByClassName("commentButton");
-let commentContent = document.getElementsByClassName("commentContent")
-let commentShow = document.getElementsByClassName("collapse")
+let commentContent = document.getElementsByClassName("commentContent");
+let commentShow = document.getElementsByClassName("collapse");
 
 for (let i = 0; i < commentButton.length; i++) {
     commentButton[i].addEventListener('click', function () {
@@ -39,6 +39,32 @@ for (let i = 0; i < likeButton.length; i++) {
         }
     }, true);
 }
+
+function likeButtonListenerActivate() {
+    console.log("like activate function");
+    console.log(likeButton.length);
+    for (let i = 0; i < likeButton.length; i++) {
+        likeButton[i].addEventListener('click', function() {
+
+
+            if(likeStatus[i].parentElement.getAttribute("value") == 1) {
+                likeButton[i].className = "material-icons text-white likeButton"
+                cancel_clicked(likeButton[i].parentElement.getAttribute("value"))
+                likeStatus[i].parentElement.setAttribute("value",0)
+
+                console.log('likeStatus:', likeStatus[i].parentElement.getAttribute("value"));
+            }
+            else if(likeStatus[i].parentElement.getAttribute("value") == 0) {
+                likeButton[i].className = "material-icons text-danger likeButton"
+                accept_clicked(likeButton[i].parentElement.getAttribute("value"))
+                likeStatus[i].parentElement.setAttribute("value",1)
+
+                console.log('likeStatus:', likeStatus[i].parentElement.getAttribute("value"));
+            }
+        }, true);
+    }
+}
+
 function getUsername() {
     let base_url = document.querySelector('input[id="hidden_base_url"]').value;
     fetch(base_url + "/getUsername")
@@ -75,3 +101,12 @@ function getStatus() {
         //.then(data => console.log(data))
         .catch(a => console.log(a));
 }
+
+function getNewButtons() {
+    likeButton = document.getElementsByClassName("likeButton");
+    likeStatus = document.getElementsByClassName("status");
+    commentButton = document.getElementsByClassName("commentButton");
+    commentContent = document.getElementsByClassName("commentContent");
+    commentShow = document.getElementsByClassName("collapse");
+}
+

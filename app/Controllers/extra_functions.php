@@ -201,4 +201,10 @@ trait extra_functions
         return "<h3>Users:</h3>
                 <p>no users found</p>";
     }
+
+    public function encode_image($file, $mime)
+{
+    $base64   = base64_encode($file);
+    return ('data:' . $mime . ';base64,' . $base64);
+}
 }

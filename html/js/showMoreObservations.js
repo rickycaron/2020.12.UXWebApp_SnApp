@@ -1,26 +1,39 @@
-//do this function when scrolled to the bottom of the page
-// $(window).scroll(function() {
-//     if($(window).scrollTop() == $(document).height() - $(window).height()) {
-//         console.log('Entered showMoreFriendsObservations.s scroll function');
-//         // ajax call get data from server and append to the div
-//         getOtherObservations()
-//     }
-// });
-
+let dates = document.getElementsByClassName("dateObject");
+let times = document.getElementsByClassName("timeObject");
 let base_url = window.location;
-var lastDate = php_lastDate;
-var lastTime = php_lastTime;
 
-//var lastDate = $('dateObject:last');
+//do this function when scrolled to the bottom of the page
+$(window).scroll(function() {
+    if($(window).scrollTop() == $(document).height() - $(window).height()) {
+        console.log('Entered showMoreFriendsObservations.s scroll function');
+        // ajax call get data from server and append to the div
+        getOtherObservations()
+    }
+});
 
 
 function getOtherObservations() {
-    console.log(php_lastDate, php_lastTime);
+    console.log(dates.length);
 
-    document.getElementById("placeholderLoading").innerHTML = "<span style='color: green;'>Waiting...</span>"
+    let lastDate = dates[dates.length - 1].getAttribute("value");
+    let lastTime = times[times.length - 1].getAttribute("value");
+    console.log(lastDate, lastTime);
+
     fetch(base_url + "?extra=true&lastDate=" + lastDate + "&lastTime=" + lastTime)
         .then(resp => resp.text())
         .then(myHTML => document.getElementById("observationCardsContainer").innerHTML += myHTML)
         .catch(a => console.log(a));
-    document.getElementById("placeholderLoading").innerHTML = "<span></span>"
+    getNewButtons();
+    likeButtonListenerActivate();
+
+    reload_js(jsFileLike);
 }
+
+let jsFileLike = document.querySelector('input[id="hidden_base_url"]').value + "/js/likeFunction.js";
+
+function reload_js(src) {
+    src = $('script[src$="' + src + '"]').attr("src");
+    $('script[src$="' + src + '"]').remove();
+    $('<script/>').attr('src', src).appendTo('head');
+}
+reload_js(jsFileLike);
