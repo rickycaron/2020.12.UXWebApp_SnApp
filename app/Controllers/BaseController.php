@@ -26,7 +26,7 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = [];
+	protected $helpers = ['url'];
 
 	/**
 	 * Constructor.
@@ -41,6 +41,9 @@ class BaseController extends Controller
 		//--------------------------------------------------------------------
 		// E.g.:
 		// $this->session = \Config\Services::session();
+        $session = \Config\Services::session();
+        $language = \Config\Services::language();
+        $language->setLocale($session->lang);
 	}
 
 }

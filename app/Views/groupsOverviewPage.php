@@ -20,7 +20,7 @@
                     <span class="material-icons my-auto mx-3" style="font-size: 40px">navigate_next</span>
                 </div>
         </a>
-        <a class="px-3 pb-3" href="<?=base_url()?>/groupmembers/<?=$group[0]?>"><?=$group[2]?> members</a>
+        <a class="px-3 pb-3" href="<?=base_url()?>/groupmembers/<?=$group[0]?>"><?=$group[2]?> <?php echo lang('app.members') ?></a>
 
     </div>
 

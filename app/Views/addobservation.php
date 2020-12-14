@@ -69,6 +69,6 @@
             <input type="text" class="form-control" id="userNotePlaceholder" name="userNote" value="">
         </div>
 
-        <button class="btn btn-primary w-100 my-2 mt-3" style="font-size:25px" type="submit">Submit</button>
+        <button class="btn btn-primary w-100 my-2 mt-3" style="font-size:25px" type="submit"><?php echo lang('app.Submit') ?></button>
     </form>
 </div>

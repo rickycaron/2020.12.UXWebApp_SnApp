@@ -11,20 +11,20 @@
                 <div class="txt_field">
                     <input type="text" name="Username/email">
                     <span></span>
-                    <label>Username/email:</label>
+                    <label><?php echo lang('app.Email') ?>:</label>
                 </div>
 
                 <div class="txt_field">
                     <input type="text" name="Password" required>
                     <span></span>
-                    <label>Password:</label>
+                    <label><?php echo lang('app.Password') ?>:</label>
                 </div>
             </form>
             <div>
-                <button id="custom-btn">Log in</button>
-                <button id="custom-btn">New user?</button>
+                <button id="custom-btn"><?php echo lang('app.Log_in') ?></button>
+                <button id="custom-btn"><?php echo lang('app.New_User?') ?></button>
             </div>
         </div>
-        <button id="custom-btn">Cancel </button>
+        <button id="custom-btn"><?php echo lang('app.Cancel') ?> </button>
     </div>
 </div>

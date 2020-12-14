@@ -89,7 +89,7 @@
 
                     <div class="d-flex flex-row my-3"  value = "<?=$ob->id?>">
                         <form id = "commentForm" class = "commentContent" target="iframe">
-                            <input type="txt" id = "commentID" class="form-control " name="comment" placeholder="Create new comment">
+                            <input type="txt" id = "commentID" class="form-control " name="comment" placeholder="<?php echo lang('app.Create_new_comment') ?>">
                         </form>
                         <iframe id="iframe" name="iframe" style="display:none;"></iframe>
                         <div class="material-icons my-auto ml-3 mr-2 text-primary commentButton" style="font-size:30px">send</div>

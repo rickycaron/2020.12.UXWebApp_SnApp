@@ -437,13 +437,13 @@ class Router implements RouterInterface
 				}
 				// Store our locale so CodeIgniter object can
 				// assign it to the Request.
-				if (isset($localeSegment))
-				{
-					// The following may be inefficient, but doesn't upset NetBeans :-/
-					$temp                 = (explode('/', $uri));
-					$this->detectedLocale = $temp[$localeSegment];
-					unset($localeSegment);
-				}
+                if (isset($localeSegment))
+                {
+                    // The following may be inefficient, but doesn't upset NetBeans :-/
+                    $temp                 = (explode('/', $uri));
+                    $this->detectedLocale = $temp[$localeSegment];
+                    unset($localeSegment);
+                }
 
 				// Are we using Closures? If so, then we need
 				// to collect the params into an array

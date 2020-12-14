@@ -17,16 +17,16 @@
                 <p>Total Points: <?= $member->points?></p>
             </address>
             <?php if(session()->get('id') == $member->id): ?>
-                <a href="<?=base_url()?>/profile" class="btn btn-primary">See Own Profile</a>
+                <a href="<?=base_url()?>/profile" class="btn btn-primary"><?php echo lang('app.See_Own_Profile') ?></a>
             <?php endif;?>
             <?php if(session()->get('id') != $member->id): ?>
-            <a href="<?=base_url()?>/otheruserprofile/<?= $member->id?>" class="btn btn-primary">See Profile</a>
+            <a href="<?=base_url()?>/otheruserprofile/<?= $member->id?>" class="btn btn-primary"><?php echo lang('app.See_Profile') ?></a>
 <!--            --><?php //if(session()->get("id") == $groupadmin):?>
 <!--                <a href="--><?//=base_url()?><!--/deletememberfromgroup" class="btn btn-third float-right">Delete</a>-->
 <!--            --><?php //endif?>
-                <a class="delete_friend btn btn-third float-right" href="<?=base_url()?>/deleteUserFromGroup/<?=$member->id?>/<?=$groupID?>/<?=$groupName?>">Delete From Group</a>
+                <a class="delete_friend btn btn-third float-right" href="<?=base_url()?>/deleteUserFromGroup/<?=$member->id?>/<?=$groupID?>/<?=$groupName?>"><?php echo lang('app.Delete_From_Group') ?></a>
             <?php else:?>
-                <a class="delete_friend btn btn-third float-right" href="<?=base_url()?>/deleteUserFromGroup/<?=$member->id?>/<?=$groupID?>/<?=$groupName?>">Leave this Group</a>
+                <a class="delete_friend btn btn-third float-right" href="<?=base_url()?>/deleteUserFromGroup/<?=$member->id?>/<?=$groupID?>/<?=$groupName?>"><?php echo lang('app.Leave_this_Group') ?></a>
             <?php endif;?>
 
         </div>

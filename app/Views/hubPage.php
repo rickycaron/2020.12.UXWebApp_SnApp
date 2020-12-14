@@ -5,6 +5,7 @@
 </head>
 <div id="nothingToShow"><?=$upToDate?></div>
 <div id="observationCardsContainer" class="w-100 mt-2">
+
     <?php foreach ($observations as $ob): ?>
 
         <?php $commentCount = sizeof(explode("♪", $ob->messages))?>
@@ -34,7 +35,8 @@
 
                 <div style="position: relative; object-fit: cover" value = "<?=$ob->id?>">
                     <a href="<?= base_url()?>/anobservation/<?=$ob->id?>">
-                    <img class="card-img img-fluid" style="max-height: 500px" id="observationCardPicture" src="<?=$ob->encoded_image?>">
+
+                    <img class="card-img img-fluid " style="height: 400px; object-fit: cover;" src="<?=$ob->encoded_image?>">
                     <div class="card-img" style="box-shadow: inset 0px -50px 40px -20px black; position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></div>
                     <h4 class="text-white" style="position: absolute; bottom: 0px; right: 12px;"><?=$ob->username?></h4>
                     <div class="material-icons text-white" style="font-size:30px;position: absolute; bottom: 6px; left: 8px" >favorite</div>
@@ -56,7 +58,7 @@
                         <h3 class="mb-0"><?=$ob->specieName?></h3>
                     </div>
                     <nav class="navbar navbar-expand-sm ">
-                        <span class=" material-icons my-auto"  type="button" data-toggle="collapse" data-target="#demo"  style="font-size: 40px">expand_more</span>
+                        <button class=" btn material-icons my-auto collapsed" type="button" id="test" data-toggle="collapse" data-target="#demo_<?=$ob->id?>"  style="font-size: 40px"></button>
                      </div>
 
 
@@ -71,7 +73,7 @@
                 ?>
 
                 <?php if ($ob->messages != null) :?>
-                    <div  id="demo" class="collapse" >
+                    <div  id="demo_<?=$ob->id?>" class="collapse" >
 
                     <?php for($i=0;$i<$commentCount*2;$i=$i+2):?>
                         <div class="py-2">
@@ -105,7 +107,7 @@
 
                         <div class="d-flex flex-row my-3"  value = "<?=$ob->id?>">
                             <form id = "commentForm" class = "commentContent" target="iframe">
-                                <input type="txt" id = "commentID" class="form-control " name="comment" placeholder="Create new comment">
+                                <input type="txt" id = "commentID" class="form-control " name="comment" placeholder="<?php echo lang('app.Create_new_comment') ?>">
                             </form>
                             <iframe id="iframe" name="iframe" style="display:none;"></iframe>
                             <div class="material-icons my-auto ml-3 mr-2 text-primary commentButton" style="font-size:30px">send</div>
@@ -123,3 +125,5 @@
 
     <?php endforeach; ?>
 </div>
+
+

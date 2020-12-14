@@ -63,7 +63,7 @@ class App extends BaseConfig
 	| should run under for this request.
 	|
 	*/
-	public $defaultLocale = 'zh';
+	public $defaultLocale = 'nl';
 
 	/*
 	|--------------------------------------------------------------------------
@@ -76,7 +76,7 @@ class App extends BaseConfig
 	| If false, no automatic detection will be performed.
 	|
 	*/
-	public $negotiateLocale = false;
+	public $negotiateLocale = true;
 
 	/*
 	|--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ class App extends BaseConfig
 	| found, the first locale will be used.
 	|
 	*/
-	public $supportedLocales = ['en','nl'];
+	public $supportedLocales = ['en','nl','zh'];
 
 	/*
 	|--------------------------------------------------------------------------

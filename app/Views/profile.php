@@ -49,7 +49,7 @@
         <hr class="mt-2 mb-3 my-3"/>
         <a href="<?= base_url()?>/friendList"><?php echo lang('app.Friends') ?></a>
         <hr class="mt-2 mb-3 my-3"/>
-        <a href="<?= base_url()?>/account/<?= session()->get('id')?>"><?php echo lang('app.Change_password') ?></a>
+        <a href="<?= base_url()?>/account/<?= session()->get('id')?>"><?php echo lang('app.Change_Password') ?></a>
         <hr class="mt-2 mb-3 my-3"/>
         <a href="<?= base_url()?>/edit_profile"><?php echo lang('app.Edit_profile') ?></a>
         <hr class="mt-2 mb-3 my-3"/>
@@ -92,23 +92,23 @@
 
 <div class="d-flex flex-row my-3">
     <div class="d-flex flex-column align-items-center mx-2">
-        <span class = "h6" > observations</span>
+        <span class = "h6" > <?php echo lang('app.Observations') ?></span>
         <span class = "h6" > <?=$observationCount[0]->observationCount?></span>
     </div>
     <div class="d-flex flex-column align-items-center mx-2">
-        <span class = "h6" > likes</span>
+        <span class = "h6" > <?php echo lang('app.Likes') ?></span>
         <span class = "h6" > <?=$likeCount[0]->likeCount?></span>
     </div>
     <div class="d-flex flex-column align-items-center mx-2">
-        <span class = "h6" > comments</span>
+        <span class = "h6" > <?php echo lang('app.Comments') ?></span>
         <span class = "h6" > <?=$commentCount[0]->commentCount?></span>
     </div>
     <div class="d-flex flex-column align-items-center mx-2">
-        <span class = "h6" > friends</span>
+        <span class = "h6" > <?php echo lang('app.Friends') ?></span>
         <span class = "h6" > <?=$friendCount[0]->friendCount?></span>
     </div>
     <div class="d-flex flex-column align-items-center mx-2">
-        <span class = "h6" > points</span>
+        <span class = "h6" > <?php echo lang('app.Points') ?></span>
         <span class = "h6" > <?=$pointCount[0]->pointCount?></span>
     </div>
 </div>
@@ -171,7 +171,7 @@
 
             <div style="position: relative;" value = "<?=$ob->id?>">
                 <a href="<?= base_url()?>/anobservation/<?=$ob->id?>">
-                    <img class="card-img" id="observationCardPicture" src="<?=$ob->encoded_image?>">
+                    <img class="card-img" style="height: 400px; object-fit: cover;" id="observationCardPicture" src="<?=$ob->encoded_image?>">
                     <div class="card-img" style="box-shadow: inset 0px -50px 40px -20px black;position: absolute; width: 100%; height: 100%;top: 0; left: 0;"></div>
                     <h4 class="text-white" style="position: absolute; bottom: 0px; right: 12px;"><?=$ob->username?></h4>
                     <div class="material-icons text-white" style="font-size:30px;position: absolute; bottom: 6px; left: 8px" >favorite</div>
@@ -228,7 +228,7 @@
 
                     <div class="d-flex flex-row my-3"  value = "<?=$ob->id?>">
                         <form id = "commentForm" class = "commentContent" target="iframe">
-                            <input type="txt" id = "commentID" class="form-control " name="comment" placeholder="Create new comment">
+                            <input type="txt" id = "commentID" class="form-control " name="comment" placeholder="<?php echo lang('app.Create_new_comment') ?>">
                         </form>
                         <iframe id="iframe" name="iframe" style="display:none;"></iframe>
                         <div class="material-icons my-auto ml-3 mr-2 text-primary commentButton" style="font-size:30px">send</div>

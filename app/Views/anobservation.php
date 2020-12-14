@@ -31,7 +31,7 @@
 
     <div id="map" class="jumbotron" style="height: 200px" ></div>
     <div>
-        <h2>Details</h2>
+        <h2><?php echo lang('app.Description') ?></h2>
         <p><?=$description?></p>
     </div>
     <div id="like_and_comment_button " class="d-flex justify-content-center"  >
