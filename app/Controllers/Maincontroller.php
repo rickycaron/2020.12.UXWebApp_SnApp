@@ -46,11 +46,22 @@ class Maincontroller extends BaseController
         return view("mainTemplate", $this->data);
     }
 
-    public function leaderboard($leaderboard_filter) {
+    public function leaderboard($filter) {
         $this->set_common_data('arrow_back', 'leaderboardSelect','search');
 
-        $leaderboard_data['leaderboard_filter'] = $leaderboard_filter;
-        $leaderboard_data['leaderboard_content'] = "<p>select a timespan</p>";
+        $leaderboard_data['leaderboard_filter'] = $filter;
+        // initially the monthly leaderboard is loaded
+        switch ($filter) {
+            case "friends":
+                $leaderboard_data['leaderboard_content'] = $this->fetchFriendsLeaderboard('monthlyPoints');
+                break;
+            case "worldwide":
+                $leaderboard_data['leaderboard_content'] = $this->fetchWorldwideLeaderboard('monthlyPoints');
+                break;
+            default:
+                $leaderboard_data['leaderboard_content'] = $this->fetchGroupLeaderboard($filter, 'monthlyPoints');
+        }
+
         $this->data['content'] = view('leaderboard', $leaderboard_data);
         $this->data['title'] = lang('app.Leaderboard');
         $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
