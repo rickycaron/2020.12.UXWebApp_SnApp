@@ -381,15 +381,15 @@ class Maincontroller extends BaseController
                 $observations = $this->database_model->getMoreObservationsProfile($userID, $lastDate, $lastTime);
                 $data3['observations'] = $observations;
                 if ($observations == null) {
-                    $data3['upToDate'] = "";
+                    $data3['nothingToShow'] = "";
                     return view('observationCards', $data3, $thisUserID);
                 }
                 if ($observations[0] == null) {
-                    $data3['upToDate'] = "";
+                    $data3['nothingToShow'] = "";
                     return view('observationCards', $data3, $thisUserID);
                 }
                 else {
-                    $data3['upToDate'] = "";
+                    $data3['nothingToShow'] = "";
                     foreach ($observations as $observation) {
                         $encoded_image = $this->encode_image($observation->imageData, $observation->imageType);
                         $observation->encoded_image = $encoded_image;
@@ -454,16 +454,25 @@ class Maincontroller extends BaseController
 
             if (strcasecmp($getMoreObservations, 'true') == 0) {
                 //get more observations from friends from current users
-                $data3['userID']=$userID;
-                $data3['username']=$username;
-                $data3['observations'] = $this->database_model->getMoreObservationsProfile($userID, $lastDate, $lastTime);
-                $observations = $data3['observations'];
+                $observations = $this->database_model->getMoreObservationsProfile($userID, $lastDate, $lastTime);
+                $data3['observations'] = $observations;
                 if ($observations == null) {
-                    $upToDateDiv = '<div id="upToDateDiv" hidden>You are up to date</div>';
-                    return $upToDateDiv;
+                    $data3['nothingToShow'] = "";
+                    return view('observationCards', $data3, $userID);
+                }
+                if ($observations[0] == null) {
+                    $data3['nothingToShow'] = "";
+                    return view('observationCards', $data3, $userID);
                 }
                 else {
-                    return view('hubPage', $data3, $userID);
+                    $data3['nothingToShow'] = "";
+                    foreach ($observations as $observation) {
+                        $encoded_image = $this->encode_image($observation->imageData, $observation->imageType);
+                        $observation->encoded_image = $encoded_image;
+                    }
+                    $data3['observations'] = $observations;
+                    $this->data['content'] = view('hubPage', $data3, $userID);
+                    return view('observationCards', $data3, $userID);
                 }
             }
         }
@@ -488,11 +497,11 @@ class Maincontroller extends BaseController
         $observations = $this->database_model->getFirstObservationsProfile($userID);
         $data2['observations'] = $observations;
         if ($observations == null) {
-            $data2['nothingYet'] = "No observations to show, Yet!";
+            $data2['nothingToShow'] = "No observations to show, Yet!";
             $this->data['content'] = view('profile', $data2); //replace by your own view
         }
         else {
-            $data2['nothingYet'] = "";
+            $data2['nothingToShow'] = "";
             foreach ($observations as $observation) {
                 $encoded_image = $this->encode_image($observation->imageData, $observation->imageType);
                 $observation->encoded_image = $encoded_image;
