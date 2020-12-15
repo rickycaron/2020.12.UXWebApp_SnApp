@@ -24,16 +24,19 @@ trait extra_functions
     private function set_leaderboard_data($person_list, $period) {
         //fill in the first podium data
         if(isset($person_list[0])) {
+            $leaderboard_data['id_first'] = $person_list[0]['id'];
             $leaderboard_data['name_first'] = $person_list[0]['username'];
             $leaderboard_data['points_first'] = $person_list[0][$period];
         }
         if(isset($person_list[1]))
         {
+            $leaderboard_data['id_second'] = $person_list[1]['id'];
             $leaderboard_data['name_second'] = $person_list[1]['username'];
             $leaderboard_data['points_second'] = $person_list[1][$period];
         }
         if(isset($person_list[2]))
         {
+            $leaderboard_data['id_third'] = $person_list[2]['id'];
             $leaderboard_data['name_third'] = $person_list[2]['username'];
             $leaderboard_data['points_third'] = $person_list[2][$period];
         }
@@ -44,21 +47,23 @@ trait extra_functions
         $current_user = 0;
         //$this->debug_to_console(count((array)$person_list));
         for ($i = 3; $i < count((array)$person_list); $i++) {
-            array_push($leaderboard_data['persons_list'], array('place'=>($i+1), 'name'=>$person_list[$i]['username'], 'point'=>$person_list[$i][$period]));
+            array_push($leaderboard_data['persons_list'], array('place'=>($i+1), 'name'=>$person_list[$i]['username'], 'point'=>$person_list[$i][$period], 'id'=>$person_list[$i]['id']));
             if (session()->get('id') == $person_list[$i]['id'] && $i > 9) {
                 $worse_then_tenth_flag = 1;
-                $current_user = array('place'=>($i+1),'name'=>$person_list[$i]['username'], 'point'=>$person_list[$i][$period]);
+                $current_user = array('place'=>($i+1),'name'=>$person_list[$i]['username'], 'point'=>$person_list[$i][$period], 'id'=>$person_list[$i]['id']);
             }
         }
         if ($worse_then_tenth_flag) {
             $leaderboard_data['user_placeholder'] = '<li class="list-group-item list-group-item-action d-flex justify-content-between bg-secondary">
                                                         <h1>...</h1>
                                                      </li>
-                                                     <li href="#" class="list-group-item list-group-item-action d-flex justify-content-between bg-secondary">
-                                                            <h3>'.$current_user["place"].'. '.$current_user["name"].'</h3>
-                                                            <!--<img src="'.base_url().'/image/profile.png">-->
-                                                            <h3>'.$current_user["point"].'</h3>
-                                                            </li>';
+                                                     <a class="w-100 active" href="'.base_url().'/otheruserprofile/'.$current_user["id"].'">
+                                                         <li class="list-group-item list-group-item-action d-flex justify-content-between bg-secondary">
+                                                                <h3>'.$current_user["place"].'. '.$current_user["name"].'</h3>
+                                                                <!--<img src="'.base_url().'/image/profile.png">-->
+                                                                <h3>'.$current_user["point"].'</h3>
+                                                         </li>
+                                                     </a>';
         }
         else {
             $leaderboard_data['user_placeholder'] = "";
