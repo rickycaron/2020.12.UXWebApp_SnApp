@@ -6,37 +6,23 @@ namespace App\Controllers;
 
 trait extra_functions
 {
-
-    /*
-    private $leaderboard_userID;
-
-    private function get_leaderboard_query_result($leaderboard_filter, $leaderboard_period) {
-        $query_result = 0;
-        switch($leaderboard_filter) {
-            case 'worldwide':
-                $query_result = $this->database_model->getLeaderboardWorldwide($leaderboard_period);
-                break;
-            case 'friends':
-                $query_result = $this->database_model->getFriendLeaderboard($leaderboard_period, $this->leaderboard_userID);
-                break;
-            default:
-                //if none of the above are selected it means that the filter is a group
-                $groups = $this->database_model->getGroupsFromUser($this->leaderboard_userID);
-                $isGroup = 0;
-                foreach ($groups as $gr):
-                    if ($leaderboard_filter == $gr->name) {
-                        $isGroup = 1;
-                        break;
-                    }
-                endforeach;
-                if ($isGroup == 1) {
-                    $query_result = $this->database_model->getLeaderboardFromGroup($leaderboard_filter, $leaderboard_period);
-                }
-        }
-        return $query_result;
+    public function fetchFriendsLeaderboard($period) {
+        $query_result = $this->database_model->getFriendLeaderboard($period, session()->get('id'));
+        return view('fetchLeaderboardHTML', $this->set_leaderboard_data($query_result, $period));
     }
 
-    private function set_leaderboard_data($person_list, $period, $filter) {
+    public function fetchWorldwideLeaderboard($period) {
+        $query_result = $this->database_model->getLeaderboardWorldwide($period);
+        return view('fetchLeaderboardHTML', $this->set_leaderboard_data($query_result, $period));
+    }
+
+    public function fetchGroupLeaderboard($group, $period) {
+        $query_result = $this->database_model->getLeaderboardFromGroup($group, $period);
+        return view('fetchLeaderboardHTML', $this->set_leaderboard_data($query_result, $period));
+    }
+
+    private function set_leaderboard_data($person_list, $period) {
+        $this->debug_to_console(session()->get('id'));
         //fill in the first podium data
         if(isset($person_list[0])) {
             $leaderboard_data['name_first'] = $person_list[0]['username'];
@@ -57,9 +43,15 @@ trait extra_functions
 
         $worse_then_tenth_flag = 0;
         $current_user = 0;
+        //$this->debug_to_console(count((array)$person_list));
         for ($i = 3; $i < count((array)$person_list); $i++) {
             array_push($leaderboard_data['persons_list'], array('place'=>($i+1), 'name'=>$person_list[$i]['username'], 'point'=>$person_list[$i][$period]));
-            if ($this->leaderboard_userID == $person_list[$i]['id'] && $i > 10) {
+            //$this->debug_to_console($person_list[$i]['username']);
+            $this->debug_to_console("checking $$$$$$$");
+            $this->debug_to_console($person_list[$i]['id']);
+            $this->debug_to_console(session()->get('id'));
+            $this->debug_to_console($i);
+            if (session()->get('id') == $person_list[$i]['id'] && $i > 9) {
                 $worse_then_tenth_flag = 1;
                 $current_user = array('place'=>($i+1),'name'=>$person_list[$i]['username'], 'point'=>$person_list[$i][$period]);
             }
@@ -79,12 +71,6 @@ trait extra_functions
         }
         return $leaderboard_data;
     }
-
-    function getLeaderboardHTMLajax ($leaderboard_filter, $leaderboard_period) {
-        $query_result = $this->get_leaderboard_query_result($leaderboard_filter, $leaderboard_period);
-        return view('fetchLeaderboardHTML', $this->set_leaderboard_data($query_result, $leaderboard_period, $leaderboard_filter));
-    }
-    */
 
     function debug_to_console($data) {
         $output = $data;
