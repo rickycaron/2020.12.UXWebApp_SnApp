@@ -612,7 +612,7 @@ class Maincontroller extends BaseController
                 session()->setFlashdata('success','Successful Login!');
                 //return hub page
                 //return redirect()->to('hub');
-                return redirect()->to('leaderboardSelect');
+                return redirect()->to('hub');
 //                return view("mainTemplate", $this->data);
             }
             else if($searchresult==1){
