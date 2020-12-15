@@ -48,6 +48,20 @@ class Maincontroller extends BaseController
         return view("mainTemplate", $this->data);
     }
 
+    public function leaderboard($leaderboard_filter) {
+        $this->set_common_data('arrow_back', 'leaderboardSelect','search');
+
+        $leaderboard_data['leaderboard_filter'] = $leaderboard_filter;
+        $leaderboard_data['leaderboard_content'] = "<p>nothing yet</p>";
+        $this->data['content'] = view('leaderboard', $leaderboard_data);
+        $this->data['title'] = lang('app.Leaderboard');
+        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
+        $this->data['scripts_to_load'] = array('leaderboard.js', 'jquery-3.5.1.min');
+
+        return view("mainTemplate", $this->data);
+    }
+
+    /*
     //TODO: when you select a filter with a space it gives an error -> set a restriction to the group name so no spaces are accepted or deal with it.
     public function leaderboard($leaderboard_filter) {
         $this->set_common_data('arrow_back', 'leaderboardSelect','search');
@@ -67,6 +81,7 @@ class Maincontroller extends BaseController
         $this->data['scripts_to_load'] = array('leaderboard.js', 'jquery-3.5.1.min');
         return view("mainTemplate", $this->data);
     }
+    */
 
     public function hub() {
         $this->set_common_data('eco',null, 'search');

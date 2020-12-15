@@ -6,6 +6,9 @@ namespace App\Controllers;
 
 trait extra_functions
 {
+
+
+    /*
     private $leaderboard_userID;
 
     private function get_leaderboard_query_result($leaderboard_filter, $leaderboard_period) {
@@ -82,6 +85,7 @@ trait extra_functions
         $query_result = $this->get_leaderboard_query_result($leaderboard_filter, $leaderboard_period);
         return view('fetchLeaderboardHTML', $this->set_leaderboard_data($query_result, $leaderboard_period, $leaderboard_filter));
     }
+    */
 
     function debug_to_console($data) {
         $output = $data;
