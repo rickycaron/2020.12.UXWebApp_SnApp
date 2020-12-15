@@ -326,7 +326,7 @@ class Maincontroller extends BaseController
         $this->data['content'] = view('groupmembers',$data); //replace by your own view
         $this->data['title'] = lang('app.Group_Members');
 
-        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js');
         return view("mainTemplate", $this->data);
     }
@@ -559,7 +559,7 @@ class Maincontroller extends BaseController
         $this->data['content'] = view('friendList', $this->data);
         $this->data['title'] = lang('app.Friend_List');
 
-        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('profile');
         $this->data['scripts_to_load'] = array('friendlist.js');
         return view("mainTemplate", $this->data);
     }
@@ -772,7 +772,7 @@ class Maincontroller extends BaseController
 
         $this->data['content'] = view('edit_profile', $data2); //replace by your own view
         $this->data['title'] = lang('app.Edit_profile');
-        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('profile');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','profilePicture.js', 'previewPicture.js');
 
         return view("mainTemplate", $this->data);
@@ -820,7 +820,7 @@ class Maincontroller extends BaseController
         $this->data['content'] = view('account',$this->data); //replace by your own view
         $this->data['title'] = lang('app.Account');
 
-        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('profile');
         return view("mainTemplate", $this->data);
     }
     /* created by rui
