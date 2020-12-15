@@ -8,7 +8,7 @@
     <?= csrf_field() ?>
     <div class="form-group mb-1">
         <label for="email"><?php echo lang('app.Email_address') ?></label>
-        <input type="email" id="inputEmail" class="form-control" name="email" value="<?= set_value("email")?>" required autofocus>
+        <input type="email" id="inputEmail" class="form-control" name="email" " required autofocus>
     </div>
 
     <div class="form-group mb-1">

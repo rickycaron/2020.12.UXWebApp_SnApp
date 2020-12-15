@@ -592,7 +592,7 @@ class Maincontroller extends BaseController
         $this->set_common_data('eco', null,'eco');
 
         //add your code here...
-        helper(['form']);//to remain the user's typed value if the login fails
+        //helper(['form']);//to remain the user's typed value if the login fails
         if ($this->request->getMethod() === 'post' && $this->validate([
                 'email'  => 'required|min_length[3]|max_length[40]|valid_email|is_not_unique[user.email]',
                 'password'=>'required|min_length[6]|max_length[50]'
