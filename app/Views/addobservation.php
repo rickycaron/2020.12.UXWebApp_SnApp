@@ -21,22 +21,22 @@
 <?php endif?>
         <input id="inputFile" type="file" name="picture" onchange="readURL(this)" hidden>
 
-        <div class="txt_field">
+        <div class="txt_field mt-3">
             <label class="mb-0"><?php echo lang('app.Species') ?></label>
             <span></span>
-            <input type="text" class="form-control" id="speciesNamePlaceholder" name="specieName" required value="<?= set_value('specieName')?>">
+            <input readonly type="text" class="form-control" id="scientificNamePlaceholder" name="scientificName" required value="<?= set_value('scientificName')?>">
         </div>
 
-        <div class="txt_field mt-3">
+        <div class="txt_field">
             <label class="mb-0"><?php echo lang('app.Scientific_name') ?></label>
             <span></span>
-            <input type="text" class="form-control" id="scientificNamePlaceholder" name="scientificName" required value="<?= set_value('scientificName')?>">
+            <input readonly type="text" class="form-control" id="speciesNamePlaceholder" name="specieName" required value="<?= set_value('specieName')?>">
         </div>
 
         <div class="txt_field mt-3">
             <label class="mb-0"><?php echo lang('app.Description') ?></label>
             <span></span>
-            <textarea readonly type="text" class="form-control mt-0" style="min-height: 120px;" id="DescriptionPlaceholder" name="description" required value="<?= set_value('description')?>"></textarea>
+            <textarea type="text" class="form-control mt-0" style="min-height: 120px;" id="DescriptionPlaceholder" name="description" required value="<?= set_value('description')?>"></textarea>
         </div>
 
         <div class="txt_field mt-3">

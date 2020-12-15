@@ -610,7 +610,7 @@ class Maincontroller extends BaseController
             $time = $this->request->getPost('time');
             $userNote = $this->request->getPost('userNote');
 
-            $this->database_model->insertObservation($picture, $imageProperties, $location, $date, $time, $specieId[0]->id, $userID, $userNote);
+            $this->database_model->insertObservation($picture, $imageProperties, $description,$location, $date, $time, $specieId[0]->id, $userID, $userNote);
             return redirect()->to('hub');
         }
 
