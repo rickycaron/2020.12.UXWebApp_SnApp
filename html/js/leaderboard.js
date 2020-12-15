@@ -25,14 +25,12 @@ function overallClicked() {
 
 function fetchLeaderboardData(url) {
     console.log(url);
-    /*
-    fetch(baseUrl +"/getLeaderboardHTMLajax/"+filter+"/"+period)
+    fetch(url)
         .then(resp => resp.text())
         .then(data => document.getElementById("leaderboard_container").innerHTML = data)
         .catch(a => console.log(a));
     //.then(data => console.log(data))
     //.then(myHTML => document.getElementById("leaderboard_container").innerHTML = myHTML)
-    */
 }
 
 function getLeaderboardURL(period) {
@@ -42,6 +40,6 @@ function getLeaderboardURL(period) {
         case "worldwide":
             return baseUrl + '/fetchWorldwideLeaderboard/' + period;
         default:
-            return baseUrl + 'fetchGroupLeaderboard/' + filter +'/' + period;
+            return baseUrl + '/fetchGroupLeaderboard/' + filter +'/' + period;
     }
 }

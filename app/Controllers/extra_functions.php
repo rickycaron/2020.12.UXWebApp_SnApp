@@ -7,7 +7,17 @@ namespace App\Controllers;
 trait extra_functions
 {
 
+    public function fetchFriendsLeaderboard($perdiod) {
+        return "<h1>fetchFiendsLeaderboard</h1>";
+    }
 
+    public function fetchWorldwideLeaderboard($perdiod) {
+        return "<h1>fetchWorldwideLeaderboard</h1>";
+    }
+
+    public function fetchGroupLeaderboard($group, $perdiod) {
+        return "<h1>fetchGroupLeaderboard</h1>";
+    }
     /*
     private $leaderboard_userID;
 

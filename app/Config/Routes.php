@@ -60,7 +60,9 @@ $routes->get('otheruserprofile/(:num)', 'Maincontroller::otheruserprofile/$1',['
 $routes->get('sendFriendRequest/(:num)', 'Maincontroller::sendFriendRequest/$1');
 
 $routes->get('leaderboard/(:alpha)', 'Maincontroller::leaderboard/$1',['filter'=>'auth']);
-$routes->get('getLeaderboardHTMLajax/(:alpha)/(:alpha)', 'Maincontroller::getLeaderboardHTMLajax/$1/$2',['filter'=>'auth']);
+$routes->get('fetchFriendsLeaderboard/(:alpha)', 'Maincontroller::fetchFriendsLeaderboard/$1',['filter'=>'auth']);
+$routes->get('fetchWorldwideLeaderboard/(:alpha)', 'Maincontroller::fetchWorldwideLeaderboard/$1',['filter'=>'auth']);
+$routes->get('fetchGroupLeaderboard/(:alpha)/(:alpha)', 'Maincontroller::fetchGroupLeaderboard/$1/$2',['filter'=>'auth']);
 $routes->match(['get','post'],'forgotPassword', 'Maincontroller::forgotPassword',['filter' => 'noauth']);
 $routes->match(['get','post'],'resetPassword/(:num)', 'Maincontroller::resetPassword/$1',['filter'=>'auth']);
 

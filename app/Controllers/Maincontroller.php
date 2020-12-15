@@ -55,7 +55,7 @@ class Maincontroller extends BaseController
         $leaderboard_data['leaderboard_content'] = "<p>nothing yet</p>";
         $this->data['content'] = view('leaderboard', $leaderboard_data);
         $this->data['title'] = lang('app.Leaderboard');
-        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
         $this->data['scripts_to_load'] = array('leaderboard.js', 'jquery-3.5.1.min');
 
         return view("mainTemplate", $this->data);

@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <?php if (isset($scripts_to_load)) foreach ($scripts_to_load as $script): ?>
-        <script src="<?= base_url()?>/js/<?=$script?>?v=9" defer></script>
+        <script src="<?= base_url()?>/js/<?=$script?>?v=10" defer></script>
     <?php endforeach; ?>
 </head>
 
