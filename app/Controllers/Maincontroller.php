@@ -151,7 +151,7 @@ class Maincontroller extends BaseController
     }
 
     public function anobservation($observationID) {
-        $this->set_common_data('arrow_back', null, 'search');
+        $this->set_common_data('arrow_back', session()->get('lastMainPageLink'), 'search');
 
         // retrieve all the information needed from the database and write values in placeholders
         $observation = $this->database_model->getObservation($observationID);
@@ -174,7 +174,7 @@ class Maincontroller extends BaseController
         $this->data['content'] = view('anobservation', $observation_data);
         $this->data['title'] = lang('app.Observation');
 
-        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
+        $this->data['menu_items'] = $this->menu_model->get_menuitems(session()->get('lastMainPageLink'));
         $this->data['scripts_to_load'] = array('anobservation.js');
         return view("mainTemplate", $this->data);
     }
