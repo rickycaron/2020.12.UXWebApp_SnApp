@@ -54,6 +54,8 @@ $routes->get('deleteUserFromGroup/(:num)/(:num)/(:alpha)', 'Maincontroller::dele
 
 $routes->get('addObservation', 'Maincontroller::addObservation');
 $routes->match(['get','post'],'addObservation', 'Maincontroller::addObservation');
+$routes->get('addObservationWithoutLogin', 'Maincontroller::addObservationWithoutLogin');
+$routes->match(['get','post'],'addObservationWithoutLogin', 'Maincontroller::addObservationWithoutLogin');
 $routes->get('leaderboardSelect', 'Maincontroller::leaderboardSelect',['filter'=>'auth']);
 $routes->get('profile', 'Maincontroller::profile',['filter'=>'auth']);
 $routes->get('otheruserprofile/(:num)', 'Maincontroller::otheruserprofile/$1',['filter'=>'auth']);
