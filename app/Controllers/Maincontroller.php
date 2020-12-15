@@ -32,10 +32,7 @@ class Maincontroller extends BaseController
 
     public function leaderboardSelect() {
         $this->set_common_data('eco', null,'search');
-        $this->debug_to_console(session()->get('id'));
-        $this->leaderboard_userID=session()->get('id');
-        $this->debug_to_console($this->leaderboard_userID);
-        $groups = $this->database_model->getGroupsFromUser($this->leaderboard_userID);
+        $groups = $this->database_model->getGroupsFromUser(session()->get('id'));
         $this->data['groups']=array();
         foreach ($groups as $group)
         {
@@ -53,7 +50,7 @@ class Maincontroller extends BaseController
         $this->set_common_data('arrow_back', 'leaderboardSelect','search');
 
         $leaderboard_data['leaderboard_filter'] = $leaderboard_filter;
-        $leaderboard_data['leaderboard_content'] = "<p>nothing yet</p>";
+        $leaderboard_data['leaderboard_content'] = "<p>select a timespan</p>";
         $this->data['content'] = view('leaderboard', $leaderboard_data);
         $this->data['title'] = lang('app.Leaderboard');
         $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');

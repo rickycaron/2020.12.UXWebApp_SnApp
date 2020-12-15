@@ -22,7 +22,6 @@ trait extra_functions
     }
 
     private function set_leaderboard_data($person_list, $period) {
-        $this->debug_to_console(session()->get('id'));
         //fill in the first podium data
         if(isset($person_list[0])) {
             $leaderboard_data['name_first'] = $person_list[0]['username'];
@@ -46,11 +45,6 @@ trait extra_functions
         //$this->debug_to_console(count((array)$person_list));
         for ($i = 3; $i < count((array)$person_list); $i++) {
             array_push($leaderboard_data['persons_list'], array('place'=>($i+1), 'name'=>$person_list[$i]['username'], 'point'=>$person_list[$i][$period]));
-            //$this->debug_to_console($person_list[$i]['username']);
-            $this->debug_to_console("checking $$$$$$$");
-            $this->debug_to_console($person_list[$i]['id']);
-            $this->debug_to_console(session()->get('id'));
-            $this->debug_to_console($i);
             if (session()->get('id') == $person_list[$i]['id'] && $i > 9) {
                 $worse_then_tenth_flag = 1;
                 $current_user = array('place'=>($i+1),'name'=>$person_list[$i]['username'], 'point'=>$person_list[$i][$period]);
