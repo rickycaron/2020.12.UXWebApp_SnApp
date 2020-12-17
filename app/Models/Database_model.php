@@ -665,7 +665,7 @@ class Database_model
         foreach ($friends as $friend):
             $queryString .= 'OR t3.username = "'.$friend->username.'" ';
         endforeach;
-        $queryString .= 'GROUP BY id ORDER BY date DESC, time DESC LIMIT 10;';
+        $queryString .= 'GROUP BY id ORDER BY date DESC, time DESC LIMIT 5;';
         //get observations from friends from database
         $query = $this->db->query($queryString);
         return $query->getResult();

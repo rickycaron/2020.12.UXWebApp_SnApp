@@ -14,7 +14,7 @@
         <a class="w-100" style="color: black;" href="<?=$base_url?>/group/<?=$group[0]?>">
                 <div class="d-flex flex-row">
                     <div class="ml-3 mr-auto my-2 mt-3">
-                        <h2><?=$group[0]?></h2>
+                        <h2 class="font-light"><?=$group[0]?></h2>
                         <p class="mb-1 font-light"><?=$group[1]?></p>
                     </div>
                     <span class="material-icons my-auto mx-3" style="font-size: 40px">navigate_next</span>
@@ -43,8 +43,8 @@
         <a class="w-100" style="color: black;" href="<?=$base_url?>/group/<?=$group[0]?>">
             <div class="d-flex flex-row">
                 <div class="ml-3 mr-auto my-2 mt-3">
-                    <h2><?=$group[0]?></h2>
-                    <p class="mb-1"><?=$group[1]?></p>
+                    <h2 class="font-light"><?=$group[0]?></h2>
+                    <p class="mb-1 font-light"><?=$group[1]?></p>
                 </div>
                 <span class="material-icons my-auto mx-3" style="font-size: 40px">navigate_next</span>
             </div>

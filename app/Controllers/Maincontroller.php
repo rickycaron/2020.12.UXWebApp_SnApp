@@ -381,15 +381,15 @@ class Maincontroller extends BaseController
                 $observations = $this->database_model->getMoreObservationsProfile($userID, $lastDate, $lastTime);
                 $data3['observations'] = $observations;
                 if ($observations == null) {
-                    $data3['nothingToShow'] = "";
+                    $data3['upToDate'] = "";
                     return view('observationCards', $data3, $thisUserID);
                 }
                 if ($observations[0] == null) {
-                    $data3['nothingToShow'] = "";
+                    $data3['upToDate'] = "";
                     return view('observationCards', $data3, $thisUserID);
                 }
                 else {
-                    $data3['nothingToShow'] = "";
+                    $data3['upToDate'] = "";
                     foreach ($observations as $observation) {
                         $encoded_image = $this->encode_image($observation->imageData, $observation->imageType);
                         $observation->encoded_image = $encoded_image;
@@ -419,11 +419,11 @@ class Maincontroller extends BaseController
         $observations = $this->database_model->getFirstObservationsProfile($userID);
         $data2['observations'] = $observations;
         if ($observations == null) {
-            $data2['nothingToShow'] = "No observations to show, Yet!";
+            $data2['upToDate'] = "No observations to show, Yet!";
             $this->data['content'] = view('profile', $data2, $thisUserID); //replace by your own view
         }
         else {
-            $data2['nothingToShow'] = "";
+            $data2['upToDate'] = "";
             foreach ($observations as $observation) {
                 $encoded_image = $this->encode_image($observation->imageData, $observation->imageType);
                 $observation->encoded_image = $encoded_image;

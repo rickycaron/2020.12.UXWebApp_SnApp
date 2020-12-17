@@ -29,14 +29,14 @@
         </div>
 
 
-        <div class="card my-2 shadow-sm " style="width:100%; max-width:600px;">
+        <div class="card my-2 shadow-sm mb-3" style="width:100%; max-width:600px;">
 
 
 
                 <div style="position: relative; object-fit: cover" value = "<?=$ob->id?>">
                     <a href="<?= base_url()?>/anobservation/<?=$ob->id?>">
 
-                    <img class="card-img img-fluid " style="height: 400px; object-fit: cover;" src="<?=$ob->encoded_image?>">
+                    <img class="card-img img-fluid " style="height: 350px; object-fit: cover;" src="<?=$ob->encoded_image?>">
                     <div class="card-img" style="box-shadow: inset 0px -50px 40px -20px black; position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></div>
                     <h4 class="text-white" style="position: absolute; bottom: 0px; right: 12px;"><?=$ob->username?></h4>
                     <div class="material-icons text-white" style="font-size:30px;position: absolute; bottom: 6px; left: 8px" >favorite</div>
@@ -53,16 +53,16 @@
 
             <div class="card-body pt-2 pb-0 ">
 
-                <div class=" d-flex flex-row py-1  " >
+                <div class=" d-flex flex-row py-1" >
                     <div class="mr-auto">
-                        <h3 class="mb-0"><?=$ob->specieName?></h3>
+                        <h5 class="mb-0"><?=$ob->specieName?></h5>
                     </div>
-                    <nav class="navbar navbar-expand-sm ">
-                        <button class=" btn material-icons my-auto collapsed" type="button" id="test" data-toggle="collapse" data-target="#demo_<?=$ob->id?>"  style="font-size: 40px"></button>
+                    <nav class="navbar navbar-expand-sm p-0" id="navbarid">
+                        <button class="btn small material-icons my-auto collapsed mb-0 p-0" type="button" id="navbarid" data-toggle="collapse" data-target="#demo_<?=$ob->id?>"  style="font-size: 30px"></button>
                      </div>
 
 
-                    <hr class="mt-0 mb-2">
+
 
                 <?php
                 for ($i = 0; $i < $commentCount; $i++)
@@ -77,8 +77,8 @@
 
                     <?php for($i=0;$i<$commentCount*2;$i=$i+2):?>
                         <div class="py-2">
-                                    <h5 class="font-weight-bold d-inline font-light"> <?=$nameComment[$i]?>: </h5>
-                                    <h5 class="d-inline font-light"> <?=$nameComment[$i+1]?> </h5>
+                                    <p class="font-weight-bold d-inline font-light"> <?=$nameComment[$i]?>: </p>
+                                    <p class="d-inline font-light"> <?=$nameComment[$i+1]?> </p>
                         </div>
                     <?php endfor;?>
 
@@ -89,32 +89,18 @@
                 </nav>
 
 
-                <div class="d-flex flex-row my-3">
-                    <?php if( service('uri')->getSegment(1) == 'hub'):?>
-                    <!--
-                    <form action="hub" method="post" id = "commentSend">
-                        <?php elseif( service('uri')->getSegment(1) == 'group'):?>
-                        <?php $groupname=service('uri')->getSegment(2)?>
+                <div class="d-flex flex-row mt-0 w-100">
 
-                        <form action="<?=$groupname ?>" method="post" id = "commentSend">
-                            <?php endif?>
-                            <input type = "hidden" name="obID" id = "obID" value = "<?=$ob->id?>">
-                            <input class="form-control" name="message" id = "message" value="<?= set_value('message')?>" placeholder="Create new comment">
-
-                            <input type="submit" name="submitCommit" value="submit" />
-                        </form>
--->
-
-                        <div class="d-flex flex-row my-3"  value = "<?=$ob->id?>">
-                            <form id = "commentForm" class = "commentContent" target="iframe">
+                        <div class="d-flex flex-row w-100"  value = "<?=$ob->id?>">
+                            <form id = "commentForm" class = "commentContent w-100" target="iframe">
                                 <input type="txt" id = "commentID" class="form-control " name="comment" placeholder="<?php echo lang('app.Create_new_comment') ?>">
                             </form>
                             <iframe id="iframe" name="iframe" style="display:none;"></iframe>
                             <div class="material-icons my-auto ml-3 mr-2 text-primary commentButton" style="font-size:30px">send</div>
                         </div>
                 </div>
-                <div class="my-2">
-                    <h6 class="font-light"><?=$ob->date?> at <?=$ob->time?></h6>
+                <div class="mt-2 mb-0">
+                    <p class="font-light small mb-1" ;"><?=$ob->date?> at <?=$ob->time?></p>
                 </div>
             </div>
 
