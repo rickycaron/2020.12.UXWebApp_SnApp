@@ -20,14 +20,16 @@
                     <span class="material-icons my-auto mx-3" style="font-size: 40px">navigate_next</span>
                 </div>
         </a>
-        <a class="px-3 pb-3" href="<?=base_url()?>/groupmembers/<?=$group[0]?>"><?=$group[2]?> <?php echo lang('app.members') ?></a>
-
+        <div>
+            <a class="px-3 pb-3" href="<?=base_url()?>/groupmembers/<?=$group[0]?>"><?=$group[2]?> <?php echo lang('app.members') ?></a>
+            <a class="px-3 pb-3 float-right" href="<?=base_url()?>/addGroupMembers/<?=$group[3]?>/<?=$group[0]?>">add members</a>
+        </div>
     </div>
 
     <?php endif?>
 <?php endforeach; ?>
 
-<a href="newgroup" class="btn btn-lg btn-primary btn-block my-3"><?php echo lang('app.Create_a_new_group') ?></a>
+<a href="newgroup" class="btn btn-lg btn-primary btn-block my-3 "><?php echo lang('app.Create_a_new_group') ?></a>
 
 
     <?php foreach ($groups as $group): ?>
@@ -40,17 +42,19 @@
 <?php foreach ($groups as $group): ?>
     <?php if ($group[3] !=session()->get('id')):?>
         <div  class="card my-2 shadow-sm" style="width:100%;max-width:600px";">
-        <a class="w-100" style="color: black;" href="<?=$base_url?>/group/<?=$group[0]?>">
-            <div class="d-flex flex-row">
-                <div class="ml-3 mr-auto my-2 mt-3">
-                    <h2><?=$group[0]?></h2>
-                    <p class="mb-1"><?=$group[1]?></p>
+            <a class="w-100" style="color: black;" href="<?=$base_url?>/group/<?=$group[0]?>">
+                <div class="d-flex flex-row">
+                    <div class="ml-3 mr-auto my-2 mt-3">
+                        <h2><?=$group[0]?></h2>
+                        <p class="mb-1"><?=$group[1]?></p>
+                    </div>
+                    <span class="material-icons my-auto mx-3" style="font-size: 40px">navigate_next</span>
                 </div>
-                <span class="material-icons my-auto mx-3" style="font-size: 40px">navigate_next</span>
+            </a>
+            <div>
+                <a class="px-3 pb-3" href="<?=base_url()?>/groupmembers/<?=$group[0]?>"><?=$group[2]?> <?php echo lang('app.members') ?></a>
+                <a class="px-3 pb-3 float-right" href="<?=base_url()?>/addGroupMembers/<?=$group[3]?>/<?=$group[0]?>">add members</a>
             </div>
-        </a>
-        <a class="px-3 pb-3" href="<?=base_url()?>/groupmembers/<?=$group[0]?>"><?=$group[2]?> <?php echo lang('app.members') ?></a>
-
         </div>
     <?php endif?>
 <?php endforeach; ?>
