@@ -77,11 +77,6 @@ header a:hover{
     content:"\e5cf";
 }
 
-#navbarid {
-    height: 5px;
-    width: 5px;
-}
-
 .sidenav {
     height: 100%;
     width: 0;

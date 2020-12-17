@@ -58,7 +58,7 @@
                         <h5 class="mb-0"><?=$ob->specieName?></h5>
                     </div>
                     <nav class="navbar navbar-expand-sm p-0" id="navbarid">
-                        <button class="btn small material-icons my-auto collapsed mb-0 mr-2" type="button" id="navbarid" data-toggle="collapse" data-target="#demo_<?=$ob->id?>"  style="font-size: 30px"></button>
+                        <button class="btn small material-icons my-auto collapsed mb-0 " type="button" id="navbarid" data-toggle="collapse" data-target="#demo_<?=$ob->id?>"  style="font-size: 30px"></button>
                      </div>
 
 
