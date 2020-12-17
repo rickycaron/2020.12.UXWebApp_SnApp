@@ -76,3 +76,8 @@ header a:hover{
 .navbar .btn.collapsed::before {
     content:"\e5cf";
 }
+
+#navbarid {
+    height: 5px;
+    width: 5px;
+}

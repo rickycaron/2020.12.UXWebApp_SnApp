@@ -16,7 +16,9 @@
         </div>
 
         <input class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit" value="<?php echo lang('app.Submit') ?>">
-        <input class="btn btn-primary w-100 my-2" style="font-size:25px" type="submit" value="<?php echo lang('app.Cancel') ?>">
+
     </form>
+    <a class="btn btn-primary w-100 my-2" style="font-size:25px" href="<?= base_url()?>/groups"><?php echo lang('app.Cancel') ?></a>
+
 </div>
 
