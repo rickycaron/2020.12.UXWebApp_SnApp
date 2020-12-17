@@ -13,7 +13,7 @@ class Menu_model
         $this->menu_items = array(
             array('iconName'=>'home', 'link'=>'hub', 'className'=>'inactive','id'=>'icon'),
             array('iconName'=>'people_alt', 'link'=>'groups', 'className'=>'inactive','id'=>'icon'),
-            array('iconName'=>'add_circle', 'link'=>'addObservation', 'className'=>' active', 'id'=>'add_icon'),
+            array('iconName'=>'add_a_photo', 'link'=>'addObservation', 'className'=>' active', 'id'=>'add_icon'),
             array('iconName'=>'leaderboard', 'link'=>'leaderboardSelect', 'className'=>'inactive','id'=>'icon'),
             array('iconName'=>'person', 'link'=>'profile', 'className'=>'inactive','id'=>'icon')
         );
