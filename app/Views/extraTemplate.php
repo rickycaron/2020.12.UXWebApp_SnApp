@@ -9,9 +9,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="<?= base_url()?>/css/bootstrap.css">
+    <link rel="stylesheet" href="<?= base_url()?>/css/main.css">
+    <link rel="stylesheet" href="<?= base_url()?>/css/reusable.css">
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <?php if (isset($scripts_to_load)) foreach ($scripts_to_load as $script): ?>
+        <script src="<?= base_url()?>/js/<?=$script?>?v=10" defer></script>
+    <?php endforeach; ?>
+
 </head>
 
 <style>

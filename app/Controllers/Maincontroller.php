@@ -244,7 +244,7 @@ class Maincontroller extends BaseController
 
         if ($observations == null) {
             $data2['upToDate'] = "You are up to date! Check your groups or search friends to see their observations";
-            $this->data['content'] = view('groupPage', $data2, $thisUserID); //replace by your own view
+            $this->data['content'] = view('hubPage', $data2, $thisUserID); //replace by your own view
         }
         else {
             $data2['upToDate'] = "";
@@ -253,7 +253,7 @@ class Maincontroller extends BaseController
                 $observation->encoded_image = $encoded_image;
             }
             $data2['observations'] = $observations;
-            $this->data['content'] = view('groupPage', $data2, $thisUserID);
+            $this->data['content'] = view('hubPage', $data2, $thisUserID); //load the hub page with data from group members
         }
 
         //check if submit comment
@@ -270,7 +270,7 @@ class Maincontroller extends BaseController
         //comment function end
 
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'likeFunction.js');
-        $this->data['content'] = view('groupPage', $data2);
+        $this->data['content'] = view('hubPage', $data2);
         $this->data['title'] = $groupname_filter;
         $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
         return view("mainTemplate", $this->data);
@@ -413,7 +413,7 @@ class Maincontroller extends BaseController
         $this->data['title'] =  lang('app.Profile');
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('profile');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'likeFunction.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'likeFunction.js', 'profileNavigation.js');
         return view("mainTemplate", $this->data);
     }
 
@@ -439,15 +439,15 @@ class Maincontroller extends BaseController
                 $observations = $this->database_model->getMoreObservationsProfile($userID, $lastDate, $lastTime);
                 $data3['observations'] = $observations;
                 if ($observations == null) {
-                    $data3['nothingToShow'] = "";
+                    $data3['upToDate'] = "";
                     return view('observationCards', $data3, $userID);
                 }
                 if ($observations[0] == null) {
-                    $data3['nothingToShow'] = "";
+                    $data3['upToDate'] = "";
                     return view('observationCards', $data3, $userID);
                 }
                 else {
-                    $data3['nothingToShow'] = "";
+                    $data3['upToDate'] = "";
                     foreach ($observations as $observation) {
                         $encoded_image = $this->encode_image($observation->imageData, $observation->imageType);
                         $observation->encoded_image = $encoded_image;
@@ -481,12 +481,12 @@ class Maincontroller extends BaseController
         $observations = $this->database_model->getFirstObservationsProfile($userID);
         $data2['observations'] = $observations;
         if ($observations == null) {
-            $data2['nothingToShow'] = "No observations to show, Yet!";
+            $data2['upToDate'] = "No observations to show, Yet!";
            // $this->data['content'] = view('profile', $data2, $thisUserID); //replace by your own view
             $this->data['content'] = view('profile', $data2); //replace by your own view
         }
         else {
-            $data2['nothingToShow'] = "";
+            $data2['upToDate'] = "";
             foreach ($observations as $observation) {
                 $encoded_image = $this->encode_image($observation->imageData, $observation->imageType);
                 $observation->encoded_image = $encoded_image;
@@ -494,62 +494,6 @@ class Maincontroller extends BaseController
             $data2['observations'] = $observations;
             $this->data['content'] = view('profile',$data2, $thisUserID); //replace by your own view
         }
-
-//        $variableActive = $this->request->getVar('extra');
-//        if ($variableActive != null) {
-//            $getMoreObservations = $_GET['extra'];
-//            $lastDate = $_GET['lastDate'];
-//            $lastTime = $_GET['lastTime'];
-//            #$tomorrow = $_GET['tomorrow'];
-//
-//            if (strcasecmp($getMoreObservations, 'true') == 0) {
-//                //get more observations from friends from current users
-//                $data3['userID']=$userID;
-//                $data3['username']=$username;
-//                $data3['observations'] = $this->database_model->getMoreObservationsProfile($userID, $lastDate, $lastTime);
-//                $observations = $data3['observations'];
-//                if ($observations == null) {
-//                    $upToDateDiv = '<div id="upToDateDiv" hidden>You are up to date</div>';
-//                    return $upToDateDiv;
-//                }
-//                else {
-//                    return view('hubPage', $data3, $userID);
-//                }
-//            }
-//        }
-//
-//        //profile user information part
-//        //get observation amount
-//        $data2['userID']=$userID;
-//        $data2['username']=$username;
-//        $data2['observationCount'] = $this->database_model->getUserObservationCount($userID);
-//        $data2['commentCount'] = $this->database_model->getUserCommentCount($userID);
-//        $data2['likeCount'] = $this->database_model->getUserLikeCount($userID);
-//        $data2['friendCount'] = $this->database_model->getUserFriendCount($userID);
-//        $data2['pointCount'] = $this->database_model->getUserpoint($userID);
-//        $data2['description'] = $this->database_model->getUserDescription($userID);
-//        $image = $this->database_model->getUserProfilePicture($userID);
-//        $data2['profile_image'] = $this->encode_image($image[0]->imagedata, $image[0]->imagetype);
-//        $data2['requestStatus'] = $this->database_model->getFriendrequestStatus($userID, session()->get('id'));
-//
-//
-//
-//        //get observations from user
-//        $observations = $this->database_model->getFirstObservationsProfile($userID);
-//        $data2['observations'] = $observations;
-//        if ($observations == null) {
-//            $data2['nothingYet'] = "No observations to show, Yet!";
-//            $this->data['content'] = view('profile', $data2); //replace by your own view
-//        }
-//        else {
-//            $data2['nothingYet'] = "";
-//            foreach ($observations as $observation) {
-//                $encoded_image = $this->encode_image($observation->imageData, $observation->imageType);
-//                $observation->encoded_image = $encoded_image;
-//            }
-//            $data2['observations'] = $observations;
-//            $this->data['content'] = view('profile',$data2); //replace by your own view
-//        }
         $this->data['title'] =  lang('app.Profile');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'likeFunction.js', 'otheruserprofile.js');
         $this->data['menu_items'] = $this->menu_model->get_menuitems(session()->get('lastMainPageLink'));
@@ -612,43 +556,11 @@ class Maincontroller extends BaseController
 
         helper(['form']);
 
-        if ($this->request->getMethod() === 'post'&& $this->validate([
-                'description'  => 'required|min_length[3]',
-                'date'=>'required|min_length[6]|max_length[50]',
-                'time'=>'required|min_length[4]|max_length[50]']))
-        {
-            $uploadedPicture = $this->request->getFile('picture');
-            $picture = file_get_contents($uploadedPicture->getTempName());
-            $imageProperties = $uploadedPicture->getMimeType();
-            $scientificName = $this->request->getPost('scientificName');
-
-            $specieName = $this->request->getPost('specieName');
-            $description = $this->request->getPost('description');
-            if ($this->database_model->getSpecieID($specieName))
-            {
-                //this specie exsits in the database
-                $specieId = $this->database_model->getSpecieID($specieName);
-            }
-            else
-            {
-                //this specie is new
-                $this->database_model->insertSpecie($specieName,$scientificName,100,$description);
-                $specieId = $this->database_model->getSpecieID($specieName);
-            }
-            $location = $this->request->getPost('location');
-            $date = $this->request->getPost('date');
-            $time = $this->request->getPost('time');
-            $userNote = $this->request->getPost('userNote');
-
-            $this->database_model->insertObservation($picture, $imageProperties, $location, $date, $time, $specieId[0]->id, $userID, $userNote);
-            return redirect()->to('hub');
-        }
-
         //add your code here...
-        $this->data['content'] = view('addobservation'); //replace by your own view
+        $this->data['content'] = view('addObservationWithoutLogin'); //replace by your own view
         $this->data['title'] = lang('app.Add_Observation');
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'plantAPI.js','previewPicture.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'plantAPIWithoutLogin.js','previewPicture.js');
         return view("extraTemplate", $this->data);
     }
 

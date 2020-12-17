@@ -2,7 +2,7 @@
 
     <div class="wrapper card w-100 d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
         <div class="previewImage" id="previewImageDiv">
-            <img class="img-fluid" id="uploadImageTag" src=""/>
+            <img class="img-fluid" style="height: 350px; object-fit: cover;" id="uploadImageTag" src=""/>
         </div>
         <div class="content d-flex flex-column align-items-center">
             <div class="material-icons" id="backupIcon" style="font-size:40px;color: #25AC71;">backup</div>
@@ -20,6 +20,11 @@
     <form action="login" method="get" enctype="multipart/form-data">
 <?php endif?>
         <input id="inputFile" type="file" name="picture" onchange="readURL(this)" hidden>
+
+        <div class="d-flex flex-row mt-0 w-100">
+            <div id="probabilityText">Probability: </div>
+            <div class="font-weight-bold" id="probability"></div>
+        </div>
 
         <div class="txt_field mt-3">
             <label class="mb-0"><?php echo lang('app.Species') ?></label>

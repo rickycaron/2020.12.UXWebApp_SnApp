@@ -55,9 +55,6 @@ function sendIdentification() {
 
 };
 
-
-
-
 function printInformation(input) {
     suggestions = input["suggestions"];
     metaData = input["meta_data"];
@@ -66,42 +63,6 @@ function printInformation(input) {
     document.getElementById("speciesNamePlaceholder").value = plantDetails.common_names[0];
     document.getElementById("scientificNamePlaceholder").value = plantDetails.scientific_name;
     document.getElementById("DescriptionPlaceholder").value = plantDescription.value;
-    document.getElementById("datePlaceholder").value = metaData.date;
-    document.getElementById("probability").innerText = "test";
-
-    let now = new Date();
-    let time = leadZero(now.getHours()) + ":" + leadZero(now.getMinutes());
-    document.getElementById("timePlaceholder").value = time;
-
-    // $('#processingText').style.display = 'none';
-}
-
-function leadZero(_something) {
-    if(parseInt(_something)<10) return "0"+_something;
-    return _something;//else
-}
-
-document.getElementById("useLocationCheckbox").onclick = function Location() {
-    if (document.getElementById("useLocationCheckbox").checked == true) {
-        getLocation();
-    }
-    else {
-        document.getElementById("LocationPlaceholder").value = '';
-    }
-
-}
-
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        document.getElementById("LocationPlaceholder").value = "Geolocation is not supported by this browser.";
-    }
-}
-
-function showPosition(position) {
-    let curLocation = position.coords.latitude + ", " + position.coords.longitude;
-    document.getElementById("LocationPlaceholder").value = curLocation;
 }
 
 

@@ -35,7 +35,7 @@
 </form>
 
 <hr class="mt-2 mb-3 my-3"/>
-<button onclick=location.href='addObservation' class="btn btn-lg btn-primary btn-block mt-1" type="submit"><?php echo lang('app.Make_an_observation') ?></button>
+<button onclick=location.href='addObservationWithoutLogin' class="btn btn-lg btn-primary btn-block mt-1" type="submit"><?php echo lang('app.Make_an_observation') ?></button>
 
 
 
