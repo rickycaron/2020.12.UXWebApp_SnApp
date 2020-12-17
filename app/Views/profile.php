@@ -1,43 +1,3 @@
-<style>
-    .sidenav {
-        height: 100%;
-        width: 0;
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        right: 0;
-        background-color: #E5F4F1;
-        overflow-x: hidden;
-        transition: 0.5s;
-        padding-top: 60px;
-    }
-
-    .sidenav a {
-        padding: 8px 8px 8px 32px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #818181;
-        display: block;
-        transition: 0.3s;
-    }
-
-    .sidenav a:hover {
-        color: #006650;
-    }
-
-    .sidenav .closebtn {
-        position: absolute;
-        top: 0;
-        right: 25px;
-        font-size: 36px;
-        margin-left: 50px;
-    }
-
-    @media screen and (max-height: 450px) {
-        .sidenav {padding-top: 15px;}
-        .sidenav a {font-size: 18px;}
-    }
-</style>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -73,17 +33,9 @@
     <div class="mx-4 w-100 ">
         <div class="row justify-content-between">
             <h2 class="user_name"><?= $username?> </h2>
-            <a><span onclick="openNav()" class="material-icons text-primary " style="font-size:50px;" id="header_icon_2">more_horiz</span></a>
-            <script>
-                function openNav() {
-                    document.getElementById("mySidenav").style.width = "150px";
-                }
-
-                function closeNav() {
-                    document.getElementById("mySidenav").style.width = "0";
-                }
-            </script>
-
+            <?php if($userID == session()->get('id')):?>
+                <a><span onclick="openNav()" class="material-icons text-primary " style="font-size:50px;" id="header_icon_2">more_horiz</span></a>
+            <?php endif?>
         </div>
         <div class="row">
             <h4 class="personal_description"><?=$description[0]->description?></h4>
@@ -120,27 +72,27 @@
 <?php if($userID != session()->get('id')):?>
     <?php switch ($requestStatus):
         case 0: ?>
-            <button class="d-flex flex-row btn btn-lg btn-third btn-block my-3" style="width:100%;max-width:600px">
-                <span class="material-icons">person_add_alt_1</span>
-                <p>request sended</p>
+            <button class="d-flex flex-row btn btn-lg btn-third btn-block" style="width:100%;max-width:600px">
+                <span class="material-icons pt-2 pr-1">person_add_alt_1</span>
+                <p class="pt-2">request sended</p>
             </button>
         <?php break; ?>
         <?php case 1: ?>
-            <button class="d-flex flex-row btn btn-lg btn-third btn-block my-3" style="width:100%;max-width:600px">
-                <span class="material-icons">person_add_alt_1</span>
-                <p>friend</p>
+            <button class="d-flex flex-row btn btn-lg btn-third btn-block" style="width:100%;max-width:600px">
+                <span class="material-icons pt-2 pr-1">how_to_reg</span>
+                <p class="pt-2">friend</p>
             </button>
         <?php break; ?>
         <?php case 2: ?>
             <button id="send_friend_request" class="d-flex flex-row btn btn-lg btn-primary btn-block my-3" style="width:100%;max-width:600px">
-                <span class="material-icons">person_add_alt_1</span>
-                <p>add friend</p>
+                <span class="material-icons pt-2 pr-1">person_add_alt_1</span>
+                <p class="pt-2">add friend</p>
             </button>
         <?php break; ?>
         <?php case 3: ?>
             <button id="send_friend_request" class="send_friend_request d-flex flex-row btn btn-lg btn-primary btn-block my-3" style="width:100%;max-width:600px">
-                <span class="material-icons">person_add_alt_1</span>
-                <p>add friend</p>
+                <span class="material-icons pt-2 pr-1">person_add_alt_1</span>
+                <p class="pt-2">add friend</p>
             </button>
             <?php break; ?>
     <?php endswitch; ?>

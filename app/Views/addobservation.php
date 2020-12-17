@@ -21,6 +21,11 @@
 <?php endif?>
         <input id="inputFile" type="file" name="picture" onchange="readURL(this)" hidden>
 
+        <div class="d-flex flex-row mt-0 w-100">
+            <div id="probabilityText">Probability: </div>
+            <div class="font-weight-bold" id="probability"></div>
+        </div>
+
         <div class="txt_field mt-3">
             <label class="mb-0"><?php echo lang('app.Species') ?></label>
             <span></span>

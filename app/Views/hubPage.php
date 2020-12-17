@@ -58,7 +58,7 @@
                         <h5 class="mb-0"><?=$ob->specieName?></h5>
                     </div>
                     <nav class="navbar navbar-expand-sm p-0" id="navbarid">
-                        <button class="btn small material-icons my-auto collapsed mb-0 p-0" type="button" id="navbarid" data-toggle="collapse" data-target="#demo_<?=$ob->id?>"  style="font-size: 30px"></button>
+                        <button class="btn small material-icons my-auto collapsed mb-0 mr-2" type="button" id="navbarid" data-toggle="collapse" data-target="#demo_<?=$ob->id?>"  style="font-size: 30px"></button>
                      </div>
 
 
@@ -92,7 +92,7 @@
                 <div class="d-flex flex-row mt-0 w-100">
 
                         <div class="d-flex flex-row w-100"  value = "<?=$ob->id?>">
-                            <form id = "commentForm" class = "commentContent w-100" target="iframe">
+                            <form id = "commentForm" class = "commentContent w-100 pt-1" target="iframe">
                                 <input type="txt" id = "commentID" class="form-control " name="comment" placeholder="<?php echo lang('app.Create_new_comment') ?>">
                             </form>
                             <iframe id="iframe" name="iframe" style="display:none;"></iframe>
