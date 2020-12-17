@@ -70,28 +70,6 @@ class Maincontroller extends BaseController
         return view("mainTemplate", $this->data);
     }
 
-    /*
-    //TODO: when you select a filter with a space it gives an error -> set a restriction to the group name so no spaces are accepted or deal with it.
-    public function leaderboard($leaderboard_filter) {
-        $this->set_common_data('arrow_back', 'leaderboardSelect','search');
-        $leaderboard_period = "monthlyPoints";
-        $this->leaderboard_userID = session()->get('id');
-
-        $query_result = $this->get_leaderboard_query_result($leaderboard_filter, $leaderboard_period);
-
-        $leaderboard_content = view('fetchLeaderboardHTML', $this->set_leaderboard_data($query_result, $leaderboard_period, $leaderboard_filter));
-
-        $pass_leaderboard_content['leaderboard_content'] = $leaderboard_content;
-        $pass_leaderboard_content['leaderboard_filter'] = $leaderboard_filter;
-
-        $this->data['content'] = view('leaderboard', $pass_leaderboard_content);
-        $this->data['title'] = lang('app.Leaderboard');
-        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
-        $this->data['scripts_to_load'] = array('leaderboard.js', 'jquery-3.5.1.min');
-        return view("mainTemplate", $this->data);
-    }
-    */
-
     public function hub() {
         $this->set_common_data('eco',null, 'search');
         helper(['form']);
@@ -294,7 +272,7 @@ class Maincontroller extends BaseController
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'likeFunction.js');
         $this->data['content'] = view('groupPage', $data2);
         $this->data['title'] = $groupname_filter;
-        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
         return view("mainTemplate", $this->data);
     }
 
@@ -318,7 +296,7 @@ class Maincontroller extends BaseController
         {
             $this->data['content'] = view('newgroup'); //replace by your own view
             $this->data['title'] = lang('app.New_Group');
-            $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
+            $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
             return view("mainTemplate", $this->data);
         }
     }
@@ -353,7 +331,7 @@ class Maincontroller extends BaseController
         $this->data['content'] = view('addGroupMembers', $this->data);
         $this->data['title'] = lang('app.Friend_List');
 
-        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
+        $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'addFriendToGroup.js');
         return view("mainTemplate", $this->data);
     }
@@ -493,6 +471,7 @@ class Maincontroller extends BaseController
         $data2['description'] = $this->database_model->getUserDescription($userID);
         $image = $this->database_model->getUserProfilePicture($userID);
         $data2['profile_image'] = $this->encode_image($image[0]->imagedata, $image[0]->imagetype);
+        $data2['requestStatus'] = $this->database_model->getFriendrequestStatus($userID, session()->get('id'));
 
 
         //get observations from user
@@ -570,7 +549,7 @@ class Maincontroller extends BaseController
 //        }
         $this->data['title'] =  lang('app.Profile');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'likeFunction.js', 'otheruserprofile.js');
-        $this->data['menu_items'] = $this->menu_model->get_menuitems_without_activation();
+        $this->data['menu_items'] = $this->menu_model->get_menuitems(session()->get('lastMainPageLink'));
         return view("mainTemplate", $this->data);
     }
 
