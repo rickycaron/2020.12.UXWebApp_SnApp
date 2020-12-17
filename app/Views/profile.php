@@ -146,7 +146,7 @@
     <?php endswitch; ?>
 <?php endif?>
 
-<div id="nothingToShow"><?=$upToDate?></div>
+<div id="nothingToShow"><?=$nothingToShow?></div>
 <div id="observationCardsContainer" class="w-100 mt-2">
 
     <?php foreach ($observations as $ob): ?>
