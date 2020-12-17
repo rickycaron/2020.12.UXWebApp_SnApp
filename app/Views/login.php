@@ -1,4 +1,4 @@
-<h1 class="text-center mb-5">snAPP Nature</h1>
+<h1 class="text-center pt-5 mt-5 mb-5">snAPP Nature</h1>
 <?php if (session()->get('success')): ?>
     <div class="alert alert-success" role="alert">
         <?= session()->get('success') ?>

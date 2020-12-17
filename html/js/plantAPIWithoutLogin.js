@@ -60,9 +60,12 @@ function printInformation(input) {
     metaData = input["meta_data"];
     plantDetails = suggestions[0]["plant_details"];
     plantDescription = plantDetails["wiki_description"];
+    let probability = suggestions[0].probability;
+    let percentage = (probability*100).toFixed(2) + '%';
     document.getElementById("speciesNamePlaceholder").value = plantDetails.common_names[0];
     document.getElementById("scientificNamePlaceholder").value = plantDetails.scientific_name;
     document.getElementById("DescriptionPlaceholder").value = plantDescription.value;
+    document.getElementById("probability").innerText = percentage;
 }
 
 

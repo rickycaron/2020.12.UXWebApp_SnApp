@@ -27,15 +27,15 @@
         </div>
 
         <div class="txt_field mt-3">
-            <label class="mb-0"><?php echo lang('app.Species') ?></label>
+            <label class="mb-0"><?php echo lang('app.Plant_name') ?></label>
             <span></span>
-            <input readonly type="text" class="form-control" id="scientificNamePlaceholder" name="scientificName" required value="<?= set_value('scientificName')?>">
+            <input readonly type="text" class="form-control" id="speciesNamePlaceholder" name="specieName" required value="<?= set_value('scientificName')?>">
         </div>
 
         <div class="txt_field">
             <label class="mb-0"><?php echo lang('app.Scientific_name') ?></label>
             <span></span>
-            <input readonly type="text" class="form-control" id="speciesNamePlaceholder" name="specieName" required value="<?= set_value('specieName')?>">
+            <input readonly type="text" class="form-control" id="scientificNamePlaceholder" name="scientificName" required value="<?= set_value('specieName')?>">
         </div>
 
         <div class="txt_field mt-3">
