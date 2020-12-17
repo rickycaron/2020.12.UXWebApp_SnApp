@@ -392,6 +392,7 @@ class Maincontroller extends BaseController
         $image = $this->database_model->getUserProfilePicture($userID);
         $data2['profile_image'] = $this->encode_image($image[0]->imagedata, $image[0]->imagetype);
 
+        if (strlen($data2['profile_image']) < 20) $data2['profile_image'] = null;
 
         //get observations from user
         $observations = $this->database_model->getFirstObservationsProfile($userID);
@@ -481,12 +482,12 @@ class Maincontroller extends BaseController
         $observations = $this->database_model->getFirstObservationsProfile($userID);
         $data2['observations'] = $observations;
         if ($observations == null) {
-            $data2['upToDate'] = "No observations to show, Yet!";
+            $data2['nothingToShow'] = "No observations to show, Yet!";
            // $this->data['content'] = view('profile', $data2, $thisUserID); //replace by your own view
             $this->data['content'] = view('profile', $data2); //replace by your own view
         }
         else {
-            $data2['upToDate'] = "";
+            $data2['nothingToShow'] = "";
             foreach ($observations as $observation) {
                 $encoded_image = $this->encode_image($observation->imageData, $observation->imageType);
                 $observation->encoded_image = $encoded_image;

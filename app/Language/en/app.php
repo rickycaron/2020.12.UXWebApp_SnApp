@@ -75,5 +75,6 @@ return [
     'Likes' => 'Likes',
     'Comments' => 'Comments',
     'Points' => 'Points',
-    'add_members' => 'add members'
+    'add_members' => 'add members',
+    'Friend_request' => 'Friend requests'
 ];

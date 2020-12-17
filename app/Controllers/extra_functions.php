@@ -181,8 +181,11 @@ trait extra_functions
 
     public function searchGetUsers($filter) {
         $filter = str_replace("SPACE", " ", $filter);
-        $this->debug_to_console($filter);
-        $result['user'] = $this->database_model->getUsersSearch($filter);
+        $users = $this->database_model->getUsersSearch($filter);
+        foreach ($users as $u) {
+            $u->encoded_image = $this->encode_image($u->p_imagedata, $u->p_imagetype);
+        }
+        $result['user'] = $users;
         if($result['user'] != null) {
             return view('searchUser', $result);
         }
@@ -191,8 +194,8 @@ trait extra_functions
     }
 
     public function encode_image($file, $mime)
-{
-    $base64   = base64_encode($file);
-    return ('data:' . $mime . ';base64,' . $base64);
-}
+    {
+        $base64   = base64_encode($file);
+        return ('data:' . $mime . ';base64,' . $base64);
+    }
 }
