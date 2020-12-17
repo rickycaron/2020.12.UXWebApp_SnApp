@@ -74,5 +74,6 @@ return [
     'Group_Name' => 'Groeps naam',
     'Likes' => 'Likes',
     'Comments' => 'Opmerkingen',
-    'Points' => 'Punten'
+    'Points' => 'Punten',
+    'add_members' => 'leden toevoegen'
 ];

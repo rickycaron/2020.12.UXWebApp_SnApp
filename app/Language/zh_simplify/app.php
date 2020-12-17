@@ -36,5 +36,6 @@ return [
     'Friends' => '好友',
     'Change_password' => '更改密码',
     'Edit_profile' => '编辑个人资料',
-    'Logout' => '退出登录'
+    'Logout' => '退出登录',
+    'add_members' => 'add members'
 ];

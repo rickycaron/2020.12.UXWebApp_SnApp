@@ -64,7 +64,11 @@
 <div class="d-flex flex-row m-3" style="width:100%;max-width:600px">
 
     <div class="">
-        <img src="<?=$profile_image?>" class="rounded-circle" alt="templatemo easy profile" style="width: 100px;">
+        <?php if(isset($profile_image)): ?>
+            <img src="<?=$profile_image?>" class="rounded-circle" alt="templatemo easy profile" style="width: 100px;">
+        <?php else:?>
+            <img class="personCardPhoto rounded-circle card-header" alt="templatemo easy profile" src="https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png" style="width: 100px;">
+        <?php endif?>
     </div>
     <div class="mx-4 w-100 ">
         <div class="row justify-content-between">

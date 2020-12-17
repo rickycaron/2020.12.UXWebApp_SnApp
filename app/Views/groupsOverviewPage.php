@@ -12,17 +12,17 @@
 
     <div  class="card my-2 shadow-sm">
         <a class="w-100" style="color: black;" href="<?=$base_url?>/group/<?=$group[0]?>">
-                <div class="d-flex flex-row">
-                    <div class="ml-3 mr-auto my-2 mt-3">
-                        <h2><?=$group[0]?></h2>
-                        <p class="mb-1 font-light"><?=$group[1]?></p>
-                    </div>
-                    <span class="material-icons my-auto mx-3" style="font-size: 40px">navigate_next</span>
+            <div class="d-flex flex-row">
+                <div class="ml-3 mr-auto my-2 mt-3">
+                    <h2><?=$group[0]?></h2>
+                    <p class="mb-1 font-light"><?=$group[1]?></p>
                 </div>
+                <span class="material-icons my-auto mx-3" style="font-size: 40px">navigate_next</span>
+            </div>
         </a>
         <div>
             <a class="px-3 pb-3" href="<?=base_url()?>/groupmembers/<?=$group[0]?>"><?=$group[2]?> <?php echo lang('app.members') ?></a>
-            <a class="px-3 pb-3 float-right" href="<?=base_url()?>/addGroupMembers/<?=$group[3]?>/<?=$group[0]?>">add members</a>
+            <a class="px-3 pb-3 float-right" href="<?=base_url()?>/addGroupMembers/<?=$group[3]?>/<?=$group[0]?>"><?php echo lang('app.add_members') ?></a>
         </div>
     </div>
 
@@ -53,7 +53,7 @@
             </a>
             <div>
                 <a class="px-3 pb-3" href="<?=base_url()?>/groupmembers/<?=$group[0]?>"><?=$group[2]?> <?php echo lang('app.members') ?></a>
-                <a class="px-3 pb-3 float-right" href="<?=base_url()?>/addGroupMembers/<?=$group[3]?>/<?=$group[0]?>">add members</a>
+                <a class="px-3 pb-3 float-right" href="<?=base_url()?>/addGroupMembers/<?=$group[3]?>/<?=$group[0]?>"><?php echo lang('app.add_members') ?></a>
             </div>
         </div>
     <?php endif?>
