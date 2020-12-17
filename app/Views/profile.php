@@ -32,13 +32,13 @@
     </div>
     <div class="mx-4 w-100 ">
         <div class="row justify-content-between">
-            <h2 class="user_name"><?= $username?> </h2>
+            <h4 class="user_name"><?= $username?> </h4>
             <?php if($userID == session()->get('id')):?>
                 <a><span onclick="openNav()" class="material-icons text-primary " style="font-size:50px;" id="header_icon_2">more_horiz</span></a>
             <?php endif?>
         </div>
         <div class="row">
-            <h4 class="personal_description"><?=$description[0]->description?></h4>
+            <h6 class="personal_description"><?=$description[0]->description?></h6>
         </div>
     </div>
 
@@ -48,24 +48,24 @@
 
 <div class="d-flex flex-row my-3">
     <div class="d-flex flex-column align-items-center mx-2">
-        <span class = "h6" > <?php echo lang('app.Observations') ?></span>
-        <span class = "h6" > <?=$observationCount[0]->observationCount?></span>
+        <span class = "p" style="font-size: smaller"> <?php echo lang('app.Observations') ?></span>
+        <span class = "p" style="font-size: smaller"> <?=$observationCount[0]->observationCount?></span>
     </div>
     <div class="d-flex flex-column align-items-center mx-2">
-        <span class = "h6" > <?php echo lang('app.Likes') ?></span>
-        <span class = "h6" > <?=$likeCount[0]->likeCount?></span>
+        <span class = "p" style="font-size: smaller" > <?php echo lang('app.Likes') ?></span>
+        <span class = "p" style="font-size: smaller" > <?=$likeCount[0]->likeCount?></span>
     </div>
     <div class="d-flex flex-column align-items-center mx-2">
-        <span class = "h6" > <?php echo lang('app.Comments') ?></span>
-        <span class = "h6" > <?=$commentCount[0]->commentCount?></span>
+        <span class = "p" style="font-size: smaller" > <?php echo lang('app.Comments') ?></span>
+        <span class = "p" style="font-size: smaller" > <?=$commentCount[0]->commentCount?></span>
     </div>
     <div class="d-flex flex-column align-items-center mx-2">
-        <span class = "h6" > <?php echo lang('app.Friends') ?></span>
-        <span class = "h6" > <?=$friendCount[0]->friendCount?></span>
+        <span class = "p" style="font-size: smaller" > <?php echo lang('app.Friends') ?></span>
+        <span class = "p" style="font-size: smaller" > <?=$friendCount[0]->friendCount?></span>
     </div>
     <div class="d-flex flex-column align-items-center mx-2">
-        <span class = "h6" > <?php echo lang('app.Points') ?></span>
-        <span class = "h6" > <?=$pointCount[0]->pointCount?></span>
+        <span class = "p" style="font-size: smaller"> <?php echo lang('app.Points') ?></span>
+        <span class = "p" style="font-size: smaller"> <?=$pointCount[0]->pointCount?></span>
     </div>
 </div>
 
