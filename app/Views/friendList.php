@@ -1,11 +1,11 @@
 <?php if (count($requests)): ?>
-<h4>Friend requests</h4>
+<h4><?php echo lang('app.Friend_request') ?></h4>
 <?php endif;?>
 <?php foreach ($requests as $r): ?>
-<a class="w-100 active" href="<?=$base_url?>/otheruserprofile/<?= $r->userID?>">
+<a class="w-100 active" style="color: black;" href="<?=$base_url?>/otheruserprofile/<?= $r->userID?>">
     <div class="card my-2 shadow-sm d-flex flex-row" style="width:100%;max-width:600px">
         <div class="ml-3 mr-auto my-2">
-            <h2><?= $r->username?></h2>
+            <h4><?= $r->username?></h4>
         </div>
         <div class="d-flex flex-row" value="<?= $r->mappingID?>">
             <a class="accept_friend material-icons my-auto mx-3" style="font-size: 40px" >check</a>

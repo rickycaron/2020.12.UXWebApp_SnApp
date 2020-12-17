@@ -37,5 +37,6 @@ return [
     'Change_password' => '更改密码',
     'Edit_profile' => '编辑个人资料',
     'Logout' => '退出登录',
-    'add_members' => 'add members'
+    'add_members' => 'add members',
+    'Friend_request' => 'Friend requests'
 ];

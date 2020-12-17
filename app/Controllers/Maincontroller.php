@@ -392,6 +392,7 @@ class Maincontroller extends BaseController
         $image = $this->database_model->getUserProfilePicture($userID);
         $data2['profile_image'] = $this->encode_image($image[0]->imagedata, $image[0]->imagetype);
 
+        if (strlen($data2['profile_image']) < 20) $data2['profile_image'] = null;
 
         //get observations from user
         $observations = $this->database_model->getFirstObservationsProfile($userID);
