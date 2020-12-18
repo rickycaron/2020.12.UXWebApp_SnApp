@@ -20,7 +20,7 @@ function sendIdentification() {
         console.log(base64files);
 
         const data = {
-            api_key: "jucxN9i1yltRvEPBKyB8ednOe0yLqxgpjBXnOlYvXKlgq0yeMM",
+            api_key: "5Rk2cQx9fbZgpvWm8pgS2cg3EawlCNtyI7SdkSlOtNxBwp21Qg",
             images: base64files,
             modifiers: ["crops_fast", "similar_images"],
             plant_language: "en",
