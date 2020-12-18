@@ -25,7 +25,7 @@
 
     <div class="">
         <?php if(isset($profile_image)): ?>
-            <img src="<?=$profile_image?>" class="rounded-circle" alt="templatemo easy profile" style="width: 100px;">
+            <img src="<?=$profile_image?>" class="rounded-circle"  alt="templatemo easy profile" style="width: 100px; height: 100px; object-fit: cover;">
         <?php else:?>
             <img class="personCardPhoto rounded-circle card-header" alt="templatemo easy profile" src="https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png" style="width: 100px;">
         <?php endif?>

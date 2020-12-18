@@ -59,9 +59,9 @@ trait extra_functions
                                                      </li>
                                                      <a class="w-100 active" href="'.base_url().'/otheruserprofile/'.$current_user["id"].'">
                                                          <li class="list-group-item list-group-item-action d-flex justify-content-between bg-secondary">
-                                                                <h3>'.$current_user["place"].'. '.$current_user["name"].'</h3>
+                                                                <h5 class="mb-0">'.$current_user["place"].'. '.$current_user["name"].'</h5>
                                                                 <!--<img src="'.base_url().'/image/profile.png">-->
-                                                                <h3>'.$current_user["point"].'</h3>
+                                                                <h5 class="mb-0">'.$current_user["point"].'</h5>
                                                          </li>
                                                      </a>';
         }
