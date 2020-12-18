@@ -12,8 +12,8 @@ for (let i = 0; i < commentButton.length; i++) {
 
         username = getUsername()
 
-        commentShow[i].insertAdjacentHTML("afterend", "<div class=\"py-2\"> <h5 class=\"font-weight-bold d-inline\">You: </h5>\n" +
-            "<h5 class=\"d-inline font-light\">" + commentContent[i].commentID.value + "</h5></div>")
+        commentShow[i].insertAdjacentHTML("afterend", "<div class=\"py-2\"> <p class=\"font-weight-bold d-inline\">You: </p>\n" +
+            "<p class=\"d-inline font-light\">" + commentContent[i].commentID.value + "</p></div>")
 
         //alert("comment success!")
     }, true)
