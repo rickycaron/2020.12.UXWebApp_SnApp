@@ -8,9 +8,9 @@
     var php_groupName = "<?php echo $groupName; ?>";
 </script>
 
-<ul class="list-group" id="list-tab" id="myList" role="tablist">
+<ul class="list-group w-100" id="list-tab" id="myList" role="tablist" style="max-width:400px">
     <?php foreach ($friends as $f): ?>
-        <li class="list-group-item d-flex justify-content-between align-items-center" value="<?=$f->username?>" id="listItem" style="width:400px">
+        <li class="list-group-item d-flex justify-content-between align-items-center" value="<?=$f->username?>" id="listItem">
             <div id="friendName"><?=$f->username?></div>
 
             <?php $userName = strval($f->username);?>

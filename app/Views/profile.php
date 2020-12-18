@@ -4,30 +4,30 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <?php if($userID == session()->get('id')):?>
-    <div id="mySidenav" class="sidenav">
+    <div id="mySidenav" class="sidenav";">
         <a href="javascript:void(0)" class=" material-icons" onclick="closeNav()">navigate_next</a>
-        <hr class="mt-2 mb-3 my-3"/>
-        <a href="<?= base_url()?>/friendList"><?php echo lang('app.Friends') ?></a>
-        <hr class="mt-2 mb-3 my-3"/>
-        <a href="<?= base_url()?>/account/<?= session()->get('id')?>"><?php echo lang('app.Change_Password') ?></a>
-        <hr class="mt-2 mb-3 my-3"/>
-        <a href="<?= base_url()?>/edit_profile"><?php echo lang('app.Edit_profile') ?></a>
-        <hr class="mt-2 mb-3 my-3"/>
+        <hr class="mt-1 mb-1 "/>
+        <a  href="<?= base_url()?>/friendList"><?php echo lang('app.Friends') ?></a>
+        <hr class="mt-1 mb-1 "/>
+        <a  href="<?= base_url()?>/account/<?= session()->get('id')?>"><?php echo lang('app.Change_Password') ?></a>
+        <hr class="mt-1 mb-1 "/>
+        <a  href="<?= base_url()?>/edit_profile"><?php echo lang('app.Edit_profile') ?></a>
+        <hr class="mt-1 mb-1 "/>
         <?php if($userID == session()->get('id')):?>
             <a href="<?= base_url()?>/logout"><?php echo lang('app.Logout') ?></a>
         <?php endif?>
-        <hr class="mt-2 mb-3 my-3"/>
+        <hr class="mt-1 mb-1 "/>
     </div>
 <?php endif?>
 
 <input type="hidden" id="hidden_userID" value="<?=$userID ?>"/>
-<div class="d-flex flex-row m-3" style="width:100%;max-width:600px">
+<div class="d-flex flex-row m-3 w-100">
 
     <div class="">
         <?php if(isset($profile_image)): ?>
-            <img src="<?=$profile_image?>" class="rounded-circle"  alt="templatemo easy profile" style="width: 100px; height: 100px; object-fit: cover;">
+            <img src="<?=$profile_image?>" class="rounded-circle img-circle"  alt="templatemo easy profile">
         <?php else:?>
-            <img class="personCardPhoto rounded-circle card-header" alt="templatemo easy profile" src="https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png" style="width: 100px;">
+            <img class="rounded-circle card-header img-circle" src="https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png">
         <?php endif?>
     </div>
     <div class="mx-4 w-100 ">
