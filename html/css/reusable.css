@@ -2,13 +2,23 @@
     font-weight: 500;
 }
 
-.font-light{
+.font-light {
     font-weight: 300;
 }
-.active span{
+
+.active span {
     text-decoration: underline;
     color:#FAFEFD;
 }
-.inactive span{
+
+.inactive span {
     color:#FAFEFD;
 }
+
+.img-circle {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.add-hover

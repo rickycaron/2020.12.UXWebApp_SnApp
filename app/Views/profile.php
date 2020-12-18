@@ -21,13 +21,13 @@
 <?php endif?>
 
 <input type="hidden" id="hidden_userID" value="<?=$userID ?>"/>
-<div class="d-flex flex-row m-3" style="width:100%;max-width:600px">
+<div class="d-flex flex-row m-3 w-100">
 
     <div class="">
         <?php if(isset($profile_image)): ?>
-            <img src="<?=$profile_image?>" class="rounded-circle"  alt="templatemo easy profile" style="width: 100px; height: 100px; object-fit: cover;">
+            <img src="<?=$profile_image?>" class="rounded-circle img-circle"  alt="templatemo easy profile">
         <?php else:?>
-            <img class="personCardPhoto rounded-circle card-header" alt="templatemo easy profile" src="https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png" style="width: 100px;">
+            <img class="rounded-circle card-header img-circle" src="https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png">
         <?php endif?>
     </div>
     <div class="mx-4 w-100 ">

@@ -34,7 +34,7 @@ return [
     'Add_personal_note' => 'Voeg opmerking toe',
     'Submit' => 'Voeg toe',
     'Friends' => 'Vrienden',
-    'Change_P   assword' => 'Wachtwoord veranderen',
+    'Change_Password' => 'Wachtwoord veranderen',
     'Edit_profile' => 'Profiel bewerken',
     'Logout' => 'Afmelden',
     'Search' => 'Zoeken',

@@ -96,7 +96,7 @@
                                 <input type="txt" id = "commentID" class="form-control " name="comment" placeholder="<?php echo lang('app.Create_new_comment') ?>">
                             </form>
                             <iframe id="iframe" name="iframe" style="display:none;"></iframe>
-                            <div class="material-icons my-auto ml-3 mr-2 text-primary commentButton" style="font-size:30px">send</div>
+                            <div type="button" class="material-icons my-auto ml-3 mr-2 text-primary commentButton" style="font-size:30px">send</div>
                         </div>
                 </div>
                 <div class="mt-2 mb-0">
