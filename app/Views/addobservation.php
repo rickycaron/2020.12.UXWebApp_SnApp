@@ -22,7 +22,7 @@
         <input id="inputFile" type="file" name="picture" onchange="readURL(this)" hidden>
 
         <div class="d-flex flex-row mt-0 w-100">
-            <div id="probabilityText">Probability: </div>
+            <div id="probabilityText"><?php echo lang('app.Probability') ?>: </div>
             <div class="font-weight-bold" id="probability"></div>
         </div>
 
