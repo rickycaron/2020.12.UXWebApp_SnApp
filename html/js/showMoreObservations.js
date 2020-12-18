@@ -19,14 +19,16 @@ function getOtherObservations() {
     let lastTime = times[times.length - 1].getAttribute("value");
     console.log(lastDate, lastTime);
 
+
     fetch(base_url + "?extra=true&lastDate=" + lastDate + "&lastTime=" + lastTime)
         .then(resp => resp.text())
-        .then(myHTML => document.getElementById("observationCardsContainer").outerHTML += myHTML)
+        .then(myHTML => document.getElementById("observationCardsContainer").innerHTML += myHTML)
         .then(getNewButtons())
         .then(likeButtonListenerActivate())
         .catch(a => console.log(a));
 }
 
+/*
 let jsFileLike = document.querySelector('input[id="hidden_base_url"]').value + "/js/likeFunction.js";
 
 function reload_js(src) {
@@ -34,6 +36,7 @@ function reload_js(src) {
     $('script[src$="' + src + '"]').remove();
     $('<script/>').attr('src', src).appendTo('head');
 }
+*/
 
 // $( document ).ajaxComplete(function() {
 //     getNewButtons();
