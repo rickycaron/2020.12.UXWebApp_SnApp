@@ -1,7 +1,4 @@
-<div id="nothingToShow"><?=$upToDate?></div>
-<div id="observationCardsContainer" class="w-100 mt-2">
-
-    <?php foreach ($observations as $ob): ?>
+<?php foreach ($observations as $ob): ?>
 
         <?php $commentCount = sizeof(explode("♪", $ob->messages))?>
         <?php $comment = explode("♪", $ob->messages)?>
