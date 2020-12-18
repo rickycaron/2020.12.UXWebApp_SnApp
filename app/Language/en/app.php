@@ -76,5 +76,9 @@ return [
     'Comments' => 'Comments',
     'Points' => 'Points',
     'add_members' => 'add members',
-    'Friend_request' => 'Friend requests'
+    'Friend_request' => 'Friend requests',
+    'Probability' => 'Probability',
+    'Create_Another_Observation' => 'Create Another Observation',
+    'Back_to_log_in' => 'Back to log in',
+    'Plant_name' => 'Plant name'
 ];

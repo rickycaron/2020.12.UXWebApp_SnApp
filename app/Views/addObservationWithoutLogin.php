@@ -24,7 +24,7 @@
 
 
             <div class="d-flex flex-row mt-0 w-100">
-                <div id="probabilityText">Probability: </div>
+                <div id="probabilityText"><?php echo lang('app.Probability') ?>: </div>
                 <div class="font-weight-bold" id="probability"></div>
             </div>
 
@@ -48,7 +48,7 @@
 
 
         </form>
-        <button onclick=location.href='addObservationWithoutLogin' class="btn btn-primary w-100 my-2 mt-3" style="font-size:25px" ><?php echo lang('app.Create Another Observation') ?></button>
+        <button onclick=location.href='addObservationWithoutLogin' class="btn btn-primary w-100 my-2 mt-3" style="font-size:25px" ><?php echo lang('app.Create_Another_Observation') ?></button>
         <hr class="mt-2 mb-3 my-3"/>
-        <button onclick=location.href='login' class="btn btn-primary w-100 my-2 mt-3" style="font-size:25px" ><?php echo lang('app.Back to log in') ?></button>
+        <button onclick=location.href='login' class="btn btn-primary w-100 my-2 mt-3" style="font-size:25px" ><?php echo lang('app.Back_to_log_in') ?></button>
 </div>
