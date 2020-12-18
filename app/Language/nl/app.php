@@ -76,5 +76,9 @@ return [
     'Comments' => 'Opmerkingen',
     'Points' => 'Punten',
     'add_members' => 'leden toevoegen',
-    'Friend_request' => 'vriendschaps verzoeken'
+    'Friend_request' => 'vriendschaps verzoeken',
+    'Probability' => 'Waarschijnlijkheid',
+    'Create_Another_Observation' => 'Maak een nieuwe observatie',
+    'Back_to_log_in' => 'Terug naar login',
+    'Plant_name' => 'Plant naam'
 ];
