@@ -4,19 +4,19 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <?php if($userID == session()->get('id')):?>
-    <div id="mySidenav" class="sidenav">
+    <div id="mySidenav" class="sidenav";">
         <a href="javascript:void(0)" class=" material-icons" onclick="closeNav()">navigate_next</a>
-        <hr class="mt-2 mb-3 my-3"/>
-        <a href="<?= base_url()?>/friendList"><?php echo lang('app.Friends') ?></a>
-        <hr class="mt-2 mb-3 my-3"/>
-        <a href="<?= base_url()?>/account/<?= session()->get('id')?>"><?php echo lang('app.Change_Password') ?></a>
-        <hr class="mt-2 mb-3 my-3"/>
-        <a href="<?= base_url()?>/edit_profile"><?php echo lang('app.Edit_profile') ?></a>
-        <hr class="mt-2 mb-3 my-3"/>
+        <hr class="mt-1 mb-1 "/>
+        <a  href="<?= base_url()?>/friendList"><?php echo lang('app.Friends') ?></a>
+        <hr class="mt-1 mb-1 "/>
+        <a  href="<?= base_url()?>/account/<?= session()->get('id')?>"><?php echo lang('app.Change_Password') ?></a>
+        <hr class="mt-1 mb-1 "/>
+        <a  href="<?= base_url()?>/edit_profile"><?php echo lang('app.Edit_profile') ?></a>
+        <hr class="mt-1 mb-1 "/>
         <?php if($userID == session()->get('id')):?>
             <a href="<?= base_url()?>/logout"><?php echo lang('app.Logout') ?></a>
         <?php endif?>
-        <hr class="mt-2 mb-3 my-3"/>
+        <hr class="mt-1 mb-1 "/>
     </div>
 <?php endif?>
 
