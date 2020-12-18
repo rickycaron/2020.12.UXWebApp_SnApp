@@ -50,7 +50,7 @@
 
 </style>
 
-<body class="container-fluid justify-content-center d-flex flex-column mx-auto bg-secondary" style="max-width:330px; height:100vh">
+<body class="container-fluid justify-content-center d-flex flex-column mx-auto bg-secondary" style="max-width:400px; height:100vh">
 <main id="wrap">
     <div class="inner">
         <?=$content?>
