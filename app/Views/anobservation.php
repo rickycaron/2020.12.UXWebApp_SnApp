@@ -2,7 +2,11 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7KOWpmjEHMRXKd19aMz8CT4ig14kHDw4&callback=initMap&libraries=&v=weekly" defer></script>
 <div>
     <div class="d-flex flex-row my-4">
-        <img class="rounded-circle" id="observation_profilePicture" style="width: 100px;" src="<?= base_url()?>/image/profile.png">
+        <?php if(isset($profile_image)): ?>
+            <img class="rounded-circle" id="observation_profilePicture" style="width: 100px;" src="<?=$profile_image ?>">
+        <?php else:?>
+            <img class="rounded-circle card-header" id="observation_profilePicture" style="width: 100px;" src="https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png">
+        <?php endif?>
         <h3 id="observation_profileName" class="my-auto mx-4"><?=$username?></h3>
     </div>
 
@@ -11,7 +15,7 @@
         <p><?=$user_note?></p>
     </div>
 
-    <img class="img-fluid" id="observation_picture" src="<?=$encoded_image?>" alt="picture of the observation">
+    <img class="img-fluid" id="observation_picture" src="<?=$encoded_image_ob?>" alt="picture of the observation">
     <div class="d-flex flex-row py-4 justify-content-center">
         <div class="information_container mx-auto">
             <span class="material-icons">event_note</span>

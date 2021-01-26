@@ -144,7 +144,11 @@ class Maincontroller extends BaseController
 
         // retrieve all the information needed from the database and write values in placeholders
         $observation = $this->database_model->getObservation($observationID);
-        $observation_data['username'] = $this->database_model->getUser($observation['userID'])->username;
+        $user = $this->database_model->getUser($observation['userID']);
+        $observation_data['username'] = $user->username;
+        $image_data_user = $user->p_imagedata;
+        $image_type_user = $user->p_imagetype;
+        $observation_data['profile_image'] = $this->encode_image($image_data_user, $image_type_user);
         $specie_query = $this->database_model->getSpecie($observation['specieID']);
         $observation_data['specie_name'] = $specie_query->specieName;
         $observation_data['description'] = $specie_query->specieDescription;
@@ -154,11 +158,13 @@ class Maincontroller extends BaseController
         $observation_data['location'] = $observation['location'];
         $observation_data['like_count'] = $observation['likes'];
         $observation_data['comment_count'] = $observation['comments'];
-        $image_data = $observation['imageData'];
-        $image_type = $observation['imageType'];
-        $observation_data['encoded_image'] = $this->encode_image($image_data, $image_type);
+        $image_data_ob = $observation['imageData'];
+        $image_type_ob = $observation['imageType'];
+        $observation_data['encoded_image_ob'] = $this->encode_image($image_data_ob, $image_type_ob);
         $observation_data['likes_comments'] = "";
         $observation_data['id'] = $observation['id'];
+
+        if (strlen($observation_data['profile_image']) < 20) $observation_data['profile_image'] = null;
 
         $this->data['content'] = view('anobservation', $observation_data);
         $this->data['title'] = lang('app.Observation');
@@ -167,6 +173,7 @@ class Maincontroller extends BaseController
         $this->data['scripts_to_load'] = array('anobservation.js');
         return view("mainTemplate", $this->data);
     }
+
 
     public function groups() {
         $this->set_common_data('eco', null,'search');
