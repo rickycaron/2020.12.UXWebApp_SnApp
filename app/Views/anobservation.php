@@ -31,8 +31,9 @@
 
     <div id="map" class="jumbotron" style="height: 200px" ></div>
     <div>
-        <h2><?php echo lang('app.Description') ?></h2>
-        <p><?=$description?></p>
+        <h2  ><?php echo lang('app.Description') ?></h2>
+        <p type="button" onclick=show() id="expand"  style="display: block;width: 300px;overflow: hidden; white-space: nowrap;text-overflow: ellipsis;"><?=$description?></p>
+        <p type="button" onclick=show() id="expand1" style="display: none" ><?=$description?></p>
     </div>
     <div id="like_and_comment_button " class="d-flex justify-content-center"  >
         <div id="like_button" class=" btn btn-primary btn-block w-10  my-3 mr-1">
@@ -51,3 +52,18 @@
 </div>
 
 <input type="hidden" id="hidden_variable_filter" value="<?=$id?>"/>
+<script>
+    function show()
+    {
+        if(document.getElementById('expand').style.display == 'block')
+    {
+        document.getElementById('expand1').style.display = 'block';
+        document.getElementById('expand').style.display = 'none';
+    }else
+    {
+        document.getElementById('expand').style.display = 'block';
+        document.getElementById('expand1').style.display = 'none';
+
+    }
+    }
+</script>
