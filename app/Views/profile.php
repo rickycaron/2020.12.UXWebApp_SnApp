@@ -19,16 +19,16 @@
             <h4 class="user_name"><?= $username?> </h4>
              <div class="dropdown">
                     <a role="button" class="dropdown btn material-icons" data-toggle="dropdown" >more_horiz</a>
-                    <ul class="dropdown-menu dropdown-menu-right bg-third">
-                        <li><a  href="<?= base_url()?>/friendList"><?php echo lang('app.Friends') ?></a></li>
+                    <ul class="dropdown-menu dropdown-menu-right bg-third ">
+                        <li><a class="ml-1" href="<?= base_url()?>/friendList"><?php echo lang('app.Friends') ?></a></li>
                         <hr class="mt-1 mb-1 "/>
-                        <li><a  href="<?= base_url()?>/account/<?= session()->get('id')?>"><?php echo lang('app.Change_Password') ?></a></li>
+                        <li><a class="ml-1" href="<?= base_url()?>/account/<?= session()->get('id')?>"><?php echo lang('app.Change_Password') ?></a></li>
                         <hr class="mt-1 mb-1 "/>
-                        <li><a  href="<?= base_url()?>/edit_profile"><?php echo lang('app.Edit_profile') ?></a></li>
+                        <li><a class="ml-1" href="<?= base_url()?>/edit_profile"><?php echo lang('app.Edit_profile') ?></a></li>
                         <hr class="mt-1 mb-1 "/>
                         <li>
                             <?php if($userID == session()->get('id')):?>
-                                <a href="<?= base_url()?>/logout"><?php echo lang('app.Logout') ?></a>
+                                <a class="ml-1" href="<?= base_url()?>/logout"><?php echo lang('app.Logout') ?></a>
                             <?php endif?>
                         </li>
                     </ul>
