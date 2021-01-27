@@ -55,11 +55,11 @@ $routes->get('logout','AccountController::logout');
 /*
  * Hub
  */
-$routes->get('/hub', 'Maincontroller::hub',['filter'=>'auth']);
-$routes->get('changeLikeStatus/(:num)','Maincontroller::changeLikeStatus/$1',['filter'=>'auth']);
-$routes->get('cancelLikeStatus/(:num)','Maincontroller::cancelLikeStatus/$1',['filter'=>'auth']);
-$routes->get('sendComment/(:any)/(:num)','Maincontroller::sendComment/$1/$2',['filter'=>'auth']);
-$routes->match(['get','post'],'hub', 'Maincontroller::hub',['filter' => 'auth']);
+$routes->get('/hub', 'HubController::hub',['filter'=>'auth']);
+$routes->get('changeLikeStatus/(:num)','HubController::changeLikeStatus/$1',['filter'=>'auth']);
+$routes->get('cancelLikeStatus/(:num)','HubController::cancelLikeStatus/$1',['filter'=>'auth']);
+$routes->get('sendComment/(:any)/(:num)','HubController::sendComment/$1/$2',['filter'=>'auth']);
+$routes->match(['get','post'],'hub', 'HubController::hub',['filter' => 'auth']);
 
 /*
  * Observation
@@ -99,14 +99,14 @@ $routes->get('fetchGroupLeaderboard/(:alpha)/(:alpha)', 'LeaderboardController::
 /*
  * Profile
  */
-$routes->get('profile', 'Maincontroller::profile',['filter'=>'auth']);
-$routes->get('otheruserprofile/(:num)', 'Maincontroller::otheruserprofile/$1',['filter'=>'auth']);
-$routes->get('sendFriendRequest/(:num)', 'Maincontroller::sendFriendRequest/$1');
-$routes->match(['get','post'],'account/(:num)', 'Maincontroller::account/$1',['filter'=>'auth']);
-$routes->get('edit_profile', 'Maincontroller::edit_profile',['filter'=>'auth']);
-$routes->get('acceptFriendRequest/(:num)', 'Maincontroller::acceptFriendRequest/$1');
-$routes->get('declineFriendRequestOrDelete/(:num)', 'Maincontroller::declineFriendRequestOrDelete/$1');
-$routes->match(['get','post'],'edit_profile', 'Maincontroller::edit_profile',['filter' => 'auth']);
+$routes->get('profile', 'profileController::profile',['filter'=>'auth']);
+$routes->get('otheruserprofile/(:num)', 'profileController::otheruserprofile/$1',['filter'=>'auth']);
+$routes->get('sendFriendRequest/(:num)', 'profileController::sendFriendRequest/$1');
+$routes->match(['get','post'],'account/(:num)', 'profileController::account/$1',['filter'=>'auth']);
+$routes->get('edit_profile', 'profileController::edit_profile',['filter'=>'auth']);
+$routes->get('acceptFriendRequest/(:num)', 'profileController::acceptFriendRequest/$1');
+$routes->get('declineFriendRequestOrDelete/(:num)', 'profileController::declineFriendRequestOrDelete/$1');
+$routes->match(['get','post'],'edit_profile', 'profileController::edit_profile',['filter' => 'auth']);
 
 /*
  * Search

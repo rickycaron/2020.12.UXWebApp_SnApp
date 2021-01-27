@@ -107,3 +107,32 @@ header a:hover{
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
+
+/*
+used for loading
+*/
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 999999;
+}
+#status {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    background-image: url(/html/image/loader.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+    text-align: center;
+    margin: -40px 0 0 -100px;
+}
+#status img {
+    text-align: center;
+    margin-top: -80px;
+}
