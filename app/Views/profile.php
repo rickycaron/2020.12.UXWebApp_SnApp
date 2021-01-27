@@ -3,6 +3,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
+<div id="preloader">
+    <div id="status">
+        <!--        <img alt="logo" src="/html/image/profile.png"> -->
+    </div>
+</div>
+
 <?php if($userID == session()->get('id')):?>
     <div id="mySidenav" class="sidenav";">
         <a href="javascript:void(0)" class=" material-icons" onclick="closeNav()">navigate_next</a>

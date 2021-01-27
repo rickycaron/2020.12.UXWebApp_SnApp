@@ -21,7 +21,7 @@ for (let i = 0; i < commentButton.length; i++) {
 
 for (let i = 0; i < likeButton.length; i++) {
     likeButton[i].addEventListener('click', function() {
-
+        likeButton[i].setAttribute("addClickHandleFlag","1")
 
         if(likeStatus[i].parentElement.getAttribute("value") == 1) {
             likeButton[i].className = "material-icons text-white likeButton"
@@ -77,10 +77,11 @@ function getStatus() {
         .catch(a => console.log(a));
 }
 
+
 function getNewButtons() {
     console.log("getNewButtons called");
-    for (let i = 0; i < likeButton.length; i++) {
-        likeButton[i].removeEventListener('click', function handleLikeClicked() {
+/*    for (let i = 0; i < likeButton.length; i++) {
+        likeButton[i].removeEventListener('click', function () {
 
 
             if(likeStatus[i].parentElement.getAttribute("value") == 1) {
@@ -97,82 +98,46 @@ function getNewButtons() {
 
                 console.log('likeStatus:', likeStatus[i].parentElement.getAttribute("value"));
             }
-        }, true);
-    }
+        }, false);
+    }*/
     // for (let i = 0; i < commentButton.length; i++) {
     //     commentButton[i].removeEventListener();
     // }
-    likeButton2 = document.getElementsByClassName("likeButton");
-    likeStatus2 = document.getElementsByClassName("status");
-    commentButton2 = document.getElementsByClassName("commentButton");
-    commentContent2 = document.getElementsByClassName("commentContent");
-    commentShow2 = document.getElementsByClassName("collapse");
-    likeButtonListenerActivate2(likeButton2, commentButton2)
+    likeButton = document.getElementsByClassName("likeButton");
+    likeStatus = document.getElementsByClassName("status");
+    commentButton = document.getElementsByClassName("commentButton");
+    commentContent = document.getElementsByClassName("commentContent");
+    commentShow = document.getElementsByClassName("collapse");
+
 }
 
-function likeButtonListenerActivate2(likeButton, commentButton) {
-    console.log("like activate function");
-    console.log(likeButton.length);
-    for (let i = 0; i < likeButton.length; i++) {
-        likeButton[i].addEventListener('click', function() {
-
-
-            if(likeStatus[i].parentElement.getAttribute("value") == 1) {
-                likeButton[i].className = "material-icons text-white likeButton"
-                cancel_clicked(likeButton[i].parentElement.getAttribute("value"))
-                likeStatus[i].parentElement.setAttribute("value",0)
-
-                console.log('likeStatus:', likeStatus[i].parentElement.getAttribute("value"));
-            }
-            else if(likeStatus[i].parentElement.getAttribute("value") == 0) {
-                likeButton[i].className = "material-icons text-danger likeButton"
-                accept_clicked(likeButton[i].parentElement.getAttribute("value"))
-                likeStatus[i].parentElement.setAttribute("value",1)
-
-                console.log('likeStatus:', likeStatus[i].parentElement.getAttribute("value"));
-            }
-        }, true);
-
-    }
-
-    for (let i = 0; i < commentButton.length; i++) {
-        commentButton[i].addEventListener('click', function () {
-            console.log('test comment button:');
-            document.getElementById('commentForm').submit()
-            sendComment(commentContent[i].commentID.value, commentButton[i].parentElement.getAttribute("value"))
-
-            username = getUsername()
-
-            commentShow[i].insertAdjacentHTML("afterend", "<div class=\"py-2\"> <h5 class=\"font-weight-bold d-inline\">You: </h5>\n" +
-                "<h5 class=\"d-inline font-light\">" + commentContent[i].commentID.value + "</h5></div>")
-
-            //alert("comment success!")
-        }, true)
-    }
-}
 
 function likeButtonListenerActivate() {
     console.log("like activate function");
     console.log(likeButton.length);
     for (let i = 0; i < likeButton.length; i++) {
-        likeButton[i].addEventListener('click', function() {
+        if (likeButton[i].getAttribute("addClickHandleFlag") !== "1") {
+            likeButton[i].setAttribute("addClickHandleFlag","1")
+
+            likeButton[i].addEventListener('click', function() {
 
 
-            if(likeStatus[i].parentElement.getAttribute("value") == 1) {
-                likeButton[i].className = "material-icons text-white likeButton"
-                cancel_clicked(likeButton[i].parentElement.getAttribute("value"))
-                likeStatus[i].parentElement.setAttribute("value",0)
+                if(likeStatus[i].parentElement.getAttribute("value") == 1) {
+                    likeButton[i].className = "material-icons text-white likeButton"
+                    cancel_clicked(likeButton[i].parentElement.getAttribute("value"))
+                    likeStatus[i].parentElement.setAttribute("value",0)
 
-                console.log('likeStatus:', likeStatus[i].parentElement.getAttribute("value"));
-            }
-            else if(likeStatus[i].parentElement.getAttribute("value") == 0) {
-                likeButton[i].className = "material-icons text-danger likeButton"
-                accept_clicked(likeButton[i].parentElement.getAttribute("value"))
-                likeStatus[i].parentElement.setAttribute("value",1)
+                    console.log('likeStatus:', likeStatus[i].parentElement.getAttribute("value"));
+                }
+                else if(likeStatus[i].parentElement.getAttribute("value") == 0) {
+                    likeButton[i].className = "material-icons text-danger likeButton"
+                    accept_clicked(likeButton[i].parentElement.getAttribute("value"))
+                    likeStatus[i].parentElement.setAttribute("value",1)
 
-                console.log('likeStatus:', likeStatus[i].parentElement.getAttribute("value"));
-            }
-        }, true);
+                    console.log('likeStatus:', likeStatus[i].parentElement.getAttribute("value"));
+                }
+            }, true);
+        }
 
     }
 

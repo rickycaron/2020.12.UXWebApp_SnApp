@@ -113,7 +113,7 @@ class GroupsController extends BaseController
         }
         //comment function end
 
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'likeFunction.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'likeFunction.js', 'loading.js');
         $this->data['content'] = view('hubPage', $data2);
         $this->data['title'] = $groupname_filter;
         $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');

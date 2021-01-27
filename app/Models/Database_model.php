@@ -666,9 +666,10 @@ class Database_model
     }
 
     public function getObservationDescription($Search) {
-        $query = $this->db->query('SELECT *  FROM (a20ux6.observation t1 LEFT JOIN a20ux6.comment c ON c.observationID = t1.id)
-                                        INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id  LEFT JOIN a20ux6.user t4 ON t4.id = c.userID
-                                        WHERE (description LIKE"%'.$Search.'%") OR  (t4.username LIKE "%'.$Search.'%");');
+        $query = $this->db->query('SELECT o.id, o.imageData, o.imageType, date, time, u.username, s.specieName  FROM a20ux6.observation AS o
+                                        INNER JOIN a20ux6.user AS u on o.userID = u.id
+                                        INNER JOIN a20ux6.specie AS s ON o.specieID = s.id
+                                        WHERE (s.specieDescription LIKE "%'.$Search.'%") OR  (s.specieName LIKE "%'.$Search.'%");');
         return $query->getResult();
     }
 
@@ -744,6 +745,23 @@ class Database_model
      */
     public function getUserCommentCount($userID) {
         $query = $this->db->query('SELECT COUNT(c.id) AS commentCount FROM a20ux6.user u LEFT JOIN a20ux6.comment c ON c.userID = u.id where u.id = "'.$userID.'";');
+        return $query->getResult();
+    }
+
+    /**
+     * @param $observationID
+     * @return string
+     */
+    public function getObservaitonCommentCount($observationID) {
+        $query = $this->db->query('SELECT COUNT(c.id) AS commentCount FROM a20ux6.observation o LEFT JOIN a20ux6.comment c ON o.id = c.observationID where o.id = "'.$observationID.'";');
+        return $query->getResult();
+    }
+    /**
+     * @param $observationID
+     * @return string
+     */
+    public function getObservaitonlikeCount($observationID) {
+        $query = $this->db->query('SELECT COUNT(l.id) AS likeCount FROM a20ux6.observation o LEFT JOIN a20ux6.like l ON o.id = l.observationID where o.id = "'.$observationID.'";');
         return $query->getResult();
     }
 

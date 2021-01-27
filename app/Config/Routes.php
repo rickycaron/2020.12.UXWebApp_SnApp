@@ -36,22 +36,30 @@ $routes->setAutoRoute(true);
 /*
  * Login
  */
-$routes->get('/', 'Maincontroller::login',['filter' => 'noauth']);
-$routes->match(['get','post'],'forgotPassword', 'Maincontroller::forgotPassword',['filter' => 'noauth']);
-$routes->match(['get','post'],'resetPassword/(:num)', 'Maincontroller::resetPassword/$1',['filter'=>'auth']);
-$routes->match(['get','post'],'login', 'Maincontroller::login',['filter' => 'noauth']);
-$routes->get('loginFromObservation', 'Maincontroller::loginFromObservation');
-$routes->match(['get','post'],'register', 'Maincontroller::register',['filter' => 'noauth']);
-$routes->get('logout','Maincontroller::logout');
+$routes->get('/', 'AccountController::login',['filter' => 'noauth']);
+$routes->match(['get','post'],'forgotPassword', 'AccountController::forgotPassword',['filter' => 'noauth']);
+$routes->match(['get','post'],'resetPassword/(:num)', 'AccountController::resetPassword/$1',['filter'=>'auth']);
+$routes->match(['get','post'],'login', 'AccountController::login',['filter' => 'noauth']);
+$routes->get('loginFromObservation', 'AccountController::loginFromObservation');
+$routes->match(['get','post'],'register', 'AccountController::register',['filter' => 'noauth']);
+$routes->get('logout','AccountController::logout');
+
+//$routes->get('/', 'Maincontroller::login',['filter' => 'noauth']);
+//$routes->match(['get','post'],'forgotPassword', 'Maincontroller::forgotPassword',['filter' => 'noauth']);
+//$routes->match(['get','post'],'resetPassword/(:num)', 'Maincontroller::resetPassword/$1',['filter'=>'auth']);
+//$routes->match(['get','post'],'login', 'Maincontroller::login',['filter' => 'noauth']);
+//$routes->get('loginFromObservation', 'Maincontroller::loginFromObservation');
+//$routes->match(['get','post'],'register', 'Maincontroller::register',['filter' => 'noauth']);
+//$routes->get('logout','Maincontroller::logout');
 
 /*
  * Hub
  */
-$routes->get('/hub', 'Maincontroller::hub',['filter'=>'auth']);
-$routes->get('changeLikeStatus/(:num)','Maincontroller::changeLikeStatus/$1',['filter'=>'auth']);
-$routes->get('cancelLikeStatus/(:num)','Maincontroller::cancelLikeStatus/$1',['filter'=>'auth']);
-$routes->get('sendComment/(:any)/(:num)','Maincontroller::sendComment/$1/$2',['filter'=>'auth']);
-$routes->match(['get','post'],'hub', 'Maincontroller::hub',['filter' => 'auth']);
+$routes->get('/hub', 'HubController::hub',['filter'=>'auth']);
+$routes->get('changeLikeStatus/(:num)','HubController::changeLikeStatus/$1',['filter'=>'auth']);
+$routes->get('cancelLikeStatus/(:num)','HubController::cancelLikeStatus/$1',['filter'=>'auth']);
+$routes->get('sendComment/(:any)/(:num)','HubController::sendComment/$1/$2',['filter'=>'auth']);
+$routes->match(['get','post'],'hub', 'HubController::hub',['filter' => 'auth']);
 
 /*
  * Observation
@@ -91,24 +99,24 @@ $routes->get('fetchGroupLeaderboard/(:alpha)/(:alpha)', 'LeaderboardController::
 /*
  * Profile
  */
-$routes->get('profile', 'Maincontroller::profile',['filter'=>'auth']);
-$routes->get('otheruserprofile/(:num)', 'Maincontroller::otheruserprofile/$1',['filter'=>'auth']);
-$routes->get('sendFriendRequest/(:num)', 'Maincontroller::sendFriendRequest/$1');
-$routes->match(['get','post'],'account/(:num)', 'Maincontroller::account/$1',['filter'=>'auth']);
-$routes->get('edit_profile', 'Maincontroller::edit_profile',['filter'=>'auth']);
-$routes->get('acceptFriendRequest/(:num)', 'Maincontroller::acceptFriendRequest/$1');
-$routes->get('declineFriendRequestOrDelete/(:num)', 'Maincontroller::declineFriendRequestOrDelete/$1');
-$routes->match(['get','post'],'edit_profile', 'Maincontroller::edit_profile',['filter' => 'auth']);
+$routes->get('profile', 'profileController::profile',['filter'=>'auth']);
+$routes->get('otheruserprofile/(:num)', 'profileController::otheruserprofile/$1',['filter'=>'auth']);
+$routes->get('sendFriendRequest/(:num)', 'profileController::sendFriendRequest/$1');
+$routes->match(['get','post'],'account/(:num)', 'profileController::account/$1',['filter'=>'auth']);
+$routes->get('edit_profile', 'profileController::edit_profile',['filter'=>'auth']);
+$routes->get('acceptFriendRequest/(:num)', 'profileController::acceptFriendRequest/$1');
+$routes->get('declineFriendRequestOrDelete/(:num)', 'profileController::declineFriendRequestOrDelete/$1');
+$routes->match(['get','post'],'edit_profile', 'profileController::edit_profile',['filter' => 'auth']);
 
 /*
  * Search
  */
-$routes->get('search', 'Maincontroller::search');
-$routes->get('searchGetObservations/(:alpha)', 'Maincontroller::searchGetObservations/$1');
-$routes->get('searchGetGroups/(:alpha)', 'Maincontroller::searchGetGroups/$1');
-$routes->get('searchGetUsers/(:alpha)', 'Maincontroller::searchGetUsers/$1');
-$routes->get('search', 'Maincontroller::search');
-$routes->get('search', 'Maincontroller::search');
+$routes->get('search', 'SearchController::search');
+$routes->get('searchGetObservations/(:alpha)', 'SearchController::searchGetObservations/$1');
+$routes->get('searchGetGroups/(:alpha)', 'SearchController::searchGetGroups/$1');
+$routes->get('searchGetUsers/(:alpha)', 'SearchController::searchGetUsers/$1');
+
+
 $routes->get('friendList', 'Maincontroller::friendList');
 
 /*
