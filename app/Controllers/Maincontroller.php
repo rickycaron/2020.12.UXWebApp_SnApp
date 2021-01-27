@@ -4,7 +4,6 @@
 namespace App\Controllers;
 
 
-use App\Models\extra_functions;
 
 class Maincontroller extends BaseController
 {
@@ -20,54 +19,6 @@ class Maincontroller extends BaseController
     public function __construct() {
         $this->menu_model = new \Menu_model();
         $this->database_model = new \Database_model();
-    }
-
-    private function set_common_data($header_icon_1, $back_route, $header_icon_2) {
-        $this->data['base_url'] = base_url();
-        //$this->debug_to_console(base_url());
-        $this->data['header_icon_1'] = $header_icon_1;
-        $this->data['header_icon_2'] = $header_icon_2;
-        $this->data['back_route'] = $back_route;
-    }
-
-    public function leaderboardSelect() {
-        $this->set_common_data('eco', null,'search');
-        $groups = $this->database_model->getGroupsFromUser(session()->get('id'));
-        $this->data['groups']=array();
-        foreach ($groups as $group)
-        {
-            $groupname=$group->name;
-            array_push($this->data['groups'],$groupname);
-        }
-        $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
-        $this->data['content'] = view('leaderboardSelect', $this->data); //replace by your own view
-        $this->data['title'] =  lang('app.Leaderboard');
-        session()->set('lastMainPageLink', 'leaderboardSelect');
-        return view("mainTemplate", $this->data);
-    }
-
-    public function leaderboard($filter) {
-        $this->set_common_data('arrow_back', 'leaderboardSelect','search');
-
-        $leaderboard_data['leaderboard_filter'] = $filter;
-        // initially the monthly leaderboard is loaded
-        switch ($filter) {
-            case "friends":
-                $leaderboard_data['leaderboard_content'] = $this->fetchFriendsLeaderboard('monthlyPoints');
-                break;
-            case "worldwide":
-                $leaderboard_data['leaderboard_content'] = $this->fetchWorldwideLeaderboard('monthlyPoints');
-                break;
-            default:
-                $leaderboard_data['leaderboard_content'] = $this->fetchGroupLeaderboard($filter, 'monthlyPoints');
-        }
-
-        $this->data['content'] = view('leaderboard', $leaderboard_data);
-        $this->data['title'] = lang('app.Leaderboard');
-        $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
-        $this->data['scripts_to_load'] = array('leaderboard.js', 'jquery-3.5.1.min');
-
-        return view("mainTemplate", $this->data);
     }
 
     public function hub() {
