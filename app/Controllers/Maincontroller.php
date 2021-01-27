@@ -73,11 +73,11 @@ class Maincontroller extends BaseController
         }
         else {
             $data2['upToDate'] = "";
-            foreach ($observations as $observation) {
-                $encoded_image = $this->encode_image($observation->imageData, $observation->imageType);
-                $observation->encoded_image = $encoded_image;
-            }
-            $data2['observations'] = $observations;
+//            foreach ($observations as $observation) {
+//                $encoded_image = $this->encode_image($observation->imageData, $observation->imageType);
+//                $observation->encoded_image = $encoded_image;
+//            }
+//            $data2['observations'] = $observations;
             $this->data['content'] = view('hubPage', $data2, $thisUserID);
         }
 
