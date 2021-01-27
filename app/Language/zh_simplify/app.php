@@ -37,9 +37,9 @@ return [
     'Change_password' => '更改密码',
     'Edit_profile' => '编辑个人资料',
     'Logout' => '退出登录',
-    'add_members' => 'add members',
-    'Friend_request' => 'Friend requests',
-    'No_users_found' => 'no users found',
-    'No_observations_found' => 'no observations found',
-    'No_groups_found' => 'no groups found'
+    'add_members' => '添加成员',
+    'Friend_request' => '好友请求',
+    'No_users_found' => '未发现用户',
+    'No_observations_found' => '未发现观察',
+    'No_groups_found' => '未发现小组'
 ];
