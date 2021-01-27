@@ -124,11 +124,11 @@ class profileController extends BaseController
                 $data3['observations'] = $observations;
                 if ($observations == null) {
                     $data3['upToDate'] = "";
-                    return view('observationCards', $data3, $userID);
+                    return view('observationCards', $data3, $thisUserID);
                 }
                 if ($observations[0] == null) {
                     $data3['upToDate'] = "";
-                    return view('observationCards', $data3, $userID);
+                    return view('observationCards', $data3, $thisUserID);
                 }
                 else {
                     $data3['upToDate'] = "";

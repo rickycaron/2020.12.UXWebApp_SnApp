@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="<?= base_url()?>/css/reusable.css" media="none" onload="this.media='all';">
     <link rel="stylesheet" href="<?= base_url()?>/css/fonts.css" media="none" onload="this.media='all';">
 
+<!--    <link rel="stylesheet" href="--><?//= base_url()?><!--/css/bootstrap.css">-->
+<!--    <link rel="stylesheet" href="--><?//= base_url()?><!--/css/main.css">-->
+<!--    <link rel="stylesheet" href="--><?//= base_url()?><!--/css/reusable.css">-->
+<!--    <link rel="stylesheet" href="--><?//= base_url()?><!--/css/fonts.css">-->
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <style>body { font-family: 'Dosis', monospace; }</style>
 
