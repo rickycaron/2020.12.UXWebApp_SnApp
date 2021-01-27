@@ -28,17 +28,8 @@ function getOtherObservations() {
         .catch(a => console.log(a));
 }
 
-/*
-let jsFileLike = document.querySelector('input[id="hidden_base_url"]').value + "/js/likeFunction.js";
 
-function reload_js(src) {
-    src = $('script[src$="' + src + '"]').attr("src");
-    $('script[src$="' + src + '"]').remove();
-    $('<script/>').attr('src', src).appendTo('head');
+function encode_image(image, mime) {
+    let base64 = btoa(image);
+    return ('data:' + mime + ';base64,' + base64);
 }
-*/
-
-// $( document ).ajaxComplete(function() {
-//     getNewButtons();
-//     likeButtonListenerActivate();
-// });
