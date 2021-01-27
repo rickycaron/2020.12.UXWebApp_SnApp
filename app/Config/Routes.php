@@ -32,6 +32,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 //['filter' => 'noauth'], this website can only be shown when the user hasn'r logged in
 //['filter' => 'auth'], this website can only be shown when the user has logged in
+
 $routes->get('/', 'Maincontroller::login',['filter' => 'noauth']);
 //$routes->get('/lang/{locale}', 'Language::index',['filter' => 'noauth']);
 $routes->get('/hub', 'Maincontroller::hub',['filter'=>'auth']);
@@ -56,15 +57,15 @@ $routes->get('addObservation', 'Maincontroller::addObservation');
 $routes->match(['get','post'],'addObservation', 'Maincontroller::addObservation');
 $routes->get('addObservationWithoutLogin', 'Maincontroller::addObservationWithoutLogin');
 $routes->match(['get','post'],'addObservationWithoutLogin', 'Maincontroller::addObservationWithoutLogin');
-$routes->get('leaderboardSelect', 'Maincontroller::leaderboardSelect',['filter'=>'auth']);
+$routes->get('leaderboardSelect', 'LeaderboardController::leaderboardSelect',['filter'=>'auth']);
 $routes->get('profile', 'Maincontroller::profile',['filter'=>'auth']);
 $routes->get('otheruserprofile/(:num)', 'Maincontroller::otheruserprofile/$1',['filter'=>'auth']);
 $routes->get('sendFriendRequest/(:num)', 'Maincontroller::sendFriendRequest/$1');
 
-$routes->get('leaderboard/(:alpha)', 'Maincontroller::leaderboard/$1',['filter'=>'auth']);
-$routes->get('fetchFriendsLeaderboard/(:alpha)', 'Maincontroller::fetchFriendsLeaderboard/$1',['filter'=>'auth']);
-$routes->get('fetchWorldwideLeaderboard/(:alpha)', 'Maincontroller::fetchWorldwideLeaderboard/$1',['filter'=>'auth']);
-$routes->get('fetchGroupLeaderboard/(:alpha)/(:alpha)', 'Maincontroller::fetchGroupLeaderboard/$1/$2',['filter'=>'auth']);
+$routes->get('leaderboard/(:alpha)', 'LeaderboardController::leaderboard/$1',['filter'=>'auth']);
+$routes->get('fetchFriendsLeaderboard/(:alpha)', 'LeaderboardController::fetchFriendsLeaderboard/$1',['filter'=>'auth']);
+$routes->get('fetchWorldwideLeaderboard/(:alpha)', 'LeaderboardController::fetchWorldwideLeaderboard/$1',['filter'=>'auth']);
+$routes->get('fetchGroupLeaderboard/(:alpha)/(:alpha)', 'LeaderboardController::fetchGroupLeaderboard/$1/$2',['filter'=>'auth']);
 $routes->match(['get','post'],'forgotPassword', 'Maincontroller::forgotPassword',['filter' => 'noauth']);
 $routes->match(['get','post'],'resetPassword/(:num)', 'Maincontroller::resetPassword/$1',['filter'=>'auth']);
 
