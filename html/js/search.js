@@ -1,7 +1,17 @@
-document.getElementById("All").addEventListener("click", AllClicked);
-document.getElementById("Observations").addEventListener("click", ObClicked);
-document.getElementById("Groups").addEventListener("click", GroupsClicked);
-document.getElementById("Users").addEventListener("click",UsersClicked);
+//let all = document.getElementById("All").addEventListener("click", AllClicked);
+//let observation = document.getElementById("Observations").addEventListener("click", ObClicked);
+//let group = document.getElementById("Groups").addEventListener("click", GroupsClicked);
+//let user = document.getElementById("Users").addEventListener("click",UsersClicked);
+
+let all = document.getElementById("All");
+let observation = document.getElementById("Observations");
+let group = document.getElementById("Groups");
+let user = document.getElementById("Users");
+
+all.addEventListener("click", AllClicked);
+observation.addEventListener("click", ObClicked);
+group.addEventListener("click", GroupsClicked);
+user.addEventListener("click",UsersClicked);
 
 document.getElementById("search").addEventListener("keyup", keyboardPressed);
 
@@ -78,21 +88,41 @@ function keyboardPressed() {
 }
 
 function AllClicked() {
+    all.classList.add('active');
+    observation.classList.remove('active');
+    group.classList.remove('active');
+    user.classList.remove('active');
+
     currentSearchFilter = 0;
     fetchSearchResult()
 }
 
 function ObClicked() {
+    observation.classList.add('active');
+    all.classList.remove('active');
+    group.classList.remove('active');
+    user.classList.remove('active');
+
     currentSearchFilter = 1;
     fetchSearchResult()
 }
 
 function GroupsClicked() {
+    group.classList.add('active');
+    observation.classList.remove('active');
+    all.classList.remove('active');
+    user.classList.remove('active');
+
     currentSearchFilter = 2;
     fetchSearchResult()
 }
 
 function UsersClicked() {
+    user.classList.add('active');
+    observation.classList.remove('active');
+    group.classList.remove('active');
+    all.classList.remove('active');
+
     currentSearchFilter = 3;
     fetchSearchResult()
 }

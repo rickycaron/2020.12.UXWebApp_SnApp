@@ -76,5 +76,8 @@ return [
     'Comments' => 'Comments',
     'Points' => 'Points',
     'add_members' => 'add members',
-    'Friend_request' => 'Friend requests'
+    'Friend_request' => 'Friend requests',
+    'No_users_found' => 'no users found',
+    'No_observations_found' => 'no observations found',
+    'No_groups_found' => 'no groups found'
 ];

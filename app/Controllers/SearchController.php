@@ -32,8 +32,8 @@ class SearchController extends BaseController
         if($result['ob'] != null) {
             return view('searchObservation', $result);
         }
-        return "<h3>Observations:</h3>
-                <p>no observations found</p>";
+        return "<h5>".lang('app.Observations').":</h5>
+                <p>".lang('app.No_observations_found')."</p>";
     }
 
     public function searchGetGroups($filter) {
@@ -41,8 +41,8 @@ class SearchController extends BaseController
         if($result['group'] != null) {
             return view('searchGroup', $result);
         }
-        return "<h3>Groups:</h3>
-                <p>no groups found</p>";
+        return '<h5>'.lang('app.Groups').':</h5>
+                <p>'.lang('app.No_groups_found').'</p>';
     }
 
     public function searchGetUsers($filter) {
@@ -55,8 +55,8 @@ class SearchController extends BaseController
         if($result['user'] != null) {
             return view('searchUser', $result);
         }
-        return "<h3>Users:</h3>
-                <p>no users found</p>";
+        return "<h5>".lang('app.Users').":</h5>
+                <p>".lang('app.No_users_found')."</p>";
     }
 
     public function search() {

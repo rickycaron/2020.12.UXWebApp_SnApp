@@ -80,5 +80,8 @@ return [
     'Probability' => 'Waarschijnlijkheid',
     'Create_Another_Observation' => 'Maak een nieuwe observatie',
     'Back_to_log_in' => 'Terug naar login',
-    'Plant_name' => 'Plant naam'
+    'Plant_name' => 'Plant naam',
+    'No_users_found' => 'geen gebruikers gevonden',
+    'No_observations_found' => 'geen observaties gevonden',
+    'No_groups_found' => 'geen groepen gevonden'
 ];
