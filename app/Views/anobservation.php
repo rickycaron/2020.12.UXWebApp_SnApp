@@ -41,14 +41,15 @@
     </div>
     <div id="like_and_comment_button " class="d-flex justify-content-center"  >
         <div id="like_button" class=" btn btn-primary btn-block w-10  my-3 mr-1">
-            <label>show likes</label>
+            <label>show likes (<?=$likeCount[0]->likeCount?>)</label>
             <!--<span class="material-icons">favorite_border</span>-->
         </div>
         <div id="comment_button" class="btn btn-primary btn-block w-10 my-3 ml-1">
-            <label>show comments</label>
+            <label>show comments (<?=$commentCount[0]->commentCount?>)</label>
             <!--<span class="material-icons">chat</span>-->
         </div>
     </div>
+    <hr>
     <div id="likes_or_comment_placeholder">
         <?=$likes_comments?>
     </div>

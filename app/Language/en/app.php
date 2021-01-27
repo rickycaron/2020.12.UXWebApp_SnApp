@@ -80,5 +80,8 @@ return [
     'Probability' => 'Probability',
     'Create_Another_Observation' => 'Create Another Observation',
     'Back_to_log_in' => 'Back to log in',
-    'Plant_name' => 'Plant name'
+    'Plant_name' => 'Plant name',
+    'No_users_found' => 'no users found',
+    'No_observations_found' => 'no observations found',
+    'No_groups_found' => 'no groups found'
 ];

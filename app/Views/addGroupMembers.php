@@ -5,7 +5,7 @@
 <?php endif;?>
 
 <script type="text/javascript">
-    var php_groupName = "<?php echo $groupName; ?>";
+    let php_groupName = "<?php echo $groupName; ?>";
 </script>
 
 <ul class="list-group w-100" id="list-tab" id="myList" role="tablist" style="max-width:400px">

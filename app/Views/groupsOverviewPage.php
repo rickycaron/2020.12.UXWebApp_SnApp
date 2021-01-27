@@ -21,7 +21,7 @@
                 </a>
                 <div>
                     <a class="px-3 pb-3" href="<?=base_url()?>/groupmembers/<?=$group[0]?>"><?=$group[2]?> <?php echo lang('app.members') ?></a>
-                    <a class="px-3 pb-3 float-right" href="<?=base_url()?>/addGroupMembers/<?=$group[3]?>/<?=$group[0]?>">add members</a>
+                    <a class="px-3 pb-3 float-right" href="<?=base_url()?>/addGroupMembers/<?=$group[4]?>/<?=$group[0]?>">add members</a>
                 </div>
             </div>
 

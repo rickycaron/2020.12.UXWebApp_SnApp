@@ -1,4 +1,9 @@
 <input type="hidden" id="hidden_variable_filter" value="<?=$leaderboard_filter?>"/>
+<div id="preloader">
+    <div id="status">
+        <!--        <img alt="logo" src="/html/image/profile.png"> -->
+    </div>
+</div>
 <div id="leaderboard_overall_container" class="jumbotron w-100" style ="background:transparent !important; max-width: 400px;">
     <h3 class="page_title d-flex justify-content-center"><?=$leaderboard_filter?></h3>
     <div id="radio_buttons_container" class=" d-flex justify-content-center">

@@ -19,7 +19,7 @@
 <?php else:?>
     <form action="login" method="get" enctype="multipart/form-data">
 <?php endif?>
-        <input id="inputFile" type="file" name="picture" onchange="readURL(this)" hidden>
+        <input id="inputFile" type="file" name="picture" onchange="getUploadedPicture(this)" hidden>
 
         <div class="d-flex flex-row mt-0 w-100">
             <div id="probabilityText"><?php echo lang('app.Probability') ?>: </div>
