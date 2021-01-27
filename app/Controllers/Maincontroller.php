@@ -4,6 +4,7 @@
 namespace App\Controllers;
 
 
+use App\Models\extra_functions;
 
 class Maincontroller extends BaseController
 {
@@ -44,9 +45,9 @@ class Maincontroller extends BaseController
         $observation_data['location'] = $observation['location'];
         $observation_data['like_count'] = $observation['likes'];
         $observation_data['comment_count'] = $observation['comments'];
-        $image_data_ob = $observation['imageData'];
-        $image_type_ob = $observation['imageType'];
-        $observation_data['encoded_image_ob'] = $this->encode_image($image_data_ob, $image_type_ob);
+        $image_data = $observation['imageData'];
+        $image_type = $observation['imageType'];
+        $observation_data['encoded_image'] = $this->encode_image($image_data, $image_type);
         $observation_data['likes_comments'] = "";
         $observation_data['id'] = $observation['id'];
 

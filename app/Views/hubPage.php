@@ -47,14 +47,14 @@
                     <img class="card-img img-fluid " style="height: 350px; object-fit: cover;" src="<?='data:' . $ob->imageType . ';base64,' . base64_encode($ob->imageData)?>"<a>
                     <div class="card-img" style="box-shadow: inset 0px -50px 40px -20px black; position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></div>
                     <h4 class="text-white" style="position: absolute; bottom: 0px; right: 12px;"><?=$ob->username?></h4>
-                    <div class="material-icons text-white" style="font-size:30px;position: absolute; bottom: 6px; left: 8px" >favorite</div>
+                    <div class="material-icons text-white"  style="font-size:30px;position: absolute; bottom: 6px; left: 8px" >favorite</div>
                     </a>
 
                     <?php if ($likeStatus == 1): ?>
-                        <div class="material-icons text-danger likeButton" style="font-size:30px;position: absolute; bottom: 6px; left: 8px">favorite</div>
+                        <div class="material-icons text-danger likeButton" type="button" style="font-size:30px;position: absolute; bottom: 6px; left: 8px">favorite</div>
                     <?php endif;?>
                     <?php if ($likeStatus == 0): ?>
-                        <div class="material-icons text-white likeButton" style="font-size:30px;position: absolute; bottom: 6px; left: 8px">favorite</div>
+                        <div class="material-icons text-white likeButton" type="button" style="font-size:30px;position: absolute; bottom: 6px; left: 8px">favorite</div>
                     <?php endif;?>
                 </div>
 

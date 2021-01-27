@@ -687,7 +687,7 @@ class Database_model
      * @return array|array[]
      */
     public function getLikeListFromObservation($observationID) {
-        $query = $this->db->query('SELECT u.username
+        $query = $this->db->query('SELECT u.username, u.p_imagetype as imagetype, u.p_imagedata as imagedata
                                         FROM a20ux6.user AS u
                                         INNER JOIN a20ux6.like AS l ON  u.id = l.userID
                                         WHERE observationID = "'.$observationID.'";');

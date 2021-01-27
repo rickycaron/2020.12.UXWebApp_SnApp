@@ -3,28 +3,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
-<div id="preloader">
-    <div id="status">
-        <!--        <img alt="logo" src="/html/image/profile.png"> -->
-    </div>
-</div>
-
-<?php if($userID == session()->get('id')):?>
-    <div id="mySidenav" class="sidenav";">
-        <a href="javascript:void(0)" class=" material-icons" onclick="closeNav()">navigate_next</a>
-        <hr class="mt-1 mb-1 "/>
-        <a  href="<?= base_url()?>/friendList"><?php echo lang('app.Friends') ?></a>
-        <hr class="mt-1 mb-1 "/>
-        <a  href="<?= base_url()?>/account/<?= session()->get('id')?>"><?php echo lang('app.Change_Password') ?></a>
-        <hr class="mt-1 mb-1 "/>
-        <a  href="<?= base_url()?>/edit_profile"><?php echo lang('app.Edit_profile') ?></a>
-        <hr class="mt-1 mb-1 "/>
-        <?php if($userID == session()->get('id')):?>
-            <a href="<?= base_url()?>/logout"><?php echo lang('app.Logout') ?></a>
-        <?php endif?>
-        <hr class="mt-1 mb-1 "/>
-    </div>
-<?php endif?>
 
 <input type="hidden" id="hidden_userID" value="<?=$userID ?>"/>
 <div class="d-flex flex-row m-3 w-100">
@@ -39,9 +17,22 @@
     <div class="mx-4 w-100 ">
         <div class="row justify-content-between">
             <h4 class="user_name"><?= $username?> </h4>
-            <?php if($userID == session()->get('id')):?>
-                <a><span onclick="openNav()" class="material-icons text-primary " style="font-size:50px;" id="header_icon_2">more_horiz</span></a>
-            <?php endif?>
+             <div class="dropdown">
+                    <a role="button" class="dropdown btn material-icons" data-toggle="dropdown" >more_horiz</a>
+                    <ul class="dropdown-menu dropdown-menu-right bg-third ">
+                        <li><a class="ml-1" href="<?= base_url()?>/friendList"><?php echo lang('app.Friends') ?></a></li>
+                        <hr class="mt-1 mb-1 "/>
+                        <li><a class="ml-1" href="<?= base_url()?>/account/<?= session()->get('id')?>"><?php echo lang('app.Change_Password') ?></a></li>
+                        <hr class="mt-1 mb-1 "/>
+                        <li><a class="ml-1" href="<?= base_url()?>/edit_profile"><?php echo lang('app.Edit_profile') ?></a></li>
+                        <hr class="mt-1 mb-1 "/>
+                        <li>
+                            <?php if($userID == session()->get('id')):?>
+                                <a class="ml-1" href="<?= base_url()?>/logout"><?php echo lang('app.Logout') ?></a>
+                            <?php endif?>
+                        </li>
+                    </ul>
+                </div>
         </div>
         <div class="row">
             <h6 class="personal_description"><?=$description[0]->description?></h6>
