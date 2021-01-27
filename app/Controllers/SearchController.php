@@ -4,7 +4,6 @@
 namespace App\Controllers;
 
 use Database_model;
-use Search_model;
 use Menu_model;
 
 class SearchController extends BaseController
