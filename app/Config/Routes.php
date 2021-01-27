@@ -63,13 +63,13 @@ $routes->get('fetchObservationCommentHTML/(:num)', 'Maincontroller::fetchObserva
 /*
  * Groups
  */
-$routes->get('groups', 'Maincontroller::groups',['filter'=>'auth']);
-$routes->match(['get','post'],'group/(:alpha)', 'Maincontroller::group/$1',['filter'=>'auth']);
-$routes->match(['get','post'],'newgroup', 'Maincontroller::newgroup',['filter'=>'auth']);
-$routes->get('groupmembers/(:alpha)', 'Maincontroller::groupmembers/$1',['filter'=>'auth']);
-$routes->get('addGroupMembers/(:num)/(:alpha)', 'Maincontroller::addGroupMembers/$1/$2',['filter'=>'auth']);
-$routes->get('addFriendToGroup/(:any)/(:alpha)', 'Maincontroller::addFriendToGroup/$1/$2',['filter'=>'auth']);
-$routes->get('deleteUserFromGroup/(:num)/(:num)/(:alpha)', 'Maincontroller::deleteUserFromGroup/$1/$2/$3',['filter'=>'auth']);
+$routes->get('groups', 'GroupsController::groups',['filter'=>'auth']);
+$routes->match(['get','post'],'group/(:alpha)', 'GroupsController::group/$1',['filter'=>'auth']);
+$routes->match(['get','post'],'newgroup', 'GroupsController::newgroup',['filter'=>'auth']);
+$routes->get('groupmembers/(:alpha)', 'GroupsController::groupmembers/$1',['filter'=>'auth']);
+$routes->get('addGroupMembers/(:num)/(:alpha)', 'GroupsController::addGroupMembers/$1/$2',['filter'=>'auth']);
+$routes->get('addFriendToGroup/(:any)/(:alpha)', 'GroupsController::addFriendToGroup/$1/$2',['filter'=>'auth']);
+$routes->get('deleteUserFromGroup/(:num)/(:num)/(:alpha)', 'GroupsController::deleteUserFromGroup/$1/$2/$3',['filter'=>'auth']);
 
 /*
  * AddObservation

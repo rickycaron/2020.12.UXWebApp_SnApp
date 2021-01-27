@@ -7,7 +7,7 @@ class addObservations_model
     private $database_model;
 
     /**
-     * Leaderboard_model constructor
+     * AddObservations_model constructor
      */
     public function __construct()
     {
