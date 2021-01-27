@@ -24,7 +24,11 @@ class SearchController extends BaseController
     }
 
     public function searchGetObservations($filter) {
-        $result['ob'] = $this->database_model->getObservationDescription($filter);
+        $observations = $this->database_model->getObservationDescription($filter);
+        foreach ($observations as $o) {
+            $o->encoded_image = $this->encode_image($o->imageData, $o->imageType);
+        }
+        $result['ob'] = $observations;
         if($result['ob'] != null) {
             return view('searchObservation', $result);
         }

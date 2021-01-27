@@ -7,7 +7,7 @@
             <input type = "hidden" name="username" id = "username" value = "<?=$o->username?>">
             <a href="<?= base_url()?>/anobservation/<?=$o->id?>">
                 <div style="position: relative;">
-                    <img class="card-img" id="observationCardPicture" src="<?php echo data_uri($o->imageData,$o->imageType); ?>">
+                    <img class="card-img" id="observationCardPicture" src="<?= $o->encoded_image ?>">
                     <div class="card-img" style="box-shadow: inset 0px -50px 40px -20px black;position: absolute; width: 100%; height: 100%;top: 0; left: 0;"></div>
                     <h4 class="text-white" style="position: absolute; bottom: 0px; right: 12px;"><?=$o->username?></h4>
                     <span class="material-icons text-white" style="font-size:30px;position: absolute; bottom: 6px; left: 8px" >favorite_border</span>
@@ -30,20 +30,5 @@
 
         </div>
 
-        <script type="text/javascript">
-            var php_lastDate = "<?php echo $o->date; ?>";
-            var php_lastTime = "<?php echo $o->time; ?>";
-        </script>
-
     </div>
 <?php endforeach?>
-
-<div id="placeholderLoading"></div>
-
-<?php
-function data_uri($file, $mime)
-{
-    $base64   = base64_encode($file);
-    return ('data:' . $mime . ';base64,' . $base64);
-}
-?>
