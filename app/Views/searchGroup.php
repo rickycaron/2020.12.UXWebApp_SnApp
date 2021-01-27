@@ -4,7 +4,7 @@
         <div class="ml-3 mr-auto mb-2 mt-3">
             <h2><?= $g->name?></h2>
             <p><?=$g->description?></p>
-            <a > members</a>
+            <a> members</a>
         </div>
         <span  class="material-icons my-auto mx-3" style="font-size: 40px">keyboard_arrow_right</span>
     </div>
