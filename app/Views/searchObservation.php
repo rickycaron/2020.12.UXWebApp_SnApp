@@ -3,9 +3,9 @@
     <div>
 
         <div class="card my-2 shadow-sm" style="width:100%;max-width:600px">
-            <input type = "hidden" name="obID" id = "obID" value = "<?=$o->observationID?>">
+            <input type = "hidden" name="obID" id = "obID" value = "<?=$o->id?>">
             <input type = "hidden" name="username" id = "username" value = "<?=$o->username?>">
-            <a href="<?= base_url()?>/anobservation/<?=$o->observationID?>">
+            <a href="<?= base_url()?>/anobservation/<?=$o->id?>">
                 <div style="position: relative;">
                     <img class="card-img" id="observationCardPicture" src="<?php echo data_uri($o->imageData,$o->imageType); ?>">
                     <div class="card-img" style="box-shadow: inset 0px -50px 40px -20px black;position: absolute; width: 100%; height: 100%;top: 0; left: 0;"></div>

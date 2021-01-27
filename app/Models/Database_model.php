@@ -733,9 +733,10 @@ class Database_model
     }
 
     public function getObservationDescription($Search) {
-        $query = $this->db->query('SELECT *  FROM (a20ux6.observation t1 LEFT JOIN a20ux6.comment c ON c.observationID = t1.id)
-                                        INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id  LEFT JOIN a20ux6.user t4 ON t4.id = c.userID
-                                        WHERE (description LIKE"%'.$Search.'%") OR  (t4.username LIKE "%'.$Search.'%");');
+        $query = $this->db->query('SELECT o.id, o.imageData, o.imageType, date, time, u.username, s.specieName  FROM a20ux6.observation AS o
+                                        INNER JOIN a20ux6.user AS u on o.userID = u.id
+                                        INNER JOIN a20ux6.specie AS s ON o.specieID = s.id
+                                        WHERE (s.specieDescription LIKE "%'.$Search.'%") OR  (s.specieName LIKE "%'.$Search.'%");');
         return $query->getResult();
     }
 
