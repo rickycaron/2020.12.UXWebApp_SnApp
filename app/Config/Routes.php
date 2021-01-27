@@ -36,13 +36,21 @@ $routes->setAutoRoute(true);
 /*
  * Login
  */
-$routes->get('/', 'Maincontroller::login',['filter' => 'noauth']);
-$routes->match(['get','post'],'forgotPassword', 'Maincontroller::forgotPassword',['filter' => 'noauth']);
-$routes->match(['get','post'],'resetPassword/(:num)', 'Maincontroller::resetPassword/$1',['filter'=>'auth']);
-$routes->match(['get','post'],'login', 'Maincontroller::login',['filter' => 'noauth']);
-$routes->get('loginFromObservation', 'Maincontroller::loginFromObservation');
-$routes->match(['get','post'],'register', 'Maincontroller::register',['filter' => 'noauth']);
-$routes->get('logout','Maincontroller::logout');
+$routes->get('/', 'AccountController::login',['filter' => 'noauth']);
+$routes->match(['get','post'],'forgotPassword', 'AccountController::forgotPassword',['filter' => 'noauth']);
+$routes->match(['get','post'],'resetPassword/(:num)', 'AccountController::resetPassword/$1',['filter'=>'auth']);
+$routes->match(['get','post'],'login', 'AccountController::login',['filter' => 'noauth']);
+$routes->get('loginFromObservation', 'AccountController::loginFromObservation');
+$routes->match(['get','post'],'register', 'AccountController::register',['filter' => 'noauth']);
+$routes->get('logout','AccountController::logout');
+
+//$routes->get('/', 'Maincontroller::login',['filter' => 'noauth']);
+//$routes->match(['get','post'],'forgotPassword', 'Maincontroller::forgotPassword',['filter' => 'noauth']);
+//$routes->match(['get','post'],'resetPassword/(:num)', 'Maincontroller::resetPassword/$1',['filter'=>'auth']);
+//$routes->match(['get','post'],'login', 'Maincontroller::login',['filter' => 'noauth']);
+//$routes->get('loginFromObservation', 'Maincontroller::loginFromObservation');
+//$routes->match(['get','post'],'register', 'Maincontroller::register',['filter' => 'noauth']);
+//$routes->get('logout','Maincontroller::logout');
 
 /*
  * Hub
