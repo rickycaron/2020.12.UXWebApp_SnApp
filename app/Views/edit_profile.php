@@ -1,7 +1,7 @@
 
 <div class="mt-3 w-100" style="max-width:350px">
 
-    <div class="wrapper card w-100 d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
+    <div class="wrapper rounded-circle card w-100 d-flex flex-column align-items-center justify-content-center" style="height: 350px">
         <div class="previewImage" id="previewImageDiv">
             <img class="img-fluid" id="uploadImageTag" src=""/>
         </div>
