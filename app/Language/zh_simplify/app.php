@@ -38,5 +38,8 @@ return [
     'Edit_profile' => '编辑个人资料',
     'Logout' => '退出登录',
     'add_members' => 'add members',
-    'Friend_request' => 'Friend requests'
+    'Friend_request' => 'Friend requests',
+    'No_users_found' => 'no users found',
+    'No_observations_found' => 'no observations found',
+    'No_groups_found' => 'no groups found'
 ];

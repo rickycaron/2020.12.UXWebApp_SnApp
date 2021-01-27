@@ -103,12 +103,12 @@ $routes->match(['get','post'],'edit_profile', 'Maincontroller::edit_profile',['f
 /*
  * Search
  */
-$routes->get('search', 'Maincontroller::search');
-$routes->get('searchGetObservations/(:alpha)', 'Maincontroller::searchGetObservations/$1');
-$routes->get('searchGetGroups/(:alpha)', 'Maincontroller::searchGetGroups/$1');
-$routes->get('searchGetUsers/(:alpha)', 'Maincontroller::searchGetUsers/$1');
-$routes->get('search', 'Maincontroller::search');
-$routes->get('search', 'Maincontroller::search');
+$routes->get('search', 'SearchController::search');
+$routes->get('searchGetObservations/(:alpha)', 'SearchController::searchGetObservations/$1');
+$routes->get('searchGetGroups/(:alpha)', 'SearchController::searchGetGroups/$1');
+$routes->get('searchGetUsers/(:alpha)', 'SearchController::searchGetUsers/$1');
+
+
 $routes->get('friendList', 'Maincontroller::friendList');
 
 /*

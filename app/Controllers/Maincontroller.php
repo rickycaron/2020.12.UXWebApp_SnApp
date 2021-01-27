@@ -311,18 +311,6 @@ class Maincontroller extends BaseController
         return view("mainTemplate", $this->data);
     }
 
-    public function search() {
-        $this->set_common_data('arrow_back', session()->get('lastMainPageLink'),'search');
-
-        $search_data['placeholder'] = lang('app.Start_typing_in_the_search_bar');
-        $this->data['content'] = view('search',$search_data);
-        $this->data['title'] = lang('app.Search');
-
-        $this->data['menu_items'] = $this->menu_model->get_menuitems(session()->get('lastMainPageLink'));
-        $this->data['scripts_to_load'] = array('search.js');
-        return view("mainTemplate", $this->data);
-    }
-
     public function login() {
         $this->data=[];
         $this->set_common_data('eco', null,'eco');
