@@ -144,6 +144,7 @@ class Maincontroller extends BaseController
 
         // retrieve all the information needed from the database and write values in placeholders
         $observation = $this->database_model->getObservation($observationID);
+        $image = $this->database_model->getUserProfilePicture($observation['userID']);
         $observation_data['username'] = $this->database_model->getUser($observation['userID'])->username;
         $specie_query = $this->database_model->getSpecie($observation['specieID']);
         $observation_data['specie_name'] = $specie_query->specieName;
@@ -159,9 +160,10 @@ class Maincontroller extends BaseController
         $observation_data['encoded_image'] = $this->encode_image($image_data, $image_type);
         $observation_data['likes_comments'] = "";
         $observation_data['id'] = $observation['id'];
-
+        $observation_data['profile_image'] = $this->encode_image($image[0]->imagedata, $image[0]->imagetype);
         $this->data['content'] = view('anobservation', $observation_data);
         $this->data['title'] = lang('app.Observation');
+
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems(session()->get('lastMainPageLink'));
         $this->data['scripts_to_load'] = array('anobservation.js');

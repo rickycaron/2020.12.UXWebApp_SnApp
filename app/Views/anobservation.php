@@ -2,7 +2,11 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7KOWpmjEHMRXKd19aMz8CT4ig14kHDw4&callback=initMap&libraries=&v=weekly" defer></script>
 <div>
     <div class="d-flex flex-row my-4">
-        <img class="rounded-circle" id="observation_profilePicture" style="width: 100px;" src="<?= base_url()?>/image/profile.png">
+        <?php if(isset($profile_image)): ?>
+            <img src="<?=$profile_image?>" class="rounded-circle img-circle"  alt="templatemo easy profile">
+        <?php else:?>
+            <img class="rounded-circle card-header img-circle" src="https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png">
+        <?php endif?>
         <h3 id="observation_profileName" class="my-auto mx-4"><?=$username?></h3>
     </div>
 
@@ -45,7 +49,6 @@
             <!--<span class="material-icons">chat</span>-->
         </div>
     </div>
-    <hr>
     <div id="likes_or_comment_placeholder">
         <?=$likes_comments?>
     </div>
