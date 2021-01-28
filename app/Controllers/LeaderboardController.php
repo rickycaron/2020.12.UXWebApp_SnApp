@@ -42,7 +42,7 @@ class LeaderboardController extends BaseController
     }
 
     public function leaderboardSelect() {
-        $this->cachePage(100);
+        $this->cachePage(10);
         $this->set_common_data('eco', null,'search');
         $groups = $this->database_model->getGroupsFromUser(session()->get('id'));
         $this->data['groups']=array();
@@ -60,7 +60,7 @@ class LeaderboardController extends BaseController
     }
 
     public function leaderboard($filter) {
-        $this->cachePage(100);
+        $this->cachePage(10);
         $this->set_common_data('arrow_back', 'leaderboardSelect','search');
 
         $leaderboard_data['leaderboard_filter'] = $filter;
