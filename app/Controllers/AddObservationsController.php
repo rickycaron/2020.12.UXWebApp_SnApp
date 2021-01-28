@@ -46,11 +46,16 @@ class AddObservationsController extends BaseController
                 'date'=>'required|min_length[6]|max_length[50]',
                 'time'=>'required|min_length[4]|max_length[50]']))
         {
-            $uploadedPicture = $this->request->getFile('picture');
-            $picture = file_get_contents($uploadedPicture->getTempName());
-            $imageProperties = $uploadedPicture->getMimeType();
-            $scientificName = $this->request->getPost('scientificName');
 
+            $uploadedPicture = $this->request->getFile('picture');
+            $imageProperties = $uploadedPicture->getMimeType();
+            $im = imagecreatefromjpeg($uploadedPicture);
+            ob_start();                      // Start output buffering
+            imagejpeg($im,NULL,50);   // Generate JPEG into buffer
+            $compressedImage=ob_get_contents();         // Load output buffer into $blob var
+            ob_end_clean();                  // Clean up buffer
+
+            $scientificName = $this->request->getPost('scientificName');
             $specieName = $this->request->getPost('specieName');
             $description = $this->request->getPost('description');
             $specieId = $this->addObservations_model->getSpecieId($specieName, $scientificName, $description);
@@ -59,7 +64,7 @@ class AddObservationsController extends BaseController
             $time = $this->request->getPost('time');
             $userNote = $this->request->getPost('userNote');
 
-            $this->database_model->insertObservation($picture, $imageProperties, $description,$location, $date, $time, $specieId[0]->id, $userID, $userNote);
+            $this->database_model->insertObservation($compressedImage, $imageProperties, $description,$location, $date, $time, $specieId[0]->id, $userID, $userNote);
             return redirect()->to('hub');
         }
 

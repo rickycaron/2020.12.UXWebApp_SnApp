@@ -12,14 +12,14 @@ class Hub_model
     function changeLikeStatus ($observationID) {
 
         $userID = session()->get('id');
-        $query_result = $this->database_model->setUserLikeStatus($userID, $observationID);
+        $this->database_model->setUserLikeStatus($userID, $observationID);
         return;
     }
 
     function sendComment ($comment, $observationID) {
 
         $userID = session()->get('id');
-        $query_result = $this->database_model->insertComment($userID, $comment, $observationID);//insertComment ($userID, $message, $observationID)
+        $this->database_model->insertComment($userID, $comment, $observationID);//insertComment ($userID, $message, $observationID)
         return;
     }
 
@@ -38,6 +38,4 @@ class Hub_model
         $status = $this->database_model->checkUserLikeStatus($userID, $observationID);
         return $status;
     }
-
-
 }
