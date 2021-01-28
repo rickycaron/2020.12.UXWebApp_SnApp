@@ -632,7 +632,7 @@ class Database_model
         $queryString = 'SELECT t1.id, GROUP_CONCAT(c.message SEPARATOR \'♪\') as messages, GROUP_CONCAT(l.userID) as likeUserIDs,  GROUP_CONCAT(t4.username) as usernames, imageData, imageType, description, specieName, t3.username, date, time FROM (a20ux6.observation t1 LEFT JOIN a20ux6.comment c ON c.observationID = t1.id)
                                         INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id  LEFT JOIN a20ux6.like l ON l.observationID = t1.id and l.status = 1 LEFT JOIN a20ux6.user t4 ON t4.id = c.userID
                                         WHERE t1.userID = "'.$userID.'"';
-        $queryString .= 'GROUP BY id ORDER BY date DESC, time DESC LIMIT 3;';
+        $queryString .= 'GROUP BY id ORDER BY date DESC, time DESC LIMIT 5;';
         $query = $this->db->query($queryString);
         return $query->getResult();
     }
