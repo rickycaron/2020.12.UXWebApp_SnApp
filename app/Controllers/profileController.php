@@ -142,7 +142,7 @@ class profileController extends BaseController
         $this->data['title'] =  lang('app.Profile');
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('profile');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'likeFunction.js', 'loading.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'showMoreObservations.js', 'likeFunction.js', 'loading.js');
         return view("mainTemplate", $this->data);
     }
 
@@ -266,7 +266,7 @@ class profileController extends BaseController
         $this->data['content'] = view('edit_profile', $data2);
         $this->data['title'] = lang('app.Edit_profile');
         $this->data['menu_items'] = $this->menu_model->get_menuitems('profile');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','profilePicture.js', 'previewPicture.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','profilePicture.js');
 
         return view("mainTemplate", $this->data);
     }

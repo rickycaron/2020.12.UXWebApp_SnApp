@@ -3,7 +3,7 @@
 
     <div class="wrapper rounded-circle card w-100 d-flex flex-column align-items-center justify-content-center" style="height: 350px">
         <div class="previewImage" id="previewImageDiv">
-            <img class="img-fluid" id="uploadImageTag" src=""/>
+            <img class="img-fluid rounded-circle" id="uploadImageTag" src=""/>
         </div>
         <div class="content d-flex flex-column align-items-center">
             <div class="material-icons" id="backupIcon" style="font-size:40px;color: #25AC71;">backup</div>
@@ -16,13 +16,9 @@
         <h2 hidden><?php echo lang('app.Processing...') ?></h2>
     </div>
 
-    <div class="mb-3">
-        <a class="justify-content-start " href="#"><?php echo lang('app.Forgot_password?') ?></a>
-    </div>
-
     <form action="edit_profile" method="post"  enctype="multipart/form-data">
 
-        <input id="inputFile" type="file" name="picture" onchange="readURL(this)" hidden>
+        <input id="inputFile" type="file" name="picture" onchange="getUploadedPicture(this)" hidden>
 
         <div class="form-group mb-1">
             <label for="Name"><?php echo lang('app.Name') ?></label>
