@@ -140,10 +140,10 @@
                 </a>
 
                 <?php if ($likeStatus == 1): ?>
-                    <div class="material-icons text-danger likeButton" style="font-size:30px;position: absolute; bottom: 6px; left: 8px">favorite</div>
+                    <div class="material-icons text-danger likeButton" style="font-size:30px;position: absolute; bottom: 6px; left: 8px" type="button">favorite</div>
                 <?php endif;?>
                 <?php if ($likeStatus == 0): ?>
-                    <div class="material-icons text-white likeButton" style="font-size:30px;position: absolute; bottom: 6px; left: 8px">favorite</div>
+                    <div class="material-icons text-white likeButton" style="font-size:30px;position: absolute; bottom: 6px; left: 8px" type="button">favorite</div>
                 <?php endif;?>
             </div>
 
@@ -193,7 +193,7 @@
                             <input type="txt" id = "commentID" class="form-control " name="comment" placeholder="<?php echo lang('app.Create_new_comment') ?>">
                         </form>
                         <iframe id="iframe" name="iframe" style="display:none;"></iframe>
-                        <div class="material-icons my-auto ml-3 mr-2 text-primary commentButton" style="font-size:30px">send</div>
+                        <div class="material-icons my-auto ml-3 mr-2 text-primary commentButton" type="button" style="font-size:30px">send</div>
                     </div>
                 </div>
                 <div class="mt-2 mb-0">
