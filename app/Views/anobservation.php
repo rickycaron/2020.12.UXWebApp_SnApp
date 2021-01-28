@@ -1,8 +1,12 @@
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7KOWpmjEHMRXKd19aMz8CT4ig14kHDw4&callback=initMap&libraries=&v=weekly" defer></script>
-<div style="width:100%;max-width:600px">
+<div>
     <div class="d-flex flex-row my-4">
-        <img class="rounded-circle" id="observation_profilePicture" style="width: 100px;" src="<?= base_url()?>/image/profile.png">
+        <?php if(isset($profile_image)): ?>
+            <img src="<?=$profile_image?>" class="rounded-circle img-circle"  alt="templatemo easy profile">
+        <?php else:?>
+            <img class="rounded-circle card-header img-circle" src="https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png">
+        <?php endif?>
         <h3 id="observation_profileName" class="my-auto mx-4"><?=$username?></h3>
     </div>
 
@@ -11,8 +15,7 @@
         <p><?=$user_note?></p>
     </div>
 
-    <img class="img-fluid" id="observation_picture" src="https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg" alt="picture of the observation">
-    <!-- src="<?php echo data_uri($image_data, $image_type); ?>" -->
+    <img class="img-fluid" id="observation_picture" src="<?=$encoded_image?>" alt="picture of the observation">
     <div class="d-flex flex-row py-4 justify-content-center">
         <div class="information_container mx-auto">
             <span class="material-icons">event_note</span>
@@ -32,17 +35,18 @@
 
     <div id="map" class="jumbotron" style="height: 200px" ></div>
     <div>
-        <h2>Details</h2>
-        <p><?=$description?></p>
+        <h2  ><?php echo lang('app.Description') ?></h2>
+        <p type="button" onclick=show() id="expand"  style="display: block;width: 300px;overflow: hidden; white-space: nowrap;text-overflow: ellipsis;"><?=$description?></p>
+        <p type="button" onclick=show() id="expand1" style="display: none" ><?=$description?></p>
     </div>
-    <div id="like_and_comment_button" class="d-flex"  >
-        <div id="like_button" class=" btn btn-primary btn-block my-3 mr-5 ml-5">
-            <span class="material-icons">favorite_border</span>
-            <p><?=$like_count?> likes</p>
+    <div id="like_and_comment_button " class="d-flex justify-content-center"  >
+        <div id="like_button" class=" btn btn-primary btn-block w-10  my-3 mr-1">
+            <label>show likes (<?=$likeCount[0]->likeCount?>)</label>
+            <!--<span class="material-icons">favorite_border</span>-->
         </div>
-        <div id="comment_button" class="btn btn-primary btn-block my-3 mr-5 ml-5">
-            <span class="material-icons">chat</span>
-            <p><?=$comment_count?> comments</p>
+        <div id="comment_button" class="btn btn-primary btn-block w-10 my-3 ml-1">
+            <label>show comments (<?=$commentCount[0]->commentCount?>)</label>
+            <!--<span class="material-icons">chat</span>-->
         </div>
     </div>
     <hr>
@@ -52,11 +56,18 @@
 </div>
 
 <input type="hidden" id="hidden_variable_filter" value="<?=$id?>"/>
+<script>
+    function show()
+    {
+        if(document.getElementById('expand').style.display == 'block')
+    {
+        document.getElementById('expand1').style.display = 'block';
+        document.getElementById('expand').style.display = 'none';
+    }else
+    {
+        document.getElementById('expand').style.display = 'block';
+        document.getElementById('expand1').style.display = 'none';
 
-<?php
-function data_uri($file, $mime)
-{
-    $base64   = base64_encode($file);
-    return ('data:' . $mime . ';base64,' . $base64);
-}
-?>
+    }
+    }
+</script>

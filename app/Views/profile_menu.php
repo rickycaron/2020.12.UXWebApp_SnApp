@@ -1,7 +1,4 @@
-
-
 <div id = "menu">
-
     <h3 class = "menuTitle">Edit profile</h3>
     <hr>
     <h3 class = "menuTitle">Friends</h3>

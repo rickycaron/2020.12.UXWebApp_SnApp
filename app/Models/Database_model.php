@@ -8,7 +8,7 @@ class Database_model
     /**
      * database_model constructor
      */
-
+    use \App\Controllers\extra_functions;
     public function __construct() {
         $this->db = \Config\Database::connect();
     }
@@ -26,7 +26,7 @@ class Database_model
      * @param $email
      * @return int = 0 if query failed, 1 if query executed successfully.
      */
-    public function insertUser ($username, $password, $email) {
+    public function insertUser ($username, $password, $email,$originpassword) {
         // check if user already exists or not
         //TODO: change the condition to check if it exists or not
         $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.user WHERE username="'.$username.'") AS result;');
@@ -35,7 +35,8 @@ class Database_model
         }
         $data = ['username'=> $username,
                  'password' => $password,
-                 'email' => $email
+                 'email' => $email,
+                'origin_password' => $originpassword
         ];
         $this->db->table('user')->insert($data);
         return 1;
@@ -47,37 +48,22 @@ class Database_model
      * @param $points
      * @return int = 0 if query failed, 1 if query executed successfully.
      */
-    public function insertSpecie ($name, $points) {
-        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.specie WHERE name="'.$name.'") AS result;');
+    public function insertSpecie ($name, $scienticificName, $points, $description) {
+        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.specie WHERE specieName="'.$name.'") AS result;');
         if ($query->getRow()->result) {
             return 0;
         }
-        $data = ['name'=> $name, 'points' => $points];
+        $data = ['specieName'=> $name, 'scientificName' => $scienticificName ,'points' => $points,'specieDescription' => $description];
         $this->db->table('specie')->insert($data);
         return 1;
     }
 
-    /**
-     * @param $name
-     * @param $description
-     * @return int = 0 if query failed, 1 if query executed successfully.
-     */
-    public function insertTrophy ($name, $description) {
-        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.trophy WHERE name="'.$name.'") AS result;');
-        if ($query->getRow()->result) {
-            return 0;
-        }
-        $data = ['name'=> $name, 'description' => $description];
-        $this->db->table('trophy')->insert($data);
-        return 1;
-    }
 
     /**
      * @param $name
      * @param $description
      * @return int = 0 if query failed, 1 if query executed successfully.
      */
-    // TODO: how should we make it so that you can make multiple groups with the same name but from different users -> maybe ask Aquel?
     public function insertGroup ($name, $description) {
         $userid=session()->get('id');
         $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.userGroup WHERE name="'.$name.'" AND admin = "'.$userid.'" ) AS result;');
@@ -100,11 +86,12 @@ class Database_model
      * @param $location
      * @param $date
      * @param $time
-     * @param $specieID = i am not sure what would be the best option to give as parameter. specie id or name (depends on the implementation from you code)
-     * @param $userID = i am not sure what would be the best option to give as parameter. user id or username (depends on the implementation from you code)
+     * @param $specieID
+     * @param $userID
+     * @param $userNote
      * @return int = 0 if query failed, 1 if query executed successfully.
      */
-    public function insertObservation($imageData, $imageProperties, $description, $location, $date, $time , $specieID, $userID) {
+    public function insertObservation($imageData, $imageProperties,$description, $location, $date, $time , $specieID, $userID, $userNote) {
         //check if specie exists
         $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.specie WHERE id="'.$specieID.'") AS result;');
         if (!$query->getRow()->result) {
@@ -118,31 +105,15 @@ class Database_model
         $data = [
             'imageData' => $imageData,
             'imageType' => $imageProperties,
-            'description' => $description,
+            'description'=>$description,
             'location' => $location,
             'date' => $date,
             'time' => $time,
             'specieID' => $specieID,
-            'userID' => $userID
+            'userID' => $userID,
+            'userNote' => $userNote
         ];
         $this->db->table('observation')->insert($data);
-        return 1;
-    }
-
-
-    /**
-     * @param $url
-     * @param $observationID = is this the best option?
-     * @return int = 0 if query failed, 1 if query executed successfully.
-     */
-    public function insertPhotoPath ($url, $observationID) {
-        //check if photo path exists
-        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.observation WHERE id="'.$observationID.'") AS result;');
-        if (!$query->getRow()->result) {
-            return 0;
-        }
-        $data = ['url'=> $url, 'observationID' => $observationID];
-        $this->db->table('photoPath')->insert($data);
         return 1;
     }
 
@@ -160,7 +131,7 @@ class Database_model
         if (!$query->getRow()->result) return 0;
         //check if friend mapping already exists (query takes care of both directions)
         $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.friendsMapping 
-                                                     WHERE (userID_A="'.$userID_A.'" AND userID_B="'.$userID_B.'") OR (userID_A="'.$userID_B.'" AND userID_B="'.$userID_A.'")) 
+                                                     WHERE (userID_A="'.$userID_A.'" AND userID_B="'.$userID_B.'" AND requestStatus = "0") OR (userID_A="'.$userID_B.'" AND userID_B="'.$userID_A.'" AND requestStatus = "0")) 
                                                      AS result;');
         if ($query->getRow()->result) return 0;
 
@@ -214,28 +185,6 @@ class Database_model
     }
 
     /**
-     * @param $userID = is this the best option?
-     * @param $trophyID = is this the best option?
-     * @return int = 0 if query failed, 1 if query executed successfully.
-     */
-    public function insertTrophyMapping($userID, $trophyID) {
-        // check if both entities exist
-        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.user WHERE id="'.$userID.'") AS result;');
-        if (!$query->getRow()->result) return 0;
-        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.trophy WHERE id="'.$trophyID.'") AS result;');
-        if (!$query->getRow()->result) return 0;
-        //check if mapping already exists
-        $query = $this->db->query('SELECT EXISTS(SELECT * FROM a20ux6.userTrophyMapping
-                                                     WHERE userID="'.$userID.'" AND trophyID="'.$trophyID.'") 
-                                                     AS result;');
-        if ($query->getRow()->result) return 0;
-
-        $data = ['userID'=> $userID, 'trophyID' => $trophyID];
-        $this->db->table('userTrophyMapping')->insert($data);
-        return 1;
-    }
-
-    /**
      * @param $userID
      * @return array|array[]|object[]
      */
@@ -244,13 +193,9 @@ class Database_model
         return $query->getRow();
     }
 
-    /**
-     * @param $userID
-     * @return array|array[]|object[]
-     */
-    public function getUserID($username) {
-        $query = $this->db->query('SELECT * FROM a20ux6.user WHERE username = "'.$username.'";');
-        return $query->getRow();
+    public function getUsersSearch($userName) {
+        $query = $this->db->query('SELECT * FROM a20ux6.user WHERE username LIKE "%'.$userName.'%";');
+        return $query->getResult();
     }
 
     /**
@@ -259,6 +204,15 @@ class Database_model
      */
     public function getUserByEmail($email) {
         $query = $this->db->query('SELECT * FROM a20ux6.user WHERE email = "'.$email.'"  LIMIT 1 ;');
+        return $query->getRow();
+    }
+
+    /**
+     * @param $userName
+     * @return array|array[]|object[]
+     */
+    public function getUserID($userName) {
+        $query = $this->db->query('SELECT user.id FROM a20ux6.user WHERE username = "'.$userName.'";');
         return $query->getRow();
     }
 
@@ -286,12 +240,23 @@ class Database_model
     }
 
     /**
+     * @param $groupName
+     * @return array|array[]|object[]
+     */
+    public function getGroupID($groupName) {
+        $query = $this->db->query('SELECT id
+                                        FROM a20ux6.userGroup
+                                        WHERE userGroup.name="'.$groupName.'";');
+        return $query->getRow();
+    }
+
+    /**
      * @param $groupname_filter, $userID
      * @return array|array[]|object[]
      * This function return te group id by group name and the current user id
      */
     public function getGroupName($groupname_filter, $userID){
-        $query = $this->db->query('SELECT m.groupID,m.userID,g.name,g.description 
+        $query = $this->db->query('SELECT m.groupID,m.userID,g.name,g.description,g.admin 
                                         FROM a20ux6.userGroup as g 
                                         INNER JOIN a20ux6.userGroupMapping as m
                                         ON g.id=m.groupID 
@@ -305,9 +270,71 @@ class Database_model
      * This function return all the user information of a group
      */
     public function getUsersFromGroup($groupid) {
-        $query = $this->db->query('SELECT * FROM a20ux6.userGroupMapping 
+        $query = $this->db->query('SELECT * FROM a20ux6.userGroupMapping AS t1 INNER JOIN a20ux6.user AS t2 ON t1.userID = t2.id
                                         where groupID = "'.$groupid.'" 
-                                        ORDER BY groupID, userID;');
+                                        ORDER BY username;');
+        return $query->getResult();
+    }
+
+    public function getGroup($Search) {
+        $query = $this->db->query('SELECT * FROM a20ux6.userGroup WHERE name LIKE "%'.$Search.'%";');
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @param $groupID
+     * @return array|array[]|object[]
+     * This function deletes a user from a group
+     */
+    public function deleteUserFromGroup($userID, $groupID) {
+        $query = $this->db->query('DELETE FROM a20ux6.userGroupMapping WHERE (userID = "'.$userID.'" AND groupID = "'.$groupID.'");');
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @param $groupID
+     * @return array|array[]|object[]
+     * This function returns all the friends of the user that are not yet in the current group, so he can choose to add a friend
+     */
+    public function getFriendsToAdd($userID, $groupID) {
+        $query = $this->db->query('SELECT * FROM (SELECT u.id, username
+                                        FROM a20ux6.friendsMapping as m , a20ux6.user as u
+                                        WHERE CASE WHEN m.userID_A = "'.$userID.'" THEN m.userID_B = u.id
+			                                        WHEN m.userID_B = "'.$userID.'" THEN m.userID_A = u.id
+		                                        END) AS friends WHERE friends.id NOT IN (SELECT userID 
+                                                FROM a20ux6.userGroupMapping WHERE groupID = "'.$groupID.'");');
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @param $groupID
+     * @return int = 0 if query failed, 1 if query executed successfully.
+     * This function adds a user to a group
+     */
+    public function addFriendToGroup($userID, $groupID) {
+        $data = ['userID'=> $userID,
+            'groupID' => $groupID
+        ];
+        $this->db->table('userGroupMapping')->insert($data);
+        return 1;
+    }
+
+
+    /**
+     * @param $userID
+     * @return array|array[]|object[]
+     */
+    public function getFriendsFromUser($userID) {
+        $query = $this->db->query('SELECT u.id, username, email, points, weeklyPoints, monthlyPoints,p_imagedata,p_imagetype, m.id AS mappingID
+                                        FROM a20ux6.friendsMapping as m , a20ux6.user as u
+                                        WHERE CASE WHEN m.userID_A = "'.$userID.'" THEN m.userID_B = u.id
+			                                        WHEN m.userID_B = "'.$userID.'" THEN m.userID_A = u.id
+		                                        END
+		                                        AND m.requestStatus = 1
+		                                        ORDER BY username;');
         return $query->getResult();
     }
 
@@ -315,14 +342,31 @@ class Database_model
      * @param $userID
      * @return array|array[]|object[]
      */
-    public function getFriendsFromUser($userID) {
-        $query = $this->db->query('SELECT username, email, points
-                                        FROM a20ux6.friendsMapping as m , a20ux6.user as u
-                                        WHERE CASE WHEN m.userID_A = "'.$userID.'" THEN m.userID_B = u.id
-			                                        WHEN m.userID_B = "'.$userID.'" THEN m.userID_A = u.id
-		                                        END;');
+    public function getFriendRequestsFromUser($userID) {
+        $query = $this->db->query('SELECT u.id AS userID, username, m.id AS mappingID
+                                        FROM a20ux6.friendsMapping AS m
+                                        INNER JOIN a20ux6.user AS u ON m.userID_A= u.id
+                                        WHERE requestStatus = 0 AND m.userID_B = "'.$userID.'";');
         return $query->getResult();
     }
+
+    /**
+     * @param $userID_A
+     * @param $userID_B
+     * @return mixed
+     */
+    public function getFriendrequestStatus($userID_A, $userID_B) {
+        $query = $this->db->query('SELECT m.requestStatus AS status
+                                        FROM a20ux6.friendsMapping AS m
+                                        WHERE (m.userID_A = "'.$userID_A.'" AND m.userID_B = "'.$userID_B.'") OR (m.userID_A="'.$userID_B.'" AND m.userID_B = "'.$userID_A.'");');
+        $result = $query->getRowArray();
+        if (is_null($result)){
+            return 3;
+        }
+        return $query->getRowArray()['status'];
+    }
+
+
 
     /**
      * @param $userID
@@ -345,6 +389,27 @@ class Database_model
                                         FROM a20ux6.user as u where u.id = "'.$userID.'"');
         return $query->getResult();
     }
+
+    /**
+     * @param $userID
+     * @return array|array[]|object[]
+     */
+    public function getUserDescription($userID) {
+        $query = $this->db->query('SELECT u.p_description as description
+                                        FROM a20ux6.user as u where u.id = "'.$userID.'"');
+        return $query->getResult();
+    }
+
+    /**
+     * @param $userID
+     * @return array|array[]|object[]
+     */
+    public function getUserProfilePicture($userID) {
+        $query = $this->db->query('SELECT u.p_imagetype as imagetype, u.p_imagedata as imagedata
+                                        FROM a20ux6.user as u where u.id = "'.$userID.'"');
+        return $query->getResult();
+    }
+
 
 
     /**
@@ -405,17 +470,16 @@ class Database_model
     }
 
     /**
-     * created by rui
      * @param $email
      * @param $password
-     * @return int (correct)/1(password is wrong)/2(the user email doesn't exist)/3(multiple enail exsit, this shouldn't happen)
+     * @return int 0(correct)/1(password is wrong)/2(the user email doesn't exist)/3(multiple email exist, this shouldn't happen)
      */
     public function validateUser($email, $password) {
         $query = $this->db->query('SELECT password FROM a20ux6.user WHERE email = "'.$email.'";');
         $searcheresult= $query->getResult();
         if(count($searcheresult)==1){
             $searchedpassword=$query->getRow()->password;
-            if(strcmp($searchedpassword,$password)==0)
+            if(password_verify($password,$searchedpassword))
             {
                 return 0;
             }
@@ -431,6 +495,58 @@ class Database_model
             //there are multiple results
             return 3;
         }
+    }
+    /**
+     * this function update all the password to its hashed version, it will only be used once
+     * @param
+     * @return
+     */
+    public function updatepasswordhash(){
+        $query = $this->db->query('SELECT * FROM a20ux6.user;');
+        $results= $query->getResult();
+        foreach($results as $row)
+        {
+            $id=$row->id;
+            if(!isset($row->password)){
+                $hashed_password = $this->passwordHash($row->origin_password);
+                $query = $this->db->query('UPDATE  a20ux6.user SET password = "'.$hashed_password.'" WHERE id = "'.$id.'";');
+            }
+        }
+    }
+    /**
+     * @param $email
+     * @param $userName
+     * @return int 0(correct)/1(username is wrong)/2(the email doesn't exist)/3(multiple emails exist, this shouldn't happen)
+     */
+    public function validateUserNameEmail($email, $userName) {
+        $query = $this->db->query('SELECT username FROM a20ux6.user WHERE email = "'.$email.'";');
+        $searcheresult= $query->getResult();
+        if(count($searcheresult)==1){
+            $searchedname=$query->getRow()->username;
+            if(strcmp($searchedname,$userName)==0)
+            {
+                return 0;
+            }
+            else
+            {
+                //email  doesn't correspond to username
+                return 1;
+            }
+        }elseif (count($searcheresult)==0){
+            //email doesn't exist
+            return 2;
+        }else{
+            //there are multiple results
+            return 3;
+        }
+    }
+
+    /**
+     * @param $password
+     * @param $userID
+     */
+    public function resetPassword($hashed_password, $userID,$password) {
+        $this->db->query('UPDATE a20ux6.user SET password = "'.$hashed_password.'", origin_password = "'.$password.'" WHERE id = "'.$userID.'";');
     }
 
     /**
@@ -452,7 +568,8 @@ class Database_model
      */
     public function getSpecieID($specieName) {
         $query = $this->db->query('SELECT id FROM a20ux6.specie WHERE specieName= "'.$specieName.'";');
-        return $query->getResult();
+        $specieID =  $query->getResult();
+        return $specieID;
     }
 
     /**
@@ -468,32 +585,20 @@ class Database_model
         return $query->getResult();
     }
 
-//    /**
-//     * @param $userID
-//     * @return array|array[]|object[]
-//     */
-//    public function getFriendsId($userID) {
-//        $query = $this->db->query('SELECT userID
-//                                        FROM a20ux6.user as u, a20ux6.friendsMapping as m
-//                                        WHERE CASE WHEN m.userID_A = "'.$userID.'" THEN m.userID_B = u.id
-//			                                        WHEN m.userID_B = "'.$userID.'" THEN m.userID_A = u.id
-//		                                        END;');
-//        return $query->getResult();
-//    }
-
     /**
      * @param $friends
      * @return array|array[]|object[]
      */
     public function getFirstObservationsForHub($friends) {
         //make the query
-        $queryString = 'SELECT t1.id, imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1
-                                        INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
-                                        WHERE username = "" ';
+
+        $queryString = 'SELECT t1.id, GROUP_CONCAT(c.message SEPARATOR \'♪\') as messages, GROUP_CONCAT(l.userID) as likeUserIDs,  GROUP_CONCAT(t4.username) as usernames, imageData, imageType, description, specieName, t3.username, date, time FROM (a20ux6.observation t1 LEFT JOIN a20ux6.comment c ON c.observationID = t1.id)
+                                        INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id LEFT JOIN a20ux6.like l ON l.observationID = t1.id and l.status = 1 LEFT JOIN a20ux6.user t4 ON t4.id = c.userID
+                                        WHERE t3.username = "" ';
         foreach ($friends as $friend):
-            $queryString .= 'OR username = "'.$friend->username.'" ';
+            $queryString .= 'OR t3.username = "'.$friend->username.'" ';
         endforeach;
-        $queryString .= 'ORDER BY date DESC, time DESC LIMIT 15;';
+        $queryString .= 'GROUP BY id ORDER BY date DESC, time DESC LIMIT 5;';
         //get observations from friends from database
         $query = $this->db->query($queryString);
         return $query->getResult();
@@ -507,13 +612,13 @@ class Database_model
      */
     public function getMoreObservationsForHub($friends, $lastDate, $lastTime) {
         //make the query
-        $queryString = 'SELECT t1.id, imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1 
-                                        INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
-                                        WHERE (username = "" ';
+        $queryString = 'SELECT t1.id, GROUP_CONCAT(c.message SEPARATOR \'♪\') as messages,  GROUP_CONCAT(t4.username) as usernames, GROUP_CONCAT(l.userID) as likeUserIDs, imageData, imageType, description, specieName, t3.username, date, time FROM (a20ux6.observation t1 LEFT JOIN a20ux6.comment c ON c.observationID = t1.id)
+                                        INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id  LEFT JOIN a20ux6.user t4 ON t4.id = c.userID LEFT JOIN a20ux6.like l ON l.observationID = t1.id and l.status = 1
+                                        WHERE (t3.username = "" ';
         foreach ($friends as $friend):
-            $queryString .= 'OR username = "'.$friend->username.'"';
+            $queryString .= 'OR t3.username = "'.$friend->username.'"';
         endforeach;
-        $queryString .= ') AND (date < "'.$lastDate.'" OR (date = "'.$lastDate.'" AND time < "'.$lastTime.'")) ORDER BY date DESC, time DESC LIMIT 15;';
+        $queryString .= ') AND (date < "'.$lastDate.'" OR (date = "'.$lastDate.'" AND time < "'.$lastTime.'")) GROUP BY id ORDER BY date DESC, time DESC LIMIT 5;';
         //get observations from friends from database
         $query = $this->db->query($queryString);
         return $query->getResult();
@@ -524,12 +629,10 @@ class Database_model
      * @return array|array[]|object[]
      */
     public function getFirstObservationsProfile($userID) {
-        //make the query
-        $queryString = 'SELECT t1.id, imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1 
-                                        INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
+        $queryString = 'SELECT t1.id, GROUP_CONCAT(c.message SEPARATOR \'♪\') as messages, GROUP_CONCAT(l.userID) as likeUserIDs,  GROUP_CONCAT(t4.username) as usernames, imageData, imageType, description, specieName, t3.username, date, time FROM (a20ux6.observation t1 LEFT JOIN a20ux6.comment c ON c.observationID = t1.id)
+                                        INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id  LEFT JOIN a20ux6.like l ON l.observationID = t1.id and l.status = 1 LEFT JOIN a20ux6.user t4 ON t4.id = c.userID
                                         WHERE t1.userID = "'.$userID.'"';
-        $queryString .= 'ORDER BY date DESC, time DESC LIMIT 15;';
-        //get own observations from database
+        $queryString .= 'GROUP BY id ORDER BY date DESC, time DESC LIMIT 3;';
         $query = $this->db->query($queryString);
         return $query->getResult();
     }
@@ -541,12 +644,10 @@ class Database_model
      * @return array|array[]|object[]
      */
     public function getMoreObservationsProfile($userID, $lastDate, $lastTime) {
-        //make the query
-        $queryString = 'SELECT t1.id, imageData, imageType, description, specieName, username, date, time FROM a20ux6.observation t1 
-                                        INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id 
+        $queryString = 'SELECT t1.id, GROUP_CONCAT(c.message SEPARATOR \'♪\') as messages,  GROUP_CONCAT(t4.username) as usernames, GROUP_CONCAT(l.userID) as likeUserIDs, imageData, imageType, description, specieName, t3.username, date, time FROM (a20ux6.observation t1 LEFT JOIN a20ux6.comment c ON c.observationID = t1.id)
+                                        INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id INNER JOIN a20ux6.user t3 ON t1.userID = t3.id LEFT JOIN a20ux6.user t4 ON t4.id = c.userID LEFT JOIN a20ux6.like l ON l.observationID = t1.id and l.status = 1
                                        WHERE (t1.userID = "'.$userID.'"';
-        $queryString .= ' AND (date < "'.$lastDate.'" OR (date = "'.$lastDate.'" AND time < "'.$lastTime.'"))) ORDER BY date DESC, time DESC LIMIT 15;';
-        //get observations from friends from database
+        $queryString .= ' AND (date < "'.$lastDate.'" OR (date = "'.$lastDate.'" AND time < "'.$lastTime.'")))  GROUP BY id ORDER BY date DESC, time DESC LIMIT 5;';
         $query = $this->db->query($queryString);
         return $query->getResult();
     }
@@ -558,6 +659,14 @@ class Database_model
     public function getObservation($observationID) {
         $query = $this->db->query('SELECT * FROM a20ux6.observation WHERE id= "'.$observationID.'";');
         return $query->getRowArray();
+    }
+
+    public function getObservationDescription($Search) {
+        $query = $this->db->query('SELECT o.id, o.imageData, o.imageType, date, time, u.username, s.specieName  FROM a20ux6.observation AS o
+                                        INNER JOIN a20ux6.user AS u on o.userID = u.id
+                                        INNER JOIN a20ux6.specie AS s ON o.specieID = s.id
+                                        WHERE (s.specieDescription LIKE "%'.$Search.'%") OR  (s.specieName LIKE "%'.$Search.'%");');
+        return $query->getResult();
     }
 
     /**
@@ -574,7 +683,7 @@ class Database_model
      * @return array|array[]
      */
     public function getLikeListFromObservation($observationID) {
-        $query = $this->db->query('SELECT u.username
+        $query = $this->db->query('SELECT u.username, u.p_imagetype as imagetype, u.p_imagedata as imagedata
                                         FROM a20ux6.user AS u
                                         INNER JOIN a20ux6.like AS l ON  u.id = l.userID
                                         WHERE observationID = "'.$observationID.'";');
@@ -612,17 +721,7 @@ class Database_model
         $query = $this->db->query($queryString);
         return $query->getResult();
     }
-//
-//    /**
-//     * @param $group_filter, $userID
-//     * @return string
-//     */
-//    public function getObservationFromGroup($group_filter, $userID) {
-//        $queryString = 'SELECT message FROM a20ux6.comment where observationID = "'.$observationID.'";';
-//        $query = $this->db->query($queryString);
-//        return $query->getResult();
-//    }
-//
+
     /**
      * @param $userID
      * @return string
@@ -642,6 +741,23 @@ class Database_model
      */
     public function getUserCommentCount($userID) {
         $query = $this->db->query('SELECT COUNT(c.id) AS commentCount FROM a20ux6.user u LEFT JOIN a20ux6.comment c ON c.userID = u.id where u.id = "'.$userID.'";');
+        return $query->getResult();
+    }
+
+    /**
+     * @param $observationID
+     * @return string
+     */
+    public function getObservaitonCommentCount($observationID) {
+        $query = $this->db->query('SELECT COUNT(c.id) AS commentCount FROM a20ux6.observation o LEFT JOIN a20ux6.comment c ON o.id = c.observationID where o.id = "'.$observationID.'";');
+        return $query->getResult();
+    }
+    /**
+     * @param $observationID
+     * @return string
+     */
+    public function getObservaitonlikeCount($observationID) {
+        $query = $this->db->query('SELECT COUNT(l.id) AS likeCount FROM a20ux6.observation o LEFT JOIN a20ux6.like l ON o.id = l.observationID where o.id = "'.$observationID.'";');
         return $query->getResult();
     }
 
@@ -694,6 +810,41 @@ class Database_model
         }
     }
 
+    /**
+     * @param $userID
+     * @param $description
+     * @param $name
+     * @param $gender
+     * @param $email
+     * @param
+     * @param
+     */
+    public function setProfileData($userID, $name, $email, $description, $imageData, $imageProperties) {
+        $data = ['username' => $name,
+            'email' => $email,
+            'p_description'=> $description,
+            'p_imageData' => $imageData,
+            'p_imageType' => $imageProperties,
+        ];
+
+        $this->db->table('user')->update( $data, 'id = "'.$userID.'"');
+        return 1;
+    }
+
+
+    /**
+     * @param $mappingID
+     * @param $status
+     */
+    public function setFriendsMappingStatus($mappingID, $status) {
+        $data = ['requestStatus'=> $status];
+        $this->db->table('friendsMapping')->update( $data, 'id = "'.$mappingID.'"');
+    }
+
+    public function deleteFriendsMapping($mappingID) {
+        $this->db->table('friendsMapping')->delete('id ="'.$mappingID.'"');
+    }
+
 
     /**
      * @param $userID
@@ -737,18 +888,5 @@ class Database_model
 
         return $query->getResult();
     }
-
-    /**
-     * Query to get own observations:
-     *
-     * SELECT picture, description, specieName, username FROM a20ux6.observation t1
-     * INNER JOIN a20ux6.specie t2 ON t1.specieID = t2.id
-     * INNER JOIN a20ux6.user t3 ON t1.userID = t3.id
-     * WHERE username = 'userName';
-     *
-     */
-
-
-
 
 }

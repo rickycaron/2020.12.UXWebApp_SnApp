@@ -1,43 +1,27 @@
-<h1 class="text-center">Forgot Password</h1>
+<h1 class="text-center"><?php echo lang('app.Forgot_password?') ?></h1>
 
-<form class="form-signin" method="post">
-    <input type="email" id="inputEmail" class="form-control mt-5" placeholder="Email address" name="Email">
-    <button class="btn btn-lg btn-primary btn-block my-3" type="submit">Send verification code</button>
-    <hr class="mt-2 mb-3 my-3"/>
-    <input type="email" id="inputEmail" class="form-control " placeholder="Enter verification code" name="Email">
-    <div class="d-flex flex-row justify-content-between" >
-        <button class="btn btn-lg btn-primary px-auto my-3" type="submit">Submit</button>
-        <a href="<?= base_url()?>/login"><span class="btn btn-lg btn-primary btn-block  my-3 ">Cancel</span></a>
+<form class="form" action="forgotPassword" method="post">
+    <?= csrf_field() ?>
+    <div class="form-group mb-1">
+    <label for="email"><?php echo lang('app.Email_address') ?></label>
+    <input type="email" id="email" class="form-control" name="email" required autofocus>
     </div>
+
+    <div class="form-group mb-1">
+    <label for="username"><?php echo lang('app.Username') ?></label>
+    <input type="text" id="username" class="form-control" name="username" required>
+    </div>
+
+    <?php if ( isset($validation)): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= \Config\Services::validation()->listErrors(); ?>
+        </div>
+    <?php endif; ?>
+    <?php if ( isset($error_message)): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $error_message?>
+        </div>
+    <?php endif; ?>
+
+    <button class="btn btn-lg btn-primary btn-block my-3" type="submit"><?php echo lang('app.Create_a_new_password') ?></button>
 </form>
-
-<!--
-<div class="addObservationContainer">
-    <br/>
-    <br/>
-    <h1 style="text-align:center">Forgot password</h1>
-    <br/>
-    <br/>
-
-    <form method="post">
-        <div class="txt_field">
-            <input type="text" name="Email">
-            <span></span>
-            <label>Email</label>
-        </div>
-    </form>
-    <button id="custom-btn">Send verification code</button>
-    <form method="post">
-        <div class="txt_field">
-            <input type="text" name="Repeat password">
-            <span></span>
-            <label>Repeat password</label>
-        </div>
-    </form>
-    <div>
-        <button id="custom-btn">Submit</button>
-        <button id="custom-btn">Cancel</button>
-    </div>
-</div>
-
--->

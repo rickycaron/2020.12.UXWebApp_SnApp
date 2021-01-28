@@ -1,58 +1,39 @@
 <div style="max-width:330px; height:100vh" class="my-5">
-<h1 class="text-center">Change Password</h1>
-
-<form method="post">
+<h1 class="text-center mt-5"><?php echo lang('app.Change_Password') ?></h1>
+    <?php if (session()->get('success')): ?>
+        <div class="alert alert-success" role="alert">
+            <?= session()->get('success') ?>
+        </div>
+    <?php endif; ?>
+<form method="post" class="mt-5" action="<?= base_url()?>/account/<?=session()->get('id')?>">
     <div class="form-group mb-1">
-        <label for="username">Old Password</label>
-        <input type="txt" class="form-control" name="old_password">
+        <label for="oldPassword"><?php echo lang('app.Old_Password') ?></label>
+        <input type="password" id="oldPassword" class="form-control" name="oldPassword"  >
     </div>
 
     <div class="form-group mb-1">
-        <label for="new_password">New Password</label>
-        <input type="txt" class="form-control" name="new_password">
+        <label for="newPassword"><?php echo lang('app.New_Password') ?></label>
+        <input type="password" id="newPassword" class="form-control" name="newPassword" >
     </div>
 
     <div class="form-group mb-1">
-        <label for="confirm_new_password">Confim New Password</label>
-        <input type="txt" class="form-control" name="confirm_new_password">
+        <label for="password_confirm"><?php echo lang('app.Confirm_New_Password') ?></label>
+        <input type="password" id="password_confirm" class="form-control" name="password_confirm" >
     </div>
-
+    <?php if ( isset($validation)): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= \Config\Services::validation()->listErrors(); ?>
+        </div>
+    <?php endif; ?>
+    <?php if ( isset($error_message)): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $error_message?>
+        </div>
+    <?php endif; ?>
     <div>
-        <input type="submit" name="submit" class="btn btn-lg btn-primary w-100 my-3" value="Log in" />
-        <input type="submit" name="submit" class="btn btn-lg btn-primary w-100 my-3" value="New user?" />
-    </div>
+        <input type="submit" name="submit" class="btn btn-lg btn-primary w-100 my-3" value="<?php echo lang('app.Change_Password') ?>" />
 
+    </div>
 </form>
+    <button onclick=location.href='<?= base_url()?>/profile' class="btn btn-lg btn-primary w-100 my-3" type="submit"><?php echo lang('app.Cancel') ?></button>
 </div>
-<!--
-<div class="addObservationContainer">
-<div class = "change_profilePicture">
-  <h1 style="text-align: center">Change password</h1>
-</div>
-<div>
-    <form method="post">
-        <div class="txt_field">
-            <input type="text" >
-            <span></span>
-            <label>Old password</label>
-        </div>
-
-        <div class="txt_field">
-            <input type="text" required>
-            <span></span>
-            <label>New password</label>
-        </div>
-
-        <div class="txt_field">
-            <input type="text "required>
-            <span></span>
-            <label>Confirm new password</label>
-        </div>
-    </form>
-    <div>
-        <button id="custom-btn">Log in</button>
-        <button id="custom-btn">New user?</button>
-    </div>
-</div>
-</div>
--->

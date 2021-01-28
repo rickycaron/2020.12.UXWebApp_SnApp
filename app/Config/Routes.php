@@ -30,45 +30,100 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-//['filter' => 'noauth'], this website can only be shown when the user hasn'r logged in
+//['filter' => 'noauth'], this website can only be shown when the user hasn't logged in
 //['filter' => 'auth'], this website can only be shown when the user has logged in
-$routes->get('/', 'Maincontroller::login',['filter' => 'noauth']);
-$routes->get('hub', 'Maincontroller::hub',['filter'=>'auth']);
-$routes->get('groups', 'Maincontroller::groups',['filter'=>'auth']);
-//$routes->get('group/(:alpha)', 'Maincontroller::group/$1',['filter'=>'auth']);
-$routes->match(['get','post'],'group/(:alpha)', 'Maincontroller::group/$1',['filter'=>'auth']);
-$routes->match(['get','post'],'newgroup', 'Maincontroller::newgroup',['filter'=>'auth']);
-//$routes->get('groupmembers', 'Maincontroller::groupmembers',['filter'=>'auth']);
-$routes->get('groupmembers/(:alpha)', 'Maincontroller::groupmembers/$1',['filter'=>'auth']);
 
-$routes->get('addObservation', 'Maincontroller::addObservation');
-$routes->match(['get','post'],'addObservation', 'Maincontroller::addObservation');
-$routes->get('leaderboardSelect', 'Maincontroller::leaderboardSelect',['filter'=>'auth']);
-$routes->get('profile', 'Maincontroller::profile',['filter'=>'auth']);
-$routes->get('otheruserprofile/(:num)', 'Maincontroller::otheruserprofile/$1',['filter'=>'auth']);
+/*
+ * Login
+ */
+$routes->get('/', 'AccountController::login',['filter' => 'noauth']);
+$routes->match(['get','post'],'forgotPassword', 'AccountController::forgotPassword',['filter' => 'noauth']);
+$routes->match(['get','post'],'resetPassword/(:num)', 'AccountController::resetPassword/$1',['filter'=>'auth']);
+$routes->match(['get','post'],'login', 'AccountController::login',['filter' => 'noauth']);
+$routes->get('loginFromObservation', 'AccountController::loginFromObservation');
+$routes->match(['get','post'],'register', 'AccountController::register',['filter' => 'noauth']);
+$routes->get('logout','AccountController::logout');
 
-$routes->get('leaderboard/(:alpha)', 'Maincontroller::leaderboard/$1',['filter'=>'auth']);
-$routes->get('getLeaderboardHTMLajax/(:alpha)/(:alpha)', 'Maincontroller::getLeaderboardHTMLajax/$1/$2',['filter'=>'auth']);
-$routes->get('forgotPassword', 'Maincontroller::forgotPassword',['filter' => 'noauth']);
-$routes->get('resetPassword', 'Maincontroller::resetPassword',['filter' => 'noauth']);
+//$routes->get('/', 'Maincontroller::login',['filter' => 'noauth']);
+//$routes->match(['get','post'],'forgotPassword', 'Maincontroller::forgotPassword',['filter' => 'noauth']);
+//$routes->match(['get','post'],'resetPassword/(:num)', 'Maincontroller::resetPassword/$1',['filter'=>'auth']);
+//$routes->match(['get','post'],'login', 'Maincontroller::login',['filter' => 'noauth']);
+//$routes->get('loginFromObservation', 'Maincontroller::loginFromObservation');
+//$routes->match(['get','post'],'register', 'Maincontroller::register',['filter' => 'noauth']);
+//$routes->get('logout','Maincontroller::logout');
+
+/*
+ * Hub
+ */
+$routes->get('/hub', 'HubController::hub',['filter'=>'auth']);
+$routes->get('changeLikeStatus/(:num)','HubController::changeLikeStatus/$1',['filter'=>'auth']);
+$routes->get('cancelLikeStatus/(:num)','HubController::cancelLikeStatus/$1',['filter'=>'auth']);
+$routes->get('sendComment/(:any)/(:num)','HubController::sendComment/$1/$2',['filter'=>'auth']);
+$routes->match(['get','post'],'hub', 'HubController::hub',['filter' => 'auth']);
+
+/*
+ * Observation
+ */
 $routes->get('anobservation/(:num)', 'Maincontroller::anobservation/$1',['filter'=>'auth']);
 $routes->get('fetchObservationLikeHTML/(:num)', 'Maincontroller::fetchObservationLikeHTML/$1');
 $routes->get('fetchObservationCommentHTML/(:num)', 'Maincontroller::fetchObservationCommentHTML/$1');
-$routes->get('account', 'Maincontroller::account',['filter'=>'auth']);
-$routes->get('edit_profile', 'Maincontroller::edit_profile',['filter'=>'auth']);
-$routes->get('search', 'Maincontroller::search');
+
+/*
+ * Groups
+ */
+$routes->get('groups', 'GroupsController::groups',['filter'=>'auth']);
+$routes->match(['get','post'],'group/(:alpha)', 'GroupsController::group/$1',['filter'=>'auth']);
+$routes->match(['get','post'],'newgroup', 'GroupsController::newgroup',['filter'=>'auth']);
+$routes->get('groupmembers/(:alpha)', 'GroupsController::groupmembers/$1',['filter'=>'auth']);
+$routes->get('addGroupMembers/(:num)/(:alpha)', 'GroupsController::addGroupMembers/$1/$2',['filter'=>'auth']);
+$routes->get('addFriendToGroup/(:any)/(:alpha)', 'GroupsController::addFriendToGroup/$1/$2',['filter'=>'auth']);
+$routes->get('deleteUserFromGroup/(:num)/(:num)/(:alpha)', 'GroupsController::deleteUserFromGroup/$1/$2/$3',['filter'=>'auth']);
+
+/*
+ * AddObservation
+ */
+$routes->get('addObservation', 'AddObservationsController::addObservation');
+$routes->match(['get','post'],'addObservation', 'AddObservationsController::addObservation');
+$routes->get('addObservationWithoutLogin', 'AddObservationsController::addObservationWithoutLogin');
+$routes->match(['get','post'],'addObservationWithoutLogin', 'AddObservationsController::addObservationWithoutLogin');
+
+/*
+ * Leaderboards
+ */
+$routes->get('leaderboardSelect', 'LeaderboardController::leaderboardSelect',['filter'=>'auth']);
+$routes->get('leaderboard/(:alpha)', 'LeaderboardController::leaderboard/$1',['filter'=>'auth']);
+$routes->get('fetchFriendsLeaderboard/(:alpha)', 'LeaderboardController::fetchFriendsLeaderboard/$1',['filter'=>'auth']);
+$routes->get('fetchWorldwideLeaderboard/(:alpha)', 'LeaderboardController::fetchWorldwideLeaderboard/$1',['filter'=>'auth']);
+$routes->get('fetchGroupLeaderboard/(:alpha)/(:alpha)', 'LeaderboardController::fetchGroupLeaderboard/$1/$2',['filter'=>'auth']);
+
+/*
+ * Profile
+ */
+$routes->get('profile', 'profileController::profile',['filter'=>'auth']);
+$routes->get('otheruserprofile/(:num)', 'profileController::otheruserprofile/$1',['filter'=>'auth']);
+$routes->get('sendFriendRequest/(:num)', 'profileController::sendFriendRequest/$1');
+$routes->match(['get','post'],'account/(:num)', 'profileController::account/$1',['filter'=>'auth']);
+$routes->get('edit_profile', 'profileController::edit_profile',['filter'=>'auth']);
+$routes->get('acceptFriendRequest/(:num)', 'profileController::acceptFriendRequest/$1');
+$routes->get('declineFriendRequestOrDelete/(:num)', 'profileController::declineFriendRequestOrDelete/$1');
+$routes->match(['get','post'],'edit_profile', 'profileController::edit_profile',['filter' => 'auth']);
+
+/*
+ * Search
+ */
+$routes->get('search', 'SearchController::search');
+$routes->get('searchGetObservations/(:alpha)', 'SearchController::searchGetObservations/$1');
+$routes->get('searchGetGroups/(:alpha)', 'SearchController::searchGetGroups/$1');
+$routes->get('searchGetUsers/(:alpha)', 'SearchController::searchGetUsers/$1');
+
+
 $routes->get('friendList', 'Maincontroller::friendList');
 
-$routes->match(['get','post'],'login', 'Maincontroller::login',['filter' => 'noauth']);
-$routes->get('loginFromObservation', 'Maincontroller::loginFromObservation');
-$routes->match(['get','post'],'register', 'Maincontroller::register',['filter' => 'noauth']);
-$routes->get('logout','Maincontroller::logout');
-
-$routes->match(['get','post'],'hub', 'Maincontroller::hub',['filter' => 'auth']);
-
-$routes->get('databaseTest', 'Maincontroller::databaseTest');
-
-
+/*
+ * Other
+ */
+//$routes->get('/lang/{locale}', 'Language::index',['filter' => 'noauth']);
+$routes->get('getUsername','Maincontroller::getUsername',['filter'=>'auth']);
 
 
 /**

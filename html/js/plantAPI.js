@@ -20,7 +20,7 @@ function sendIdentification() {
         console.log(base64files);
 
         const data = {
-            api_key: "jucxN9i1yltRvEPBKyB8ednOe0yLqxgpjBXnOlYvXKlgq0yeMM",
+            api_key: "5Rk2cQx9fbZgpvWm8pgS2cg3EawlCNtyI7SdkSlOtNxBwp21Qg",
             images: base64files,
             modifiers: ["crops_fast", "similar_images"],
             plant_language: "en",
@@ -59,20 +59,23 @@ function sendIdentification() {
 
 
 function printInformation(input) {
-    suggestions = input["suggestions"];
-    metaData = input["meta_data"];
-    plantDetails = suggestions[0]["plant_details"];
-    plantDescription = plantDetails["wiki_description"];
+    let suggestions = input["suggestions"];
+    let metaData = input["meta_data"];
+    let plantDetails = suggestions[0]["plant_details"];
+    let plantDescription = plantDetails["wiki_description"];
+    let probability = suggestions[0].probability;
+    let percentage = (probability*100).toFixed(2) + '%';
+    document.getElementById("probability").innerText = percentage;
     document.getElementById("speciesNamePlaceholder").value = plantDetails.common_names[0];
     document.getElementById("scientificNamePlaceholder").value = plantDetails.scientific_name;
     document.getElementById("DescriptionPlaceholder").value = plantDescription.value;
-    document.getElementById("datePlaceholder").value = metaData.date;
 
-    let now = new Date();
-    let time = leadZero(now.getHours()) + ":" + leadZero(now.getMinutes());
-    document.getElementById("timePlaceholder").value = time;
-
-    // $('#processingText').style.display = 'none';
+    if ($("#datePlaceholder").length) {
+        document.getElementById("datePlaceholder").value = metaData.date;
+        let now = new Date();
+        let time = leadZero(now.getHours()) + ":" + leadZero(now.getMinutes());
+        document.getElementById("timePlaceholder").value = time;
+    }
 }
 
 function leadZero(_something) {
@@ -80,27 +83,31 @@ function leadZero(_something) {
     return _something;//else
 }
 
-document.getElementById("useLocationCheckbox").onclick = function Location() {
-    if (document.getElementById("useLocationCheckbox").checked == true) {
-        getLocation();
-    }
-    else {
-        document.getElementById("LocationPlaceholder").value = '';
+if ($("#useLocationCheckbox").length) {
+    document.getElementById("useLocationCheckbox").onclick = function Location() {
+        if (document.getElementById("useLocationCheckbox").checked == true) {
+            getLocation();
+        }
+        else {
+            document.getElementById("LocationPlaceholder").value = '';
+        }
+
     }
 
-}
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            document.getElementById("LocationPlaceholder").value = "Geolocation is not supported by this browser.";
+        }
+    }
 
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        document.getElementById("LocationPlaceholder").value = "Geolocation is not supported by this browser.";
+    function showPosition(position) {
+        let curLocation = position.coords.latitude + ", " + position.coords.longitude;
+        document.getElementById("LocationPlaceholder").value = curLocation;
     }
 }
 
-function showPosition(position) {
-    let curLocation = position.coords.latitude + ", " + position.coords.longitude;
-    document.getElementById("LocationPlaceholder").value = curLocation;
-}
+
 
 
