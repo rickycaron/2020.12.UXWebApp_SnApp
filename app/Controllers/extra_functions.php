@@ -31,10 +31,6 @@ trait extra_functions
             $image = $this->encode_image($like['imagedata'],$like['imagetype']);
 
             array_push($like_data['like_list'], array('username'=>$like['username'],'pic'=>$image));
-
-
-
-
         }
         foreach ($query as $user) {
             $image = $this->database_model->getUserProfilePicture($user);
