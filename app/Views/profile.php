@@ -4,6 +4,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
+<div id="preloader">
+    <div id="status">
+    </div>
+</div>
+
 <input type="hidden" id="hidden_userID" value="<?=$userID ?>"/>
 <div class="d-flex flex-row m-3 w-100">
 
@@ -95,7 +100,7 @@
     <?php endswitch; ?>
 <?php endif?>
 
-<div id="nothingToShow"><?=$nothingToShow?></div>
+<div id="upToDate"><?=$upToDate?></div>
 <div id="observationCardsContainer" class="w-100 mt-2">
 
     <?php foreach ($observations as $ob): ?>
