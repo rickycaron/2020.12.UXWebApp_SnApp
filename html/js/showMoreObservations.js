@@ -27,9 +27,3 @@ function getOtherObservations() {
         .then(likeButtonListenerActivate())
         .catch(a => console.log(a));
 }
-
-
-function encode_image(image, mime) {
-    let base64 = btoa(image);
-    return ('data:' + mime + ';base64,' + base64);
-}

@@ -158,7 +158,6 @@ class GroupsController extends BaseController
         $this->data['title'] = lang('app.Group_Members');
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js');
         return view("mainTemplate", $this->data);
     }
 

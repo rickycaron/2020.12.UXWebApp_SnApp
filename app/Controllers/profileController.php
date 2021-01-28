@@ -85,7 +85,6 @@ class profileController extends BaseController
             #$tomorrow = $_GET['tomorrow'];
 
             if (strcasecmp($getMoreObservations, 'true') == 0) {
-                //get more observations from friends from current users
                 $observations = $this->database_model->getMoreObservationsProfile($userID, $lastDate, $lastTime);
                 $data3['observations'] = $observations;
                 if ($observations == null) {
