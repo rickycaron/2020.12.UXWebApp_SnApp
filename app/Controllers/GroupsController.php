@@ -28,7 +28,7 @@ class GroupsController extends BaseController
     }
 
     public function getUserID() {
-        return session()->get('id');;
+        return session()->get('id');
     }
 
     public function groups() {

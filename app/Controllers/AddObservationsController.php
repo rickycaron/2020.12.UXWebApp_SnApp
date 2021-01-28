@@ -29,7 +29,7 @@ class AddObservationsController extends BaseController
 
 
     public function getUserID() {
-        return session()->get('id');;
+        return session()->get('id');
     }
 
 
