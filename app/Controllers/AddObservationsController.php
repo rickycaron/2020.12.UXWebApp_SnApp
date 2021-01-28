@@ -29,7 +29,7 @@ class AddObservationsController extends BaseController
 
 
     public function getUserID() {
-        return session()->get('id');;
+        return session()->get('id');
     }
 
 
@@ -46,11 +46,16 @@ class AddObservationsController extends BaseController
                 'date'=>'required|min_length[6]|max_length[50]',
                 'time'=>'required|min_length[4]|max_length[50]']))
         {
-            $uploadedPicture = $this->request->getFile('picture');
-            $picture = file_get_contents($uploadedPicture->getTempName());
-            $imageProperties = $uploadedPicture->getMimeType();
-            $scientificName = $this->request->getPost('scientificName');
 
+            $uploadedPicture = $this->request->getFile('picture');
+            $imageProperties = $uploadedPicture->getMimeType();
+            $im = imagecreatefromjpeg($uploadedPicture);
+            ob_start();                      // Start output buffering
+            imagejpeg($im,NULL,25);   // Generate JPEG into buffer
+            $compressedImage=ob_get_contents();         // Load output buffer into $blob var
+            ob_end_clean();                  // Clean up buffer
+
+            $scientificName = $this->request->getPost('scientificName');
             $specieName = $this->request->getPost('specieName');
             $description = $this->request->getPost('description');
             $specieId = $this->addObservations_model->getSpecieId($specieName, $scientificName, $description);
@@ -59,14 +64,14 @@ class AddObservationsController extends BaseController
             $time = $this->request->getPost('time');
             $userNote = $this->request->getPost('userNote');
 
-            $this->database_model->insertObservation($picture, $imageProperties, $description,$location, $date, $time, $specieId[0]->id, $userID, $userNote);
+            $this->database_model->insertObservation($compressedImage, $imageProperties, $description,$location, $date, $time, $specieId[0]->id, $userID, $userNote);
             return redirect()->to('hub');
         }
 
         $this->data['content'] = view('addobservation'); //replace by your own view
         $this->data['title'] = lang('app.Add_Observation');
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'plantAPI.js','previewPicture.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'plantAPI.js','previewPicture.js', 'loading.js');
         return view("mainTemplate", $this->data);
     }
 
@@ -76,7 +81,7 @@ class AddObservationsController extends BaseController
         $this->data['content'] = view('addObservationWithoutLogin'); //replace by your own view
         $this->data['title'] = lang('app.Add_Observation');
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'plantAPI.js','previewPicture.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'plantAPI.js','previewPicture.js', 'loading.js');
         return view("extraTemplate", $this->data);
     }
 

@@ -12,14 +12,14 @@ class Hub_model
     function changeLikeStatus ($observationID) {
 
         $userID = session()->get('id');
-        $query_result = $this->database_model->setUserLikeStatus($userID, $observationID);
+        $this->database_model->setUserLikeStatus($userID, $observationID);
         return;
     }
 
     function sendComment ($comment, $observationID) {
 
         $userID = session()->get('id');
-        $query_result = $this->database_model->insertComment($userID, $comment, $observationID);//insertComment ($userID, $message, $observationID)
+        $query_result = $this->database_model->insertComment($userID, $comment, $observationID);
         return;
     }
 

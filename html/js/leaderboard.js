@@ -34,7 +34,6 @@ function overallClicked() {
 }
 
 function fetchLeaderboardData(url) {
-    console.log(url);
     fetch(url)
         .then(resp => resp.text())
         .then(data => document.getElementById("leaderboard_container").innerHTML = data)

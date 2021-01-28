@@ -1,9 +1,8 @@
 
-<!--<head>-->
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>-->
-<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
-<!--</head>-->
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js" defer></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" defer></script>
+</head>
 
 <div id="preloader">
     <div id="status">
@@ -43,7 +42,7 @@
                 <div style="position: relative; object-fit: cover" value = "<?=$ob->id?>">
                     <a href="<?= base_url()?>/anobservation/<?=$ob->id?>">
 
-                    <img class="card-img img-fluid " style="height: 350px; object-fit: cover;" src="<?='data:' . $ob->imageType . ';base64,' . base64_encode($ob->imageData)?>">
+                    <img class="card-img img-fluid " style="height: 350px; object-fit: cover;" src="<?=$ob->encoded_image?>">
                     <div class="card-img" style="box-shadow: inset 0px -50px 40px -20px black; position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></div>
                     <h4 class="text-white" style="position: absolute; bottom: 0px; right: 12px;"><?=$ob->username?></h4>
                     <div class="material-icons text-white"  style="font-size:30px;position: absolute; bottom: 6px; left: 8px" >favorite</div>
@@ -67,10 +66,6 @@
                     <nav class="navbar navbar-expand-sm p-0" id="navbarid">
                         <button class="btn small material-icons my-auto collapsed mb-0 " type="button" id="navbarid" data-toggle="collapse" data-target="#demo_<?=$ob->id?>"  style="font-size: 30px"></button>
                      </div>
-
-
-
-
                 <?php
                 for ($i = 0; $i < $commentCount; $i++)
                 {
@@ -96,7 +91,7 @@
                 </nav>
 
 
-                <div class="d-flex flex-row mt-0 w-100">
+                <div class="d-flex flex-row mt-0 w-100 presentShow">
 
                         <div class="d-flex flex-row w-100"  value = "<?=$ob->id?>">
                             <form id = "commentForm" class = "commentContent w-100 pt-1" target="iframe">

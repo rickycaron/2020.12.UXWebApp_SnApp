@@ -30,7 +30,6 @@ class AccountController extends BaseController
         $this->data=[];
         $this->set_common_data('eco', null,'eco');
 
-        //helper(['form']);//to remain the user's typed value if the login fails
         if ($this->request->getMethod() === 'post' && $this->validate([
                 'email'  => 'required|min_length[3]|max_length[40]|valid_email|is_not_unique[user.email]',
                 'password'=>'required|min_length[6]|max_length[50]'
@@ -49,9 +48,8 @@ class AccountController extends BaseController
                 $this->setUserSession($user);
                 session()->setFlashdata('success','Successful Login!');
                 //return hub page
-                //return redirect()->to('hub');
                 return redirect()->to('hub');
-//                return view("mainTemplate", $this->data);
+
             }
             else if($searchresult==1){
                 //password is wrong
@@ -76,7 +74,6 @@ class AccountController extends BaseController
     }
     public function loginFromObservation() {
 
-        //add your code here...
         $this->data['content'] = view('loginFromObservation'); //replace by your own view
         $this->data['title'] = lang('app.Login_From_Observation');
 

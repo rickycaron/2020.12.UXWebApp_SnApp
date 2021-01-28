@@ -23,7 +23,6 @@ for (let i = 0; i < delete_friend_list.length; i++) {
 function accept_clicked(idString) {
     let baseUrl = document.querySelector('input[id="hidden_base_url"]').value;
     fetch(baseUrl + "/acceptFriendRequest/" + idString)
-        //.then(data => console.log(data))
         .catch(a => console.log(a));
     window.location.reload(); //this line is not tested yet
 }

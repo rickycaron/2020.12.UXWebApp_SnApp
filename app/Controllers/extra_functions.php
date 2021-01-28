@@ -8,7 +8,6 @@ trait extra_functions
 {
     private function set_common_data($header_icon_1, $back_route, $header_icon_2) {
         $this->data['base_url'] = base_url();
-        //$this->debug_to_console(base_url());
         $this->data['header_icon_1'] = $header_icon_1;
         $this->data['header_icon_2'] = $header_icon_2;
         $this->data['back_route'] = $back_route;
@@ -26,16 +25,10 @@ trait extra_functions
         $query_result = $this->database_model->getLikeListFromObservation($observationID);
 
         $like_data['like_list'] = array();
-        $query = array();
         foreach ($query_result as $like) {
             $image = $this->encode_image($like['imagedata'],$like['imagetype']);
 
             array_push($like_data['like_list'], array('username'=>$like['username'],'pic'=>$image));
-        }
-        foreach ($query as $user) {
-            $image = $this->database_model->getUserProfilePicture($user);
-            $test= $this->encode_image('imagedata', 'imagetype');
-            array_push($like_data['pic_list'], array($test=>$pic['profile_picture']));
         }
         return view('observationLikeList', $like_data);
     }
@@ -78,23 +71,6 @@ trait extra_functions
         $userID = session()->get('id');
         $status = $this->database_model->checkUserLikeStatus($userID, $observationID);
         return $status;
-    }
-
-    function acceptFriendRequest($mappingID) {
-        $this->database_model->setFriendsMappingStatus($mappingID, 1);
-        return "<p>$mappingID</p>";
-    }
-
-    function declineFriendRequestOrDelete($mappingID) {
-        $this->database_model->deleteFriendsMapping($mappingID);
-        return "<p>$mappingID</p>";
-    }
-
-    function sendFriendRequest($userID_reciever) {
-        if(!$this->database_model->insertFriendsMapping(session()->get('id'), $userID_reciever)) {
-            $this->debug_to_console("failed to insert friendsmapping");
-        }
-        return "<p>$userID_reciever</p>";
     }
 
     public function deleteUserFromGroup($memberID, $groupID, $groupName) {

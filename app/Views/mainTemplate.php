@@ -8,22 +8,17 @@
     <meta name="description" content="This website is a social madia like page where you can share your observations from nature with your friends and the world" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="<?= base_url()?>/css/bootstrap.css" media="none" onload="this.media='all';">
-    <link rel="stylesheet" href="<?= base_url()?>/css/main.css" media="none" onload="this.media='all';">
-    <link rel="stylesheet" href="<?= base_url()?>/css/reusable.css" media="none" onload="this.media='all';">
-    <link rel="stylesheet" href="<?= base_url()?>/css/fonts.css" media="none" onload="this.media='all';">
 
-<!--    <link rel="stylesheet" href="--><?//= base_url()?><!--/css/bootstrap.css">-->
-<!--    <link rel="stylesheet" href="--><?//= base_url()?><!--/css/main.css">-->
-<!--    <link rel="stylesheet" href="--><?//= base_url()?><!--/css/reusable.css">-->
-<!--    <link rel="stylesheet" href="--><?//= base_url()?><!--/css/fonts.css">-->
+    <link rel="stylesheet" href="<?= base_url()?>/css/bootstrap.css">
+    <link rel="stylesheet" href="<?= base_url()?>/css/main.css">
+    <link rel="stylesheet" href="<?= base_url()?>/css/reusable.css">
+    <link rel="stylesheet" href="<?= base_url()?>/css/fonts.css">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <style>body { font-family: 'Dosis', monospace; }</style>
 
-
     <?php if (isset($scripts_to_load)) foreach ($scripts_to_load as $script): ?>
-        <script src="<?= base_url()?>/js/<?=$script?>?v=10" defer></script>
+        <script src="<?= base_url()?>/js/<?=$script?>?v=11" defer></script>
     <?php endforeach; ?>
 </head>
 

@@ -28,7 +28,7 @@ class GroupsController extends BaseController
     }
 
     public function getUserID() {
-        return session()->get('id');;
+        return session()->get('id');
     }
 
     public function groups() {
@@ -40,6 +40,7 @@ class GroupsController extends BaseController
         $this->data['menu_items'] = $this->menu_model->get_menuitems('groups');
         $this->data['content'] = view('groupsOverviewPage', $this->data); //replace by your own view
         $this->data['title'] = lang('app.Groups');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'loading.js');
         session()->set('lastMainPageLink', 'groups');
         return view("mainTemplate", $this->data);
     }
@@ -106,9 +107,6 @@ class GroupsController extends BaseController
             $message= $this->request->getPost('message');
             $observationID = $this->request->getPost('obID');
             $this->database_model-> insertComment($userID,$message,$observationID);
-
-            /*$this->data['content'] = view('hubPage'); //replace by your own view
-            return view("extraTemplate", $this->data);*/
             return redirect()->to($groupname_filter);
         }
         //comment function end

@@ -140,10 +140,10 @@
                 </a>
 
                 <?php if ($likeStatus == 1): ?>
-                    <div class="material-icons text-danger likeButton" style="font-size:30px;position: absolute; bottom: 6px; left: 8px">favorite</div>
+                    <div class="material-icons text-danger likeButton" style="font-size:30px;position: absolute; bottom: 6px; left: 8px" type="button">favorite</div>
                 <?php endif;?>
                 <?php if ($likeStatus == 0): ?>
-                    <div class="material-icons text-white likeButton" style="font-size:30px;position: absolute; bottom: 6px; left: 8px">favorite</div>
+                    <div class="material-icons text-white likeButton" style="font-size:30px;position: absolute; bottom: 6px; left: 8px" type="button">favorite</div>
                 <?php endif;?>
             </div>
 

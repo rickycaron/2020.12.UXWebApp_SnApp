@@ -23,24 +23,16 @@ document.getElementById("comment_button").addEventListener("click", commentClick
 
 // this is far from
 function likeClicked() {
-    console.log("like clicked");
 
     let base_url = document.querySelector('input[id="hidden_base_url"]').value;
-    // let getUrl = window.location;
-    // let baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
     let url = base_url + "/fetchObservationLikeHTML/" + document.querySelector('input[id="hidden_variable_filter"]').value;
-    console.log(url);
     setLikesOrComments(url);
 }
 
 function commentClicked() {
-    console.log("comment clicked");
 
     let base_url = document.querySelector('input[id="hidden_base_url"]').value;
-    // let getUrl = window.location;
-    // let baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
     let url =  base_url + "/fetchObservationCommentHTML/" + document.querySelector('input[id="hidden_variable_filter"]').value;
-    console.log(url);
     setLikesOrComments(url);
 }
 
@@ -49,6 +41,5 @@ function setLikesOrComments(url) {
         .then(resp => resp.text())
         .then(data => document.getElementById("likes_or_comment_placeholder").innerHTML = data)
         .catch(a => console.log(a));
-    //.then(data => console.log(data))
-    //.then(myHTML => document.getElementById("leaderboard_container").innerHTML = myHTML)
+
 }

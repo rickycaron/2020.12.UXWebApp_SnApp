@@ -42,6 +42,7 @@ class LeaderboardController extends BaseController
     }
 
     public function leaderboardSelect() {
+        $this->cachePage(10);
         $this->set_common_data('eco', null,'search');
         $groups = $this->database_model->getGroupsFromUser(session()->get('id'));
         $this->data['groups']=array();
@@ -53,11 +54,13 @@ class LeaderboardController extends BaseController
         $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
         $this->data['content'] = view('leaderboardSelect', $this->data);
         $this->data['title'] =  lang('app.Leaderboard');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'loading.js');
         session()->set('lastMainPageLink', 'leaderboardSelect');
         return view("mainTemplate", $this->data);
     }
 
     public function leaderboard($filter) {
+        $this->cachePage(10);
         $this->set_common_data('arrow_back', 'leaderboardSelect','search');
 
         $leaderboard_data['leaderboard_filter'] = $filter;

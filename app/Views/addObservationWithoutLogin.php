@@ -1,3 +1,7 @@
+<div id="preloader">
+    <div id="status">
+    </div>
+</div>
 <div class="py-4 container-fluid w-100 pt-5" style="width: 400px; font-size: 1.5rem">
 
     <div class="wrapper card w-100 d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
