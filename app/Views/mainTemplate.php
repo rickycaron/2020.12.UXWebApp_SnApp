@@ -17,7 +17,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <style>body { font-family: 'Dosis', monospace; }</style>
 
-
     <?php if (isset($scripts_to_load)) foreach ($scripts_to_load as $script): ?>
         <script src="<?= base_url()?>/js/<?=$script?>?v=11" defer></script>
     <?php endforeach; ?>

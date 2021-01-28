@@ -32,6 +32,7 @@ class GroupsController extends BaseController
     }
 
     public function groups() {
+        $this->cachePage(100);
         $this->set_common_data('eco', null,'search');
 
         $userID = $this->getUserID();
