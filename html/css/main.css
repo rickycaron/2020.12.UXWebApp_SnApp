@@ -126,7 +126,7 @@ used for loading
     position: absolute;
     left: 50%;
     top: 40%;
-    background-image: url(/html/image/loader.gif);
+    background-image: url(../image/loader.gif);
     background-repeat: no-repeat;
     background-position: center center;
     text-align: center;

@@ -6,7 +6,7 @@
 
     <div class="wrapper card w-100 d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
         <div class="previewImage" id="previewImageDiv">
-            <img class="img-fluid" style="height: 350px; object-fit: cover;" id="uploadImageTag" src=""/>
+            <img class="img-fluid" style="height: 350px; object-fit: cover;" id="uploadImageTag" src="#" alt=""/>
         </div>
         <div class="content d-flex flex-column align-items-center">
             <div class="material-icons" id="backupIcon" style="font-size:40px;color: #25AC71;">backup</div>

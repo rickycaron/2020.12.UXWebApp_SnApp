@@ -39,10 +39,10 @@
 
 
 
-                <div style="position: relative; object-fit: cover" value = "<?=$ob->id?>">
+                <div style="position: relative; object-fit: cover" >
                     <a href="<?= base_url()?>/anobservation/<?=$ob->id?>">
 
-                    <img class="card-img img-fluid " style="height: 350px; object-fit: cover;" src="<?=$ob->encoded_image?>">
+                    <img class="card-img img-fluid " style="height: 350px; object-fit: cover;" src="<?=$ob->encoded_image?>" alt="Image could not be loaded">
                     <div class="card-img" style="box-shadow: inset 0px -50px 40px -20px black; position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></div>
                     <h4 class="text-white" style="position: absolute; bottom: 0px; right: 12px;"><?=$ob->username?></h4>
                     <div class="material-icons text-white"  style="font-size:30px;position: absolute; bottom: 6px; left: 8px" >favorite</div>
