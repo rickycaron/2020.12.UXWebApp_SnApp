@@ -143,7 +143,7 @@ class profileController extends BaseController
         $this->data['title'] =  lang('app.Profile');
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('profile');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'likeFunction.js', 'profileNavigation.js', 'loading.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'likeFunction.js', 'loading.js');
         return view("mainTemplate", $this->data);
     }
 

@@ -16,7 +16,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Maincontroller');
+$routes->setDefaultController('AccountController');
 $routes->setDefaultMethod('login');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -101,11 +101,9 @@ $routes->get('fetchGroupLeaderboard/(:alpha)/(:alpha)', 'LeaderboardController::
  */
 $routes->get('profile', 'profileController::profile',['filter'=>'auth']);
 $routes->get('otheruserprofile/(:num)', 'profileController::otheruserprofile/$1',['filter'=>'auth']);
-$routes->get('sendFriendRequest/(:num)', 'profileController::sendFriendRequest/$1');
 $routes->match(['get','post'],'account/(:num)', 'profileController::account/$1',['filter'=>'auth']);
 $routes->get('edit_profile', 'profileController::edit_profile',['filter'=>'auth']);
-$routes->get('acceptFriendRequest/(:num)', 'profileController::acceptFriendRequest/$1');
-$routes->get('declineFriendRequestOrDelete/(:num)', 'profileController::declineFriendRequestOrDelete/$1');
+
 $routes->match(['get','post'],'edit_profile', 'profileController::edit_profile',['filter' => 'auth']);
 
 /*
@@ -116,14 +114,19 @@ $routes->get('searchGetObservations/(:alpha)', 'SearchController::searchGetObser
 $routes->get('searchGetGroups/(:alpha)', 'SearchController::searchGetGroups/$1');
 $routes->get('searchGetUsers/(:alpha)', 'SearchController::searchGetUsers/$1');
 
-
-$routes->get('friendList', 'Maincontroller::friendList');
+/*
+ * Friends
+ */
+$routes->get('friendList', 'FriendsController::friendList');
+$routes->get('acceptFriendRequest/(:num)', 'FriendsController::acceptFriendRequest/$1');
+$routes->get('declineFriendRequestOrDelete/(:num)', 'FriendsController::declineFriendRequestOrDelete/$1');
+$routes->get('sendFriendRequest/(:num)', 'FriendsController::sendFriendRequest/$1');
 
 /*
  * Other
  */
 //$routes->get('/lang/{locale}', 'Language::index',['filter' => 'noauth']);
-$routes->get('getUsername','Maincontroller::getUsername',['filter'=>'auth']);
+$routes->get('getUsername','profileController::getUsername',['filter'=>'auth']);
 
 
 /**
