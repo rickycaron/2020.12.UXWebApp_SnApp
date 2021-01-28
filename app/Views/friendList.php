@@ -8,8 +8,8 @@
             <h4><?= $r->username?></h4>
         </div>
         <div class="d-flex flex-row" value="<?= $r->mappingID?>">
-            <a class="accept_friend material-icons my-auto mx-3" style="font-size: 40px" >check</a>
-            <a class="decline_friend material-icons my-auto mx-3" style="font-size: 40px">clear</a>
+            <a type="button" class="accept_friend material-icons my-auto mx-3" style="font-size: 40px" >check</a>
+            <a type="button" class="decline_friend material-icons my-auto mx-3" style="font-size: 40px">clear</a>
         </div>
     </div>
 </a>
@@ -29,7 +29,7 @@
             <?php endif?>
             <h4 class="my-auto m-3"><?= $f->username?></h4>
         </div>
-        <a class="delete_friend material-icons my-auto mx-3" value="<?= $f->mappingID?>" style="font-size: 40px;">clear</a>
+        <a type="button" class="delete_friend material-icons my-auto mx-3" value="<?= $f->mappingID?>" style="font-size: 40px;">clear</a>
     </div>
 </a>
 <?php endforeach?>
