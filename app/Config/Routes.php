@@ -64,9 +64,9 @@ $routes->match(['get','post'],'hub', 'HubController::hub',['filter' => 'auth']);
 /*
  * Observation
  */
-$routes->get('anobservation/(:num)', 'Maincontroller::anobservation/$1',['filter'=>'auth']);
-$routes->get('fetchObservationLikeHTML/(:num)', 'Maincontroller::fetchObservationLikeHTML/$1');
-$routes->get('fetchObservationCommentHTML/(:num)', 'Maincontroller::fetchObservationCommentHTML/$1');
+$routes->get('anobservation/(:num)', 'AnobservationController::anobservation/$1',['filter'=>'auth']);
+$routes->get('fetchObservationLikeHTML/(:num)', 'AnobservationController::fetchObservationLikeHTML/$1');
+$routes->get('fetchObservationCommentHTML/(:num)', 'AnobservationController::fetchObservationCommentHTML/$1');
 
 /*
  * Groups

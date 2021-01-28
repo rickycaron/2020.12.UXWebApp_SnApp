@@ -1,5 +1,6 @@
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7KOWpmjEHMRXKd19aMz8CT4ig14kHDw4&callback=initMap&libraries=&v=weekly" defer></script>
+
 <div>
     <div class="d-flex flex-row my-4">
         <?php if(isset($profile_image)): ?>
@@ -41,11 +42,11 @@
     </div>
     <div id="like_and_comment_button " class="d-flex justify-content-center"  >
         <div id="like_button" class=" btn btn-primary btn-block w-10  my-3 mr-1">
-            <label>show likes (<?=$likeCount[0]->likeCount?>)</label>
+            <label>show likes: <?=$likeCount[0]->likeCount?></label>
             <!--<span class="material-icons">favorite_border</span>-->
         </div>
         <div id="comment_button" class="btn btn-primary btn-block w-10 my-3 ml-1">
-            <label>show comments (<?=$commentCount[0]->commentCount?>)</label>
+            <label>show comments: <?=$commentCount[0]->commentCount?></label>
             <!--<span class="material-icons">chat</span>-->
         </div>
     </div>
