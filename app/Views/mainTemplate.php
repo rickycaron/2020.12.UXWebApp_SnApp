@@ -20,6 +20,9 @@
     <?php if (isset($scripts_to_load)) foreach ($scripts_to_load as $script): ?>
         <script src="<?= base_url()?>/js/<?=$script?>?v=11" defer></script>
     <?php endforeach; ?>
+    <?php if (isset($scripts_to_load_from_net)) foreach ($scripts_to_load_from_net as $script): ?>
+        <script src="<?=$script?>" defer></script>
+    <?php endforeach; ?>
 </head>
 
 <body class="d-flex flex-column font-dark bg-primary">
