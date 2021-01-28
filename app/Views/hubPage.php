@@ -77,7 +77,7 @@
                 <?php if ($ob->messages != null) :?>
                     <div  id="demo_<?=$ob->id?>" class="collapse" >
 
-                    <?php for($i=0;$i<$commentCount*2;$i=$i+2):?>
+                    <?php for($i=0;$i<$commentCount;$i=$i+2):?>
                         <div class="py-2">
                                     <p class="font-weight-bold d-inline font-light"> <?=$nameComment[$i]?>: </p>
                                     <p class="d-inline font-light"> <?=$nameComment[$i+1]?> </p>
