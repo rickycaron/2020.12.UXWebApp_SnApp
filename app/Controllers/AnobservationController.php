@@ -55,6 +55,7 @@ class AnobservationController extends BaseController
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems(session()->get('lastMainPageLink'));
         $this->data['scripts_to_load'] = array('anobservation.js');
+        $this->data['scripts_to_load_from_net'] = array('https://polyfill.io/v3/polyfill.min.js?features=default', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyC7KOWpmjEHMRXKd19aMz8CT4ig14kHDw4&callback=initMap&libraries=&v=weekly');
         return view("mainTemplate", $this->data);
     }
 
