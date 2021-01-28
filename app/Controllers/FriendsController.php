@@ -3,10 +3,10 @@
 
 namespace App\Controllers;
 
+use Database_model;
+use Menu_model;
 
-use App\Models\extra_functions;
-
-class Maincontroller extends BaseController
+class FriendsController extends BaseController
 {
     private $menu_model;
     private $database_model;
@@ -15,13 +15,29 @@ class Maincontroller extends BaseController
     use \App\Controllers\extra_functions;
 
     /**
-     * Maincontroller constructor.
+     * FriendsController constructor.
      */
     public function __construct() {
-        $this->menu_model = new \Menu_model();
-        $this->database_model = new \Database_model();
+        $this->menu_model = new Menu_model();
+        $this->database_model = new Database_model();
     }
 
+    function acceptFriendRequest($mappingID) {
+        $this->database_model->setFriendsMappingStatus($mappingID, 1);
+        return "<p>$mappingID</p>";
+    }
+
+    function declineFriendRequestOrDelete($mappingID) {
+        $this->database_model->deleteFriendsMapping($mappingID);
+        return "<p>$mappingID</p>";
+    }
+
+    function sendFriendRequest($userID_reciever) {
+        if(!$this->database_model->insertFriendsMapping(session()->get('id'), $userID_reciever)) {
+            $this->debug_to_console("failed to insert friendsmapping");
+        }
+        return "<p>$userID_reciever</p>";
+    }
 
     public function friendList() {
         $this->set_common_data('arrow_back', 'profile','search');
@@ -41,6 +57,4 @@ class Maincontroller extends BaseController
         $this->data['scripts_to_load'] = array('friendlist.js');
         return view("mainTemplate", $this->data);
     }
-
-
 }
