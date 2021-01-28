@@ -10,7 +10,6 @@
     </div>
 </div>
 
-
 <div id="nothingToShow"><?=$upToDate?></div>
 <div id="observationCardsContainer" class="w-100 mt-2">
 
