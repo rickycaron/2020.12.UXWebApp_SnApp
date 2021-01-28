@@ -3,7 +3,7 @@ namespace App\Controllers;
 
 use Database_model;
 use Menu_model;
-use profile_model;
+use Profile_model;
 class profileController extends BaseController
 {
     private $menu_model;
