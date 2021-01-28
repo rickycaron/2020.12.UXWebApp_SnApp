@@ -253,7 +253,6 @@ class profileController extends BaseController
             }
 
             $name = $this->request->getPost('Name');
-            //$gender = $this->request->getPost('gender');
             $email = $this->request->getPost('email');
             $description = $this->request->getPost('description');
 
