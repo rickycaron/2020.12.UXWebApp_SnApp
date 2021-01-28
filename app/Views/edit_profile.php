@@ -29,11 +29,6 @@
             <input type="txt" class="form-control" name="Name" value ="<?= $userInformation->username?>">
         </div>
 
-        <!--<div class="form-group mb-1">
-            <label for="gender">Gender</label>
-            <input type="txt" class="form-control" name="gender" id="gender" value="<?/*= set_value('gender')*/?>">
-        </div>-->
-
         <div class="form-group mb-1">
             <label for="email"><?php echo lang('app.Public_email') ?></label>
             <input type="txt" class="form-control" name="email" value="<?= $userInformation->email?>">
@@ -46,7 +41,6 @@
         <hr class=" mb-3 my-3"/>
         <div>
             <input type="submit" name="submit" class="btn btn-lg btn-primary w-100 my-3" value="<?php echo lang('app.Submit') ?>" />
-            <!--<input type="submit" name="submit" class="btn btn-lg btn-primary w-100 my-3" value="Cancel" />-->
         </div>
     </form>
 

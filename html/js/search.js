@@ -21,7 +21,6 @@ let currentInput;
 let baseUrl = document.querySelector('input[id="hidden_base_url"]').value;
 
 function fetchSearchResult(){
-    //console.log(currentInput + " " + currentSearchFilter);
     if(currentInput === ""){
         document.getElementById("placeholder_search_message").innerHTML = "<p>Start typing in the search bar.</p>";
         document.getElementById("observations_container").innerHTML = "<p></p>";
@@ -57,7 +56,6 @@ function fetchSearchResult(){
 }
 
 function fetchObservations(){
-    //console.log(baseUrl + "/searchGetObservations/" + currentInput);
     fetch(baseUrl + "/searchGetObservations/" + currentInput)
         .then(resp => resp.text())
         .then(data => document.getElementById("observations_container").innerHTML = data)
@@ -65,7 +63,6 @@ function fetchObservations(){
 }
 
 function fetchGroups(){
-    //console.log(baseUrl + "/searchGetGroups/" + currentInput);
     fetch(baseUrl + "/searchGetGroups/" + currentInput)
         .then(resp => resp.text())
         .then(data => document.getElementById("groups_container").innerHTML = data)
@@ -73,7 +70,6 @@ function fetchGroups(){
 }
 
 function fetchUsers(){
-    //console.log(baseUrl + "/searchGetUsers/" + currentInput);
     fetch(baseUrl + "/searchGetUsers/" + currentInput)
         .then(resp => resp.text())
         .then(data => document.getElementById("users_container").innerHTML = data)
@@ -92,7 +88,6 @@ function AllClicked() {
     observation.classList.remove('active');
     group.classList.remove('active');
     user.classList.remove('active');
-
     currentSearchFilter = 0;
     fetchSearchResult()
 }
@@ -102,7 +97,6 @@ function ObClicked() {
     all.classList.remove('active');
     group.classList.remove('active');
     user.classList.remove('active');
-
     currentSearchFilter = 1;
     fetchSearchResult()
 }
@@ -112,7 +106,6 @@ function GroupsClicked() {
     observation.classList.remove('active');
     all.classList.remove('active');
     user.classList.remove('active');
-
     currentSearchFilter = 2;
     fetchSearchResult()
 }
@@ -122,7 +115,6 @@ function UsersClicked() {
     observation.classList.remove('active');
     group.classList.remove('active');
     all.classList.remove('active');
-
     currentSearchFilter = 3;
     fetchSearchResult()
 }

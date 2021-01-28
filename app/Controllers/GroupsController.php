@@ -107,9 +107,6 @@ class GroupsController extends BaseController
             $message= $this->request->getPost('message');
             $observationID = $this->request->getPost('obID');
             $this->database_model-> insertComment($userID,$message,$observationID);
-
-            /*$this->data['content'] = view('hubPage'); //replace by your own view
-            return view("extraTemplate", $this->data);*/
             return redirect()->to($groupname_filter);
         }
         //comment function end

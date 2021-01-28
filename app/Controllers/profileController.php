@@ -22,7 +22,6 @@ class profileController extends BaseController
     public function account($userID) {
         $this->set_common_data('arrow_back', 'profile','search');
 
-        //add your code here...
         if($userID != session()->get('id'))
         {
             //here should inform you don't have right to do that, you can only modify your own password
@@ -43,7 +42,7 @@ class profileController extends BaseController
                 if(strcmp($oldPassword,$newPassword) == 0)
                 {
                     $this->data['error_message'] ='This password is the same as te old one!';
-                    $this->data['content'] = view('account', $this->data); //replace by your own view
+                    $this->data['content'] = view('account', $this->data);
                     return view("mainTemplate", $this->data);
                 }
                 $hashed_password=$this->passwordHash($newPassword);
@@ -128,7 +127,7 @@ class profileController extends BaseController
         $data2['observations'] = $observations;
         if ($observations == null) {
             $data2['upToDate'] = "No observations to show, Yet!";
-            $this->data['content'] = view('profile', $data2, $thisUserID); //replace by your own view
+            $this->data['content'] = view('profile', $data2, $thisUserID);
         }
         else {
             $data2['upToDate'] = "";
@@ -137,7 +136,7 @@ class profileController extends BaseController
                 $observation->encoded_image = $encoded_image;
             }
             $data2['observations'] = $observations;
-            $this->data['content'] = view('profile',$data2, $thisUserID); //replace by your own view
+            $this->data['content'] = view('profile',$data2, $thisUserID);
         }
 
         $this->data['title'] =  lang('app.Profile');
@@ -212,8 +211,8 @@ class profileController extends BaseController
         $data2['observations'] = $observations;
         if ($observations == null) {
             $data2['upToDate'] = "No observations to show, Yet!";
-            // $this->data['content'] = view('profile', $data2, $thisUserID); //replace by your own view
-            $this->data['content'] = view('profile', $data2); //replace by your own view
+
+            $this->data['content'] = view('profile', $data2);
         }
         else {
             $data2['upToDate'] = "";
@@ -222,7 +221,7 @@ class profileController extends BaseController
                 $observation->encoded_image = $encoded_image;
             }
             $data2['observations'] = $observations;
-            $this->data['content'] = view('profile',$data2, $thisUserID); //replace by your own view
+            $this->data['content'] = view('profile',$data2, $thisUserID);
         }
         $this->data['title'] =  lang('app.Profile');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','showMoreObservations.js', 'likeFunction.js', 'otheruserprofile.js', 'loading.js');
@@ -264,7 +263,7 @@ class profileController extends BaseController
         }
         $data2['userInformation'] = $this->database_model->getUser($userID);
 
-        $this->data['content'] = view('edit_profile', $data2); //replace by your own view
+        $this->data['content'] = view('edit_profile', $data2);
         $this->data['title'] = lang('app.Edit_profile');
         $this->data['menu_items'] = $this->menu_model->get_menuitems('profile');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js','profilePicture.js', 'previewPicture.js');

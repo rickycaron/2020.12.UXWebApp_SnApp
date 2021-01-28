@@ -33,26 +33,4 @@
     </div>
 </a>
 <?php endforeach?>
-<!--
-<?php foreach ($friends as $f): ?>
-<div class="card shadow my-2 w-100" style="max-width:400px">
-    <?php if(isset($f->p_imagedata)&&isset($f->p_imagetype)): ?>
-        <img class="personCardPhoto card-header d-flex flex-row mx-auto mt-4 p-1 rounded-circle" width = "250" height = "250" alt="Bootstrap Image Preview" src="<?=$f->encoded_image; ?>">
-    <?php else:?>
-        <img class="personCardPhoto card-header d-flex flex-row mx-auto mt-4 p-1 rounded-circle" width = "250" height = "250" alt="Bootstrap Image Preview" src="https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png">
-    <?php endif?>
-    <div class="card-body">
-        <h4 class="card-title"><?= $f->username?></h4>
-        <address class=" card-footer border p-3 mb-4">
-            <strong>Email address </strong><br><?= $f->email?>
-            <hr>
-            <p>Weekly Points: <?= $f->weeklyPoints?></p>
-            <p>Monthly Points: <?= $f->monthlyPoints?></p>
-            <p>Total Points: <?= $f->points?></p>
-        </address>
-        <a href="<?=$base_url?>/otheruserprofile/<?= $f->id?>" class="btn btn-primary"><?php echo lang('app.See_Profile') ?></a>
-        <a class="delete_friend btn btn-third float-right" value="<?= $f->mappingID?>"><?php echo lang('app.Delete') ?></a>
-    </div>
-</div>
-<?php endforeach?>
--->
+

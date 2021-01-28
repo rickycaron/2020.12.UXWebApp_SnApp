@@ -35,7 +35,6 @@ class Leaderboard_model
 
         $worse_then_tenth_flag = 0;
         $current_user = 0;
-        //$this->debug_to_console(count((array)$person_list));
         for ($i = 3; $i < count((array)$person_list); $i++) {
             array_push($leaderboard_data['persons_list'], array('place'=>($i+1), 'name'=>$person_list[$i]['username'], 'point'=>$person_list[$i][$period], 'id'=>$person_list[$i]['id']));
             if (session()->get('id') == $person_list[$i]['id'] && $i > 9) {

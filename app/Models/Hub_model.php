@@ -19,7 +19,7 @@ class Hub_model
     function sendComment ($comment, $observationID) {
 
         $userID = session()->get('id');
-        $this->database_model->insertComment($userID, $comment, $observationID);//insertComment ($userID, $message, $observationID)
+        $query_result = $this->database_model->insertComment($userID, $comment, $observationID);
         return;
     }
 
@@ -38,4 +38,6 @@ class Hub_model
         $status = $this->database_model->checkUserLikeStatus($userID, $observationID);
         return $status;
     }
+
+
 }

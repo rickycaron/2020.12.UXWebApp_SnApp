@@ -728,10 +728,6 @@ class Database_model
      */
     public function getUserObservationCount($userID) {
         $query = $this->db->query('SELECT COUNT(o.id) AS observationCount FROM a20ux6.user u LEFT JOIN a20ux6.observation o ON o.userID = u.id where u.id = "'.$userID.'";');
-        /*if (!$query->getRow()->result) {
-            return 0;
-        }*/
-
         return $query->getResult();
     }
 

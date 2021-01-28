@@ -3,13 +3,10 @@ function getUploadedPicture(input) {
         let reader = new FileReader();
 
         reader.onload = function (e) {
-
             document.getElementById("backupIcon").style.display = 'none';
             document.getElementById("noFileText").style.display = 'none';
             document.getElementById("previewImageDiv").style.display = 'flex';
-
             $('#uploadImageTag').attr('src', e.target.result);
-
             sendIdentification();
         };
         reader.readAsDataURL(input.files[0]);

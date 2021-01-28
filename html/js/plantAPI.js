@@ -9,7 +9,6 @@ function sendIdentification() {
             const reader = new FileReader();
             reader.onload = (event) => {
                 const res = event.target.result;
-                console.log(res);
                 resolve(res);
             };
             reader.readAsDataURL(file)
@@ -17,8 +16,6 @@ function sendIdentification() {
     });
 
     Promise.all(promises).then((base64files) => {
-        console.log(base64files);
-
         const data = {
             api_key: "5Rk2cQx9fbZgpvWm8pgS2cg3EawlCNtyI7SdkSlOtNxBwp21Qg",
             images: base64files,
@@ -43,9 +40,6 @@ function sendIdentification() {
             .then(data => {
                 suggestions = data["suggestions"];
                 plantDetails = suggestions[0]["plant_details"];
-                console.log('Success:', data);
-                console.log('suggestions', suggestions);
-                console.log('suggestions', plantDetails);
                 printInformation(data);
             })
             .catch((error) => {
@@ -54,9 +48,6 @@ function sendIdentification() {
     })
 
 };
-
-
-
 
 function printInformation(input) {
     let suggestions = input["suggestions"];
