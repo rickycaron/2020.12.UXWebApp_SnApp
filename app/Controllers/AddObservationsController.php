@@ -51,7 +51,7 @@ class AddObservationsController extends BaseController
             $imageProperties = $uploadedPicture->getMimeType();
             $im = imagecreatefromjpeg($uploadedPicture);
             ob_start();                      // Start output buffering
-            imagejpeg($im,NULL,50);   // Generate JPEG into buffer
+            imagejpeg($im,NULL,25);   // Generate JPEG into buffer
             $compressedImage=ob_get_contents();         // Load output buffer into $blob var
             ob_end_clean();                  // Clean up buffer
 
