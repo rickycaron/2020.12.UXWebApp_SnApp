@@ -20,35 +20,35 @@
         <script src="<?= base_url()?>/js/<?=$script?>?v=10" defer></script>
     <?php endforeach; ?>
 
+    <style>
+        #wrap {
+            width: 100%;
+            position: relative;
+        }
+
+        .inner {
+            position: relative;
+            z-index: 2;
+        }
+
+        #wrap:after {
+            content: "\EA35";
+            font-family: "Material Icons";
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: inherit;
+            position: fixed;
+            font-size: 500px;
+            color: #E5F4F1;
+            top: 30%;
+            left: 60%;
+            margin: -300px 0 0 -200px;
+            z-index: 1;
+        }
+
+    </style>
+
 </head>
-
-<style>
-    #wrap {
-        width: 100%;
-        position: relative;
-    }
-
-    .inner {
-        position: relative;
-        z-index: 2;
-    }
-
-    #wrap:after {
-        content: "\EA35";
-        font-family: "Material Icons";
-        font-style: normal;
-        font-weight: normal;
-        text-decoration: inherit;
-        position: fixed;
-        font-size: 500px;
-        color: #E5F4F1;
-        top: 30%;
-        left: 60%;
-        margin: -300px 0 0 -200px;
-        z-index: 1;
-    }
-
-</style>
 
 <body class="container-fluid justify-content-center d-flex flex-column mx-auto bg-secondary" style="max-width:400px; height:100vh">
 <main id="wrap">
