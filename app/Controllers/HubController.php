@@ -20,6 +20,8 @@ class HubController extends BaseController
     }
 
     public function hub() {
+        //$this->cachePage(10);
+
         $this->set_common_data('eco',null, 'search');
         helper(['form']);
         $index = 1;

@@ -124,7 +124,6 @@ $routes->get('friendList', 'Maincontroller::friendList');
  */
 //$routes->get('/lang/{locale}', 'Language::index',['filter' => 'noauth']);
 $routes->get('getUsername','Maincontroller::getUsername',['filter'=>'auth']);
-$routes->get('databaseTest', 'Maincontroller::databaseTest');
 
 
 /**

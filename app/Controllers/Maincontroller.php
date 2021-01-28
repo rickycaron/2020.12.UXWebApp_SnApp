@@ -23,6 +23,7 @@ class Maincontroller extends BaseController
     }
 
     public function anobservation($observationID) {
+        $this->cachePage(10);
         $this->set_common_data('arrow_back', session()->get('lastMainPageLink'), 'search');
 
         // retrieve all the information needed from the database and write values in placeholders
@@ -78,55 +79,6 @@ class Maincontroller extends BaseController
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('profile');
         $this->data['scripts_to_load'] = array('friendlist.js');
-        return view("mainTemplate", $this->data);
-    }
-
-
-
-    public function account($userID) {
-        $this->set_common_data('arrow_back', 'profile','search');
-
-        //add your code here...
-        if($userID != session()->get('id'))
-        {
-            //here should inform you don't have right to do that, you can only modify your own password
-            return redirect()->to(base_url());
-        }
-        $this->data['userID'] = $userID;
-        if ($this->request->getMethod() === 'post' && $this->validate([
-                'oldPassword'  => 'required|min_length[6]|max_length[50]',
-                'newPassword'  => 'required|min_length[6]|max_length[50]',
-                'password_confirm'=>'matches[newPassword]'
-            ]))
-        {
-            $oldPassword= $this->request->getPost('oldPassword');
-            if($this->database_model->validateUser(session()->get('email'),$oldPassword)==0)
-            {
-                //the password is correct
-                $newPassword= $this->request->getPost('newPassword');
-                if(strcmp($oldPassword,$newPassword) == 0)
-                {
-                    $this->data['error_message'] ='This password is the same as te old one!';
-                    $this->data['content'] = view('account', $this->data); //replace by your own view
-                    return view("mainTemplate", $this->data);
-                }
-                $hashed_password=$this->passwordHash($newPassword);
-                $this->database_model->resetPassword($hashed_password, $userID,$newPassword);
-                session()->destroy();
-                return redirect()->to(base_url());
-            }else
-            {
-                $this->data['error_message'] ='Your password is incorrect!';
-            }
-        }
-        elseif ($this->request->getMethod() === 'post')
-        {
-            $this->data['validation'] = "error";
-        }
-        $this->data['content'] = view('account',$this->data); //replace by your own view
-        $this->data['title'] = lang('app.Account');
-
-        $this->data['menu_items'] = $this->menu_model->get_menuitems('profile');
         return view("mainTemplate", $this->data);
     }
 

@@ -185,10 +185,6 @@ class AccountController extends BaseController
         return view("extraTemplate", $this->data);
     }
 
-
-    /* created by rui
-     * logout, clean the data of the current information
-     * */
     public function logout(){
         session()->destroy();
         return redirect()->to('login');
@@ -207,9 +203,6 @@ class AccountController extends BaseController
         }
     }
 
-    /* created by rui
-     * save the data of the current data to session
-     * */
     private function setUserSession($user){
         $data = [
             'id' => $user->id,
