@@ -91,7 +91,7 @@
                 </nav>
 
 
-                <div class="d-flex flex-row mt-0 w-100">
+                <div class="d-flex flex-row mt-0 w-100 presentShow">
 
                         <div class="d-flex flex-row w-100"  value = "<?=$ob->id?>">
                             <form id = "commentForm" class = "commentContent w-100 pt-1" target="iframe">

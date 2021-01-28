@@ -3,13 +3,14 @@ let likeStatus = document.getElementsByClassName("status");
 let commentButton = document.getElementsByClassName("commentButton");
 let commentContent = document.getElementsByClassName("commentContent");
 let commentShow = document.getElementsByClassName("collapse");
+let presentShow = document.getElementsByClassName("presentShow");
 
 for (let i = 0; i < commentButton.length; i++) {
     commentButton[i].addEventListener('click', function () {
         document.getElementById('commentForm').submit()
         sendComment(commentContent[i].commentID.value, commentButton[i].parentElement.getAttribute("value"))
         username = getUsername()
-        commentShow[i].insertAdjacentHTML("afterend", "<div class=\"py-2\"> <p class=\"font-weight-bold d-inline\">You: </p>\n" +
+        presentShow[i].insertAdjacentHTML("beforebegin", "<div class=\"py-2\"> <p class=\"font-weight-bold d-inline\">You: </p>\n" +
             "<p class=\"d-inline font-light\">" + commentContent[i].commentID.value + "</p></div>")
     }, true)
 }
