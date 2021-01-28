@@ -1,3 +1,7 @@
+<div id="preloader">
+    <div id="status">
+    </div>
+</div>
 <div class="w-100">
     <?php foreach ($groups as $group): ?>
         <?php if ($group[3] == session()->get('id')):?>

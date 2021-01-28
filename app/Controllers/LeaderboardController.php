@@ -54,6 +54,7 @@ class LeaderboardController extends BaseController
         $this->data['menu_items'] = $this->menu_model->get_menuitems('leaderboardSelect');
         $this->data['content'] = view('leaderboardSelect', $this->data);
         $this->data['title'] =  lang('app.Leaderboard');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'loading.js');
         session()->set('lastMainPageLink', 'leaderboardSelect');
         return view("mainTemplate", $this->data);
     }

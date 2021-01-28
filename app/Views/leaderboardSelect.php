@@ -6,6 +6,11 @@ $uri = service('uri');
 <?php endif; ?>
 <a  <?= ($uri->getSegment(1) == 'leaderboardSelect'?'active' : null)?> href="/"></a>
 
+<div id="preloader">
+    <div id="status">
+    </div>
+</div>
+
 <div class="w-100 mt-2">
 
     <a class="w-100" style="color: black;" href="leaderboard/friends">

@@ -1,3 +1,8 @@
+
+<div id="preloader">
+    <div id="status">
+    </div>
+</div>
 <input type="hidden" id="hidden_variable_filter" value="<?=$leaderboard_filter?>"/>
 <div id="leaderboard_overall_container" class="jumbotron w-100" style ="background:transparent !important; max-width: 400px;">
     <h3 class="page_title d-flex justify-content-center"><?=$leaderboard_filter?></h3>

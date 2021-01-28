@@ -71,7 +71,7 @@ class AddObservationsController extends BaseController
         $this->data['content'] = view('addobservation'); //replace by your own view
         $this->data['title'] = lang('app.Add_Observation');
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'plantAPI.js','previewPicture.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'plantAPI.js','previewPicture.js', 'loading.js');
         return view("mainTemplate", $this->data);
     }
 
@@ -81,7 +81,7 @@ class AddObservationsController extends BaseController
         $this->data['content'] = view('addObservationWithoutLogin'); //replace by your own view
         $this->data['title'] = lang('app.Add_Observation');
         $this->data['menu_items'] = $this->menu_model->get_menuitems('addObservation');
-        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'plantAPI.js','previewPicture.js');
+        $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'plantAPI.js','previewPicture.js', 'loading.js');
         return view("extraTemplate", $this->data);
     }
 
