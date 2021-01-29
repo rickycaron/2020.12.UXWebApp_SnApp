@@ -108,9 +108,6 @@ header a:hover{
     .sidenav a {font-size: 18px;}
 }
 
-/*
-used for loading
-*/
 #preloader {
     position: fixed;
     top: 0;
