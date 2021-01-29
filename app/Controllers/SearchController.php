@@ -67,6 +67,7 @@ class SearchController extends BaseController
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems(session()->get('lastMainPageLink'));
         $this->data['scripts_to_load'] = array('search.js');
+        $this->data['scripts_to_load_from_net'] = array('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js');
         return view("mainTemplate", $this->data);
     }
 

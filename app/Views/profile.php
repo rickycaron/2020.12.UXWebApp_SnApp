@@ -1,8 +1,3 @@
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
 
 <div id="preloader">
     <div id="status">
@@ -16,7 +11,7 @@
         <?php if(isset($profile_image)): ?>
             <img src="<?=$profile_image?>" class="rounded-circle img-circle"  alt="templatemo easy profile">
         <?php else:?>
-            <img class="rounded-circle card-header img-circle" src="https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png">
+            <img class="rounded-circle card-header img-circle" src="https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png" alt="profile picture">
         <?php endif?>
     </div>
     <div class="mx-4 w-100 ">
@@ -186,14 +181,14 @@
                 </nav>
 
 
-                <div class="d-flex flex-row mt-0 w-100">
+                <div class="d-flex flex-row mt-0 w-100 presentShow">
 
                     <div class="d-flex flex-row w-100"  value = "<?=$ob->id?>">
                         <form id = "commentForm" class = "commentContent w-100" target="iframe">
                             <input type="txt" id = "commentID" class="form-control " name="comment" placeholder="<?php echo lang('app.Create_new_comment') ?>">
                         </form>
                         <iframe id="iframe" name="iframe" style="display:none;"></iframe>
-                        <div class="material-icons my-auto ml-3 mr-2 text-primary commentButton" style="font-size:30px">send</div>
+                        <div class="material-icons my-auto ml-3 mr-2 text-primary commentButton" type="button" style="font-size:30px">send</div>
                     </div>
                 </div>
                 <div class="mt-2 mb-0">

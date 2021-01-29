@@ -7,12 +7,12 @@
 <form class="form" action="login" method="post">
     <?= csrf_field() ?>
     <div class="form-group mb-1">
-        <label for="email"><?php echo lang('app.Email_address') ?></label>
-        <input type="email" id="inputEmail" class="form-control" name="email" " required autofocus>
+        <label for="inputEmail"><?php echo lang('app.Email_address') ?></label>
+        <input type="email" id="inputEmail" class="form-control" name="email" required autofocus>
     </div>
 
     <div class="form-group mb-1">
-    <label for="password"><?php echo lang('app.Password') ?></label>
+    <label for="inputPassword"><?php echo lang('app.Password') ?></label>
     <input type="password" id="inputPassword" class="form-control" name="password" required>
     </div>
 
@@ -31,11 +31,11 @@
             <?= $error_message?>
         </div>
     <?php endif; ?>
-    <button onclick=location.href='hub' class="btn btn-lg btn-primary btn-block mt-5" type="submit"><?php echo lang('app.Log_in') ?></button>
+    <button onclick="location.href='hub'" class="btn btn-lg btn-primary btn-block mt-5" type="submit"><?php echo lang('app.Log_in') ?></button>
 </form>
 
 <hr class="mt-2 mb-3 my-3"/>
-<button onclick=location.href='addObservationWithoutLogin' class="btn btn-lg btn-primary btn-block mt-1" type="submit"><?php echo lang('app.Make_an_observation') ?></button>
+<button onclick="location.href='addObservationWithoutLogin'" class="btn btn-lg btn-primary btn-block mt-1" type="submit"><?php echo lang('app.Make_an_observation') ?></button>
 
 
 
