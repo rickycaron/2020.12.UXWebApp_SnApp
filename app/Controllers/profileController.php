@@ -143,7 +143,7 @@ class profileController extends BaseController
 
         $this->data['menu_items'] = $this->menu_model->get_menuitems('profile');
         $this->data['scripts_to_load'] = array('jquery-3.5.1.min.js', 'showMoreObservations.js', 'likeFunction.js', 'loading.js');
-        //$this->data['scripts_to_load_from_net'] = array('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js','https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js');
+        $this->data['scripts_to_load_from_net'] = array('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js','https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js');
         return view("mainTemplate", $this->data);
     }
 

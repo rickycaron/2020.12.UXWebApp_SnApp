@@ -17,7 +17,5 @@ function getOtherObservations() {
     fetch(base_url + "?extra=true&lastDate=" + lastDate + "&lastTime=" + lastTime)
         .then(resp => resp.text())
         .then(myHTML => document.getElementById("observationCardsContainer").insertAdjacentHTML("beforeend", myHTML))
-        .then(getNewButtons())
-        .then(likeButtonListenerActivate())
         .catch(a => console.log(a));
 }
